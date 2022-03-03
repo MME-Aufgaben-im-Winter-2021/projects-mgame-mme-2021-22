@@ -1,0 +1,1 @@
+/**shows all created memestories one after the other */
