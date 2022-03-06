@@ -5,14 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resources/css/style.css" rel="stylesheet">
+    <link href="./../resources/css/style.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body class="body">
     <div class="row px-2" style="height: 30vh;">
         <div class="container col-2 prompt border border-dark rounded mx-2 my-2">Prompt</div>
-        <div class="container col border border-dark mx-2 my-2">Playing Field</div>
+        <div class="container col border border-dark mx-2 my-2">
+            <ul class="playingField">
+            <!-- Hier kommen die Memes rein -->
+            </ul>
+        </div>
         <div class="container col-2 game-progress border border-dark rounded mx-2 my-2">Round progress</div>
     </div>
     <div class="row mx-1" style="height: 70vh;">
@@ -30,7 +34,7 @@
                         </ul>
 
                         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                            <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                            <input type="text" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
                         </form>
 
                         <div class="text-end">
@@ -42,20 +46,21 @@
             </header>
             <div class="container-fluid py-3">
                 <div class="d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
-                  <div class="bg-light border rounded-3">
-                    <br><br><br><br><br><br><br><br><br><br>
-                  </div>
-                  <div class="bg-light border rounded-3">
-                    <br><br><br><br><br><br><br><br><br><br>
-                  </div>
-                  <div class="bg-light border rounded-3">
-                    <br><br><br><br><br><br><br><br><br><br>
-                  </div>
+                    <ul class="memes">
+                   <!-- Hier kommen die Memes rein -->
+                     </ul>
                 </div>
               </div>
         </div>
 
     </div>
+    <script type="module" src="./src/Model/index.js"></script>
 </body>
+
+<template id="meme-template">
+        <li class="meme" name="">
+            <span class="picture"></span>
+        </li>
+</template>
 
 </html>
