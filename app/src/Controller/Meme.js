@@ -12,7 +12,7 @@ class Meme extends Observable{
         this.id = memeName;
         this.playingArea = document.querySelector(".playingArea");
         this.handArea = document.querySelector(".handArea");
-        this.body = document.createElement("li");
+        this.body = document.createElement("ul");
         this.body.innerHTML = MEME_TEMPLATE;
         this.body.classList.add("meme");
         this.imageSource = this.body.querySelector(".picture");
