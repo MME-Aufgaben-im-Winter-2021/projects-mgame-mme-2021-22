@@ -32,10 +32,13 @@ class Hand extends Observable {
 
   }
   addNewMeme(memeName, imageSource) {
+    if(handArray.length < 10){
+      console.log(handArray.length);
     let newMeme = new Meme(memeName, imageSource);
     handArray.push(newMeme);
     newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
   }
+}
   
   removeMeme(memeName) {
     handArray = handArray.filter((meme) => meme.id !== memeName);
@@ -48,7 +51,7 @@ class Hand extends Observable {
   
     if (location === "playingArea") {
 
-        this.removeMeme(memeName);
+       // this.removeMeme(memeName);
         playingField.addMeme(memeName,
           "https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/a5/3a/b7/a53ab703-a5dc-e293-d8cf-b0b5708889bd/source/256x256bb.jpg" );
   

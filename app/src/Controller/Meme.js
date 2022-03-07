@@ -2,6 +2,7 @@ import { Event, Observable } from "../utils/Observable.js";
 
 const MEME_TEMPLATE = document.querySelector("#meme-template").content.querySelector("div.meme").innerHTML;
 var draggedMeme,
+swappingMeme,
 currentLocation;
 
 
@@ -16,9 +17,7 @@ class Meme extends Observable{
         this.body.innerHTML = MEME_TEMPLATE;
         this.body.classList.add("meme");
         this.imageSource = this.body.querySelector(".picture");
-        console.log(this.imageSource);
         this.imageSource.innerHTML = "<img src=\""+ image + "\">";
-        console.log(this.imageSource.innerText);
         this.body.setAttribute("draggable", "true");
         this.body.addEventListener('dragstart', () => {
             this.body.classList.add('dragging');
@@ -26,18 +25,16 @@ class Meme extends Observable{
         });
         this.body.addEventListener('dragend', () => {
             this.body.classList.remove('dragging');
-            this.notifyAll(new Event("dragEnded", [draggedMeme, currentLocation]));
+            this.notifyAll(new Event("dragEnded", [draggedMeme, currentLocation, swappingMeme]));
         });
         this.body.addEventListener('dragenter', () => {
-            console.log("swap");
+            swappingMeme = this.id;
         });
         this.playingArea.addEventListener('dragenter', () => {
             currentLocation = "playingArea";
-            console.log(currentLocation);
         });
         this.handArea.addEventListener('dragenter', () => {
             currentLocation = "handArea";
-            console.log(currentLocation);
         });
     }
 

@@ -22,11 +22,13 @@ super();
 
 addMeme(memeName, imageSource)
 {
+  if(playingFieldArray.length < 3){
 let newMeme = new Meme(memeName, imageSource);  
 playingFieldArray.push(newMeme);
 console.log(playingFieldArray);
 newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));  
 this.updatePlayingField();
+  }
 }
 
 removeMeme(memeName)
