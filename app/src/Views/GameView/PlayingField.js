@@ -1,8 +1,12 @@
 /** playing field. players drop cards in here */
 import Meme from "../../Controller/Meme.js";
 import Observable from "../../utils/Observable.js";
+import Hand from "./Hand.js";
 
-var playingField;
+var playingField,
+promptField,
+playingFieldArray = [];
+
 
 class PlayingField extends Observable
 {
@@ -10,57 +14,45 @@ class PlayingField extends Observable
 constructor()
 {
 super();
- playingField = document.querySelector(".playingField");
- this.playingFieldArray = [];
- playingField.addEventListener("dragEnded", this.checkMeme);  
+ playingField = document.querySelector(".field");
+ promptField = document.querySelector(".promptField");
+ promptField.innerHTML = "Describe your funniest moment last year";
  console.log(playingField);
 }
 
 addMeme(memeName, imageSource)
 {
 let newMeme = new Meme(memeName, imageSource);  
-this.playingFieldArray.push(newMeme);
+playingFieldArray.push(newMeme);
+console.log(playingFieldArray);
+newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));  
 this.updatePlayingField();
 }
 
 removeMeme(memeName)
 {
-this.playingFieldArray = this.playingFieldArray.filter((meme) => meme.id !== memeName );
+playingFieldArray = playingFieldArray.filter((meme) => meme.id !== memeName );
 this.updatePlayingField();
 }
 
 updatePlayingField()
 {
-    this.playingField.innerHTML = "";
-    for (const meme of this.handArray) {
-        this.HandSpace.appendChild(meme.body);
+    playingField.innerHTML = "";
+    for (const meme of playingFieldArray) {
+        playingField.appendChild(meme.body);
     }
 }
 checkMeme(event) {
     let memeName = event.data[0],
-      location = event.data[1],
-      memeExists = false;
+      location = event.data[1];
       console.log(memeName, location);
   
     if (location === "handArea") {
-      for (let i = 0; i < this.playingFieldArray.length; i++) {
-        const meme = this.playingFieldArray[i];
-        if (meme.id === memeName) {
-          memeExists = true;
-  
-        }
-      }
-      if (memeExists === true) {
+      console.log(playingFieldArray);
         this.removeMeme(memeName);
-        console.log(memeName, location);
-  
+
       }
+    } 
   
-    } else {
-      this.addMeme(memeName,
-        "https://docrdsfx76ssb.cloudfront.net/static/1645730902/pages/wp-content/uploads/2020/05/illo-mobile-810x480-1.jpg"
-        );
-    }
-  }
 }
 export default PlayingField;

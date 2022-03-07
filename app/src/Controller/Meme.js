@@ -1,6 +1,6 @@
 import { Event, Observable } from "../utils/Observable.js";
 
-const MEME_TEMPLATE = document.querySelector("#meme-template").content.querySelector("li.meme").innerHTML;
+const MEME_TEMPLATE = document.querySelector("#meme-template").content.querySelector("div.meme").innerHTML;
 var draggedMeme,
 currentLocation;
 

@@ -11,11 +11,13 @@
 
 <body class="body">
     <div class="row px-2" style="height: 30vh;">
-        <div class="container col-2 prompt border border-dark rounded mx-2 my-2">Prompt</div>
-        <div class="playingArea col border border-dark mx-2 my-2">
-            <ul class="playingField">
-            <!-- Hier kommen die Memes rein -->
-            </ul>
+        <div class="promptField container col-2 prompt border border-dark rounded mx-2 my-2">Prompt</div>
+        <div class="playingArea col border border-dark mx-2 my-2" >
+            <div class="playingField container-fluid py-3">
+                <div class="field d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
+                   <!-- Hier kommen die Memes rein -->
+                </div>
+              </div>
         </div>
         <div class="container col-2 game-progress border border-dark rounded mx-2 my-2">Round progress</div>
     </div>
@@ -40,12 +42,10 @@
                         </div>
                     </div>
                 </div>
-            </header>
+            </nav>
             <div class="handArea container-fluid py-3">
-                <div class="d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
-                    <ul class="memes">
+                <div class="hand d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
                    <!-- Hier kommen die Memes rein -->
-                     </ul>
                 </div>
               </div>
         </div>
@@ -57,9 +57,9 @@
 </body>
 
 <template id="meme-template">
-        <li class="meme" name="">
+        <div class="meme" name="">
             <span class="picture"></span>
-        </li>
+        </div>
 </template>
 
 </html>
