@@ -1,17 +1,23 @@
-const MEME_TEMPLATE = document.querySelector("#meme-template").content.querySelector("li.meme").innerHTML;
-var draggedMeme;
+import { Event, Observable } from "../utils/Observable.js";
 
-class Meme{
+const MEME_TEMPLATE = document.querySelector("#meme-template").content.querySelector("div.meme").innerHTML;
+var draggedMeme,
+swappingMeme,
+currentLocation;
+
+
+class Meme extends Observable{
 
     constructor(memeName, image){
+        super();
         this.id = memeName;
-        this.body = document.createElement("li");
+        this.playingArea = document.querySelector(".playingArea");
+        this.handArea = document.querySelector(".handArea");
+        this.body = document.createElement("ul");
         this.body.innerHTML = MEME_TEMPLATE;
         this.body.classList.add("meme");
         this.imageSource = this.body.querySelector(".picture");
-        console.log(this.imageSource);
-        this.imageSource.innerHTML = "<img src\""+ image + "\">";
-        console.log(this.imageSource.innerText);
+        this.imageSource.innerHTML = "<img src=\""+ image + "\">";
         this.body.setAttribute("draggable", "true");
         this.body.addEventListener('dragstart', () => {
             this.body.classList.add('dragging');
@@ -19,17 +25,22 @@ class Meme{
         });
         this.body.addEventListener('dragend', () => {
             this.body.classList.remove('dragging');
-            this.notifyAll(new Event("dragEnded", draggedMeme));
+            this.notifyAll(new Event("dragEnded", [draggedMeme, currentLocation, swappingMeme]));
         });
         this.body.addEventListener('dragenter', () => {
-            draggedMeme = this.id;
+            swappingMeme = this.id;
         });
-    
+        this.playingArea.addEventListener('dragenter', () => {
+            currentLocation = "playingArea";
+        });
+        this.handArea.addEventListener('dragenter', () => {
+            currentLocation = "handArea";
+        });
     }
 
     getImageSource()
     {
-        return this.imageSource;
+        return this.imageSource.innerHTML;
     }
 
     getId()

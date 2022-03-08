@@ -1,5 +1,4 @@
 import Hand from "../Views/GameView/Hand.js";
-import PlayingField from "../Views/GameView/PlayingField.js";
 
 
 function init() {

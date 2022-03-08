@@ -1,7 +1,5 @@
 class Prompt{
-constructor(){
-    
-}
+
 
 
 }

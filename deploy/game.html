@@ -11,26 +11,25 @@
 
 <body class="body">
     <div class="row px-2" style="height: 30vh;">
-        <div class="container col-2 prompt border border-dark rounded mx-2 my-2">Prompt</div>
-        <div class="container col border border-dark mx-2 my-2">
-            <ul class="playingField">
-            <!-- Hier kommen die Memes rein -->
-            </ul>
+        <div class="promptField container col-2 prompt border border-dark rounded mx-2 my-2">Prompt</div>
+        <div class="playingArea col border border-dark mx-2 my-2" >
+            <div class="playingField container-fluid py-3">
+                <div class="field d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
+                   <!-- Hier kommen die Memes rein -->
+                </div>
+              </div>
         </div>
         <div class="container col-2 game-progress border border-dark rounded mx-2 my-2">Round progress</div>
     </div>
-    <div class="row mx-1" style="height: 70vh;">
-        <div class="col border search-menu p-2">
-            <header class="p-3 bg-dark text-white">
-                <div class="container">
-                    <div class="d-flex flex-wrap align-items-left justify-content-left justify-content-lg-start">
-
-                        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                            <li><a href="#" class="nav-link px-2 text-white">Funny</a></li>
-                            <li><a href="#" class="nav-link px-2 text-white">Cringe</a></li>
-                            <li><a href="#" class="nav-link px-2 text-white">Sad</a></li>
-                            <li><a href="#" class="nav-link px-2 text-white">Horny</a></li>
-                            <li><a href="#" class="nav-link px-2 text-white">Ukraine</a></li>
+    <div class="row px-2">
+        <div class="col-12 bgd-dark">
+            <nav class="navbar navbar-expand-lg bgd-dark-s">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="categories">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Home</a>
+                            </li>
                         </ul>
 
                         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -43,24 +42,24 @@
                         </div>
                     </div>
                 </div>
-            </header>
-            <div class="container-fluid py-3">
-                <div class="d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
-                    <ul class="memes">
+            </nav>
+            <div class="handArea container-fluid py-3">
+                <div class="hand d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
                    <!-- Hier kommen die Memes rein -->
-                     </ul>
                 </div>
               </div>
         </div>
-
+    </div>
+    <div class="row mx-1 vh-70">
+        <div class="col border bgd-secondary h-100"></div>
     </div>
     <script type="module" src="./src/Model/index.js"></script>
 </body>
 
 <template id="meme-template">
-        <li class="meme" name="">
+        <div class="meme" name="">
             <span class="picture"></span>
-        </li>
+        </div>
 </template>
 
 </html>
