@@ -4,6 +4,14 @@
 import Meme from "../../Controller/Meme.js";
 import Observable from "../../utils/Observable.js";
 import PlayingField from "./PlayingField.js";
+const data = new Promise((resolve, reject) => {
+  fetch('./resources/meme_json_data.json')
+      .then(respond => {
+          resolve(respond.json());
+      }).catch(err => {
+          reject(err);
+   });
+  });
 
 var searchBar,
   HandSpace,
@@ -17,13 +25,13 @@ class Hand extends Observable {
     HandSpace = document.querySelector(".hand");
     searchBar = document.querySelector("input");
     searchBar.addEventListener("change", this.onSearch.bind(this));
+    console.log(data);
 
   }
 
   onSearch() {
     this.addNewMeme(searchBar.value,
-      "https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/a5/3a/b7/a53ab703-a5dc-e293-d8cf-b0b5708889bd/source/256x256bb.jpg"
-      );
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/a5/3a/b7/a53ab703-a5dc-e293-d8cf-b0b5708889bd/source/256x256bb.jpg");
     HandSpace.innerHTML = "";
     for (const meme of this.handArray) {
 
@@ -52,8 +60,7 @@ class Hand extends Observable {
 
       // this.removeMeme(memeName);
       playingField.addMeme(memeName,
-        "https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/a5/3a/b7/a53ab703-a5dc-e293-d8cf-b0b5708889bd/source/256x256bb.jpg"
-        );
+        "https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/a5/3a/b7/a53ab703-a5dc-e293-d8cf-b0b5708889bd/source/256x256bb.jpg");
 
     }
   }

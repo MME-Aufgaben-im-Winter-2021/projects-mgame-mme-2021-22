@@ -1,6 +1,7 @@
 /** playing field. players drop cards in here */
 import Meme from "../../Controller/Meme.js";
 import Observable from "../../utils/Observable.js";
+import RatingView from "../RatingView/RatingView.js";
 
 
 var playingField,
@@ -12,6 +13,8 @@ class PlayingField extends Observable {
   constructor() {
     super();
     this.playingFieldArray = [];
+    this.submitButton = document.querySelector(".submit");
+    this.submitButton.addEventListener("click",this.submitMemes.bind(this));
     playingField = document.querySelector(".field");
     promptField = document.querySelector(".promptField");
     promptField.innerHTML =
@@ -76,8 +79,14 @@ class PlayingField extends Observable {
     this.updatePlayingField();
   }
 
-  getPlayingFieldArrayLength() {
-    return this.playingFieldArray.length;
+  submitMemes(){
+    document.location.href = "rating.html";
+    let jsarray = this.playingFieldArray,
+    ratingView = new RatingView();
+    sessionStorage.setItem("jsArray", JSON.stringify(jsarray));
+    console.log(ratingView);
+    
+
   }
 
 }
