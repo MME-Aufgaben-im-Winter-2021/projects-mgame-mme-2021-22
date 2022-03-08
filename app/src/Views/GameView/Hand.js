@@ -32,8 +32,7 @@ class Hand extends Observable {
 
   }
   addNewMeme(memeName, imageSource) {
-    if(handArray.length < 10){
-      console.log(handArray.length);
+    if(handArray.length < 10){;
     let newMeme = new Meme(memeName, imageSource);
     handArray.push(newMeme);
     newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));

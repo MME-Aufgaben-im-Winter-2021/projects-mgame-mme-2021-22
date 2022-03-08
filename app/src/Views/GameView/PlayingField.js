@@ -17,7 +17,6 @@ super();
  playingField = document.querySelector(".field");
  promptField = document.querySelector(".promptField");
  promptField.innerHTML = "<h1> Describe your funniest moment last year </h1>";
- console.log(playingField);
 }
 
 addMeme(memeName, imageSource)
@@ -25,7 +24,6 @@ addMeme(memeName, imageSource)
   if(playingFieldArray.length < 3){
 let newMeme = new Meme(memeName, imageSource);  
 playingFieldArray.push(newMeme);
-console.log(playingFieldArray);
 newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));  
 this.updatePlayingField();
   }
@@ -48,10 +46,8 @@ checkMeme(event) {
     let memeName = event.data[0],
       location = event.data[1],
       swappingMeme = event.data[2];
-      console.log(memeName, location);
   
     if (location === "handArea") {
-      console.log(playingFieldArray);
         this.removeMeme(memeName);
 
       }
@@ -81,7 +77,11 @@ swapMeme(firstMeme, secondMeme)
   }
   playingFieldArray[indexDragged] = playingFieldArray.splice(indexSwapped, 1, playingFieldArray[indexDragged])[0]; //https://stackoverflow.com/questions/872310/javascript-swap-array-elements/872317
   this.updatePlayingField();
-}     
+} 
+
+getPlayingFieldArrayLength(){
+  return playingFieldArray.length;
+}
   
 }
 export default PlayingField;
