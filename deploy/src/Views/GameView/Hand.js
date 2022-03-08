@@ -20,7 +20,7 @@ class Hand extends Observable {
     let newMeme = new Meme(memeName, imageSource);
     this.handArray.push(newMeme);
     console.log(imageSource);
-  
+
   }
 
   onSearch() {
@@ -29,7 +29,7 @@ class Hand extends Observable {
       "https://unternehmer.de/wp-content/uploads/2019/02/meme-marketing-mehr-als-nur-ein-trend.jpg"
     );
     this.HandSpace.innerHTML = "";
-    for (const meme of handArray) {
+    for (const meme of this.handArray) {
 
       this.HandSpace.appendChild(meme.body);
     }
@@ -42,7 +42,7 @@ class Hand extends Observable {
   }
 
   updateHand() {
-    for (const meme of handArray) {
+    for (const meme of this.handArray) {
       this.HandSpace.appendChild(meme.body);
     }
     console.log(this.HandSpace);
