@@ -7,13 +7,13 @@ import PlayingField from "./PlayingField.js";
 
 var searchBar,
   HandSpace,
-  handArray = [],
   playingField = new PlayingField;
 
 class Hand extends Observable {
 
   constructor() {
     super();
+    this.handArray = [];
     HandSpace = document.querySelector(".hand");
     searchBar = document.querySelector("input");
     searchBar.addEventListener("change", this.onSearch.bind(this));
@@ -25,22 +25,22 @@ class Hand extends Observable {
       "https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/a5/3a/b7/a53ab703-a5dc-e293-d8cf-b0b5708889bd/source/256x256bb.jpg"
       );
     HandSpace.innerHTML = "";
-    for (const meme of handArray) {
+    for (const meme of this.handArray) {
 
       HandSpace.appendChild(meme.body);
     }
 
   }
   addNewMeme(memeName, imageSource) {
-    if(handArray.length < 10){;
+    if(this.handArray.length < 10){;
     let newMeme = new Meme(memeName, imageSource);
-    handArray.push(newMeme);
+    this.handArray.push(newMeme);
     newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
   }
 }
   
   removeMeme(memeName) {
-    handArray = handArray.filter((meme) => meme.id !== memeName);
+    this.handArray = this.handArray.filter((meme) => meme.id !== memeName);
     this.updateHand();
   }
   
@@ -59,7 +59,7 @@ class Hand extends Observable {
   
   updateHand() {
     HandSpace.innerHTML = "";
-    for (const meme of handArray) {
+    for (const meme of this.handArray) {
       HandSpace.appendChild(meme.body);
     }
   }
