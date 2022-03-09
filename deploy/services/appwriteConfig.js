@@ -1,4 +1,3 @@
-/* eslint-env node */
 import { Appwrite } from "appwrite";
 
 const appwrite = new Appwrite();
