@@ -1,9 +1,10 @@
-import Hand from "../Views/GameView/Hand.js";
+
+import GameManager from "./GameManager.js";
 
 
 function init() {
-    let hand = new Hand;
-    console.log(hand);
+    let gameManager = new GameManager;
+    console.log(gameManager);
     console.log("### Starting MME Project ###");
 }
 

@@ -1,7 +1,7 @@
 /** playing field. players drop cards in here */
 import Meme from "../../Controller/Meme.js";
 import Observable from "../../utils/Observable.js";
-import RatingView from "../RatingView/RatingView.js";
+
 
 
 var playingField,
@@ -23,7 +23,7 @@ class PlayingField extends Observable {
 
   addMeme(memeName, imageSource) {
     if (this.playingFieldArray.length < 3) {
-      let newMeme = new Meme(memeName, imageSource);
+      let newMeme = new Meme(memeName + this.playingFieldArray.length, imageSource);
       this.playingFieldArray.push(newMeme);
       newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
       this.updatePlayingField();
@@ -80,11 +80,12 @@ class PlayingField extends Observable {
   }
 
   submitMemes(){
-    document.location.href = "rating.html";
-    let jsarray = this.playingFieldArray,
-    ratingView = new RatingView();
+    let jsarray = this.playingFieldArray;
     sessionStorage.setItem("jsArray", JSON.stringify(jsarray));
-    console.log(ratingView);
+    document.location.href = "rating.html";
+    console.log("huhu");
+    
+
     
 
   }

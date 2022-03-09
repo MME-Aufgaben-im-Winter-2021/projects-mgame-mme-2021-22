@@ -3,13 +3,16 @@ import { Event, Observable } from "../utils/Observable.js";
 const MEME_TEMPLATE = document.querySelector("#meme-template").content.querySelector("div.meme").innerHTML;
 var draggedMeme,
 swappingMeme,
-currentLocation;
+currentLocation,
+path = window.location.pathname,
+page = path.split("/").pop();
 
 
 class Meme extends Observable{
 
     constructor(memeName, image){
         super();
+        console.log(page);
         this.id = memeName;
         this.playingArea = document.querySelector(".playingArea");
         this.handArea = document.querySelector(".handArea");
@@ -36,6 +39,15 @@ class Meme extends Observable{
         this.handArea.addEventListener('dragenter', () => {
             currentLocation = "handArea";
         });
+    }
+
+
+    checkFile(){
+        if(page === "game.html"){
+        this.addMemeToHand();}
+        else {
+            this.addMemeToRating();
+        }
     }
 
     getImageSource()

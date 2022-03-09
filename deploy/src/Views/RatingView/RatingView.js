@@ -1,15 +1,17 @@
 /**shows all created memestories one after the other */
 
+
+
 class RatingView
 {
 constructor(memes){
     this.memes = memes;
     this.jsarray = JSON.parse(sessionStorage.getItem("jsArray"));
-    this.titleField = document.querySelector(".title").innerHTML;
+    this.titleField = document.querySelector(".title");
     this.firstMemeSpace = document.querySelector(".meme1");
     this.secondMemeSpace = document.querySelector(".meme2");
     this.thirdMemeSpace = document.querySelector(".meme3");
-    console.log(this.memes);
+    console.log(this.titleField);
     this.updateView();
     
 }
