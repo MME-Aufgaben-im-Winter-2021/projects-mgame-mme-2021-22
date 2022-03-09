@@ -1,7 +1,5 @@
-/* eslint-env node */
-import { Appwrite } from "appwrite";
-
-const appwrite = new Appwrite();
+// eslint-disable-next-line no-undef
+var appwrite = new Appwrite();
 
 appwrite
   .setEndpoint(
@@ -34,4 +32,4 @@ class AppwriteDAL {
   }
 
 }
-export default {AppwriteDAL};
+export {AppwriteDAL};
