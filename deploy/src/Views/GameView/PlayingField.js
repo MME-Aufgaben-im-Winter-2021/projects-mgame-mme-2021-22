@@ -23,7 +23,7 @@ class PlayingField extends Observable {
 
   addMeme(memeName, imageSource) {
     if (this.playingFieldArray.length < 3) {
-      let newMeme = new Meme(memeName, imageSource);
+      let newMeme = new Meme(memeName + this.playingFieldArray.length, imageSource);
       this.playingFieldArray.push(newMeme);
       newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
       this.updatePlayingField();

@@ -30,6 +30,7 @@ class Hand extends Observable {
   }
 
   onSearch() {
+    for (let i=0; i<10; i++){
     this.addNewMeme(searchBar.value,
       "https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/a5/3a/b7/a53ab703-a5dc-e293-d8cf-b0b5708889bd/source/256x256bb.jpg");
     HandSpace.innerHTML = "";
@@ -37,7 +38,7 @@ class Hand extends Observable {
 
       HandSpace.appendChild(meme.body);
     }
-
+  }
   }
   addNewMeme(memeName, imageSource) {
     if (this.handArray.length < 10) {
