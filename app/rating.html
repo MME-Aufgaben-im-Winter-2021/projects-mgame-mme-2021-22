@@ -13,15 +13,15 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <div class="container py-3">
         <header>
-            <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-                <h1 class="display-4 fw-normal">Title of the Story</h1>
+            <div class="title pricing-header p-3 pb-md-4 mx-auto text-center">
+                <h1 class="title display-4 fw-normal">Title of the Story</h1>
             </div>
         </header>
         <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
             <div class="col">
                 <div class="card mb-4 rounded-3 shadow-sm">
                     <div class="card-body">
-                        <ul class="list-unstyled mt-3 mb-4">
+                        <ul class="meme1 list-unstyled mt-3 mb-4">
                             <li>1st Meme</li>
                         </ul>
                     </div>
@@ -30,7 +30,7 @@
             <div class="col">
                 <div class="card mb-4 rounded-3 shadow-sm">
                     <div class="card-body">
-                        <ul class="list-unstyled mt-3 mb-4">
+                        <ul class="meme2 list-unstyled mt-3 mb-4">
                             <li>2nd Meme</li>
                         </ul>
                     </div>
@@ -39,7 +39,7 @@
             <div class="col">
                 <div class="card mb-4 rounded-3 shadow-sm">
                     <div class="card-body">
-                        <ul class="list-unstyled mt-3 mb-4">
+                        <ul class="meme3 list-unstyled mt-3 mb-4">
                             <li>3rd Meme</li>
                         </ul>
                     </div>
@@ -72,15 +72,19 @@
                 <i class="fa fa-star" aria-hidden="true"></i>
             </button>
         </div>
-
+        <script type="module" src=".\src\Views\RatingView\RatingView.js"></script>
 </body>
 <!--https://bootsnipp.com/snippets/WaXlr-->
 
 
+<template id="meme-template">
+    <div class="meme" name="">
+        <span class="picture"></span>
+    </div>
+</template>
 
 
 
 
-</body>
 
 </html>

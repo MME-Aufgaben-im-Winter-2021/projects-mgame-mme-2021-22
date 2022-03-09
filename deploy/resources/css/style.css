@@ -18,6 +18,21 @@
     --red-orange: #ff3838;
     --spiro-disco-ball: #17c0eb;
     --light-purple: #c56cf0;
+    /*flat ui colors dutch palette */
+    --20000-feet-under-the-sea: #1B1464;
+    --red-triade: #641b14;
+    --green-comp: #B6D615;
+
+    
+    --primary: #79ff1a;
+    --prim-light: #b2ff5e;
+    --prim-dark: #38cb00;
+    --secondary: #3612DE;
+    --sec-light: #1a79ff;
+    --sec-dark: #004ecb;
+
+    --primary-text: #0000;  /*min 47% opacity*/
+    --sec-dark-text: #ffff; /*min 52% opacity*/
 }
 
 .attachment-full {
@@ -31,10 +46,12 @@
 }
 
 body {
-    background-color: var(--dorn-yellow);
+    background-color: var(--primary);
     font-family: 'Space Grotesk', sans-serif;
     margin: 0;
     padding: 0;
+    padding-right: 0px !important;
+    overflow-y: auto;
 }
 
 .ui {
@@ -47,18 +64,43 @@ body {
 
 .ui h1 {
     text-align: center;
-    color: var(--jet);
+    color: var(--primary-text);
 }
 
-.prompt {
-    background-color: var(--light-purple);
-
+.bgd-primary {
+    background-color: var(--primary);
 }
 
-.game-progress {
-    background-color: gainsboro;
+.bgd-dark {
+    background-color: var(--prim-dark);
 }
 
-.search-menu {
-    background-color: var(--radiant-yellow);
+.bgd-light {
+    background-color: var(--prim-light);
+}
+
+.bgd-secondary {
+    background-color: var(--secondary);
+}
+
+.bgd-dark-s {
+    background-color: var(--sec-dark);
+}
+
+.bgd-light-s {
+    background-color: var(--sec-light);
+}
+
+/*this fixes website shaking because of scrollbar popping up in chrome*/
+::-webkit-scrollbar { 
+    width: 0px!important;
+  } 
+
+.btn-primary {
+    background-color: var(--sec-light);
+}
+
+.card {
+    width: 5cm;
+    height: 5cm;
 }
