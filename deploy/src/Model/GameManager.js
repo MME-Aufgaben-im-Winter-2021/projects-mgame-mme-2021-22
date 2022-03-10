@@ -8,35 +8,34 @@ import Hand from "../Views/GameView/Hand.js";
 import RatingView from "../Views/RatingView/RatingView.js";
 import Prompt from "../Views/GameView/Prompt.js";
 
-var path = window.location.pathname,
-page = path.split("/").pop();
-
-
 class GameManager{
 
 constructor(){
     
    this.gameProgressCard = new GameProgressCard;
-
-   this.checkFile();
-}
-
-checkFile(){
-    switch (page) {
-        case "game.html":
-            this.hand = new Hand;
-            this.playingField = new PlayingField;
-            this.prompt = new Prompt;
-            console.log("ibims");
-          break;
-        case "rating.html":
-            this.ratingView = new RatingView;
-            console.log("gtrgt");
-            break;
-        default:
-             break;
-      }
-}
+   this.PlayingField = new PlayingField;
+   this.Hand = new Hand;
+   this.RatingView = new RatingView;
+   this.Prompt = new Prompt;
+   this.handArea = document.getElementById("handArea");
+   this.playingField = document.getElementById("playingField");
+   this.ratingArea = document.getElementById("ratingArea");
+   this.promptField = document.getElementById("promptField");
+   this.progressField = document.getElementById("progressField");
+   this.submitButton = document.querySelector(".submit");
+   this.submitButton.addEventListener("click",this.setGameStateRate.bind(this));
 
 }
+
+setGameStateRate()
+{
+    console.log("huhu");
+    this.RatingView.updateView(this.PlayingField.playingFieldArray);
+    this.playingField.hidden = true;
+    this.RatingView.hidden = false;
+
+}
+
+}
+document.getElementById("playingField").hidden = true;
 export default GameManager;

@@ -1,12 +1,12 @@
 import { Event, Observable } from "../utils/Observable.js";
 
-const MEME_TEMPLATE = document.querySelector("#meme-template").content.querySelector("div.meme").innerHTML;
+const MEME_TEMPLATES = document.querySelector("#meme-template").content.querySelector("div.meme").innerHTML;
+
 var draggedMeme,
 swappingMeme,
 currentLocation,
 path = window.location.pathname,
 page = path.split("/").pop();
-
 
 class Meme extends Observable{
 
@@ -15,9 +15,9 @@ class Meme extends Observable{
         console.log(page);
         this.id = memeName;
         this.playingArea = document.querySelector(".playingArea");
-        this.handArea = document.querySelector(".handArea");
+        this.handArea = document.querySelector(".handMemeArea");
         this.body = document.createElement("ul");
-        this.body.innerHTML = MEME_TEMPLATE;
+        this.body.innerHTML = MEME_TEMPLATES;
         this.body.classList.add("meme");
         this.imageSource = this.body.querySelector(".picture");
         this.imageSource.innerHTML = "<img src=\""+ image + "\">";
@@ -39,9 +39,27 @@ class Meme extends Observable{
         this.handArea.addEventListener('dragenter', () => {
             currentLocation = "handArea";
         });
+        this.fetchData();
     }
+    fetchData(){
 
-
+    let data = new Promise((resolve, reject) => {
+        fetch('./resources/meme_json_data.json')
+            .then(respond => {
+                resolve(respond.json())
+                .then((meme)=>{
+                    let test = meme["Drake Hotline Bling "];
+                    console.log(test);
+                });
+            }).catch(err => {
+                reject(err);
+         });
+        });
+        console.log(data);
+        
+    }
+  
+    
     checkFile(){
         if(page === "game.html"){
         this.addMemeToHand();}

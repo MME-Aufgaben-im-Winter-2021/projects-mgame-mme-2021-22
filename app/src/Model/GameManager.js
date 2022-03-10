@@ -8,34 +8,38 @@ import Hand from "../Views/GameView/Hand.js";
 import RatingView from "../Views/RatingView/RatingView.js";
 import Prompt from "../Views/GameView/Prompt.js";
 
-var path = window.location.pathname,
-page = path.split("/").pop();
-
-
 class GameManager{
 
 constructor(){
     
    this.gameProgressCard = new GameProgressCard;
+   this.PlayingField = new PlayingField;
+   this.Hand = new Hand;
+   this.RatingView = new RatingView;
+   this.Prompt = new Prompt;
+   this.handArea = document.getElementById("handArea");
+   this.playingField = document.getElementById("playingField");
+   this.ratingArea = document.getElementById("ratingArea");
+   this.ratingField = document.getElementById("ratingField");
+   this.promptField = document.getElementById("promptField");
+   this.progressField = document.getElementById("progressField");
+   this.submitButton = document.querySelector(".submit");
+   this.divider = document.getElementById("divider");
+   this.submitButton.addEventListener("click",this.setGameStateRate.bind(this));
 
-   this.checkFile();
 }
 
-checkFile(){
-    switch (page) {
-        case "game.html":
-            this.hand = new Hand;
-            this.playingField = new PlayingField;
-            this.prompt = new Prompt;
-            console.log("ibims");
-          break;
-        case "rating.html":
-            this.ratingView = new RatingView;
-            console.log("gtrgt");
-            break;
-        default:
-             break;
-      }
+setGameStateRate()
+{
+    console.log("huhu");
+   // this.RatingView.updateView(this.PlayingField.playingFieldArray);
+    this.playingField.hidden = true;
+    this.promptField.hidden = true;
+    this.progressField.hidden = true;
+    this.ratingArea.hidden= false;
+    this.ratingField.hidden = false;
+    this.handArea.hidden = true;
+    this.divider.hidden = true;
 }
 
 }

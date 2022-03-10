@@ -4,14 +4,7 @@
 import Meme from "../../Controller/Meme.js";
 import Observable from "../../utils/Observable.js";
 import PlayingField from "./PlayingField.js";
-const data = new Promise((resolve, reject) => {
-  fetch('./resources/meme_json_data.json')
-      .then(respond => {
-          resolve(respond.json());
-      }).catch(err => {
-          reject(err);
-   });
-  });
+
 
 var searchBar,
   HandSpace,
@@ -23,10 +16,8 @@ class Hand extends Observable {
     super();
     this.handArray = [];
     HandSpace = document.querySelector(".hand");
-    searchBar = document.querySelector("input");
+    searchBar = document.getElementById("searchBar");
     searchBar.addEventListener("change", this.onSearch.bind(this));
-    console.log(data);
-
   }
 
   onSearch() {
@@ -41,6 +32,7 @@ class Hand extends Observable {
   }
   }
   addNewMeme(memeName, imageSource) {
+    console.log("fdf");
     if (this.handArray.length < 10) {
       let newMeme = new Meme(memeName, imageSource);
       this.handArray.push(newMeme);

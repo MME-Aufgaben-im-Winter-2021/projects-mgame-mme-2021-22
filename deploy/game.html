@@ -11,18 +11,73 @@
 
 <body class="body">
     <div class="row px-2" style="height: 30vh;">
-        <div class="promptField container col-2 prompt border border-dark rounded mx-2 my-2">Prompt</div>
+        <div id ="promptField" class="promptField container col-2 prompt border border-dark rounded mx-2 my-2">Prompt</div>
         <div class="playingArea col border border-dark mx-2 my-2" >
             <div class="playingField container-fluid py-3">
-                <div class="field d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
+                <div id="ratingField" class="row row-cols-1 row-cols-md-3 mb-3 text-center" hidden>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            <div class="card-body">
+                                <ul class="meme1 list-unstyled mt-3 mb-4">
+                                    <li>1st Meme</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            <div class="card-body">
+                                <ul class="meme2 list-unstyled mt-3 mb-4">
+                                    <li>2nd Meme</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            <div class="card-body">
+                                <ul class="meme3 list-unstyled mt-3 mb-4">
+                                    <li>3rd Meme</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="playingField" class="field d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
                    <!-- Hier kommen die Memes rein -->
                 </div>
               </div>
         </div>
-        <div class="container col-2 game-progress border border-dark rounded mx-2 my-2">Round progress</div>
+        <div id="progressField" class="container col-2 game-progress border border-dark rounded mx-2 my-2">Round progress</div>
     </div>
-    <div class="row px-2">
-        <div class="col-12 bgd-dark">
+    <div id="ratingArea" class="row px-2" hidden>
+        <div class="form-group text-center" id="rating-ability-wrapper">
+            <label class="control-label" for="rating">
+                <span class="field-label-header">How would you rate this Story?</span><br>
+                <span class="field-label-info"></span>
+                <input type="hidden" id="selected_rating" name="selected_rating" value="5" requireSd="required">
+            </label>
+            <h2 class="bold rating-header" style="">
+                <span class="selected-rating">5</span><small> / 5</small>
+            </h2>
+            <button type="button" class="btnrating btn btn-lg btn-warning" data-attr="1" id="rating-star-1">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-lg btn-warning" data-attr="2" id="rating-star-2">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-lg btn-warning" data-attr="3" id="rating-star-3">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-lg btn-warning" data-attr="4" id="rating-star-4">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btnrating btn btn-lg btn-warning" data-attr="5" id="rating-star-5">
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+    <div id= "handArea" class="col-12 bgd-dark">
             <nav class="navbar navbar-expand-lg bgd-dark-s">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="categories">
@@ -33,7 +88,7 @@
                         </ul>
 
                         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                            <input type="text" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                            <input id="searchBar" type="text" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
                         </form>
 
                         <div class="text-end">
@@ -43,13 +98,13 @@
                     </div>
                 </div>
             </nav>
-            <div class="handArea container-fluid py-3">
+            <div class="handMemeArea container-fluid py-3">
                 <div class="hand d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
                    <!-- Hier kommen die Memes rein -->
                 </div>
-              </div>
         </div>
     </div>
+</div>
     <div class="row mx-1 vh-70">
         <div class="col border bgd-secondary h-100"></div>
     </div>
