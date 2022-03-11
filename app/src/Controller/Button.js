@@ -14,8 +14,8 @@ class LoginButtons extends Observable {
         console.log(lobbyIDInput);
         lobbyJoin = document.querySelector("#lobbyJoin");
         lobbyCreate = document.querySelector("#lobbyCreate");
-        lobbyJoin.addEventListener("joinLobbyEvent", this.joinLobby(nicknameInput));
-        lobbyCreate.addEventListener("createNewLobbyEvent", createLobby());
+        lobbyJoin.addEventListener("click", this.joinLobby(nicknameInput));
+        lobbyCreate.addEventListener("click", createLobby());
     }
 
     joinLobby(nicknameInput2){
@@ -29,6 +29,9 @@ class LoginButtons extends Observable {
 function createLobby(){
     console.log("test");
 }
+
+
+
 export default LoginButtons;
 
 
