@@ -1,24 +1,22 @@
 /**
  * User enters nickname and submits
  */
-import {appwrite} from "./services/appwriteConfig.js";
+ import {AppwriteDAL} from "./../../../services/appwriteConfig.js";
+ var dal = new AppwriteDAL(), nickname = document.getElementById("nicknameInput"), sessionID = document.getElementById("lobbyIDInput"), hostButton = document.getElementById("host"),
+ joinButton = document.getElementById("join");
 
-var username = "Bonifatius", lobbyId = "9SK8KL";
+//link event listener
+ hostButton.addEventListener("click", hostSession);
+ joinButton.addEventListener("click", joinSession);
 
-// Register User
-appwrite
-    .account.create("unique()", username, lobbyId)
-        .then(response => {
-            console.log(response);
-        }, error => {
-            console.log(error);
-        });
+function hostSession(){
+    if(nickname.value){
+        dal.createSession(nickname.value);
+    }
+    return 0;
+}
 
-let promise = appwrite.account.createAnonymousSession();
-
-promise.then(function (response) {
-    console.log(response); // Success
-}, function (error) {
-    console.log(error); // Failure
-});
-
+function joinSession() {
+        dal.joinSession(nickname.value, sessionID.value);
+    return 0;
+}
