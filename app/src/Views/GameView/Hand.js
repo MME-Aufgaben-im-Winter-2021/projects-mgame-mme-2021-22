@@ -32,7 +32,6 @@ class Hand extends Observable {
   }
   }
   addNewMeme(memeName, imageSource) {
-    console.log("fdf");
     if (this.handArray.length < 10) {
       let newMeme = new Meme(memeName, imageSource);
       this.handArray.push(newMeme);

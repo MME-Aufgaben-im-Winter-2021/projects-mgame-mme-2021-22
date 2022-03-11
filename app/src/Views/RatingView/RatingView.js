@@ -17,10 +17,13 @@ updateView(memes){
     this.firstMemeSpace.innerHTML = "";
     this.firstMemeSpace.appendChild(memes[0].body);
     this.secondMemeSpace.innerHTML = "";
-    this.firstMemeSpace.appendChild(memes[1].body);
+    this.secondMemeSpace.appendChild(memes[1].body);
     this.thirdMemeSpace.innerHTML = "";
     this.thirdMemeSpace.appendChild(memes[2].body);
 }
-
+loadMemes(){  
+    let fromStorage = Array.from(new Set(JSON.parse(window.localStorage.getItem('playedMemes'))));
+    console.log(fromStorage);
+    }
 }
 export default RatingView;

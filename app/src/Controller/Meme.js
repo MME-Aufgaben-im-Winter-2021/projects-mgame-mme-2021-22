@@ -42,7 +42,6 @@ class Meme extends Observable{
         this.fetchData();
     }
     fetchData(){
-
     let data = new Promise((resolve, reject) => {
         fetch('./resources/meme_json_data.json')
             .then(respond => {
@@ -55,8 +54,7 @@ class Meme extends Observable{
                 reject(err);
          });
         });
-        console.log(data);
-        
+        console.log(data);    
     }
   
     

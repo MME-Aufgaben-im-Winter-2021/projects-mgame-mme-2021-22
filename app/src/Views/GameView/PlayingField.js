@@ -39,7 +39,6 @@ class PlayingField extends Observable {
     for (const meme of this.playingFieldArray) {
       playingField.appendChild(meme.body);
     }
-    console.log(this.playingFieldArray);
   }
   checkMeme(event) {
     let memeName = event.data[0],
@@ -83,6 +82,9 @@ class PlayingField extends Observable {
     console.log(this.playingFieldArray);
       return this.playingFieldArray;
   }
+  storePlayedMemes() {
+    window.localStorage.setItem('playedMemes', JSON.stringify(this.playingFieldArray));
+}
  
 }
 export default PlayingField;

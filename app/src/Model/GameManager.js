@@ -12,13 +12,13 @@ class GameManager{
 
 constructor(){
     
-   this.gameProgressCard = new GameProgressCard;
-   this.PlayingField = new PlayingField;
-   this.Hand = new Hand;
-   this.RatingView = new RatingView;
-   this.Prompt = new Prompt;
+   this.gameProgressCard = new GameProgressCard();
+   this.playingField = new PlayingField();
+   this.Hand = new Hand();
+   this.RatingView = new RatingView();
+   this.Prompt = new Prompt();
    this.handArea = document.getElementById("handArea");
-   this.playingField = document.getElementById("playingField");
+   this.playingFieldArea = document.getElementById("playingField");
    this.ratingArea = document.getElementById("ratingArea");
    this.ratingField = document.getElementById("ratingField");
    this.promptField = document.getElementById("promptField");
@@ -31,9 +31,9 @@ constructor(){
 
 setGameStateRate()
 {
-    console.log("huhu");
-   // this.RatingView.updateView(this.PlayingField.playingFieldArray);
-    this.playingField.hidden = true;
+    console.log(this.playingField.playingFieldArray);
+    this.RatingView.updateView(this.playingField.playingFieldArray);
+    this.playingFieldArea.hidden = true;
     this.promptField.hidden = true;
     this.progressField.hidden = true;
     this.ratingArea.hidden= false;
