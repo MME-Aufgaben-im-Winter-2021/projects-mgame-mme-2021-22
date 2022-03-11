@@ -10,39 +10,153 @@
 </head>
 
 <body class="body">
-    <div class="row">
-        <div class="container" style="height: 100px;">
-            <a class="btn btn-primary" href="index.html" role="button">Home</a>
+    <div class="row" style="height: 20vh;">
+        <div class="col">
+            <div class="containter">
+                <h2 class="text-dark text-center">THE MEME GAME</h2>
+            </div>
         </div>
     </div>
     <div class="row">
-        <div class="container col-xl-2"></div>
-        <div class="container col-xl-4">
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-light">PlayerOne</li>
-                <li class="list-group-item"> PlayerTwo</li>
-                <li class="list-group-item">PlayerThree</li>
-                <li class="list-group-item">PlayerFour</li>
-                <li class="list-group-item">PlayerFive</li>
-            </ul>
+        <!--Player List-->
+        <div class="col bgd-dark">
+            <div class="container p-2">
+                <table class="table table-striped border border-dark ">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col" colspan="2">Name</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Insert players with template here-->
+                        <tr id="player-slot-1">
+                            <th scope="row" id="player-number">1</th>
+                            <td colspan="2" id="player-name"></td>
+                            <td id="connection-status"></td>
+                        </tr>
+                        <tr id="player-slot-2">
+                            <th scope="row" id="player-number">2</th>
+                            <td colspan="2" id="player-name"></td>
+                            <td id="connection-status"></td>
+                        </tr>
+                        <tr id="player-slot-3">
+                            <th scope="row" id="player-number">3</th>
+                            <td colspan="2" id="player-name"></td>
+                            <td id="connection-status"></td>
+                        </tr>
+                        <tr id="player-slot-4">
+                            <th scope="row" id="player-number">4</th>
+                            <td colspan="2" id="player-name"></td>
+                            <td id="connection-status"></td>
+                        </tr>
+                        <tr id="player-slot-5">
+                            <th scope="row" id="player-number">5</th>
+                            <td colspan="2" id="player-name"></td>
+                            <td id="connection-status"></td>
+                        </tr>
+                        <tr id="player-slot-6">
+                            <th scope="row" id="player-number">6</th>
+                            <td colspan="2" id="player-name"></td>
+                            <td id="connection-status"></td>
+                        </tr>
+                        <tr id="player-slot-7">
+                            <th scope="row" id="player-number">7</th>
+                            <td colspan="2" id="player-name"></td>
+                            <td id="connection-status"></td>
+                        </tr>
+                        <tr id="player-slot-8">
+                            <th scope="row" id="player-number">8</th>
+                            <td colspan="2" id="player-name"></td>
+                            <td id="connection-status"></td>
+                        </tr>
+                        <tr id="player-slot-9">
+                            <th scope="row" id="player-number">9</th>
+                            <td colspan="2" id="player-name"></td>
+                            <td id="connection-status"></td>
+                        </tr>
+                        <tr id="player-slot-10">
+                            <th scope="row" id="player-number">10</th>
+                            <td colspan="2" id="player-name"></td>
+                            <td id="connection-status"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <template id="player-data">
+                    <tr id="player-slot-">
+                        <th scope="row" id="player-number">-1</th>
+                        <td colspan="2" id="player-name">Larry the Bird</td>
+                        <td id="connection-status">Not Ready</td>
+                    </tr>
+                </template>
+            </div>
         </div>
-        <div class="container col-xl-4 bg-danger text-white">
-            <div class="card my-3" style="width: 18rem; height: 18rem; float:left">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title text-black">Mode 1</h5>
+        <!--Game Settings-->
+        <div class="col pe-4">
+            <div class="container border border-dark" id="game-settings">
+                <div id="game-mode-selector" class="carousel carousel-dark slide text-center" data-bs-ride="carousel" style="height: 80pt;" data-bs-interval="false">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#game-mode-selector" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#game-mode-selector" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <h2 class="d-block w-100 mt-4" alt="...">Game Mode 1</h2>
+                        </div>
+                        <div class="carousel-item">
+                            <h2 class="d-block w-100 mt-4">Game Mode 2</h2>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#game-mode-selector" data-bs-slide="next">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#game-mode-selector" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <hr class="bgd-dark-s border-2 border-top border-dark">
+                <div id="game-mode-settings" class="container">
+                    <div class="row" id="setting1">
+                        <label for="player-count" class="col-3 col-form-label">Player Count</label>
+                        <div class="col">
+                            <input type="range" class="form-range pt-1" id="player-count">
+                        </div>
+                        <div class="col-2">
+                            <input type="number" class="form-control mb-2" id="input-player-count">
+                        </div>
+                    </div>
+                    <div class="row" id="setting2">
+                        <label for="round-count" class="col-3 col-form-label">Round Count</label>
+                        <div class="col">
+                            <input type="range" class="form-range pt-1" id="round-count">
+                        </div>
+                        <div class="col-2">
+                            <input type="number" class="form-control mb-2" id="input-round-count">
+                        </div>
+                    </div>
+                    <div class="row" id="setting3">
+                        <label for="round-length" class="col-3 col-form-label">Round Duration</label>
+                        <div class="col">
+                            <input type="range" class="form-range pt-1" id="round-length">
+                        </div>
+                        <div class="col-2">
+                            <input type="number" class="form-control mb-2" id="input-round-length">
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card my-3" style="width: 18rem; height: 18rem; float:right">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title text-black">Mode 2</h5>
-                </div>
-            </div>
-        </div>
+            <div class="row mt-2 pe-4">
+                <div class="col" id="link">
 
-    </div>
-    <div class="container col-xl-2"></div>
+                </div>
+                <div class="col-1" id="copy">
+                    <button type="copy" >Copy</button>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

@@ -31,5 +31,31 @@ class AppwriteDAL {
       });
   }
 
+  createSession(nickname){
+    this.login(nickname);
+    let promise = this.sdk.database.createDocument("[Sessions]", "unique()", {});
+    promise.then(function (response) {
+      console.log(response);}, function (error) {
+        console.log(error);
+    });
+    return 0;
+  }
+
+  joinSession(){
+    return 0;
+  }
+
 }
+
+function generatePassword() {
+  var length = 5, i = 0, n = 0,
+      charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+      retVal = "";
+ 
+  for (i, n = charset.length; i < length; ++i) {
+      retVal += charset.charAt(Math.floor(Math.random() * n));
+  }
+  return retVal;
+}
+
 export {AppwriteDAL};
