@@ -3,25 +3,20 @@ import Meme from "../../Controller/Meme.js";
 import Observable from "../../utils/Observable.js";
 
 
-
-var playingField,
-  promptField;
-
-
 class PlayingField extends Observable {
 
   constructor() {
     super();
     this.playingFieldArray = [];
-    playingField = document.querySelector(".field");
-    promptField = document.querySelector(".promptField");
-    promptField.innerHTML =
-      "<h1> Describe your funniest moment last year </h1>";
+    this.playingField = document.querySelector(".field");
+    this.promptField = document.querySelector(".promptField");
+
   }
 
   addMeme(memeName, imageSource) {
     if (this.playingFieldArray.length < 3) {
-      let newMeme = new Meme(memeName + this.playingFieldArray.length, imageSource);
+      let newMeme = new Meme(memeName + this.playingFieldArray.length,
+        imageSource);
       this.playingFieldArray.push(newMeme);
       newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
       this.updatePlayingField();
@@ -29,16 +24,18 @@ class PlayingField extends Observable {
   }
 
   removeMeme(memeName) {
-    this.playingFieldArray = this.playingFieldArray.filter((meme) => meme.id !==
+    this.playingFieldArray = this.playingFieldArray.filter((meme) => meme
+      .id !==
       memeName);
     this.updatePlayingField();
   }
 
   updatePlayingField() {
-    playingField.innerHTML = "";
+    this.playingField.innerHTML = "";
     for (const meme of this.playingFieldArray) {
-      playingField.appendChild(meme.body);
+      this.playingField.appendChild(meme.body);
     }
+    this.storePlayedMemes();
   }
   checkMeme(event) {
     let memeName = event.data[0],
@@ -71,20 +68,29 @@ class PlayingField extends Observable {
         break;
       }
     }
-    this.playingFieldArray[indexDragged] = this.playingFieldArray.splice(indexSwapped,
+    this.playingFieldArray[indexDragged] = this.playingFieldArray.splice(
+      indexSwapped,
       1, this.playingFieldArray[indexDragged])[
     0]; //https://stackoverflow.com/questions/872310/javascript-swap-array-elements/872317
     this.updatePlayingField();
   }
-  
-  getElements ()
-  {
+
+  getElements() {
     console.log(this.playingFieldArray);
-      return this.playingFieldArray;
+    return this.playingFieldArray;
   }
+
   storePlayedMemes() {
-    window.localStorage.setItem('playedMemes', JSON.stringify(this.playingFieldArray));
-}
- 
+    window.localStorage.setItem('playedMemes', JSON.stringify(this
+      .playingFieldArray));
+  }
+
+  setPrompt(prompt) {
+
+    this.promptField.innerHTML = prompt;
+    this.updatePlayingField();
+
+  }
+
 }
 export default PlayingField;
