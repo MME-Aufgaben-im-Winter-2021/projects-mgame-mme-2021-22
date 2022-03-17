@@ -21,19 +21,28 @@ class AppwriteDAL {
     console.log("AppwriteDAL printing!");
   }
 
-  login(nickname) {
-    this.sdk.account.create("unique()", "not@used.com", "password",
-        nickname)
-      .then(response => {
+  register(nickname, email, password) {
+    let promise = this.sdk.account.create("unique()", email, password,
+        nickname);
+      promise.then(response => {
         console.log(response);
       }, error => {
         console.log(error);
       });
   }
 
+  signIn(email, password) {
+    let promise = this.sdk.account.createSession(email, password);
+
+    promise.then(function(response){
+      console.log(response);
+    }, function(error){
+      console.log(error);
+    });
+  }
+
   createSession(nickname){
-    this.login(nickname);
-    let promise = this.sdk.database.createDocument("[Sessions]", "unique()", {});
+    let promise = this.sdk.database.createDocument("62248d05d88cb88edf41", "unique()", {});
     promise.then(function (response) {
       console.log(response);}, function (error) {
         console.log(error);
