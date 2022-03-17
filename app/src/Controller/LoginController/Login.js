@@ -2,21 +2,21 @@
  * User enters nickname and submits
  */
  import {AppwriteDAL} from "./../../../services/appwriteConfig.js";
- var dal = new AppwriteDAL(), nickname = document.getElementById("nicknameInput"), sessionID = document.getElementById("lobbyIDInput"), hostButton = document.getElementById("host"),
- joinButton = document.getElementById("join");
+ var dal = new AppwriteDAL(), nickname = document.getElementById("nicknameInput"), password = document.getElementById("password"), email = document.getElementById("emailInput"), registerButton = document.getElementById("register"),
+ signinButton = document.getElementById("signin");
 
 //link event listener
- hostButton.addEventListener("click", hostSession);
- joinButton.addEventListener("click", joinSession);
+ signinButton.addEventListener("click", signIn);
+ registerButton.addEventListener("click", registerAcc);
 
-function hostSession(){
-    if(nickname.value){
-        dal.createSession(nickname.value);
-    }
-    return 0;
+function signIn(){
+        dal.signIn(email.value, password.value);
 }
 
-function joinSession() {
-        dal.joinSession(nickname.value, sessionID.value);
-    return 0;
+function registerAcc() {
+    if (email.value && password.value){
+        dal.register(nickname.value, email.value, password.value);
+    }else{
+        console.log("Email or password invalid.");
+    }
 }
