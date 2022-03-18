@@ -1,19 +1,20 @@
-const PROMPT_ARRAY = ["Describe your funniest moment this year","How would your perfect date go?","How would you describe your last exam"];
+const PROMPT_ARRAY = ["Describe your funniest moment this year",
+  "How would your perfect date go?", "How would you describe your last exam"];
 
 
-class Prompt{
+class Prompt {
 
-getRandomInt(max) {
+  getRandomInt(max) {
 
     return Math.floor(Math.random() * max);
 
-    }
+  }
 
-generatePrompt(){
-    
+  generatePrompt() {
+
     let randomNumber = this.getRandomInt(PROMPT_ARRAY.length);
     return PROMPT_ARRAY[randomNumber];
-}
+  }
 
 }
 export default Prompt;

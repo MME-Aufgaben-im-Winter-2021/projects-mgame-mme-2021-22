@@ -38,8 +38,8 @@ class GameManager {
 
 
   setGameStateRate() {
-    //  console.log( Array.from(new Set(JSON.parse(window.localStorage.getItem('playedMemes')))));
-    // this.RatingView.updateView( Array.from(new Set(JSON.parse(window.localStorage.getItem('playedMemes')))));
+    console.log( Array.from(new Set(JSON.parse(window.localStorage.getItem('playedMemes')))));
+    this.RatingView.updateView( Array.from(new Set(JSON.parse(window.localStorage.getItem('playedMemes')))));
     this.playingFieldArea.hidden = true;
     //this.promptField.hidden = true;
     this.progressField.hidden = true;

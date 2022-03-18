@@ -31,6 +31,7 @@ class PlayingField extends Observable {
   }
 
   updatePlayingField() {
+    console.log(this.playingField);
     this.playingField.innerHTML = "";
     for (const meme of this.playingFieldArray) {
       this.playingField.appendChild(meme.body);

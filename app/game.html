@@ -16,30 +16,18 @@
         <div class="playingArea col border border-dark mx-2 my-2">
             <div id="ratingField" class="row row-cols-1 row-cols-md-3 mb-3 text-center" hidden>
                 <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        <div class="card-body">
-                            <ul class="meme1 list-unstyled mt-3 mb-4">
-                                <li>1st Meme</li>
-                            </ul>
-                        </div>
+                    <div class="card1 mb-4 rounded-3 shadow-sm">
+
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        <div class="card-body">
-                            <ul class="meme2 list-unstyled mt-3 mb-4">
-                                <li>2nd Meme</li>
-                            </ul>
-                        </div>
+                    <div class="card2 mb-4 rounded-3 shadow-sm">
+
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        <div class="card-body">
-                            <ul class="meme3 list-unstyled mt-3 mb-4">
-                                <li>3rd Meme</li>
-                            </ul>
-                        </div>
+                    <div class="card3 mb-4 rounded-3 shadow-sm">
+
                     </div>
                 </div>
             </div>
@@ -49,7 +37,14 @@
                 </div>
             </div>
         </div>
-        <div id="progressField" class="container col-2 game-progress border border-dark rounded mx-2 my-2">Round progress</div>
+        <div id="progressField" class="container col-2 game-progress border border-dark rounded mx-2 my-2">
+            <div id="countdown">
+                <div id="countdown-number"></div>
+                <svg>
+                    <circle r="18" cx="20" cy="20"></circle>
+                </svg>
+            </div>
+        </div>
     </div>
     <div id="ratingArea" class="row px-2" hidden>
         <div class="form-group text-center" id="rating-ability-wrapper">
@@ -64,12 +59,12 @@
                         <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"></path>
                     </svg>
                 </button>
-                <button id = "meh"type="button" class="meh btn btn-primary">
+                <button id="meh" type="button" class="meh btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-square" viewBox="0 0 16 16">
                         <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"></path>
                     </svg>
                 </button>
-                <button id = "bad" type="button" class="bad btn btn-danger">
+                <button id="bad" type="button" class="bad btn btn-danger">
                     <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
                     </svg>

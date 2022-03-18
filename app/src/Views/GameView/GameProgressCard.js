@@ -2,5 +2,14 @@
 class GameProgressCard
 {
 
+constructor(){
+    this.countdownNumberEL = document.getElementById("countdown-number");
+    this.countdown = 10;
+    console.log(this.countdownNumberEL);
+    this.countdownNumberEL.textContent = this.countdown;
+
+   
+}
+    
 }
 export default GameProgressCard;
