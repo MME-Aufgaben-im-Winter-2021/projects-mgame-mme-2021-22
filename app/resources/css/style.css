@@ -56,48 +56,46 @@ body {
 
 
   
-  #countdown {
+  .clock {
     position: relative;
-    margin: auto;
-    margin-top: 100px;
-    height: 40px;
-    width: 40px;
-    text-align: center;
-  }
-  
-  #countdown-number {
-    color: white;
-    display: inline-block;
-    line-height: 40px;
-  }
-  
-  svg {
+    width: 210px;
+    margin: 15px auto;
+}
+
+.clock .face {
+    width: 200px;
+    height: 200px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #010104;
+    border-radius: 50%;
+    background-color: #FFF;
+}
+
+.clock .center {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 40px;
-    height: 40px;
-    transform: rotateY(-180deg) rotateZ(-90deg);
-  }
-  
-  svg circle {
-    stroke-dasharray: 113px;
-    stroke-dashoffset: 0px;
-    stroke-linecap: round;
-    stroke-width: 2px;
-    stroke: black;
-    fill: none;
-    animation: countdown 10s linear infinite forwards;
-  }
-  
-  @keyframes countdown {
-    from {
-      stroke-dashoffset: 0px;
-    }
-    to {
-      stroke-dashoffset: 113px;
-    }
-  }
+    top: 100px;
+    left: 100px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #010104;
+}
+
+.clock .handle {
+    position: absolute;
+    width: 4px;
+    height: 100px;
+    top: 20px;
+    left: 103px;
+    transform-origin: 50% 85%;
+    background: #010104;
+    transform: rotateZ(0deg);
+}
+
+.clock .handle-animated {
+    animation: rotate 60s infinite linear;
+}
 
 .ui {
     display: flex;
