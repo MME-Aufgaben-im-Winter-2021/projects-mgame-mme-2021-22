@@ -4,6 +4,11 @@ const PROMPT_ARRAY = ["Describe your funniest moment this year",
 
 class Prompt {
 
+constructor(){
+  this.promptField = document.getElementById("promptField");
+  }
+
+
   getRandomInt(max) {
 
     return Math.floor(Math.random() * max);

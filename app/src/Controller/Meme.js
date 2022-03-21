@@ -9,10 +9,11 @@ var draggedMeme,
 
 class Meme extends Observable {
 
-  constructor(memeName, image) {
+  constructor(memeName, image, isInHand) {
     super();
     this.id = memeName;
     this.image = image;
+    this.isInHand = isInHand;
     this.playingArea = document.querySelector(".playingArea");
     this.handArea = document.querySelector(".handMemeArea");
     this.body = document.createElement("ul");
@@ -27,7 +28,7 @@ class Meme extends Observable {
     });
     this.body.addEventListener('dragend', () => {
       this.body.classList.remove('dragging');
-      this.notifyAll(new Event("dragEnded", [draggedMeme, currentLocation,swappingMeme]));
+      this.notifyAll(new Event("dragEnded", [draggedMeme, currentLocation,swappingMeme, this.isInHand]));
     });
     this.body.addEventListener('dragenter', () => {
       swappingMeme = this.id;

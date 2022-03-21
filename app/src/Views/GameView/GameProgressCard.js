@@ -3,6 +3,7 @@ class GameProgressCard
 {
 
 constructor(){
+   this.progressField = document.getElementById("progressField");
    this.clockEl = document.querySelector(".clock");
    this.clockHandle = this.clockEl.querySelector(".handle");
 
