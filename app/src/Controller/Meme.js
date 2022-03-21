@@ -51,7 +51,7 @@ class Meme extends Observable {
     });
 
     data.then(meme => {
-      console.log(meme[2,0]);
+      console.log(meme[0]);
 
     });
     

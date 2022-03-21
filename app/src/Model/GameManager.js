@@ -32,6 +32,7 @@ class GameManager {
   }
 
   setGameStatePlay() {
+    this.gameProgressCard.start();
     this.playingField.setPrompt(this.Prompt.generatePrompt());
 
   }

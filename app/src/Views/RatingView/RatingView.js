@@ -18,7 +18,6 @@ class RatingView {
   }
 
   updateView(memes) {
-    console.log(memes[0].image);
     this.firstMemeSpace.innerHTML = "<img src=\"" + memes[0].image + "\">";
     this.secondMemeSpace.innerHTML = "<img src=\"" + memes[1].image + "\">";
     this.thirdMemeSpace.innerHTML = "<img src=\"" + memes[2].image + "\">";
