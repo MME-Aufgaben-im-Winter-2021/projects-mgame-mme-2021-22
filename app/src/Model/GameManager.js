@@ -65,10 +65,14 @@ class GameManager extends Observable {
   addNewMemeToField(memeName, imageSource) {
     if (fieldArray.length < 3) {
       let newMeme = new Meme(memeName + fieldArray.length, imageSource, false);
+      
       fieldArray.push(newMeme);
       newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
       newMeme.isInHand = false;
+      console.log("moin");
     }
+    this.updatePlayingField();
+    
   }
 
   checkMeme(event) {
@@ -76,10 +80,12 @@ class GameManager extends Observable {
         currentLocation = event.data[1],
         swappingMeme = event.data[2],
         isInHand = event.data[3];
-
+        
     if (currentLocation === "playingArea") {
       // this.removeMeme(memeName);
-      if(isInHand === false){
+      
+      if(isInHand){
+        
       this.addNewMemeToField(memeName,
         "https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/a5/3a/b7/a53ab703-a5dc-e293-d8cf-b0b5708889bd/source/256x256bb.jpg");
       }
