@@ -52,7 +52,7 @@ class Meme extends Observable {
     });
 
     data.then(meme => {
-      console.log(meme[0]);
+      console.log((((Object.values(meme[0]))[0])[0]).filename);
 
     });
     

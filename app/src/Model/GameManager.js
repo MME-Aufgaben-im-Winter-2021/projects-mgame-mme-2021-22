@@ -138,7 +138,7 @@ class GameManager extends Observable {
     }
     this.storePlayedMemes();
   }
-
+  
   setPrompt(prompt) {
 
     this.playingField.promptField.innerHTML = prompt;
