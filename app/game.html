@@ -10,6 +10,7 @@
 </head>
 
 <body class="body">
+<div id="game" hidden>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <div class="row px-2" style="height: 30vh;">
         <div id="promptField" class="promptField container col-2 prompt border border-dark rounded mx-2 my-2">Prompt</div>
@@ -105,7 +106,51 @@
     <div id="divider" class="row mx-1 vh-70">
         <div class="col border bgd-secondary h-100"></div>
     </div>
+
     <script type="module" src="./src/Model/index.js"></script>
+</div>
+<div id="roundEnd">
+    <div class="container-fluid pt-5 my-5 bg-dark text-white col-xl-6">
+        <h1 class="text-center">Current Standings</h1>
+    </div>
+    <div class="row-2">
+        <div class="container col-xl-6">
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th class="text-end">Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Memeio</th>
+                        <th class="text-end">1200 (+200)</th>
+                    </tr>
+                    <tr>
+                        <th>Sarcuse</th>
+                        <th class="text-end">1000 (+300)</th>
+                    </tr>
+                    <tr>
+                        <th>EinsteinDidntKillHimself</th>
+                        <th class="text-end">-200 (-100)</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="roundStories">
+        <!-- Hier kommen die Memes rein -->
+    </div>
+ 
+    </div>
+    <div class="container text-center">
+        <button type="button" class="btn btn-primary btn-lg">Continue</button>
+
+    </div>
+</div>
+
 </body>
 
 <template id ="keyword-template">

@@ -13,13 +13,13 @@ import KeyWord from "../Controller/KeyWord.js";
 
 
 let submitButton = document.querySelector(".submit"),
-    saveButton = document.querySelector(".save"),
-    goodButton = document.getElementById("good"),
-    mehButton = document.getElementById("meh"),
-    badButton = document.getElementById("bad"),
-    searchBar = document.getElementById("searchBar"),
-    handArray = [],
-    fieldArray = [];
+  saveButton = document.querySelector(".save"),
+  goodButton = document.getElementById("good"),
+  mehButton = document.getElementById("meh"),
+  badButton = document.getElementById("bad"),
+  searchBar = document.getElementById("searchBar"),
+  handArray = [],
+  fieldArray = [];
 
 class GameManager extends Observable {
 
@@ -43,15 +43,16 @@ class GameManager extends Observable {
 
   onSearch() {
     handArray = [];
-    for (let i=0; i<10; i++){
-    this.addNewMemeToHand(searchBar.value,
-      "https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/a5/3a/b7/a53ab703-a5dc-e293-d8cf-b0b5708889bd/source/256x256bb.jpg");
-    this.hand.HandSpace.innerHTML = "";
-    for (const meme of handArray) {
-      this.hand.HandSpace.appendChild(meme.body);
+    for (let i = 0; i < 10; i++) {
+      this.addNewMemeToHand(searchBar.value,
+        "https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/a5/3a/b7/a53ab703-a5dc-e293-d8cf-b0b5708889bd/source/256x256bb.jpg"
+        );
+      this.hand.HandSpace.innerHTML = "";
+      for (const meme of handArray) {
+        this.hand.HandSpace.appendChild(meme.body);
+      }
     }
-  }
-  this.addNewKeyword();
+    this.addNewKeyword();
   }
 
   addNewMemeToHand(memeName, imageSource) {
@@ -64,36 +65,36 @@ class GameManager extends Observable {
 
   addNewMemeToField(memeName, imageSource) {
     if (fieldArray.length < 3) {
-      let newMeme = new Meme(memeName + fieldArray.length, imageSource, false);
-      
+      let newMeme = new Meme(memeName + fieldArray.length, imageSource,
+      false);
+
       fieldArray.push(newMeme);
       newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
       newMeme.isInHand = false;
       console.log("moin");
     }
     this.updatePlayingField();
-    
+
   }
 
   checkMeme(event) {
     let memeName = event.data[0],
-        currentLocation = event.data[1],
-        swappingMeme = event.data[2],
-        isInHand = event.data[3];
-        
+      currentLocation = event.data[1],
+      swappingMeme = event.data[2],
+      isInHand = event.data[3];
+
     if (currentLocation === "playingArea") {
       // this.removeMeme(memeName);
-      
-      if(isInHand){
-        
-      this.addNewMemeToField(memeName,
-        "https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/a5/3a/b7/a53ab703-a5dc-e293-d8cf-b0b5708889bd/source/256x256bb.jpg");
-      }
-      else{
+
+      if (isInHand) {
+
+        this.addNewMemeToField(memeName,
+          "https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/a5/3a/b7/a53ab703-a5dc-e293-d8cf-b0b5708889bd/source/256x256bb.jpg"
+          );
+      } else {
         this.swapMeme(memeName, swappingMeme);
       }
-    }
-    else if(isInHand === false){
+    } else if (isInHand === false) {
       this.removeMemeFromField(memeName);
     }
   }
@@ -119,7 +120,8 @@ class GameManager extends Observable {
     fieldArray[indexDragged] = fieldArray.splice(
       indexSwapped,
       1, fieldArray[indexDragged])[
-    0]; //https://stackoverflow.com/questions/872310/javascript-swap-array-elements/872317
+      0
+      ]; //https://stackoverflow.com/questions/872310/javascript-swap-array-elements/872317
     this.updatePlayingField();
   }
 
@@ -135,9 +137,9 @@ class GameManager extends Observable {
   }
 
   setPrompt(prompt) {
-    
-   this.playingField.promptField.innerHTML = prompt;
-   this.updatePlayingField();
+
+    this.playingField.promptField.innerHTML = prompt;
+    this.updatePlayingField();
 
   }
   storePlayedMemes() {
@@ -145,13 +147,13 @@ class GameManager extends Observable {
   }
 
   removeMemeFromField(memeName) {
-    fieldArray =fieldArray.filter((meme) => meme
+    fieldArray = fieldArray.filter((meme) => meme
       .id !==
       memeName);
     this.updatePlayingField();
   }
 
-  addNewKeyword(){
+  addNewKeyword() {
     let newKeyWord = new KeyWord(searchBar.value);
     this.hand.keyWordArea.appendChild(newKeyWord.body);
     console.log(newKeyWord);
@@ -183,15 +185,17 @@ class GameManager extends Observable {
 
 
   setGameStateRate() {
-    console.log( Array.from(new Set(JSON.parse(window.localStorage.getItem('playedMemes')))));
-    this.RatingView.updateView( Array.from(new Set(JSON.parse(window.localStorage.getItem('playedMemes')))));
-    this.playingFieldArea.hidden = true;
+    console.log(Array.from(new Set(JSON.parse(window.localStorage.getItem(
+      'playedMemes')))));
+    this.ratingView.updateView(Array.from(new Set(JSON.parse(window
+      .localStorage.getItem('playedMemes')))));
+    this.playingField.playingFieldArea.hidden = true;
     //this.promptField.hidden = true;
-    this.progressField.hidden = true;
-    this.ratingArea.hidden = false;
-    this.ratingField.hidden = false;
-    this.handArea.hidden = true;
-    this.divider.hidden = true;
+    this.gameProgressCard.progressField.hidden = true;
+    this.ratingView.ratingArea.hidden = false;
+    this.ratingView.ratingField.hidden = false;
+    this.hand.handArea.hidden = true;
+    this.hand.divider.hidden = true;
   }
 
 }
