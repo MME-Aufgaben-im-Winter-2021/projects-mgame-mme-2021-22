@@ -3,7 +3,8 @@
 class RatingView {
   constructor() {
     console.log("ratingview called");
-
+    this.ratingArea = document.getElementById("ratingArea");
+    this.ratingField = document.getElementById("ratingField");
     this.titleField = document.querySelector(".title");
     this.firstMemeSpace = document.querySelector(".card1");
     this.secondMemeSpace = document.querySelector(".card2");
