@@ -1,6 +1,6 @@
 import { Event, Observable } from "../utils/Observable.js";
 
-const MEME_TEMPLATES = document.querySelector("#meme-template").content
+const MEME_TEMPLATE = document.querySelector("#meme-template").content
   .querySelector("div.meme").innerHTML;
 
 var draggedMeme,
@@ -17,7 +17,7 @@ class Meme extends Observable {
     this.playingArea = document.querySelector(".playingArea");
     this.handArea = document.querySelector(".handMemeArea");
     this.body = document.createElement("ul");
-    this.body.innerHTML = MEME_TEMPLATES;
+    this.body.innerHTML = MEME_TEMPLATE;
     this.body.classList.add("meme");
     this.imageSource = this.body.querySelector(".picture");
     this.imageSource.innerHTML = "<img src=\"" + image + "\">";

@@ -6,6 +6,7 @@ class PlayingField extends Observable {
 
   constructor() {
     super();
+    this.gameView = document.getElementById("game");
     this.playingFieldArray = [];
     this.playingField = document.querySelector(".field");
     this.promptField = document.querySelector(".promptField");

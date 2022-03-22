@@ -10,7 +10,7 @@
 </head>
 
 <body class="body">
-<div id="game" hidden>
+<div id="game">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <div class="row px-2" style="height: 30vh;">
         <div id="promptField" class="promptField container col-2 prompt border border-dark rounded mx-2 my-2">Prompt</div>
@@ -109,7 +109,7 @@
 
     <script type="module" src="./src/Model/index.js"></script>
 </div>
-<div id="roundEnd">
+<div id="roundEnd" hidden>
     <div class="container-fluid pt-5 my-5 bg-dark text-white col-xl-6">
         <h1 class="text-center">Current Standings</h1>
     </div>
@@ -143,10 +143,9 @@
     <div id="roundStories">
         <!-- Hier kommen die Memes rein -->
     </div>
- 
-    </div>
+
     <div class="container text-center">
-        <button type="button" class="btn btn-primary btn-lg">Continue</button>
+        <button id="continue" type="button" class="btn btn-primary btn-lg">Continue</button>
 
     </div>
 </div>
@@ -162,8 +161,37 @@
 </template>
 
 <template id="meme-template">
-    <div class="meme" name="">
+    <div class="meme" >
         <span class="picture"></span>
+    </div>
+</template>
+
+<template id ="finished-story">
+<div class="story-view">
+    <header>
+        <div class="pricing-header p-3 pb-md-4 mx-auto">
+            <h1 class="player display-4 fw-normal">Player 3</h1>
+        </div>
+    </header>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                        <span class="firstMeme"></span>
+
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+
+                        <span class="secondMeme"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+
+                        <span class="thirdMeme"></span>
+            </div>
+        </div>
     </div>
 </template>
 
