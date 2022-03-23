@@ -8,11 +8,12 @@ import Hand from "../Views/GameView/Hand.js";
 import RatingView from "../Views/RatingView/RatingView.js";
 import Prompt from "../Views/GameView/Prompt.js";
 import Meme from "../Controller/Meme.js";
-import Observable from "../utils/Observable.js";
+import { Event, Observable } from "../utils/Observable.js";
 import KeyWord from "../Controller/KeyWord.js";
 import RoundScoreboard from "../Views/EndOfRoundView/RoundScoreboard.js";
 import Story from "../Controller/Story.js";
 import Config from "../utils/Config.js";
+import ImageDownloader from "../Controller/ImageDownloader.js";
 
 
 let submitButton = document.querySelector(".submit"),
@@ -35,7 +36,10 @@ class GameManager extends Observable {
     this.hand = new Hand();
     this.ratingView = new RatingView();
     this.prompt = new Prompt();
-    this.RoundScoreboard = new RoundScoreboard();
+    this.roundScoreboard = new RoundScoreboard();
+    this.imageDownloader = new ImageDownloader();
+    
+    this.imageDownloader.addEventListener("imagesFetched", this.fillHand.bind(this));
     saveButton.addEventListener("click", this.addNewKeyword.bind(this));
     submitButton.addEventListener("click", this.setGameStateRate.bind(this));
     goodButton.addEventListener("click", this.votedGood.bind(this));
@@ -50,27 +54,52 @@ class GameManager extends Observable {
 
   onSearch() {
     handArray = [];
-    for (let i = 0; i < Config.HAND_SIZE; i++) {
-      this.addNewMemeToHand(searchBar.value,Config.PLACEHOLDER_MEME);
-      this.hand.HandSpace.innerHTML = "";
-      for (const meme of handArray) {
-        this.hand.HandSpace.appendChild(meme.body);
-      }
-    }
+    this.updateHand();
+   // for (let i = 0; i < Config.HAND_SIZE; i++) {
+    //  this.addNewMemeToHand(searchBar.value,Config.PLACEHOLDER_MEME);
+    //  this.hand.HandSpace.innerHTML = "";
+   //   for (const meme of handArray) {
+   //     this.hand.HandSpace.appendChild(meme.body);
+   //   }
+  //  }
+    this.requestMemes(searchBar.value);
     this.addNewKeyword();
   }
 
-  addNewMemeToHand(memeName, imageSource) {
-    if (handArray.length < Config.HAND_SIZE) {
-      let newMeme = new Meme(memeName, imageSource, true);
-      handArray.push(newMeme);
-      newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
+  requestMemes(tag){
+    this.imageDownloader.fetchData(tag);
+  }
+
+  fillHand(event){
+    console.log(event.data);
+
+    let data = event.data,
+    size = data.length;
+    for (let i = 0; i < Config.HAND_SIZE; i++) {
+      if (i<size){
+        console.log(size);
+        this.addNewMemeToHand(data[i]);
+      }
     }
   }
 
-  addNewMemeToField(memeName, imageSource) {
+  addNewMemeToHand(imageSource) {
+    console.log(imageSource);
+    
+    if (handArray.length < Config.HAND_SIZE) {
+      let newMeme = new Meme( imageSource, true);
+      console.log(handArray.length, Config.HAND_SIZE);
+      handArray.push(newMeme);
+      newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
+      
+    }
+    this.updateHand();
+  }
+
+  addNewMemeToField(imageSource) {
+    console.log(imageSource);
     if (fieldArray.length < Config.MAX_MEMES) {
-      let newMeme = new Meme(memeName + fieldArray.length, imageSource,
+      let newMeme = new Meme(imageSource,
         false);
 
       fieldArray.push(newMeme);
@@ -79,7 +108,7 @@ class GameManager extends Observable {
       console.log("moin");
     }
     this.updatePlayingField();
-
+  
   }
 
   checkMeme(event) {
@@ -87,13 +116,14 @@ class GameManager extends Observable {
       currentLocation = event.data[1],
       swappingMeme = event.data[2],
       isInHand = event.data[3];
+      
 
     if (currentLocation === "playingArea") {
       // this.removeMeme(memeName);
 
       if (isInHand) {
 
-        this.addNewMemeToField(memeName,Config.PLACEHOLDER_MEME);
+        this.addNewMemeToField(memeName);
       } else {
         this.swapMeme(memeName, swappingMeme);
       }
@@ -182,6 +212,8 @@ class GameManager extends Observable {
     console.log("votedBAD");
   }
 
+
+
   setGameStatePlay() {
     handArray = [];
     fieldArray = [];
@@ -189,7 +221,7 @@ class GameManager extends Observable {
     this.updateHand();
     this.gameProgressCard.start();
     this.setPrompt(this.prompt.generatePrompt());
-    this.RoundScoreboard.scoreboardView.hidden = true;
+    this.roundScoreboard.scoreboardView.hidden = true;
     this.playingField.gameView.hidden = false;
     this.playingField.playingFieldArea.hidden = false;
     //this.promptField.hidden = true;
@@ -216,17 +248,17 @@ class GameManager extends Observable {
 
   setGameStateRoundEnd() {
     this.playingField.gameView.hidden = true;
-    this.RoundScoreboard.scoreboardView.hidden = false;
+    this.roundScoreboard.scoreboardView.hidden = false;
     let story = new Story(currentPrompt, fieldArray, "Player1", 0);
-    this.RoundScoreboard.storyListView.appendChild(story.body);
+    this.roundScoreboard.storyListView.appendChild(story.body);
 
   }
 
 setGameStateGameEnd() {
     this.playingField.gameView.hidden = true;
-    this.RoundScoreboard.scoreboardView.hidden = false;
+    this.roundScoreboard.scoreboardView.hidden = false;
     let story = new Story(currentPrompt, fieldArray, "Player1", 0);
-    this.RoundScoreboard.storyListView.appendChild(story.body);
+    this.roundScoreboard.storyListView.appendChild(story.body);
 
   }
 }

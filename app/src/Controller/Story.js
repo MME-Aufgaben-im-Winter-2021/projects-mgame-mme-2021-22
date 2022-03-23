@@ -18,11 +18,11 @@ constructor(prompt, memes, player, id){
     this.playerNameElement = this.body.querySelector(".player");
     this.playerNameElement.innerHTML = player;
     this.firstMemeView = this.body.querySelector(".firstMeme");
-    this.firstMemeView.innerHTML = "<img src=\"" + memes[0].image + "\">";
+    this.firstMemeView.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[0].image + "\">";
     this.secondMemeView = this.body.querySelector(".secondMeme"); 
-    this.secondMemeView.innerHTML = "<img src=\"" + memes[1].image + "\">";
+    this.secondMemeView.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[1].image + "\">";
     this.thirdMemeView = this.body.querySelector(".thirdMeme"); 
-    this.thirdMemeView.innerHTML = "<img src=\"" + memes[2].image + "\">";
+    this.thirdMemeView.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[2].image + "\">";
 
 }
 

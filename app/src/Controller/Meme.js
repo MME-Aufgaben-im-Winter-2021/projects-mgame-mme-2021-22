@@ -5,13 +5,14 @@ const MEME_TEMPLATE = document.querySelector("#meme-template").content
 
 var draggedMeme,
   swappingMeme,
-  currentLocation;
+  currentLocation,
+  fileName;
 
 class Meme extends Observable {
 
-  constructor(memeName, image, isInHand) {
+  constructor(image, isInHand) {
     super();
-    this.id = memeName;
+    this.id = image;
     this.image = image;
     this.isInHand = isInHand;
     this.playingArea = document.querySelector(".playingArea");
@@ -20,7 +21,7 @@ class Meme extends Observable {
     this.body.innerHTML = MEME_TEMPLATE;
     this.body.classList.add("meme");
     this.imageSource = this.body.querySelector(".picture");
-    this.imageSource.innerHTML = "<img src=\"" + image + "\">";
+    this.imageSource.innerHTML = "<img src=\"\\resources\\images_full\\" + image + "\">";
     this.body.setAttribute("draggable", "true");
     this.body.addEventListener('dragstart', () => {
       this.body.classList.add('dragging');
@@ -28,7 +29,7 @@ class Meme extends Observable {
     });
     this.body.addEventListener('dragend', () => {
       this.body.classList.remove('dragging');
-      this.notifyAll(new Event("dragEnded", [draggedMeme, currentLocation,swappingMeme, this.isInHand]));
+      this.notifyAll(new Event("dragEnded", [draggedMeme, currentLocation, swappingMeme, this.isInHand, this.imageSource]));
     });
     this.body.addEventListener('dragenter', () => {
       swappingMeme = this.id;
@@ -39,24 +40,9 @@ class Meme extends Observable {
     this.handArea.addEventListener('dragenter', () => {
       currentLocation = "handArea";
     });
-    this.fetchData();
-  }
-  fetchData() {
-    let data = new Promise((resolve, reject) => {
-      fetch('./resources/meme_json_data.json')
-        .then(respond => {
-          resolve(respond.json());
-        }).catch(err => {
-          reject(err);
-        });
-    });
-
-    data.then(meme => {
-      console.log((((Object.values(meme[0]))[0])[0]).filename);
-
-    });
     
   }
+
 
   getImageSource() {
     return this.imageSource.innerHTML;

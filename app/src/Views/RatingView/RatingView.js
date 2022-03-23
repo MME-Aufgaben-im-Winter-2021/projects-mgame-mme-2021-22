@@ -41,9 +41,9 @@ class RatingView {
     this.setRatingMemeImages();
     try{
       console.log(memes[0].image);
-      this.firstMemeSpace.innerHTML = "<img src=\"" + memes[0].image + "\">";
-      this.secondMemeSpace.innerHTML = "<img src=\"" + memes[1].image + "\">";
-      this.thirdMemeSpace.innerHTML = "<img src=\"" + memes[2].image + "\">";
+      this.firstMemeSpace.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[0].id + "\">";
+      this.secondMemeSpace.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[1].id + "\">";
+      this.thirdMemeSpace.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[2].id + "\">";
     }
     catch{
       console.error("CATCH: CANT READ MEME DATA IN RATINGVIEW");
