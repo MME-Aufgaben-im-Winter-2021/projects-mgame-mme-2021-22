@@ -55,15 +55,7 @@ class GameManager extends Observable {
   onSearch() {
     handArray = [];
     this.updateHand();
-   // for (let i = 0; i < Config.HAND_SIZE; i++) {
-    //  this.addNewMemeToHand(searchBar.value,Config.PLACEHOLDER_MEME);
-    //  this.hand.HandSpace.innerHTML = "";
-   //   for (const meme of handArray) {
-   //     this.hand.HandSpace.appendChild(meme.body);
-   //   }
-  //  }
     this.requestMemes(searchBar.value);
-    this.addNewKeyword();
   }
 
   requestMemes(tag){

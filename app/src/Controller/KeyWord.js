@@ -12,6 +12,7 @@ constructor(keyword){
     this.body.classList.add("nav-item");
     this.keyWordEL = this.body.querySelector(".nav-link");
     this.keyWordEL.innerHTML = this.keyword;
+    this.body.addEventListener("click", console.log("joffof"));
     console.log(this.keyWordEL);
 
 }
