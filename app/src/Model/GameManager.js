@@ -8,7 +8,7 @@ import Hand from "../Views/GameView/Hand.js";
 import RatingView from "../Views/RatingView/RatingView.js";
 import Prompt from "../Views/GameView/Prompt.js";
 import Meme from "../Controller/Meme.js";
-import { Event, Observable } from "../utils/Observable.js";
+import Observable  from "../utils/Observable.js";
 import KeyWord from "../Controller/KeyWord.js";
 import RoundScoreboard from "../Views/EndOfRoundView/RoundScoreboard.js";
 import Story from "../Controller/Story.js";
@@ -181,6 +181,7 @@ class GameManager extends Observable {
 
   addNewKeyword() {
     let newKeyWord = new KeyWord(searchBar.value);
+    newKeyWord.keyWordEL.addEventListener("click", this.requestMemes(newKeyWord.keyword));
     this.hand.keyWordArea.appendChild(newKeyWord.body);
     console.log(newKeyWord);
   }

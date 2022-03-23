@@ -27,7 +27,7 @@
     --primary: #79ff1a;
     --prim-light: #b2ff5e;
     --prim-dark: #38cb00;
-    --secondary: #3612DE;
+    --: #3612DE;
     --sec-light: #1a79ff;
     --sec-dark: #004ecb;
 
@@ -91,6 +91,7 @@ body {
     transform-origin: 50% 85%;
     background: #010104;
     transform: rotateZ(0deg);
+    
 }
 
 .clock .handle-animated {
@@ -133,10 +134,12 @@ body {
 .bgd-light-s {
     background-color: var(--sec-light);
 }
+
 img {
     max-width: 100%;
     max-height: 100%;
 }
+
 .picture {
     height: 200px;
     width: 200px;
