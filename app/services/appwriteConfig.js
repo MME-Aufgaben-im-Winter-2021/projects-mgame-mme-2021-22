@@ -35,23 +35,34 @@ class AppwriteDAL {
     let promise = this.sdk.account.createSession(email, password);
 
     promise.then(function(response){
+      //user logged into his account successfully
       console.log(response);
+      window.location.replace("homepage.html");
     }, function(error){
       console.log(error);
     });
   }
 
-  createSession(nickname){
-    let promise = this.sdk.database.createDocument("62248d05d88cb88edf41", "unique()", {});
+  hostGame(){
+    let promise = this.sdk.database.createDocument(["Sessions"], "unique()", ["role:all"]);
     promise.then(function (response) {
       console.log(response);}, function (error) {
         console.log(error);
     });
-    return 0;
+    return promise;
   }
 
   joinSession(){
     return 0;
+  }
+
+  logout(){
+    this.sdk.account.deleteSession("current").then(function(response){
+      console.log(response);
+      window.location.replace("login.html");
+    }, function(error){
+      console.log(error);
+    });
   }
 
 }
