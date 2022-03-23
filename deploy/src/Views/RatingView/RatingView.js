@@ -4,26 +4,22 @@
 
 class RatingView
 {
-constructor(memes){
-    this.memes = memes;
-    this.jsarray = JSON.parse(sessionStorage.getItem("jsArray"));
+constructor(){
     this.titleField = document.querySelector(".title");
     this.firstMemeSpace = document.querySelector(".meme1");
     this.secondMemeSpace = document.querySelector(".meme2");
     this.thirdMemeSpace = document.querySelector(".meme3");
     console.log(this.titleField);
-    this.updateView();
-    
 }
 
-updateView(){
+updateView(memes){
     console.log("here");
     this.firstMemeSpace.innerHTML = "";
-    this.firstMemeSpace.appendChild(this.jsarray[0].body);
+    this.firstMemeSpace.appendChild(memes[0].body);
     this.secondMemeSpace.innerHTML = "";
-    this.firstMemeSpace.appendChild(this.jsarray[1].body);
+    this.firstMemeSpace.appendChild(memes[1].body);
     this.thirdMemeSpace.innerHTML = "";
-    this.firstMemeSpace.appendChild(this.jsarray[2].body);
+    this.thirdMemeSpace.appendChild(memes[2].body);
 }
 
 }

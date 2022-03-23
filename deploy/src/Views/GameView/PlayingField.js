@@ -13,8 +13,6 @@ class PlayingField extends Observable {
   constructor() {
     super();
     this.playingFieldArray = [];
-    this.submitButton = document.querySelector(".submit");
-    this.submitButton.addEventListener("click",this.submitMemes.bind(this));
     playingField = document.querySelector(".field");
     promptField = document.querySelector(".promptField");
     promptField.innerHTML =
@@ -78,17 +76,5 @@ class PlayingField extends Observable {
     0]; //https://stackoverflow.com/questions/872310/javascript-swap-array-elements/872317
     this.updatePlayingField();
   }
-
-  submitMemes(){
-    let jsarray = this.playingFieldArray;
-    sessionStorage.setItem("jsArray", JSON.stringify(jsarray));
-    document.location.href = "rating.html";
-    console.log("huhu");
-    
-
-    
-
-  }
-
 }
 export default PlayingField;

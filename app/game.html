@@ -10,19 +10,73 @@
 </head>
 
 <body class="body">
-    <div class="row px-2" style="height: 30vh;">
-        <div class="promptField container col-2 prompt border border-dark rounded mx-2 my-2">Prompt</div>
-        <div class="playingArea col border border-dark mx-2 my-2" >
-            <div class="playingField container-fluid py-3">
-                <div class="field d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
-                   <!-- Hier kommen die Memes rein -->
+    <div id="game">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <div class="row px-2" style="height: 30vh;">
+            <div id="promptField" class="promptField container col-2 prompt border border-dark rounded mx-2 my-2">Prompt</div>
+            <div class="playingArea col border border-dark mx-2 my-2">
+                <div id="ratingField" class="row row-cols-1 row-cols-md-3 mb-3 text-center" hidden>
+                    <div class="col">
+                        <div class="card1 mb-4 rounded-3 shadow-sm picture">
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card2 mb-4 rounded-3 shadow-sm picture">
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card3 mb-4 rounded-3 shadow-sm picture">
+
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <div id="playingField" class="playingField container-fluid py-3">
+                    <div class="field d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
+                        <!-- Hier kommen die Memes rein -->
+                    </div>
+                </div>
+            </div>
+            <div id="progressField" class="container col-2 game-progress border border-dark rounded mx-2 my-2">
+                <div id="countdown">
+                    <div id="clock" class="clock">
+                        <div id="face" class="face"></div>
+                        <div id="center" class="center"></div>
+                        <div id="handle" class="handle"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="container col-2 game-progress border border-dark rounded mx-2 my-2">Round progress</div>
-    </div>
-    <div class="row px-2">
-        <div class="col-12 bgd-dark">
+        <div id="ratingArea" class="row px-2" hidden>
+            <div class="form-group text-center" id="rating-ability-wrapper">
+                <label class="control-label" for="rating">
+                    <span class="field-label-header">How would you rate this Story?</span><br>
+                    <span class="field-label-info"></span>
+                    <input type="hidden" id="selected_rating" name="selected_rating" value="5" requireSd="required">
+                </label>
+                    <p>
+                        <img id="ratingMemeBad" src="\resources\rating_memes\joy_bad.png" width="256" height="256" >
+                        <button id="good" type="button" class="good btn btn-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-triangle" viewBox="0 0 16 16">
+                                <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"></path>
+                            </svg>
+                        </button>
+                        <button id="meh" type="button" class="meh btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-square" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"></path>
+                            </svg>
+                        </button>
+                        <button id="bad" type="button" class="bad btn btn-danger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+                            </svg>
+                        </button>
+                        <img id="ratingMemeGood" src="\resources\rating_memes\joy_good.png" width="256" height="256" >
+                    </p>
+            </div>
+        </div>
+        <div id="handArea" class="col-12 bgd-dark">
             <nav class="navbar navbar-expand-lg bgd-dark-s">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="categories">
@@ -30,35 +84,183 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Home</a>
                             </li>
+                            <!-- Hier kommen die Keywords rein -->
                         </ul>
 
-                        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                            <input type="text" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" >
+                            <input id="searchBar" type="text" class="form-control form-control-dark" placeholder="Search...">
                         </form>
 
                         <div class="text-end">
-                            <button type="button" class="btn btn-outline-light me-2">Save</button>
+                            <button type="button" class="save btn btn-outline-light me-2">Save</button>
                             <button type="button" class="submit btn btn-warning">Submit</button>
                         </div>
                     </div>
                 </div>
             </nav>
-            <div class="handArea container-fluid py-3">
+            <div class="handMemeArea container-fluid py-3">
                 <div class="hand d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
-                   <!-- Hier kommen die Memes rein -->
+                    <!-- Hier kommen die Memes rein -->
                 </div>
-              </div>
+            </div>
         </div>
     </div>
-    <div class="row mx-1">
+    <div id="divider" class="row mx-1 vh-70">
         <div class="col border bgd-secondary h-100"></div>
     </div>
+
     <script type="module" src="./src/Model/index.js"></script>
+    </div>
+    <div id="roundEnd" hidden>
+        <div class="container-fluid pt-5 my-5 bg-dark text-white col-xl-6">
+            <h1 class="text-center">Current Standings</h1>
+        </div>
+        <div class="row-2">
+            <div class="container col-xl-6">
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th class="text-end">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Memeio</th>
+                            <th class="text-end">1200 (+200)</th>
+                        </tr>
+                        <tr>
+                            <th>Sarcuse</th>
+                            <th class="text-end">1000 (+300)</th>
+                        </tr>
+                        <tr>
+                            <th>EinsteinDidntKillHimself</th>
+                            <th class="text-end">-200 (-100)</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="roundStories">
+            <!-- Hier kommen die Memes rein -->
+        </div>
+
+        <div class="container text-center">
+            <button id="continue" type="button" class="btn btn-primary btn-lg">Continue</button>
+
+        </div>
+    </div>
+    <div id="gameEnd" hidden>
+        <div class="container-fluid pt-5 my-5 bg-dark text-white col-xl-6">
+            <h1 class="text-center">Final Standings</h1>
+        </div>
+        <div class="row-2">
+            <div class="container col-xl-6">
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th class="text-end">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Memeio</th>
+                            <th class="text-end">1200</th>
+                        </tr>
+                        <tr>
+                            <th>Sarcuse</th>
+                            <th class="text-end">1000</th>
+                        </tr>
+                        <tr>
+                            <th>EinsteinDidntKillHimself</th>
+                            <th class="text-end">-200</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="container">
+            <header>
+                <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                    <h1 class="display-4 fw-normal">Best Story</h1>
+                    <P>Title of the Story</P>
+                </div>
+            </header>
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-body">
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>1st Meme</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-body">
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>2nd Meme</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-body">
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>3rd Meme</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
+<template id="keyword-template">
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+
+        </a>
+    </li>
+</template>
+
 <template id="meme-template">
-        <div class="meme" name="">
-            <span class="picture"></span>
+    <div class="meme">
+        <span class="picture"></span>
+    </div>
+</template>
+
+<template id="finished-story">
+    <div class="story-view">
+        <header>
+            <div class="pricing-header p-3 pb-md-4 mx-auto">
+                <h1 class="player display-4 fw-normal">Player 3</h1>
+            </div>
+        </header>
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <span class="firstMeme picture"></span>
+
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+
+                    <span class="secondMeme picture"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+
+                    <span class="thirdMeme picture"></span>
+                </div>
+            </div>
         </div>
 </template>
 

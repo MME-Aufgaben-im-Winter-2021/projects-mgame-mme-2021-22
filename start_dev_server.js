@@ -1,4 +1,5 @@
 /* eslint-env node */
+
 import "dotenv/config";
 import express from "express";
 import open from "open";

@@ -1,11 +1,23 @@
 import { Event, Observable } from "../utils/Observable.js";
 
-const MEME_TEMPLATE = document.querySelector("#meme-template").content.querySelector("div.meme").innerHTML;
+const MEME_TEMPLATE = document.querySelector("#meme-template").content.querySelector("div.meme").innerHTML,
+DATA = new Promise((resolve, reject) => {
+    fetch('./resources/meme_json_data.json')
+        .then(respond => {
+            resolve(respond.json())
+            .then((meme)=>{
+                console.log(meme.filename);
+            });
+        }).catch(err => {
+            reject(err);
+     });
+    });
 var draggedMeme,
 swappingMeme,
 currentLocation,
 path = window.location.pathname,
 page = path.split("/").pop();
+
 
 
 class Meme extends Observable{
@@ -15,7 +27,7 @@ class Meme extends Observable{
         console.log(page);
         this.id = memeName;
         this.playingArea = document.querySelector(".playingArea");
-        this.handArea = document.querySelector(".handArea");
+        this.handArea = document.querySelector(".handMemeArea");
         this.body = document.createElement("ul");
         this.body.innerHTML = MEME_TEMPLATE;
         this.body.classList.add("meme");
@@ -39,6 +51,7 @@ class Meme extends Observable{
         this.handArea.addEventListener('dragenter', () => {
             currentLocation = "handArea";
         });
+        console.log(DATA);
     }
 
 

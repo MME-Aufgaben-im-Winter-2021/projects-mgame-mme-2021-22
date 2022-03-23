@@ -24,10 +24,10 @@
     --green-comp: #B6D615;
 
     
-    --primary: #008351;
-    --prim-light: #4ab47e;
-    --prim-dark: #005528;
-    --secondary: #830032;
+    --primary: #79ff1a;
+    --prim-light: #b2ff5e;
+    --prim-dark: #38cb00;
+    --secondary: #3612DE;
     --sec-light: #1a79ff;
     --sec-dark: #004ecb;
 
@@ -52,6 +52,49 @@ body {
     padding: 0;
     padding-right: 0px !important;
     overflow-y: auto;
+}
+
+
+  
+  .clock {
+    position: relative;
+    width: 210px;
+    margin: 15px auto;
+}
+
+.clock .face {
+    width: 200px;
+    height: 200px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #010104;
+    border-radius: 50%;
+    background-color: #FFF;
+}
+
+.clock .center {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #010104;
+}
+
+.clock .handle {
+    position: absolute;
+    width: 4px;
+    height: 100px;
+    top: 20px;
+    left: 103px;
+    transform-origin: 50% 85%;
+    background: #010104;
+    transform: rotateZ(0deg);
+}
+
+.clock .handle-animated {
+    animation: rotate 60s infinite linear;
 }
 
 .ui {
@@ -90,6 +133,14 @@ body {
 .bgd-light-s {
     background-color: var(--sec-light);
 }
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+.picture {
+    height: 200px;
+    width: 200px;
+   }
 
 /*this fixes website shaking because of scrollbar popping up in chrome*/
 ::-webkit-scrollbar { 
