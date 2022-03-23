@@ -133,6 +133,14 @@ body {
 .bgd-light-s {
     background-color: var(--sec-light);
 }
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+.picture {
+    height: 200px;
+    width: 200px;
+   }
 
 /*this fixes website shaking because of scrollbar popping up in chrome*/
 ::-webkit-scrollbar { 

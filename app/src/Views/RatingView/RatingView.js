@@ -9,9 +9,6 @@ class RatingView {
     this.firstMemeSpace = document.querySelector(".card1");
     this.secondMemeSpace = document.querySelector(".card2");
     this.thirdMemeSpace = document.querySelector(".card3");
-    this.goodButton = document.getElementById("good");
-    this.mehButton = document.getElementById("meh");
-    this.badButton = document.getElementById("bad");
     this.ratingMemeBad = document.getElementById("ratingMemeBad");
     this.ratingMemeGood = document.getElementById("ratingMemeGood");
     //this.goodButton.addEventListener("click", this.votedGood.bind(this));
