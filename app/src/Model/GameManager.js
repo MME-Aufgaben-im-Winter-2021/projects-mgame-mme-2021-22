@@ -206,10 +206,12 @@ class GameManager extends Observable {
 
   votedMeh() {
     console.log("votedMeh");
+    this.setGameStateRoundEnd();
   }
 
   votedBad() {
     console.log("votedBAD");
+    this.setGameStateRoundEnd();
   }
 
 
