@@ -13,7 +13,8 @@ class ImageDownloader extends Observable {
           .then(respond => respond.json())
             .then(files => {
               for (let i = 0; i < files.length; i++) {
-                if ((((Object.values(files[i]))[0])[0]).filename.includes(tag)) {
+                if ((((Object.values(files[i]))[0])[0]).filename.includes(tag)
+                 ||(((Object.values(files[i]))[0])[0]).tags.includes(tag) ) {
                   this.images.push((((Object.values(files[i]))[0])[0]).filename);
                 }
               }
