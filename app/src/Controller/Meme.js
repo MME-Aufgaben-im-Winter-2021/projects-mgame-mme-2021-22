@@ -5,8 +5,7 @@ const MEME_TEMPLATE = document.querySelector("#meme-template").content
 
 var draggedMeme,
   swappingMeme,
-  currentLocation,
-  fileName;
+  currentLocation;
 
 class Meme extends Observable {
 
