@@ -1,4 +1,4 @@
-import { Appwrite } from "appwrite";
+
 
 // Init your Web SDK
 const appwrite = new Appwrite();
