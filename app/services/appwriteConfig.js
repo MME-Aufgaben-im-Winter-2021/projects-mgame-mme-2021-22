@@ -2,8 +2,8 @@
 const appwrite = new Appwrite();
 
 appwrite
-    .setEndpoint('https://appwrite.software-engineering.education/v1') // Your Appwrite Endpoint
-    .setProject('62066432a2c67cb3f59e') // Your project ID
+    .setEndpoint("https://appwrite.software-engineering.education/v1") // Your Appwrite Endpoint
+    .setProject("62066432a2c67cb3f59e") // Your project ID
 ;
 
 class AppwriteDAL {
@@ -14,10 +14,6 @@ class AppwriteDAL {
     this.sdk = appwrite;
     Object.freeze(this);
     AppwriteDAL.instance = this;
-  }
-
-  print() {
-    console.log("AppwriteDAL printing!");
   }
 
   register(nickname, email, password) {
