@@ -1,5 +1,3 @@
-
-
 // Init your Web SDK
 const appwrite = new Appwrite();
 
@@ -45,7 +43,7 @@ class AppwriteDAL {
   }
 
   hostGame(){
-    let promise = this.sdk.database.createDocument(["Sessions"], "unique()", ["role:all"]);
+    let promise = this.sdk.database.createDocument("62248d05d88cb88edf41", "unique()", {"SessionID": "test_session", "GameState": "lobby"});
     promise.then(function (response) {
       console.log(response);}, function (error) {
         console.log(error);
