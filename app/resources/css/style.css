@@ -54,7 +54,6 @@ body {
     overflow-y: auto;
 }
 
-<<<<<<< HEAD
 
   
   .clock {
@@ -99,8 +98,6 @@ body {
     animation: rotate 60s infinite linear;
 }
 
-=======
->>>>>>> parent of 07ecb5b (Merge branch 'dev' of https://github.com/MME-Aufgaben-im-Winter-2021/projects-mgame-mme-2021-22 into dev)
 .ui {
     display: flex;
     flex-direction: column;
@@ -137,7 +134,6 @@ body {
 .bgd-light-s {
     background-color: var(--sec-light);
 }
-<<<<<<< HEAD
 
 img {
     max-width: 100%;
@@ -148,8 +144,6 @@ img {
     height: 200px;
     width: 200px;
    }
-=======
->>>>>>> parent of 07ecb5b (Merge branch 'dev' of https://github.com/MME-Aufgaben-im-Winter-2021/projects-mgame-mme-2021-22 into dev)
 
 /*this fixes website shaking because of scrollbar popping up in chrome*/
 ::-webkit-scrollbar { 
