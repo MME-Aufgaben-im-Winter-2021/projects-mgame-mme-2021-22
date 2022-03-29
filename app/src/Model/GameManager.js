@@ -14,6 +14,7 @@ import RoundScoreboard from "../Views/EndOfRoundView/RoundScoreboard.js";
 import Story from "../Controller/Story.js";
 import Config from "../utils/Config.js";
 import ImageDownloader from "../Controller/ImageDownloader.js";
+import FinalScore from "../Views/EndOfGameView/FinalScoreboard.js";
 
 
 let submitButton = document.querySelector(".submit"),
@@ -25,6 +26,7 @@ let submitButton = document.querySelector(".submit"),
   continueButton = document.getElementById("continue"),
   handArray = [],
   fieldArray = [],
+  roundCount = 0,
   currentPrompt;
 
 class GameManager extends Observable {
@@ -37,6 +39,7 @@ class GameManager extends Observable {
     this.ratingView = new RatingView();
     this.prompt = new Prompt();
     this.roundScoreboard = new RoundScoreboard();
+    this.finalScore = new FinalScore();
     this.imageDownloader = new ImageDownloader();
     
     this.imageDownloader.addEventListener("imagesFetched", this.fillHand.bind(this));
@@ -194,17 +197,29 @@ class GameManager extends Observable {
 
   votedGood() {
     console.log("votedGood");
-    this.setGameStateRoundEnd();
+    if(roundCount < Config.MAX_ROUNDS){
+    this.setGameStateRoundEnd();}
+    else{
+    this.setGameStateGameEnd();
+    }
   }
 
   votedMeh() {
     console.log("votedMeh");
-    this.setGameStateRoundEnd();
+    if(roundCount < Config.MAX_ROUNDS){
+      this.setGameStateRoundEnd();}
+      else{
+      this.setGameStateGameEnd();
+      }
   }
 
   votedBad() {
     console.log("votedBAD");
-    this.setGameStateRoundEnd();
+    if(roundCount < Config.MAX_ROUNDS){
+      this.setGameStateRoundEnd();}
+      else{
+      this.setGameStateGameEnd();
+      }
   }
 
 
@@ -230,6 +245,7 @@ class GameManager extends Observable {
 
 
   setGameStateRate() {
+    roundCount++;
     this.ratingView.updateView(Array.from(new Set(JSON.parse(window
       .localStorage.getItem("playedMemes")))));
     this.playingField.playingFieldArea.hidden = true;
@@ -251,7 +267,8 @@ class GameManager extends Observable {
 
 setGameStateGameEnd() {
     this.playingField.gameView.hidden = true;
-    this.roundScoreboard.scoreboardView.hidden = false;
+    this.finalScore.endGameScreen.hidden = false;
+    this.finalScore.addMemes(fieldArray);
     let story = new Story(currentPrompt, fieldArray, "Player1", 0);
     this.roundScoreboard.storyListView.appendChild(story.body);
 
