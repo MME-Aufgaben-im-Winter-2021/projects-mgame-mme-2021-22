@@ -36,6 +36,7 @@ class AppwriteDAL {
     promise.then(function(response) {
       //user logged into his account successfully
       console.log(response);
+
       window.location.replace("homepage.html");
     }, function(error) {
       console.log(error);
@@ -47,10 +48,10 @@ class AppwriteDAL {
       "unique()", {
         "SessionID": "test_session",
         "UserIDs": [
-          "Mikkelanschelo",
+          this.getAccount().name,
         ],
         "GameState": "lobby",
-      });
+      }, ["role:all"], ["role:all"]);
     promise.then(function(response) {
       console.log(response);
     }, function(error) {
