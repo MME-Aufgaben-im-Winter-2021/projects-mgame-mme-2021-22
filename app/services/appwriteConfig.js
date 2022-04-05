@@ -36,7 +36,7 @@ class AppwriteDAL {
     promise.then(function(response) {
       //user logged into his account successfully
       console.log(response);
-
+      
       window.location.replace("homepage.html");
     }, function(error) {
       console.log(error);
@@ -48,7 +48,7 @@ class AppwriteDAL {
       "unique()", {
         "SessionID": "test_session",
         "UserIDs": [
-          this.getAccount().name,
+          this.getUsername(),
         ],
         "GameState": "lobby",
       }, ["role:all"], ["role:all"]);
@@ -57,8 +57,12 @@ class AppwriteDAL {
     }, function(error) {
       console.log(error);
     });
-    
+    console.log(this.getUsername());
     return promise;
+  }
+
+  getUsername(){
+    return window.localStorage.getItem("username");
   }
 
   async updateSession() {
@@ -109,8 +113,9 @@ class AppwriteDAL {
     window.location.replace("homepage.html");
   }
 
-  getAccount(){
+  async getAccount(){
     let promise = this.sdk.account.get();
+    promise.then(function(response) {console.log(typeof(response.name)); window.localStorage.setItem("username", response.name);}, function(error){console.log(error);});
     return promise;
   }
 }

@@ -42,9 +42,12 @@ async function hostGame() {
   //synchronize my state
   sync.synchronizeGameState(documentData.GameState);
 }
+//.then(response => usernameText.innerHTML = response.name, error => console.log(error)); //window.location.replace("login.html")
 
-hasUser().then(response => usernameText.innerHTML = response.name, error => window.location.replace("login.html"));
-
-async function hasUser() {
-  return DAL.getAccount();
+function hasUser() {
+  let promise = DAL.getAccount();
+  console.log(promise);
+  promise.then(response => usernameText.innerHTML = response.name, error => console.log(error));
 }
+
+hasUser();

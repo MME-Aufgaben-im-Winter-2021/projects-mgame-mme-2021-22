@@ -7,7 +7,7 @@ var GameSettings = {
     roundDuration: 120,
     gameMode: 0,
 }, DAL = new AppwriteDAL(), leaveButton = document.getElementById("leave"), sessionData = await DAL.updateSession(), test = console.log(sessionData),
-    playerList = new PlayerList(sessionData.UserIDs), copyButton = document.getElementById("copyToken"), tokenText = document.getElementById("lobbyToken");
+    playerList = new PlayerList(sessionData.UserIDs), copyButton = document.getElementById("copyToken"), tokenText = document.getElementById("lobbyToken"), update = setInterval(updateGame, [1000]);
 
 leaveButton.addEventListener("click", leaveLobby);
 tokenText.value = sessionData.$id;
@@ -19,7 +19,11 @@ function copyToClipboard(){
     //alert("Copied token to clipboard" + tokenText.value);
 }
 
-
 function leaveLobby(){
     DAL.leaveLobby();
 }
+
+function updateGame() {
+    const state = DAL.updateSession();
+}
+
