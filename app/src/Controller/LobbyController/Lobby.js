@@ -23,8 +23,8 @@ function leaveLobby(){
     DAL.leaveLobby();
 }
 
-function updateGame() {
-    const state = DAL.updateSession();
+async function updateGame() {
+    const state = await DAL.updateSession();
     playerList.updatePlayerList(state.UserIDs);
     
 }
