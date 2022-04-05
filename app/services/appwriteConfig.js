@@ -91,8 +91,9 @@ class AppwriteDAL {
     //save current session token/id
     window.localStorage.setItem("documentID", JSON.stringify(promise.$id));
     //update document player list
-    let usersInGame = promise.UserIDs, user = this.getAccount();
-    usersInGame.push(user.name);
+    let usersInGame = promise.UserIDs, user = this.getUsername();
+    usersInGame.push(user);
+    console.log(usersInGame);
     // eslint-disable-next-line one-var
     let update = this.sdk.database.updateDocument(Config.collectionID, promise.$id, {"UserIDs": usersInGame});
     update.then(response => console.log(response), error => console.log(error));

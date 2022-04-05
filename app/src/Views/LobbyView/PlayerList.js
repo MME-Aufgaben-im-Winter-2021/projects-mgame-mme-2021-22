@@ -4,11 +4,12 @@ class PlayerList{
     constructor(playerNames){
         this.playerList = document.getElementById("playerList");
         this.playerTemplate = document.getElementById("player-data");
-        console.log(typeof(playerNames));
-        console.log(playerNames.length);
+        this.updatePlayerList(playerNames);  
+    }
+
+    updatePlayerList(playerNames){
         for (let player of playerNames){
             if(player !== null){
-                console.log(player);
                 let th = this.playerTemplate.content.querySelector("th"),
                 td = this.playerTemplate.content.querySelectorAll("td");
                 th.textContent = "PlayerNumber";

@@ -25,5 +25,7 @@ function leaveLobby(){
 
 function updateGame() {
     const state = DAL.updateSession();
+    playerList.updatePlayerList(state.UserIDs);
+    
 }
 
