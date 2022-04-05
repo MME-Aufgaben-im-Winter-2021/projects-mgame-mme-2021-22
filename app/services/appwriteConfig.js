@@ -98,6 +98,7 @@ class AppwriteDAL {
     // eslint-disable-next-line one-var
     let update = this.sdk.database.updateDocument(Config.collectionID, promise.$id, {"UserIDs": usersInGame});
     update.then(function(response){console.log(response); window.localStorage.setItem("role", "player");}, error => console.log(error));
+    console.log(window.localStorage.getItem("role"));
   }
 
   logout() {
@@ -113,14 +114,19 @@ class AppwriteDAL {
     if(window.localStorage.getItem("role") === "host"){
       this.sdk.database.deleteDocument(Config.collectionID,
         getDocumentIDFromLocalStorage());
-      window.location.replace("homepage.html");
+        console.log("Leaving as host");
+        window.localStorage.setItem("role", "");
+      //window.location.replace("homepage.html");
     }else{
       //remove name from userids
-      let sessionData = await this.updateSession()
-      , filtered = sessionData.userIDs.filter(function(value, index, arr){return value !== window.localStorage.getItem("username");}), 
+      let sessionData = await this.updateSession(), username = window.localStorage.getItem("username");
+      console.log(sessionData.UserIDs);
+      let unfiltered = sessionData.UserIDs;
+      let filtered = unfiltered.filter(function(value, index, arr){return value !== username;}),
       update = this.sdk.database.updateDocument(Config.collectionID, sessionData.$id, {"UserIDs": filtered});
       update.then(function(response){console.log(response);}, error => console.log(error));
-      window.location.replace("homepage.html");
+      console.log("leaving as player");
+      //window.location.replace("homepage.html");
     }
     
   }
