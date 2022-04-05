@@ -132,9 +132,10 @@ class AppwriteDAL {
   }
 
   async getAccount(){
-    let promise = this.sdk.account.get();
-    promise.then(function(response) {console.log(typeof(response.name)); window.localStorage.setItem("username", response.name);}, function(error){console.log(error);});
-    return promise;
+    let account = await this.sdk.account.get();
+    console.log(typeof(account.name)); 
+    window.localStorage.setItem("username", account.name);
+    return account;
   }
 }
 

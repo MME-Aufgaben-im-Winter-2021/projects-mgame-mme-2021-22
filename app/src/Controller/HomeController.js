@@ -44,10 +44,11 @@ async function hostGame() {
 }
 //.then(response => usernameText.innerHTML = response.name, error => console.log(error)); //window.location.replace("login.html")
 
-function hasUser() {
-  let promise = DAL.getAccount();
-  console.log(promise);
-  promise.then(response => usernameText.innerHTML = response.name, error => console.log(error));
+async function hasUser() {
+  let account = await DAL.getAccount();
+  console.log(account);
+  usernameText.innerHTML = account.name;
+  //promise.then(response => usernameText.innerHTML = response.name, error => console.log(error));
 }
 
 hasUser();
