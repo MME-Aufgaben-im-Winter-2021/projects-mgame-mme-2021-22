@@ -143,7 +143,7 @@ img {
 .picture {
     height: 200px;
     width: 200px;
-}
+   }
 
 /*this fixes website shaking because of scrollbar popping up in chrome*/
 ::-webkit-scrollbar { 
