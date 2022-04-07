@@ -232,7 +232,7 @@ class GameManager extends Observable {
     }
     else{
       let rand = Math.floor(Math.random() * Config.BAD_AUDIO_NUM);
-      let audio = new Audio("/resources/rating_audio/bad0.mp3");
+      let audio = new Audio("/resources/rating_audio/bad"+rand+".mp3");
       audio.volume = 0.1;
       audio.play();
     }
