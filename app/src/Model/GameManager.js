@@ -194,6 +194,7 @@ class GameManager extends Observable {
   }
 
   votedGood() {
+    this.playRatingSound(true);
     console.log("votedGood");
     if(roundCount < Config.MAX_ROUNDS){
     this.setGameStateRoundEnd();}
@@ -212,6 +213,7 @@ class GameManager extends Observable {
   }
 
   votedBad() {
+    this.playRatingSound(false);
     console.log("votedBAD");
     if(roundCount < Config.MAX_ROUNDS){
       this.setGameStateRoundEnd();}
@@ -220,7 +222,21 @@ class GameManager extends Observable {
       }
   }
 
-
+  playRatingSound(good){
+    console.log("play rating sound");
+    if (good){
+      let rand = Math.floor(Math.random() * Config.GOOD_AUDIO_NUM);
+      let audio = new Audio("/resources/rating_audio/good"+rand+".mp3");
+      audio.volume = 0.1;
+      audio.play();
+    }
+    else{
+      let rand = Math.floor(Math.random() * Config.BAD_AUDIO_NUM);
+      let audio = new Audio("/resources/rating_audio/bad0.mp3");
+      audio.volume = 0.1;
+      audio.play();
+    }
+  }
 
   setGameStatePlay() {
     handArray = [];
