@@ -1,5 +1,4 @@
 /* eslint-env node */
-
 import "dotenv/config";
 import express from "express";
 import open from "open";
@@ -11,6 +10,9 @@ function init() {
         console.log("Server started. Opening application in browser ... [Press CTRL + C to stop server]");
         open(`http://localhost:${process.env.DEV_PORT}`);
     });
+   
+    
+    
 }
 
 init();

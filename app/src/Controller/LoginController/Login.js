@@ -1,23 +1,22 @@
 /**
  * User enters nickname and submits
  */
-import {appwrite} from "./services/appwriteConfig.js";
+import { AppwriteDAL } from "../../../services/AppwriteService.js";
 
-var username = "Bonifatius", lobbyId = "9SK8KL";
+var dal = new AppwriteDAL(), nickname = document.getElementById("nicknameInput"), password = document.getElementById("password"), email = document.getElementById("emailInput"), registerButton = document.getElementById("register"),
+ signinButton = document.getElementById("signin");
 
-// Register User
-appwrite
-    .account.create("unique()", username, lobbyId)
-        .then(response => {
-            console.log(response);
-        }, error => {
-            console.log(error);
-        });
+ signinButton.addEventListener("click", signIn);
+ registerButton.addEventListener("click", registerAcc);
 
-let promise = appwrite.account.createAnonymousSession();
+ function registerAcc() {
+    if (email.value && password.value){
+        dal.register(nickname.value, email.value, password.value);
+    }else{
+        console.log("Email or password invalid.");
+    }
+}
 
-promise.then(function (response) {
-    console.log(response); // Success
-}, function (error) {
-    console.log(error); // Failure
-});
+function signIn(){
+    dal.signIn(email.value, password.value);
+}
