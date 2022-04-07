@@ -14,6 +14,7 @@ import RoundScoreboard from "../Views/EndOfRoundView/RoundScoreboard.js";
 import Story from "../Controller/Story.js";
 import Config from "../utils/Config.js";
 import ImageDownloader from "../Controller/ImageDownloader.js";
+import FinalScore from "../Views/EndOfGameView/FinalScoreboard.js";
 
 
 let submitButton = document.querySelector(".submit"),
@@ -25,6 +26,7 @@ let submitButton = document.querySelector(".submit"),
   continueButton = document.getElementById("continue"),
   handArray = [],
   fieldArray = [],
+  roundCount = 0,
   currentPrompt;
 
 class GameManager extends Observable {
@@ -37,6 +39,7 @@ class GameManager extends Observable {
     this.ratingView = new RatingView();
     this.prompt = new Prompt();
     this.roundScoreboard = new RoundScoreboard();
+    this.finalScore = new FinalScore();
     this.imageDownloader = new ImageDownloader();
     
     this.imageDownloader.addEventListener("imagesFetched", this.fillHand.bind(this));
@@ -47,8 +50,6 @@ class GameManager extends Observable {
     badButton.addEventListener("click", this.votedBad.bind(this));
     searchBar.addEventListener("change", this.onSearch.bind(this));
     continueButton.addEventListener("click", this.setGameStatePlay.bind(this));
-    this.setGameStatePlay();
-
 
   }
 
@@ -193,21 +194,77 @@ class GameManager extends Observable {
   }
 
   votedGood() {
+    this.playRatingSound(true);
     console.log("votedGood");
-    this.setGameStateRoundEnd();
+    if(roundCount < Config.MAX_ROUNDS){
+    this.setGameStateRoundEnd();}
+    else{
+    this.setGameStateGameEnd();
+    }
   }
 
   votedMeh() {
     console.log("votedMeh");
-    this.setGameStateRoundEnd();
+    if(roundCount < Config.MAX_ROUNDS){
+      this.setGameStateRoundEnd();}
+      else{
+      this.setGameStateGameEnd();
+      }
   }
 
   votedBad() {
+    this.playRatingSound(false);
     console.log("votedBAD");
-    this.setGameStateRoundEnd();
+    if(roundCount < Config.MAX_ROUNDS){
+      this.setGameStateRoundEnd();}
+      else{
+      this.setGameStateGameEnd();
+      }
   }
 
+  playRatingSound(good){
+    
+    if (good){
+      let rand = Math.floor(Math.random() * Config.GOOD_AUDIO_NUM),
 
+       audio = new Audio("/resources/rating_audio/good"+rand+".mp3");
+      console.log("play rating sound: good:"+rand);
+      switch(rand){
+        case 2: audio.volume = 0.07; break;
+        case 4: audio.volume = 0.07; break;
+        case 6: audio.volume = 0.07; break;
+        case 7: audio.volume = 0.35; break;
+        case 8: audio.volume = 0.07; break;
+        case 9: audio.volume = 0.17; break;
+        case 10: audio.volume = 0.07; break;
+        case 11: audio.volume = 0.06; break;
+        case 12: audio.volume = 0.17; break;
+        case 13: audio.volume = 0.2; break;
+        case 15: audio.volume = 0.06; break;
+        case 17: audio.volume = 0.06; break;
+        case 18: audio.volume = 0.17; break;
+        case 19: audio.volume = 0.05; break;
+        default: audio.volume = 0.1; break;
+      }
+      audio.play();
+    }
+    else{
+      let rand = Math.floor(Math.random() * Config.BAD_AUDIO_NUM),
+      audio = new Audio("/resources/rating_audio/bad"+rand+".mp3");
+      console.log("play rating sound: bad:"+rand);
+      
+      switch(rand){
+        case 0: audio.volume = 0.07; break;
+        case 2: audio.volume = 0.3; break;
+        case 15: audio.volume = 0.4; break;
+        case 18: audio.volume = 0.2; break;
+        case 20: audio.volume = 0.07; break;
+
+        default: audio.volume = 0.1; break;
+      }
+      audio.play();
+    }
+  }
 
   setGameStatePlay() {
     handArray = [];
@@ -230,6 +287,7 @@ class GameManager extends Observable {
 
 
   setGameStateRate() {
+    roundCount++;
     this.ratingView.updateView(Array.from(new Set(JSON.parse(window
       .localStorage.getItem("playedMemes")))));
     this.playingField.playingFieldArea.hidden = true;
@@ -251,7 +309,8 @@ class GameManager extends Observable {
 
 setGameStateGameEnd() {
     this.playingField.gameView.hidden = true;
-    this.roundScoreboard.scoreboardView.hidden = false;
+    this.finalScore.endGameScreen.hidden = false;
+    this.finalScore.addMemes(fieldArray);
     let story = new Story(currentPrompt, fieldArray, "Player1", 0);
     this.roundScoreboard.storyListView.appendChild(story.body);
 
