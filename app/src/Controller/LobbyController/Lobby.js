@@ -1,5 +1,6 @@
 // players wait here for game start, host invites new players and edits settings
 import { AppwriteDAL } from "../../../services/AppwriteService.js";
+import Config from "../../Model/Config.js";
 import PlayerList from "../../Views/LobbyView/PlayerList.js";
 
 var GameSettings = {
@@ -27,10 +28,18 @@ function copyToClipboard() {
 function leaveLobby() {
   DAL.leaveLobby();
 }
-updateGame();
-async function updateGame() {
+subscribeGame();
+async function subscribeGame() {
   //const state = await DAL.updateSession();
   //playerList.updatePlayerList(state.UserIDs);
-  DAL.subscribe();
+  DAL.subscribe(updateGamestate);
+}
 
+function updateGamestate(payload){
+  console.log(payload.$id.toString());
+  console.log(window.localStorage.getItem("documentID"));
+  if(payload.$id.toString() === window.localStorage.getItem("documentID")){
+    playerList.updatePlayerList(payload.UserIDs);
+    console.log(playerList);
+  }
 }

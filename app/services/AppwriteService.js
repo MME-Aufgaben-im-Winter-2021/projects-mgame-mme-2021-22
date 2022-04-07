@@ -39,10 +39,10 @@ class AppwriteDAL {
     });
   }
 
-  subscribe(){
+  subscribe(callback){
     console.log("Subscribed");
     let channel = "collections." + Config.collectionID + ".documents";
-    this.sdk.subscribe(channel, function(response){console.log("Updated Docs"); console.log(response);});
+    this.sdk.subscribe(channel, function(response){ callback(response.payload);});
   }
 
   hostGame() {

@@ -1,7 +1,6 @@
 //Homepage allows user to sign out of session or join a game
 import { AppwriteDAL } from "../../../services/AppwriteService.js";
 import Synchronizer from "../../../services/Synchronizer.js";
-import Config from "../../Model/Config.js";
 
 var dbLink = new AppwriteDAL(),
   logoutButton = document.getElementById(
@@ -10,6 +9,10 @@ var dbLink = new AppwriteDAL(),
   usernameText = document.getElementById("username"),
   DAL = new AppwriteDAL(), joinButton = document.getElementById("join"), 
   token = document.getElementById("token"),
+  roundCountRangeSetting = document.getElementById("round-count"),
+  roundDurationRangeSetting = document.getElementById("round-length"),
+  roundCountSetting = document.getElementById("input-round-count"),
+  roundDurationSetting = document.getElementById("input-round-length"),
   sync = new Synchronizer();
 
 logoutButton.addEventListener("click", logout);
