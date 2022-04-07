@@ -1,7 +1,7 @@
 /**
  * User enters nickname and submits
  */
-import { AppwriteDAL } from "../../../services/appwriteConfig.js";
+import { AppwriteDAL } from "../../../services/AppwriteService.js";
 
 var dal = new AppwriteDAL(), nickname = document.getElementById("nicknameInput"), password = document.getElementById("password"), email = document.getElementById("emailInput"), registerButton = document.getElementById("register"),
  signinButton = document.getElementById("signin");

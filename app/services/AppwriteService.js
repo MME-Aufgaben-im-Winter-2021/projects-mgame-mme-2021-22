@@ -5,7 +5,7 @@ const appwrite = new Appwrite();
 
 appwrite
   .setEndpoint(
-    "https://appwrite.software-engineering.education/v1"
+    "https://appwrite.software-engineering.education/v1",
     ) // Your Appwrite Endpoint
   .setProject("62066432a2c67cb3f59e") // Your project ID
 ;
@@ -23,11 +23,7 @@ class AppwriteDAL {
   register(nickname, email, password) {
     let promise = this.sdk.account.create("unique()", email, password,
       nickname);
-    promise.then(response => {
-      console.log(response);
-    }, error => {
-      console.log(error);
-    });
+      //tell the user he actually made an account XD
   }
 
   signIn(email, password) {
@@ -41,6 +37,12 @@ class AppwriteDAL {
     }, function(error) {
       console.log(error);
     });
+  }
+
+  subscribe(){
+    console.log("Subscribed");
+    let channel = "collections." + Config.collectionID + ".documents";
+    this.sdk.subscribe(channel, function(response){console.log("Updated Docs"); console.log(response);});
   }
 
   hostGame() {
@@ -68,7 +70,7 @@ class AppwriteDAL {
 
   async updateSession() {
       let id = JSON.parse(window.localStorage.getItem("documentID"));
-      //this.sdk.subscribe(Config.collectionID.id, callback);
+      
     if (id !== null) {
       let promise = this.sdk.database.getDocument(
         Config.collectionID, id);
@@ -88,6 +90,7 @@ class AppwriteDAL {
     return promise;
   }
 
+  //implement try catch
   registerPlayer(promise){
     //save current session token/id
     window.localStorage.setItem("documentID", JSON.stringify(promise.$id));
@@ -116,24 +119,22 @@ class AppwriteDAL {
         getDocumentIDFromLocalStorage());
         console.log("Leaving as host");
         window.localStorage.setItem("role", "");
-      //window.location.replace("homepage.html");
+      window.location.replace("homepage.html");
     }else{
       //remove name from userids
-      let sessionData = await this.updateSession(), username = window.localStorage.getItem("username");
-      console.log(sessionData.UserIDs);
-      let unfiltered = sessionData.UserIDs;
-      let filtered = unfiltered.filter(function(value, index, arr){return value !== username;}),
+      let sessionData = await this.updateSession(), username = window.localStorage.getItem("username"),
+      unfiltered = sessionData.UserIDs,
+      filtered = unfiltered.filter(function(value, index, arr){return value !== username;}),
       update = this.sdk.database.updateDocument(Config.collectionID, sessionData.$id, {"UserIDs": filtered});
-      update.then(function(response){console.log(response);}, error => console.log(error));
       console.log("leaving as player");
-      //window.location.replace("homepage.html");
+      window.location.replace("homepage.html");
     }
     
   }
 
-  async getAccount(){
+  getAccount(){
     let promise = this.sdk.account.get();
-    promise.then(function(response) {console.log(typeof(response.name)); window.localStorage.setItem("username", response.name);}, function(error){console.log(error);});
+    promise.then(function(response) {window.localStorage.setItem("username", response.name);}, function(error){console.log(error);});
     return promise;
   }
 }
@@ -141,8 +142,6 @@ class AppwriteDAL {
 function getDocumentIDFromLocalStorage() {
   return JSON.parse(window.localStorage.getItem("documentID"));
 }
-
-
 
 // eslint-disable-next-line no-unused-vars
 function generatePassword() {

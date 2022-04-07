@@ -1,7 +1,7 @@
 //Homepage allows user to sign out of session or join a game
-import { AppwriteDAL } from "../../services/appwriteConfig.js";
-import Synchronizer from "../../services/Synchronizer.js";
-import Config from "../Model/Config.js";
+import { AppwriteDAL } from "../../../services/AppwriteService.js";
+import Synchronizer from "../../../services/Synchronizer.js";
+import Config from "../../Model/Config.js";
 
 var dbLink = new AppwriteDAL(),
   logoutButton = document.getElementById(
@@ -46,8 +46,7 @@ async function hostGame() {
 
 function hasUser() {
   let promise = DAL.getAccount();
-  console.log(promise);
-  promise.then(response => usernameText.innerHTML = response.name, error => console.log(error));
+  promise.then(response => usernameText.innerHTML = response.name, error => window.location.replace("login.html"));
 }
 
 hasUser();
