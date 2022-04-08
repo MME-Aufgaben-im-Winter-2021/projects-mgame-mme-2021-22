@@ -225,9 +225,9 @@ class GameManager extends Observable {
   playRatingSound(good){
     
     if (good){
-      let rand = Math.floor(Math.random() * Config.GOOD_AUDIO_NUM);
+      let rand = Math.floor(Math.random() * Config.GOOD_AUDIO_NUM),
 
-      let audio = new Audio("/resources/rating_audio/good"+rand+".mp3");
+       audio = new Audio("/resources/rating_audio/good"+rand+".mp3");
       console.log("play rating sound: good:"+rand);
       switch(rand){
         case 2: audio.volume = 0.07; break;
@@ -249,10 +249,10 @@ class GameManager extends Observable {
       audio.play();
     }
     else{
-      let rand = Math.floor(Math.random() * Config.BAD_AUDIO_NUM);
+      let rand = Math.floor(Math.random() * Config.BAD_AUDIO_NUM),
+      audio = new Audio("/resources/rating_audio/bad"+rand+".mp3");
       console.log("play rating sound: bad:"+rand);
-
-      let audio = new Audio("/resources/rating_audio/bad"+rand+".mp3");
+      
       switch(rand){
         case 0: audio.volume = 0.07; break;
         case 2: audio.volume = 0.3; break;
