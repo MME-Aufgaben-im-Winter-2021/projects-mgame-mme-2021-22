@@ -125,7 +125,7 @@
                             <th class="text-end">Score</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="roundScoreboard">
                         <tr>
                             <th>Memeio</th>
                             <th class="text-end">1200 (+200)</th>
@@ -165,7 +165,7 @@
                             <th class="text-end">Score</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id = "endScoreboard">
                         <tr>
                             <th>Memeio</th>
                             <th class="text-end">1200</th>
@@ -253,6 +253,13 @@
                 </div>
             </div>
         </div>
+</template>
+
+<template id = "userWithScore">
+    <tr id="column">
+        <th id="username">Memeio</th>
+        <th id ="points" class="text-end">1200 (+200)</th>
+    </tr>
 </template>
 
 </html>
