@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import Config from "../src/Model/Config.js";
 
 // Init your Web SDK
@@ -7,7 +8,7 @@ const appwrite = new Appwrite();
 appwrite
   .setEndpoint(
     "https://appwrite.software-engineering.education/v1",
-    ) // Your Appwrite Endpoint
+  ) // Your Appwrite Endpoint
   .setProject("62066432a2c67cb3f59e") // Your project ID
 ;
 
@@ -24,8 +25,8 @@ class AppwriteDAL {
   register(nickname, email, password) {
     let promise = this.sdk.account.create("unique()", email, password,
       nickname);
-      console.log(promise);
-      //tell the user he actually made an account XD
+    console.log(promise);
+    //tell the user he actually made an account XD
   }
 
   signIn(email, password) {
@@ -34,17 +35,18 @@ class AppwriteDAL {
     promise.then(function(response) {
       //user logged into his account successfully
       console.log(response);
-      
+
       window.location.replace("homepage.html");
-    }, function(error) {
-      console.log(error);
+    }, function() {
+      alert("Your password must be at least 8 characters long!");
     });
   }
 
-  subscribe(callback){
+  subscribe(callback) {
     console.log("Subscribed");
     let channel = "collections." + Config.collectionID + ".documents";
-    this.sdk.subscribe(channel, function(response){ callback(response.payload);});
+    this.sdk.subscribe(channel, function(response) { callback(response
+        .payload); });
   }
 
   hostGame() {
@@ -58,28 +60,28 @@ class AppwriteDAL {
       }, ["role:all"], ["role:all"]);
     promise.then(function(response) {
       console.log(response);
-      window.localStorage.setItem("role","host");
+      window.localStorage.setItem("role", "host");
     }, function(error) {
-      console.log(error);
+      alert(error);
     });
     console.log(this.getUsername());
     return promise;
   }
 
-  getUsername(){
+  getUsername() {
     return window.localStorage.getItem("username");
   }
 
   async updateSession() {
-      let id = JSON.parse(window.localStorage.getItem("documentID"));
-      
+    let id = JSON.parse(window.localStorage.getItem("documentID"));
+
     if (id !== null) {
       let promise = this.sdk.database.getDocument(
         Config.collectionID, id);
       promise.then(function(response) {
         console.log(response);
       }, function(error) {
-        console.log(error);
+        alert(error);
       });
       return promise;
     }
@@ -88,21 +90,24 @@ class AppwriteDAL {
 
   joinSession(token) {
     let promise = this.sdk.database.getDocument(Config.collectionID, token);
-    promise.then(response => this.registerPlayer(response),error => console.log(error));
+    promise.then(response => this.registerPlayer(response), error =>alert(error));
     return promise;
   }
 
   //implement try catch
-  registerPlayer(promise){
+  registerPlayer(promise) {
     //save current session token/id
     window.localStorage.setItem("documentID", JSON.stringify(promise.$id));
     //update document player list
-    let usersInGame = promise.UserIDs, user = this.getUsername();
+    let usersInGame = promise.UserIDs,
+      user = this.getUsername();
     usersInGame.push(user);
     console.log(usersInGame);
     // eslint-disable-next-line one-var
-    let update = this.sdk.database.updateDocument(Config.collectionID, promise.$id, {"UserIDs": usersInGame});
-    update.then(function(response){console.log(response); window.localStorage.setItem("role", "player");}, error => console.log(error));
+    let update = this.sdk.database.updateDocument(Config.collectionID, promise
+      .$id, { "UserIDs": usersInGame });
+    update.then(function(response) { console.log(response);
+        window.localStorage.setItem("role", "player"); }, error => alert(error));
     console.log(window.localStorage.getItem("role"));
   }
 
@@ -111,33 +116,37 @@ class AppwriteDAL {
       console.log(response);
       window.location.replace("login.html");
     }, function(error) {
-      console.log(error);
+      alert(error);
     });
   }
 
   async leaveLobby() {
-    if(window.localStorage.getItem("role") === "host"){
+    if (window.localStorage.getItem("role") === "host") {
       this.sdk.database.deleteDocument(Config.collectionID,
         getDocumentIDFromLocalStorage());
-        console.log("Leaving as host");
-        window.localStorage.setItem("role", "");
+      console.log("Leaving as host");
+      window.localStorage.setItem("role", "");
       window.location.replace("homepage.html");
-    }else{
+    } else {
       //remove name from userids
-      let sessionData = await this.updateSession(), username = window.localStorage.getItem("username"),
-      unfiltered = sessionData.UserIDs,
-      filtered = unfiltered.filter(function(value /*,index, arr*/){return value !== username;}),
-      update = this.sdk.database.updateDocument(Config.collectionID, sessionData.$id, {"UserIDs": filtered});
+      let sessionData = await this.updateSession(),
+        username = window.localStorage.getItem("username"),
+        unfiltered = sessionData.UserIDs,
+        filtered = unfiltered.filter(function(
+        value /*,index, arr*/ ) { return value !== username; }),
+        update = this.sdk.database.updateDocument(Config.collectionID,
+          sessionData.$id, { "UserIDs": filtered });
       console.log(update);
       console.log("leaving as player");
       window.location.replace("homepage.html");
     }
-    
+
   }
 
-  getAccount(){
+  getAccount() {
     let promise = this.sdk.account.get();
-    promise.then(function(response) {window.localStorage.setItem("username", response.name);}, function(error){console.log(error);});
+    promise.then(function(response) { window.localStorage.setItem("username",
+        response.name); }, function(error) { alert(error); });
     return promise;
   }
 }

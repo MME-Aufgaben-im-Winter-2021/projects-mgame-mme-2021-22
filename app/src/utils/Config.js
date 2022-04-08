@@ -14,7 +14,14 @@ const Config = {
     //ERROR CODES
     LOGIN_FAILED_ERROR: "email or password are incorrect",
     NO_SUCH_SESSION_ERROR: "This game is no longer available or token is wrong.",
-    
+    GAME_NO_LONGER_AVAILABLE_ERROR: "The host has ended the session.",
+    INVALID_PASSWORD_ERROR: "Password is invalid. Please choose password with at least 8 characters.",
+    ILLEGAL_NAME_ERROR: "Dude, you cant use that name.",
+    CONNECTION_LOST_ERROR: "You lost connection to the game session.",
+    CONNECTION_UNSTABLE_WARNING: "Your connection to the game session is unstable/was interrupted.",
+    // MEME JSON
+    MAX_JSON_SEARCH_STARTPOINT: 1300,
+
 };
 Object.freeze(Config);
 

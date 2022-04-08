@@ -28,7 +28,8 @@ async function joinGame(){
             sync.synchronizeGameState(promise.GameState);
             console.log(promise.GameState);
         }catch(exception){
-            console.log(exception);
+           // eslint-disable-next-line no-alert
+           alert("Invalid token");
         }
     }
 }
