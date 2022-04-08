@@ -18,6 +18,7 @@ import FinalScore from "../Views/EndOfGameView/FinalScoreboard.js";
 
 
 let submitButton = document.querySelector(".submit"),
+  refreshButton = document.querySelector(".refresh"),
   saveButton = document.querySelector(".save"),
   goodButton = document.getElementById("good"),
   mehButton = document.getElementById("meh"),
@@ -27,6 +28,8 @@ let submitButton = document.querySelector(".submit"),
   handArray = [],
   fieldArray = [],
   roundCount = 0,
+  searchBlockBoolean=false,
+  lastSearchedTerm="",
   currentPrompt;
 
 class GameManager extends Observable {
@@ -43,29 +46,61 @@ class GameManager extends Observable {
     this.imageDownloader = new ImageDownloader();
     
     this.imageDownloader.addEventListener("imagesFetched", this.fillHand.bind(this));
+    refreshButton.addEventListener("click", this.refreshHand.bind(this));
     saveButton.addEventListener("click", this.addNewKeyword.bind(this));
     submitButton.addEventListener("click", this.setGameStateRate.bind(this));
     goodButton.addEventListener("click", this.votedGood.bind(this));
     mehButton.addEventListener("click", this.votedMeh.bind(this));
     badButton.addEventListener("click", this.votedBad.bind(this));
-    searchBar.addEventListener("change", this.onSearch.bind(this));
+    //searchBar.addEventListener("change", this.onSearch.bind(this));
+    //searchBar.addEventListener("change", this.onSearch);
+    searchBar.addEventListener('keydown', () => this.delay(1000).then(() => this.onSearch()));
+
     continueButton.addEventListener("click", this.setGameStatePlay.bind(this));
     this.setPrompt(this.prompt.generatePrompt());
     this.fillHandWithRandomMemes();
+
+  }
+
+  delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
   }
 
   onSearch() {
-    handArray = [];
-    this.updateHand();
-    this.requestMemes(searchBar.value);
+    if (searchBlockBoolean===false&&searchBar.value.length>1){
+      searchBlockBoolean=true;
+      this.delay(1000).then(() => this.checkIfNewSearchIsNeeded());
+      console.log("onsearch method");
+      handArray = [];
+      this.updateHand();
+      lastSearchedTerm=searchBar.value;
+      this.requestMemes(searchBar.value);
+    }
+  }
+
+  checkIfNewSearchIsNeeded(){
+    searchBlockBoolean=false;
+    if (searchBar.value!==lastSearchedTerm){
+        this.onSearch();
+    }
   }
 
   requestMemes(tag){
     this.imageDownloader.fetchData(tag,0);
   }
 
+  refreshHand(){
+    console.log("refresh");
+
+    searchBlockBoolean=true;
+    this.delay(1000).then(() => searchBlockBoolean=false);
+    handArray=[];
+    searchBar.value = "";
+    this.fillHandWithRandomMemes();
+  }
+
   fillHand(event){
-    console.log(event.data);
+    //console.log(event.data);
 
     let data = event.data,
     size = data.length,
@@ -76,7 +111,7 @@ class GameManager extends Observable {
 
     for (let i = 0; i < Config.HAND_SIZE; i++) {
       if (i<size){
-        console.log(size);
+        //console.log(size);
         this.addNewMemeToHand(data[i+dataRandomStartOffset]);
       }
     }
@@ -101,11 +136,11 @@ class GameManager extends Observable {
   }
 
   addNewMemeToHand(imageSource) {
-    console.log(imageSource);
+    //console.log(imageSource);
     
     if (handArray.length < Config.HAND_SIZE) {
       let newMeme = new Meme( imageSource, true);
-      console.log(handArray.length, Config.HAND_SIZE);
+      //console.log(handArray.length, Config.HAND_SIZE);
       handArray.push(newMeme);
       newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
       
