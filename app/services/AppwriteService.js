@@ -1,5 +1,5 @@
 /* eslint-disable no-alert */
-import Config from "../src/Model/Config.js";
+import Config from "../src/utils/Config.js";
 
 // Init your Web SDK
 // eslint-disable-next-line no-undef
@@ -25,7 +25,6 @@ class AppwriteDAL {
   register(nickname, email, password) {
     let promise = this.sdk.account.create("unique()", email, password,
       nickname);
-    console.log(promise);
     //tell the user he actually made an account XD
   }
 
@@ -44,13 +43,13 @@ class AppwriteDAL {
 
   subscribe(callback) {
     console.log("Subscribed");
-    let channel = "collections." + Config.collectionID + ".documents";
+    let channel = "collections." + Config.SESSIONS_COLLECTION_ID + ".documents";
     this.sdk.subscribe(channel, function(response) { callback(response
         .payload); });
   }
 
   hostGame() {
-    let promise = this.sdk.database.createDocument(Config.collectionID,
+    let promise = this.sdk.database.createDocument(Config.SESSIONS_COLLECTION_ID,
       "unique()", {
         "SessionID": "test_session",
         "UserIDs": [
@@ -77,7 +76,7 @@ class AppwriteDAL {
 
     if (id !== null) {
       let promise = this.sdk.database.getDocument(
-        Config.collectionID, id);
+        Config.SESSIONS_COLLECTION_ID, id);
       promise.then(function(response) {
         console.log(response);
       }, function(error) {
@@ -89,7 +88,7 @@ class AppwriteDAL {
   }
 
   joinSession(token) {
-    let promise = this.sdk.database.getDocument(Config.collectionID, token);
+    let promise = this.sdk.database.getDocument(Config.SESSIONS_COLLECTION_ID, token);
     promise.then(response => this.registerPlayer(response), error =>alert(error));
     return promise;
   }
@@ -104,7 +103,7 @@ class AppwriteDAL {
     usersInGame.push(user);
     console.log(usersInGame);
     // eslint-disable-next-line one-var
-    let update = this.sdk.database.updateDocument(Config.collectionID, promise
+    let update = this.sdk.database.updateDocument(Config.SESSIONS_COLLECTION_ID, promise
       .$id, { "UserIDs": usersInGame });
     update.then(function(response) { console.log(response);
         window.localStorage.setItem("role", "player"); }, error => alert(error));
@@ -122,7 +121,7 @@ class AppwriteDAL {
 
   async leaveLobby() {
     if (window.localStorage.getItem("role") === "host") {
-      this.sdk.database.deleteDocument(Config.collectionID,
+      this.sdk.database.deleteDocument(Config.SESSIONS_COLLECTION_ID,
         getDocumentIDFromLocalStorage());
       console.log("Leaving as host");
       window.localStorage.setItem("role", "");
@@ -134,7 +133,7 @@ class AppwriteDAL {
         unfiltered = sessionData.UserIDs,
         filtered = unfiltered.filter(function(
         value /*,index, arr*/ ) { return value !== username; }),
-        update = this.sdk.database.updateDocument(Config.collectionID,
+        update = this.sdk.database.updateDocument(Config.SESSIONS_COLLECTION_ID,
           sessionData.$id, { "UserIDs": filtered });
       console.log(update);
       console.log("leaving as player");

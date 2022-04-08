@@ -1,7 +1,6 @@
 // players wait here for game start, host invites new players and edits settings
 import { AppwriteDAL } from "../../../services/AppwriteService.js";
-import Config from "../../Model/Config.js";
-//import Config from "../../Model/Config.js";
+import Config from "../../utils/Config.js";
 import PlayerList from "../../Views/LobbyView/PlayerList.js";
 
 var /*GameSettings = {
@@ -29,8 +28,8 @@ tokenText.value = sessionData.$id;
 copyButton.addEventListener("click", copyToClipboard);
 
 // init setting default values
-roundCountSetting.value = roundCountRangeSetting.value;
-roundDurationSetting.value = roundDurationRangeSetting.value;
+roundCountSetting.value = roundCountRangeSetting.value = Config.MAX_ROUNDS;
+roundDurationSetting.value = roundDurationRangeSetting.value = Config.MIN_ROUND_DURATION;
 
 //Round Count
 roundCountRangeSetting.addEventListener("input", function(){setRoundCount(roundCountRangeSetting.value);});
@@ -39,10 +38,6 @@ roundCountSetting.addEventListener("input", function (){setRoundCount(roundCount
 roundDurationRangeSetting.addEventListener("input", function(){ setRoundDuration( roundDurationRangeSetting.value);});
 roundDurationSetting.addEventListener("input", function (){ setRoundDuration(roundDurationSetting.value);});
 
-function setPlayerCount(count){
-  playerCountInput.value = count;
-  playerCountSlider.value = count;
-}
 function setRoundCount(count){
   roundCountSetting.value = count;
   roundCountRangeSetting.value = count;
@@ -51,7 +46,6 @@ function setRoundCount(count){
 function setRoundDuration(duration){
   roundDurationSetting.value = duration;
   roundDurationRangeSetting.value = duration;
-  //Config.roundLength = duration;
 }
 
 function copyToClipboard() {
