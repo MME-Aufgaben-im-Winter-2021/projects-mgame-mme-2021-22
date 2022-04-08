@@ -1,5 +1,6 @@
 // players wait here for game start, host invites new players and edits settings
 import { AppwriteDAL } from "../../../services/AppwriteService.js";
+import Config from "../../Model/Config.js";
 //import Config from "../../Model/Config.js";
 import PlayerList from "../../Views/LobbyView/PlayerList.js";
 
@@ -13,11 +14,45 @@ var /*GameSettings = {
   sessionData = await DAL.updateSession(),
   playerList = new PlayerList(sessionData.UserIDs),
   copyButton = document.getElementById("copyToken"),
+  //Setting sliders and input fields
+  roundCountRangeSetting = document.getElementById("round-count"),
+  roundDurationRangeSetting = document.getElementById("round-length"),
+  roundCountSetting = document.getElementById("input-round-count"),
+  roundDurationSetting = document.getElementById("input-round-length"),
+  playerCountSlider = document.getElementById("player-count"),
+  playerCountInput = document.getElementById("input-player-count"),
+  //lobby token code
   tokenText = document.getElementById("lobbyToken");
 
 leaveButton.addEventListener("click", leaveLobby);
 tokenText.value = sessionData.$id;
 copyButton.addEventListener("click", copyToClipboard);
+
+// init setting default values
+roundCountSetting.value = roundCountRangeSetting.value;
+roundDurationSetting.value = roundDurationRangeSetting.value;
+
+//Round Count
+roundCountRangeSetting.addEventListener("input", function(){setRoundCount(roundCountRangeSetting.value);});
+roundCountSetting.addEventListener("input", function (){setRoundCount(roundCountSetting.value);});
+//Round Duration
+roundDurationRangeSetting.addEventListener("input", function(){ setRoundDuration( roundDurationRangeSetting.value);});
+roundDurationSetting.addEventListener("input", function (){ setRoundDuration(roundDurationSetting.value);});
+
+function setPlayerCount(count){
+  playerCountInput.value = count;
+  playerCountSlider.value = count;
+}
+function setRoundCount(count){
+  roundCountSetting.value = count;
+  roundCountRangeSetting.value = count;
+}
+
+function setRoundDuration(duration){
+  roundDurationSetting.value = duration;
+  roundDurationRangeSetting.value = duration;
+  //Config.roundLength = duration;
+}
 
 function copyToClipboard() {
   tokenText.select();
