@@ -51,6 +51,7 @@ class GameManager extends Observable {
     searchBar.addEventListener("change", this.onSearch.bind(this));
     continueButton.addEventListener("click", this.setGameStatePlay.bind(this));
     this.setPrompt(this.prompt.generatePrompt());
+    this.fillHandWithRandomMemes();
   }
 
   onSearch() {
@@ -60,20 +61,43 @@ class GameManager extends Observable {
   }
 
   requestMemes(tag){
-    this.imageDownloader.fetchData(tag);
+    this.imageDownloader.fetchData(tag,0);
   }
 
   fillHand(event){
     console.log(event.data);
 
     let data = event.data,
-    size = data.length;
+    size = data.length,
+    dataRandomStartOffset=0;
+    if (size>Config.HAND_SIZE){
+      dataRandomStartOffset=this.getRandomIntBetween0AndMax(size-Config.HAND_SIZE);
+    }
+
     for (let i = 0; i < Config.HAND_SIZE; i++) {
       if (i<size){
         console.log(size);
-        this.addNewMemeToHand(data[i]);
+        this.addNewMemeToHand(data[i+dataRandomStartOffset]);
       }
     }
+  }
+
+  getRandomIntBetween0AndMax(max){
+    let rand = Math.floor(Math.random() * max);
+    return rand;
+  }
+  
+  fillHandWithRandomMemes(){
+    const alphabet = "abcdefghijklmnoprstuvwxyz";
+
+    let randomCharacter = alphabet[Math.floor(Math.random() * alphabet.length)],
+        data = this.imageDownloader.fetchData(randomCharacter,this.getRandomIntBetween0AndMax(Config.MAX_JSON_SEARCH_STARTPOINT));
+  
+    for (let i = 0; i < Config.HAND_SIZE; i++) {
+      if (i< data.length){
+        this.addNewMemeToHand(data[i]);
+      }
+    }  
   }
 
   addNewMemeToHand(imageSource) {
@@ -98,7 +122,7 @@ class GameManager extends Observable {
       fieldArray.push(newMeme);
       newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
       newMeme.isInHand = false;
-      console.log("moin");
+      console.log("add meme to field");
     }
     this.updatePlayingField();
   
@@ -179,6 +203,7 @@ class GameManager extends Observable {
       memeName);
     this.updatePlayingField();
   }
+
 
   addNewKeyword() {
     let newKeyWord = new KeyWord(searchBar.value);
