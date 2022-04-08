@@ -50,7 +50,7 @@ class GameManager extends Observable {
     badButton.addEventListener("click", this.votedBad.bind(this));
     searchBar.addEventListener("change", this.onSearch.bind(this));
     continueButton.addEventListener("click", this.setGameStatePlay.bind(this));
-
+    this.setPrompt(this.prompt.generatePrompt());
   }
 
   onSearch() {
