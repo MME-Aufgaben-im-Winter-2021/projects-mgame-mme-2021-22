@@ -23,6 +23,24 @@ class FinalScore{
             }
         });
     }
+    sortByPoints(players){
+        let sortedPlayers = [];
+
+        for(let i = 0; i<players.length; i++){
+            if(i === 0){
+                sortedPlayers.push(players[i]);
+            }
+            else{
+                for(let j = 0; j<sortedPlayers.length; j++){
+                if(players[i].points > sortedPlayers[j].points){
+                    sortedPlayers.splice(j,0,players[i]);
+                    break;
+                }
+                else(sortedPlayers.push(players[i]))
+            }
+        }
+        return sortedPlayers;
+    }
 
     addMemes(memes){
     this.memeView1.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[0].id + "\">";
