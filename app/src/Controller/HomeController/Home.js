@@ -9,12 +9,10 @@ var dbLink = new AppwriteDAL(),
   hostButton = document.getElementById("host"),
   usernameText = document.getElementById("username"),
   DAL = new AppwriteDAL(), joinButton = document.getElementById("join"),
-  teamButton = document.getElementById("team"),
-  teamToken = document.getElementById("teamId"), 
   token = document.getElementById("token"),
   sync = new Synchronizer();
 
-teamButton.addEventListener("click", joinTeam);
+
 logoutButton.addEventListener("click", logout);
 hostButton.addEventListener("click", hostGame);
 joinButton.addEventListener("click", joinGame);
@@ -22,10 +20,6 @@ joinButton.addEventListener("click", joinGame);
 
 function logout() {
   dbLink.logout();
-}
-
-function joinTeam(){
-  dbLink.joinTeam(teamToken.value);
 }
 
 async function joinGame(){

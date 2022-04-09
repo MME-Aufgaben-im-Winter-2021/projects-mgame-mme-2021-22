@@ -14,6 +14,7 @@ appwrite
   .setProject("62066432a2c67cb3f59e") // Your project ID
 ;
 
+//Data Access Layer to Appwrite Collections and LocalStorage
 class AppwriteDAL {
   constructor() {
     if (AppwriteDAL.instance instanceof AppwriteDAL) {
@@ -223,6 +224,23 @@ class AppwriteDAL {
     //to do handle error
   }
 
+  downloadMemeStories(roundNumber){
+    let promise = this.sdk.database.listDocuments(Config.MEMESTORY_COLLECTION_ID, [appwrite.Query.equal("SessionId", Config.SESSIONS_COLLECTION_ID)]);
+    promise.then(response => console.log(response), error => console.log(error));
+  }
+
+  setRoundDuration(duration){
+    window.localStorage.setItem("roundLength", duration);
+  }
+  getRoundDuration(){
+    return window.localStorage.getItem("roundLength");
+  }
+  setRoundCount(count){
+    window.localStorage.setItem("roundCount", count);
+  }
+  getRoundCount(){
+    window.localStorage.getItem("roundCount");
+  }
 }
 
 function getDocumentIDFromLocalStorage() {

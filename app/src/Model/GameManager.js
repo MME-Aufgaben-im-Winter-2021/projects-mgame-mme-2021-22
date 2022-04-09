@@ -163,7 +163,6 @@ class GameManager extends Observable {
       //console.log("add meme to field");
     }
     this.updatePlayingField();
-  
   }
 
   checkMeme(event) {
@@ -328,6 +327,33 @@ class GameManager extends Observable {
     }
   }
 
+  submitMemeStory() {
+    if(Config.HAS_SUBMITTED === false){
+      let memes = Array.from(new Set(JSON.parse(window
+        .localStorage.getItem("playedMemes")))), memeIds = [];
+      //this.ratingView.updateView(memes);
+      console.log("Submitted MemeStory");
+      for(let meme of memes){ memeIds.push(meme.id);}
+      this.DAL.uploadMemeStory(memeIds, roundCount);
+      Config.HAS_SUBMITTED = true;
+    }
+    
+  }
+
+  setGameStateRate(){
+    this.playingField.playingFieldArea.hidden = true;
+    //this.promptField.hidden = true;
+    this.gameProgressCard.progressField.hidden = true;
+    this.ratingView.ratingArea.hidden = false;
+    this.ratingView.ratingField.hidden = false;
+    this.hand.handArea.hidden = true;
+    this.hand.divider.hidden = true;
+    //
+    this.DAL.downloadMemeStories(roundCount);
+  }
+  /*
+   * HOST FUNCTIONS; 
+   */
   setGameStatePlay() {
     handArray = [];
     fieldArray = [];
@@ -344,25 +370,18 @@ class GameManager extends Observable {
     this.ratingView.ratingField.hidden = true;
     this.hand.handArea.hidden = false;
     this.hand.divider.hidden = false;
-
+    //round timer
+    if(window.localStorage.getItem(Config.ROLE_KEY) === Config.HOST_ROLE){
+      let roundDuration = Number(this.DAL.getRoundDuration()) * 100;
+      console.log("Round will go " + roundDuration +"s");
+      setTimeout(this.hostSetGameStateRate.bind(this), roundDuration);
+      ++roundCount;
+    }
   }
 
-  submitMemeStory() {
-    let memes = Array.from(new Set(JSON.parse(window
-      .localStorage.getItem("playedMemes")))), memeIds = [];
-    //this.ratingView.updateView(memes);
-    console.log("Submitted MemeStory");
-    for(let meme of memes){ memeIds.push(meme.id);}
-    this.DAL.uploadMemeStory(memeIds, roundCount);
-    /*
-    this.playingField.playingFieldArea.hidden = true;
-    //this.promptField.hidden = true;
-    this.gameProgressCard.progressField.hidden = true;
-    this.ratingView.ratingArea.hidden = false;
-    this.ratingView.ratingField.hidden = false;
-    this.hand.handArea.hidden = true;
-    this.hand.divider.hidden = true;
-    ++roundCount;*/
+  hostSetGameStateRate(){
+    console.log("Times up!");
+    this.DAL.updateGameState(Config.RATING_PHASE);
   }
 
   setGameStateRoundEnd() {

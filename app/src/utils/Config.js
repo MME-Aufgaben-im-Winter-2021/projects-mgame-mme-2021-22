@@ -15,6 +15,7 @@ const Config = {
     MAX_KEYWORDS: 6,
     GOOD_AUDIO_NUM: 21,
     BAD_AUDIO_NUM: 25,
+    HAS_SUBMITTED: false,
     //ERROR CODES
     LOGIN_FAILED_ERROR: "email or password are incorrect",
     NO_SUCH_SESSION_ERROR: "This game is no longer available or token is wrong.",

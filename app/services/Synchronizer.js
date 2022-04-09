@@ -15,6 +15,7 @@ class Synchronizer {
   
     updateSession(payload){
         console.log("payload received");
+        let DAL = new AppwriteDAL();
         if(payload.$id !== window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY)){
             //alert(Config.CONNECTION_UNSTABLE_WARNING);
             return false;
@@ -22,9 +23,9 @@ class Synchronizer {
         let gameManager = new GameManager();
         switch(payload.GameState){
             case Config.LOBBY_WAITING: console.log("update lobby"); lobbyView.updateView(payload.UserIDs, payload.RoundCount, payload.RoundDuration); break;
-            case Config.GAME_STARTED: console.log("start game"); lobbyView.setHidden(true); gameManager.setGameStatePlay(); break;
+            case Config.GAME_STARTED: console.log("start game"); DAL.setRoundCount(payload.RoundCount); DAL.setRoundDuration(payload.RoundDuration); lobbyView.setHidden(true); gameManager.setGameStatePlay(); break;
             case Config.ROUND_ENDED: break;
-            case Config.RATING_PHASE: break;
+            case Config.RATING_PHASE: gameManager.setGameStateRate(); break;
             case Config.GAME_ENDED: break;
             case Config.SESSION_ENDED: break;
             default: return false; 
@@ -49,6 +50,10 @@ class Synchronizer {
             }
             return "Page correct";}catch(error){console.log(error);}
         return true;
+    }
+    //Host ends round early if all players submit meme before timer runs out
+    checkForSubmissions(){
+        return false;
     }
 }
 
