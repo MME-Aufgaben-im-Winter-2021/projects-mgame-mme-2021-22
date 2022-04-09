@@ -59,7 +59,6 @@ class GameManager extends Observable {
     continueButton.addEventListener("click", this.setGameStatePlay.bind(this));
     this.setPrompt(this.prompt.generatePrompt());
     this.fillHandWithRandomMemes();
-
   }
 
   delay(time) {
@@ -327,8 +326,10 @@ class GameManager extends Observable {
   }
 
   setGameStatePlay() {
+
     handArray = [];
     fieldArray = [];
+
     this.updatePlayingField();
     this.updateHand();
     this.gameProgressCard.start();
@@ -343,6 +344,7 @@ class GameManager extends Observable {
     this.hand.handArea.hidden = false;
     this.hand.divider.hidden = false;
 
+    this.fillHandWithRandomMemes();
   }
 
 

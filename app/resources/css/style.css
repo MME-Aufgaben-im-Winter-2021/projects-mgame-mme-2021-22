@@ -163,3 +163,23 @@ img {
     font-weight: bold;
     font-size: x-large;
 }
+
+.maxWidth {
+    max-width: 850px;
+}
+
+.ratingWidth{
+    padding-top: 10px;
+    padding-left: 17%;
+    max-width: 1000px; 
+}
+
+.leftcol{
+    offset-position: 500px;
+}
+
+.col{
+    position:relative;
+    display: inline-block;
+    float:left;
+}
