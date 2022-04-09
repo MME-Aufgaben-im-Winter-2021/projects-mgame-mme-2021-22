@@ -88,6 +88,7 @@ class GameManager extends Observable {
   }
 
   requestMemes(tag){
+    console.log(tag);
     this.imageDownloader.fetchData(tag,0);
   }
 
@@ -243,10 +244,16 @@ class GameManager extends Observable {
 
   addNewKeyword() {
     let newKeyWord = new KeyWord(searchBar.value);
-    newKeyWord.keyWordEL.addEventListener("click", this.requestMemes(newKeyWord.keyword));
+    console.log(newKeyWord.keyword);
+    newKeyWord.keyWordEL.addEventListener("click", () => {
+      handArray = [];
+      this.updateHand();
+      this.requestMemes(newKeyWord.keyword); });
+      // logs `false`);
     this.hand.keyWordArea.appendChild(newKeyWord.body);
     console.log(newKeyWord);
   }
+
   updateHand() {
     this.hand.HandSpace.innerHTML = "";
     for (const meme of handArray) {
