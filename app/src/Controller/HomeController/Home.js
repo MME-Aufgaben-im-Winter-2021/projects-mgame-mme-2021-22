@@ -30,14 +30,8 @@ function joinTeam(){
 
 async function joinGame(){
     if(token.value !== null){
-        try{
-            let promise = await DAL.joinSession(token.value);
-            sync.subscribeToGame(); // while -> update views with every document update
-            sync.synchronizeGameState(promise.GameState); //do
-        }catch(exception){
-           // eslint-disable-next-line no-alert
-           alert("Invalid token");
-        }
+            let documentData = await DAL.joinSession(token.value);
+            sync.synchronizeGameState(documentData.GameState);
     }
 }
 

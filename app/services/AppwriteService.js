@@ -75,6 +75,7 @@ class AppwriteDAL {
     try {
       window.localStorage.setItem(Config.TEAM_STORAGE_KEY, team.$id);
       window.localStorage.setItem(Config.DOCUMENT_STORAGE_KEY, promise.$id);
+      window.localStorage.setItem("role", "host");
     } catch (error) { console.log(error); }
     return promise;
   }
@@ -105,33 +106,28 @@ class AppwriteDAL {
     return false;
   }
 
-  joinSession(token) {
-    let promise = this.sdk.database.getDocument(Config.SESSIONS_COLLECTION_ID,
+  async joinSession(token) {
+    let promise = await this.sdk.database.getDocument(Config
+      .SESSIONS_COLLECTION_ID,
       token);
-    promise.then(function(response){this.registerPlayer(response); return promise;}, function(error){alert(
-      error); console.log(error);});
-  }
-
-  //implement try catch
-  registerPlayer(promise) {
+    if (promise === null || promise === undefined) { return alert(
+        "Document does not exist!"); }
     //save current session token/id
-    window.localStorage.setItem(Config.DOCUMENT_STORAGE_KEY, JSON.stringify(
-      promise.$id));
-    Config.DOCUMENT_STORAGE_KEY = promise.$id;
+    window.localStorage.setItem(Config.DOCUMENT_STORAGE_KEY, 
+      promise.$id);
     //update document player list
+    // eslint-disable-next-line one-var
     let usersInGame = promise.UserIDs,
       user = this.getUsername();
     usersInGame.push(user);
-    console.log(usersInGame);
-    // eslint-disable-next-line one-var
-    let update = this.sdk.database.updateDocument(Config
-      .SESSIONS_COLLECTION_ID, promise
-      .$id, { "UserIDs": usersInGame });
+      // eslint-disable-next-line one-var
+      let update = this.sdk.database.updateDocument(Config
+        .SESSIONS_COLLECTION_ID, promise
+        .$id, { "UserIDs": usersInGame });
     update.then(function(response) {
-      console.log(response);
       window.localStorage.setItem("role", "player");
-    }, error => alert(error));
-    console.log(window.localStorage.getItem("role"));
+    }, function(error){console.log(update);alert(error); });
+    return update;
   }
 
   logout() {
@@ -144,10 +140,11 @@ class AppwriteDAL {
     });
   }
 
-  joinTeam(token){
+  joinTeam(token) {
     return null;
   }
   async leaveLobby() {
+    console.log(window.localStorage.getItem("role"));
     if (window.localStorage.getItem("role") === "host") {
       this.sdk.database.deleteDocument(Config.SESSIONS_COLLECTION_ID,
         getDocumentIDFromLocalStorage());

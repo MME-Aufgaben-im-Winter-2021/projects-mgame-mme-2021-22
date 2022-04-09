@@ -32,17 +32,18 @@ class Synchronizer {
     }
 
     synchronizeGameState(targetState){
-        let currentState = window.location.pathname;
-        currentState = currentState.split("/").pop();
-        if (currentState !== targetState) {
-            switch(targetState){
-                case "lobby": window.location.replace("lobby.html"); break;
-                case "home": window.location.replace("homepage.html"); break;
-                default: break;
+        try{let currentState = window.location.pathname;
+            currentState = currentState.split("/").pop();
+            if (currentState !== targetState) {
+                switch(targetState){
+                    case "lobby": window.location.replace("lobby.html"); break;
+                    case "home": window.location.replace("homepage.html"); break;
+                    default: break;
+                }
+                return "Switching page to: " + targetState;
             }
-            return "Switching page to: " + targetState;
-        }
-        return "Page correct";
+            return "Page correct";}catch(error){console.log(error);}
+        return true;
     }
 }
 
