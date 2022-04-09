@@ -147,8 +147,8 @@ img {
 }
 
 .currentStandingPicture{
-    height: 185;
-    width: 185px;
+    height: 150;
+    width: 150px;
 }
 
 /*this fixes website shaking because of scrollbar popping up in chrome*/

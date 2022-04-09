@@ -365,8 +365,8 @@ class GameManager extends Observable {
     this.playingField.gameView.hidden = true;
     this.roundScoreboard.scoreboardView.hidden = false;
     let story = new Story(currentPrompt, fieldArray, "Best Story: " + this.getCurrentRoundWinningPlayerName(), 0);
+    this.roundScoreboard.storyListView.removeChild(this.roundScoreboard.storyListView.lastChild);
     this.roundScoreboard.storyListView.appendChild(story.body);
-
     document.getElementById("titleOfTheStory").innerHTML=currentPrompt;
   }
 
