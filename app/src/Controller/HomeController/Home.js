@@ -8,10 +8,13 @@ var dbLink = new AppwriteDAL(),
   "logout"), //joinButton = document.getElementById("join")
   hostButton = document.getElementById("host"),
   usernameText = document.getElementById("username"),
-  DAL = new AppwriteDAL(), joinButton = document.getElementById("join"), 
+  DAL = new AppwriteDAL(), joinButton = document.getElementById("join"),
+  teamButton = document.getElementById("team"),
+  teamToken = document.getElementById("teamId"), 
   token = document.getElementById("token"),
   sync = new Synchronizer();
 
+teamButton.addEventListener("click", joinTeam);
 logoutButton.addEventListener("click", logout);
 hostButton.addEventListener("click", hostGame);
 joinButton.addEventListener("click", joinGame);
@@ -21,28 +24,24 @@ function logout() {
   dbLink.logout();
 }
 
+function joinTeam(){
+  dbLink.joinTeam(teamToken.value);
+}
+
 async function joinGame(){
     if(token.value !== null){
-        try{
-            let promise = await DAL.joinSession(token.value);
-            sync.synchronizeGameState(promise.GameState);
-            console.log(promise.GameState);
-        }catch(exception){
-           // eslint-disable-next-line no-alert
-           alert("Invalid token");
-        }
+            let documentData = await DAL.joinSession(token.value);
+            sync.synchronizeGameState(documentData.GameState);
     }
 }
 
 async function hostGame() {
   //returns promise as json
-  let documentData = await dbLink.hostGame(),
-    documentID = documentData.$id;
-  //get sessionID
-  window.localStorage.setItem("documentID", JSON.stringify(documentID));
+  let documentData = await dbLink.hostGame();
   //synchronize my state
-  sync.synchronizeGameState(documentData.GameState);
+  sync.synchronizeGameState(documentData.GameState); //do
 }
+
 //.then(response => usernameText.innerHTML = response.name, error => console.log(error)); //window.location.replace("login.html")
 
 function hasUser() {

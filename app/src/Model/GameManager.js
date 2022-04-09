@@ -149,7 +149,7 @@ class GameManager extends Observable {
   }
 
   addNewMemeToField(imageSource) {
-    console.log(imageSource);
+    //console.log(imageSource);
     if (fieldArray.length < Config.MAX_MEMES) {
       let newMeme = new Meme(imageSource,
         false);
@@ -157,7 +157,7 @@ class GameManager extends Observable {
       fieldArray.push(newMeme);
       newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
       newMeme.isInHand = false;
-      console.log("add meme to field");
+      //console.log("add meme to field");
     }
     this.updatePlayingField();
   
