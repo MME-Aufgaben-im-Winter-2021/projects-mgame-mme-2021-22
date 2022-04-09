@@ -3,7 +3,8 @@ import { AppwriteDAL } from "./AppwriteService.js";
 import Config from "../src/utils/Config.js";
 import LobbyView from "../src/Views/LobbyView/LobbyView.js";
 import PlayingField from "../src/Views/GameView/PlayingField.js";
-var lobbyView = new LobbyView(), gameView = new PlayingField;
+import GameManager from "../src/Model/GameManager.js";
+var lobbyView = new LobbyView(), gameManager =new GameManager();
 
 class Synchronizer {
     
@@ -16,13 +17,13 @@ class Synchronizer {
     updateSession(payload){
         console.log("payload received");
         if(payload.$id !== window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY)){
-            alert(Config.CONNECTION_UNSTABLE_WARNING);
+            //alert(Config.CONNECTION_UNSTABLE_WARNING);
             return false;
         }
         
         switch(payload.GameState){
             case Config.LOBBY_WAITING: console.log("update lobby"); lobbyView.updateView(payload.UserIDs, payload.RoundCount, payload.RoundDuration); break;
-            case Config.GAME_STARTED: console.log("start game"); lobbyView.setHidden(true); gameView.gameView.hidden = false; break;
+            case Config.GAME_STARTED: console.log("start game"); lobbyView.setHidden(true); gameManager.setGameStatePlay(); break;
             case Config.ROUND_ENDED: break;
             case Config.RATING_PHASE: break;
             case Config.GAME_ENDED: break;

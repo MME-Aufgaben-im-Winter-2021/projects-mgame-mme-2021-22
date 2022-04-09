@@ -89,9 +89,11 @@ class AppwriteDAL {
   getUsername() {
     return window.localStorage.getItem("username");
   }
+
   updateGameState(state){
-    this.sdk.updateDocument(Config.SESSIONS_COLLECTION_ID, this.getDocumentIDFromLocalStorage(), {"GameState":state});
+    this.sdk.database.updateDocument(Config.SESSIONS_COLLECTION_ID, getDocumentIDFromLocalStorage(), {"GameState":state});
   }
+
   async updateSession() {
     let id = window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY);
 
@@ -182,14 +184,6 @@ class AppwriteDAL {
         response.name);
     }, function(error) { alert(error); });
     return promise;
-  }
-
-  updateGameState(state) {
-    let documentId = getDocumentIDFromLocalStorage(),
-      promise = this.sdk.database.updateDocument(Config
-        .SESSIONS_COLLECTION_ID, documentId, { "GameState": state });
-    promise.then(response => console.log(response), error => console.log(
-      error));
   }
 
   updateSessionWithSettings(rounds, duration) {
