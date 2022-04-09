@@ -67,7 +67,7 @@ class GameManager extends Observable {
   }
 
   onSearch() {
-    if (searchBlockBoolean===false&&searchBar.value.length>1){
+    if (searchBlockBoolean===false&&searchBar.value.length>=1){
       searchBlockBoolean=true;
       this.delay(1000).then(() => this.checkIfNewSearchIsNeeded());
       console.log("onsearch method");

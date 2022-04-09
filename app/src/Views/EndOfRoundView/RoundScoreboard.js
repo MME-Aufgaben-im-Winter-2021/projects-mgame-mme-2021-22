@@ -36,12 +36,13 @@ class RoundScoreboard{
                     sortedPlayers.splice(j,0,players[i]);
                     break;
                 }
-                else(sortedPlayers.push(players[i]))
+                else{
+                    sortedPlayers.push(players[i])
+                }
             }
         }
-        return sortedPlayers;
     }
-
-
+    return sortedPlayers;
+    }
 }
 export default RoundScoreboard;
