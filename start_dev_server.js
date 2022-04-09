@@ -10,9 +10,6 @@ function init() {
         console.log("Server started. Opening application in browser ... [Press CTRL + C to stop server]");
         open(`http://localhost:${process.env.DEV_PORT}`);
     });
-   
-    
-    
 }
 
 init();

@@ -25,8 +25,8 @@ async function joinGame(){
     if(token.value !== null){
         try{
             let promise = await DAL.joinSession(token.value);
-            sync.synchronizeGameState(promise.GameState);
-            console.log(promise.GameState);
+            sync.subscribeToGame(); // while -> update views with every document update
+            sync.synchronizeGameState(promise.GameState); //do
         }catch(exception){
            // eslint-disable-next-line no-alert
            alert("Invalid token");
@@ -36,13 +36,12 @@ async function joinGame(){
 
 async function hostGame() {
   //returns promise as json
-  let documentData = await dbLink.hostGame(),
-    documentID = documentData.$id;
-  //get sessionID
-  window.localStorage.setItem("documentID", JSON.stringify(documentID));
+  let documentData = await dbLink.hostGame();
   //synchronize my state
-  sync.synchronizeGameState(documentData.GameState);
+  sync.subscribeToGame(); // while 
+  sync.synchronizeGameState(documentData.GameState); //do
 }
+
 //.then(response => usernameText.innerHTML = response.name, error => console.log(error)); //window.location.replace("login.html")
 
 function hasUser() {

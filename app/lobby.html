@@ -87,7 +87,7 @@
                     <div class="row" id="setting2">
                         <label for="round-count" class="col-3 col-form-label">Round Count</label>
                         <div class="col">
-                            <input type="range" class="form-range pt-1" id="round-count" min="3" max="6" value="3">
+                            <input type="range" class="form-range pt-1" id="round-count" min="3" max="7">
                         </div>
                         <div class="col-2">
                             <input type="number" class="form-control mb-2" id="input-round-count">
@@ -96,7 +96,7 @@
                     <div class="row" id="setting3">
                         <label for="round-length" class="col-3 col-form-label">Round Duration</label>
                         <div class="col">
-                            <input type="range" class="form-range pt-1" id="round-length" min="60" max="250" value="120">
+                            <input type="range" class="form-range pt-1" id="round-length" min="60" max="250">
                         </div>
                         <div class="col-2">
                             <input type="number" class="form-control mb-2" id="input-round-length">
@@ -199,9 +199,9 @@
                             <!-- Hier kommen die Keywords rein -->
                         </ul>
 
-                        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" >
+                        <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" >
                             <input id="searchBar" type="text" class="form-control form-control-dark" placeholder="Search...">
-                        </form>
+                        </div>
 
                         <div class="text-end">
                             <button type="button" class="save btn btn-outline-light me-2">Save</button>
@@ -220,8 +220,6 @@
     <div id="divider" class="row mx-1 vh-70">
         <div class="col border bgd-secondary h-100"></div>
     </div>
-
-    <script type="module" src="./src/Model/index.js"></script>
     </div>
     <div id="roundEnd" hidden>
         <div class="container-fluid pt-5 my-5 bg-dark text-white col-xl-6">

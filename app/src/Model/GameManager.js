@@ -51,7 +51,7 @@ class GameManager extends Observable {
     searchBar.addEventListener("change", this.onSearch.bind(this));
     continueButton.addEventListener("click", this.setGameStatePlay.bind(this));
     this.setPrompt(this.prompt.generatePrompt());
-    this.fillHandWithRandomMemes();
+    //this.fillHandWithRandomMemes();
   }
 
   onSearch() {
@@ -65,7 +65,7 @@ class GameManager extends Observable {
   }
 
   fillHand(event){
-    console.log(event.data);
+    //console.log(event.data);
 
     let data = event.data,
     size = data.length,
@@ -76,7 +76,7 @@ class GameManager extends Observable {
 
     for (let i = 0; i < Config.HAND_SIZE; i++) {
       if (i<size){
-        console.log(size);
+        //console.log(size);
         this.addNewMemeToHand(data[i+dataRandomStartOffset]);
       }
     }
@@ -101,11 +101,11 @@ class GameManager extends Observable {
   }
 
   addNewMemeToHand(imageSource) {
-    console.log(imageSource);
+    //console.log(imageSource);
     
     if (handArray.length < Config.HAND_SIZE) {
       let newMeme = new Meme( imageSource, true);
-      console.log(handArray.length, Config.HAND_SIZE);
+      //console.log(handArray.length, Config.HAND_SIZE);
       handArray.push(newMeme);
       newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
       
@@ -114,7 +114,7 @@ class GameManager extends Observable {
   }
 
   addNewMemeToField(imageSource) {
-    console.log(imageSource);
+    //console.log(imageSource);
     if (fieldArray.length < Config.MAX_MEMES) {
       let newMeme = new Meme(imageSource,
         false);
@@ -122,7 +122,7 @@ class GameManager extends Observable {
       fieldArray.push(newMeme);
       newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
       newMeme.isInHand = false;
-      console.log("add meme to field");
+      //console.log("add meme to field");
     }
     this.updatePlayingField();
   
