@@ -215,6 +215,14 @@ class AppwriteDAL {
     }
   }
 
+  uploadMemeStory(memeArray, roundPlayed){
+    this.sdk.database.createDocument(Config.MEMESTORY_COLLECTION_ID, "unique()", {"MemeStories": memeArray, 
+    "Session": getDocumentIDFromLocalStorage(), 
+    "Player": this.getUsername(), "StoryScore": 0, 
+    "InRoundPlayed": roundPlayed}, ["role:all"], ["role:all"]);
+    //to do handle error
+  }
+
 }
 
 function getDocumentIDFromLocalStorage() {

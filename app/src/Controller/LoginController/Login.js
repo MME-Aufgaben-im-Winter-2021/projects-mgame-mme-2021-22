@@ -18,5 +18,6 @@ var dal = new AppwriteDAL(), nickname = document.getElementById("nicknameInput")
 }
 
 function signIn(){
+    console.log("Pressed Sign In");
     dal.signIn(email.value, password.value);
 }

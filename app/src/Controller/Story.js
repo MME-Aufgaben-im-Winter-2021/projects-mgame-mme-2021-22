@@ -1,19 +1,16 @@
 
-const STORY_TEMPLATE = document.querySelector("#finished-story").content
-.querySelector("div.story-view").innerHTML;
-
-
 class Story{
 
 constructor(prompt, memes, player, id){
-
+    this.STORY_TEMPLATE = document.querySelector("#finished-story").content
+    .querySelector("div.story-view").innerHTML;
     this.prompt = prompt;
     this.score = 0;
     this.memes = memes;
     this.player = player;
     this.id = id;
     this.body = document.createElement("li");
-    this.body.innerHTML = STORY_TEMPLATE;
+    this.body.innerHTML = this.STORY_TEMPLATE;
     this.body.classList.add("story-view");
     this.playerNameElement = this.body.querySelector(".player");
     this.playerNameElement.innerHTML = player;

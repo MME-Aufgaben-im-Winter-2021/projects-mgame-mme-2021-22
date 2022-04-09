@@ -2,7 +2,6 @@
 
 class RatingView {
   constructor() {
-    console.log("ratingview called");
     this.ratingArea = document.getElementById("ratingArea");
     this.ratingField = document.getElementById("ratingField");
     this.titleField = document.querySelector(".title");
@@ -21,7 +20,6 @@ class RatingView {
 
   updateView(memes) {
     console.log("ratingview updated");
-
 
     if (this.ratingMemeBad===null){
       console.log("ratingmemebad is null");
