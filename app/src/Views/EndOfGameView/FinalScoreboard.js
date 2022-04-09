@@ -37,7 +37,7 @@ class FinalScore{
                     break;
                 }
                 else{
-                    sortedPlayers.push(players[i])
+                    sortedPlayers.push(players[i]);
                 }
             }
         }

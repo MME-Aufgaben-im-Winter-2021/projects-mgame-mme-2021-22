@@ -364,16 +364,21 @@ class GameManager extends Observable {
   setGameStateRoundEnd() {
     this.playingField.gameView.hidden = true;
     this.roundScoreboard.scoreboardView.hidden = false;
-    let story = new Story(currentPrompt, fieldArray, "Player1", 0);
+    let story = new Story(currentPrompt, fieldArray, "Best Story: " + this.getCurrentRoundWinningPlayerName(), 0);
     this.roundScoreboard.storyListView.appendChild(story.body);
 
+    document.getElementById("titleOfTheStory").innerHTML=currentPrompt;
   }
 
-setGameStateGameEnd() {
+  getCurrentRoundWinningPlayerName(){
+    return "winner";
+  }
+
+  setGameStateGameEnd() {
     this.playingField.gameView.hidden = true;
     this.finalScore.endGameScreen.hidden = false;
     this.finalScore.addMemes(fieldArray);
-    let story = new Story(currentPrompt, fieldArray, "Player1", 0);
+    let story = new Story(currentPrompt, fieldArray, "PlayerGameStateEnd", 0);
     this.roundScoreboard.storyListView.appendChild(story.body);
 
   }

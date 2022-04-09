@@ -37,7 +37,7 @@ class RoundScoreboard{
                     break;
                 }
                 else{
-                    sortedPlayers.push(players[i])
+                    sortedPlayers.push(players[i]);
                 }
             }
         }

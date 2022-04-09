@@ -119,6 +119,7 @@ body {
     background-color: var(--prim-dark);
 }
 
+
 .bgd-light {
     background-color: var(--prim-light);
 }
@@ -141,9 +142,14 @@ img {
 }
 
 .picture {
-    height: 200px;
-    width: 200px;
-   }
+    height: 230px;
+    width: 230px;
+}
+
+.currentStandingPicture{
+    height: 185;
+    width: 185px;
+}
 
 /*this fixes website shaking because of scrollbar popping up in chrome*/
 ::-webkit-scrollbar { 
@@ -170,7 +176,7 @@ img {
 
 .ratingWidth{
     padding-top: 10px;
-    padding-left: 17%;
+    padding-left: 9%;
     max-width: 1000px; 
 }
 
@@ -182,4 +188,61 @@ img {
     position:relative;
     display: inline-block;
     float:left;
+    padding-left:50px;
+}
+
+.firstcol{
+    position:relative;
+    display: inline-block;
+    float:left;
+    padding-right:45px;
+}
+
+.thirdcol{
+    position:relative;
+    display: inline-block;
+    float:left;
+    padding-left:80px;
+}
+
+.rateThisStoryBox {
+    background-color: var(--sec-dark);
+    color: white;
+}
+
+
+.howWouldYouRateText{
+    padding: 30px;
+}
+
+.toppadding{
+    padding-top: 50px;
+}
+
+.currentStandingPic1{
+    padding-left: 35%;
+}
+.currentStandingPic2{
+    padding-left: 12%;
+    padding-right: 0%;
+}
+.currentStandingPic3{
+    padding-right: 0%;
+    padding-left: 0%;
+}
+
+.currentStandingImageContainer{
+    max-width: 90%;
+}
+
+.currentStandings{
+    margin-top:0px;
+    padding-top:0px;
+
+    margin-bottm:0px;
+    padding-bottom:0px;   
+}
+
+.noliststyle{
+    list-style: none;
 }
