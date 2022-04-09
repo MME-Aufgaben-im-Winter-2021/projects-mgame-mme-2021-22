@@ -2,7 +2,8 @@
 import { AppwriteDAL } from "./AppwriteService.js";
 import Config from "../src/utils/Config.js";
 import LobbyView from "../src/Views/LobbyView/LobbyView.js";
-var lobbyView = new LobbyView();
+import PlayingField from "../src/Views/GameView/PlayingField.js";
+var lobbyView = new LobbyView(), gameView = new PlayingField;
 
 class Synchronizer {
     
@@ -20,8 +21,12 @@ class Synchronizer {
         }
         
         switch(payload.GameState){
-            case "lobby": console.log("update lobby"); lobbyView.updateView(payload.UserIDs, payload.RoundCount, payload.RoundDuration); break;
-            case "Game": console.log("update game"); break;
+            case Config.LOBBY_WAITING: console.log("update lobby"); lobbyView.updateView(payload.UserIDs, payload.RoundCount, payload.RoundDuration); break;
+            case Config.GAME_STARTED: console.log("start game"); lobbyView.setHidden(true); gameView.gameView.hidden = false; break;
+            case Config.ROUND_ENDED: break;
+            case Config.RATING_PHASE: break;
+            case Config.GAME_ENDED: break;
+            case Config.SESSION_ENDED: break;
             default: return false; 
         }
         //if gamestate changed -> synchronize Game State

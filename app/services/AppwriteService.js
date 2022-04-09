@@ -75,7 +75,7 @@ class AppwriteDAL {
     try {
       window.localStorage.setItem(Config.TEAM_STORAGE_KEY, team.$id);
       window.localStorage.setItem(Config.DOCUMENT_STORAGE_KEY, promise.$id);
-      window.localStorage.setItem("role", "host");
+      window.localStorage.setItem(Config.ROLE_KEY, Config.HOST_ROLE);
     } catch (error) { console.log(error); }
     return promise;
   }
@@ -89,7 +89,9 @@ class AppwriteDAL {
   getUsername() {
     return window.localStorage.getItem("username");
   }
-
+  updateGameState(state){
+    this.sdk.updateDocument(Config.SESSIONS_COLLECTION_ID, this.getDocumentIDFromLocalStorage(), {"GameState":state});
+  }
   async updateSession() {
     let id = window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY);
 
@@ -125,7 +127,7 @@ class AppwriteDAL {
         .SESSIONS_COLLECTION_ID, promise
         .$id, { "UserIDs": usersInGame });
     update.then(function(response) {
-      window.localStorage.setItem("role", "player");
+      window.localStorage.setItem(Config.ROLE_KEY, Config.PLAYER_ROLE);
     }, function(error){console.log(update);alert(error); });
     return update;
   }
@@ -144,16 +146,17 @@ class AppwriteDAL {
     return null;
   }
   async leaveLobby() {
-    console.log(window.localStorage.getItem("role"));
-    if (window.localStorage.getItem("role") === "host") {
+    if (window.localStorage.getItem(Config.ROLE_KEY) === Config.HOST_ROLE) {
       this.sdk.database.deleteDocument(Config.SESSIONS_COLLECTION_ID,
         getDocumentIDFromLocalStorage());
+
       this.sdk.teams.delete(window.localStorage.getItem(Config
         .TEAM_STORAGE_KEY));
+
       console.log("Leaving as host");
       window.localStorage.setItem(Config.TEAM_STORAGE_KEY, "");
       window.localStorage.setItem(Config.DOCUMENT_STORAGE_KEY, "");
-      window.localStorage.setItem("role", "");
+      window.localStorage.setItem(Config.ROLE_KEY, "");
       window.location.replace("homepage.html");
     } else {
       //remove name from userids

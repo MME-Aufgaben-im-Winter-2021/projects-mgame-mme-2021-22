@@ -18,7 +18,7 @@ var
   //lobby token code
   tokenText = document.getElementById("lobbyToken");
 
-startButton.addEventListener("click", function (){ if(window.localStorage.getItem("role") === "host") {console.log("Startet game as host"); DAL.updateGamestate("Started");}}); //lobbyView.setHidden(true); let gameManager = new GameManager(); gameManager.setGameStatePlay();
+startButton.addEventListener("click", function (){ console.log("Startled game as host"); DAL.updateGamestate(Config.GAME_STARTED);}); //lobbyView.setHidden(true); let gameManager = new GameManager(); gameManager.setGameStatePlay();
 leaveButton.addEventListener("click", leaveLobby);
 tokenText.value = sessionData.$id;
 copyButton.addEventListener("click", copyToClipboard);
@@ -41,6 +41,15 @@ roundDurationRangeSetting.addEventListener("input", function(){ DAL.updateSessio
 roundDurationSetting.addEventListener("input", function (){ DAL.updateSessionWithSettings(null, roundDurationSetting.value);});
 
 DAL.subscribe();
+
+//disable host functions if player
+if(window.localStorage.getItem(Config.ROLE_KEY) === Config.PLAYER_ROLE){
+  roundCountSetting.disabled = true;
+  roundCountRangeSetting.disabled = true;
+  roundDurationRangeSetting.disabled = true;
+  roundDurationSetting.disabled = true;
+  startButton.disabled = true;
+}
 }
 
 function leaveLobby() {

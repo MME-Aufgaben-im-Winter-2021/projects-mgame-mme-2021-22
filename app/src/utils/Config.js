@@ -25,6 +25,18 @@ const Config = {
     HOST_ERROR: "Could not host a new game! Sry bro.",
     // MEME JSON
     MAX_JSON_SEARCH_STARTPOINT: 1300,
+    //GameStates
+    LOBBY_WAITING: "lobby",
+    GAME_STARTED: "startedGame",
+    GAME_ENDED: "gameEnd",
+    ROUND_ENDED: "roundEnd",
+    RATING_PHASE: "rating",
+    SESSION_ENDED: "gameOver",
+    //Roles
+    ROLE_KEY: "role",
+    HOST_ROLE: "host",
+    PLAYER_ROLE: "player",
+    SPECTATOR_ROLE: "spectator",
 
 };
 //Object.freeze(Config);
