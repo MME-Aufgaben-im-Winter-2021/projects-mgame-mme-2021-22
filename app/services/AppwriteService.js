@@ -4,7 +4,7 @@ import Synchronizer from "./Synchronizer.js";
 
 // Init your Web SDK
 // eslint-disable-next-line no-undef
-const appwrite = new Appwrite(),
+const appwrite = new Appwrite(), query = new Query(),
   sync = new Synchronizer();
 
 appwrite
@@ -219,13 +219,13 @@ class AppwriteDAL {
   uploadMemeStory(memeArray, roundPlayed){
     this.sdk.database.createDocument(Config.MEMESTORY_COLLECTION_ID, "unique()", {"MemeStories": memeArray, 
     "Session": getDocumentIDFromLocalStorage(), 
-    "Player": this.getUsername(), "StoryScore": 0, 
+    "Player": this.getUsername(), "Score": 0, 
     "InRoundPlayed": roundPlayed}, ["role:all"], ["role:all"]);
     //to do handle error
   }
 
   downloadMemeStories(roundNumber){
-    let promise = this.sdk.database.listDocuments(Config.MEMESTORY_COLLECTION_ID, [appwrite.Query.equal("SessionId", Config.SESSIONS_COLLECTION_ID)]);
+    let promise = this.sdk.database.listDocuments(Config.MEMESTORY_COLLECTION_ID, [], 100);
     promise.then(response => console.log(response), error => console.log(error));
   }
 
