@@ -23,6 +23,12 @@ leaveButton.addEventListener("click", leaveLobby);
 tokenText.value = sessionData.$id;
 copyButton.addEventListener("click", copyToClipboard);
 
+function copyToClipboard() {
+  tokenText.select();
+  navigator.clipboard.writeText(tokenText.value);
+  //alert("Copied token to clipboard" + tokenText.value);
+}
+function init(){
 // init setting default values
 roundCountSetting.value = roundCountRangeSetting.value = Config.DEFAULT_ROUNDS;
 roundDurationSetting.value = roundDurationRangeSetting.value = Config.DEFAULT_ROUND_DURATION;
@@ -34,15 +40,14 @@ roundCountSetting.addEventListener("input", function (){DAL.updateSessionWithSet
 roundDurationRangeSetting.addEventListener("input", function(){ DAL.updateSessionWithSettings(null, roundDurationRangeSetting.value);});
 roundDurationSetting.addEventListener("input", function (){ DAL.updateSessionWithSettings(null, roundDurationSetting.value);});
 
-function copyToClipboard() {
-  tokenText.select();
-  navigator.clipboard.writeText(tokenText.value);
-  //alert("Copied token to clipboard" + tokenText.value);
+DAL.subscribe();
 }
 
 function leaveLobby() {
   DAL.leaveLobby();
 }
+
+init();
 //subscribeGame();
 /*
 async function subscribeGame() {

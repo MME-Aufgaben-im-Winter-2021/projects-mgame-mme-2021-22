@@ -8,10 +8,13 @@ var dbLink = new AppwriteDAL(),
   "logout"), //joinButton = document.getElementById("join")
   hostButton = document.getElementById("host"),
   usernameText = document.getElementById("username"),
-  DAL = new AppwriteDAL(), joinButton = document.getElementById("join"), 
+  DAL = new AppwriteDAL(), joinButton = document.getElementById("join"),
+  teamButton = document.getElementById("team"),
+  teamToken = document.getElementById("teamId"), 
   token = document.getElementById("token"),
   sync = new Synchronizer();
 
+teamButton.addEventListener("click", joinTeam);
 logoutButton.addEventListener("click", logout);
 hostButton.addEventListener("click", hostGame);
 joinButton.addEventListener("click", joinGame);
@@ -19,6 +22,10 @@ joinButton.addEventListener("click", joinGame);
 
 function logout() {
   dbLink.logout();
+}
+
+function joinTeam(){
+  dbLink.joinTeam(teamToken.value);
 }
 
 async function joinGame(){
@@ -38,7 +45,6 @@ async function hostGame() {
   //returns promise as json
   let documentData = await dbLink.hostGame();
   //synchronize my state
-  sync.subscribeToGame(); // while 
   sync.synchronizeGameState(documentData.GameState); //do
 }
 

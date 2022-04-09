@@ -70,7 +70,7 @@ class AppwriteDAL {
           "RoundCount": Config.DEFAULT_ROUNDS,
           "RoundDuration": Config.DEFAULT_ROUND_DURATION,
           "GameState": "lobby",
-        }, [teamId], [teamId]);
+        }, ["role:all"], ["role:all"]);
 
     try {
       window.localStorage.setItem(Config.TEAM_STORAGE_KEY, team.$id);
@@ -108,9 +108,8 @@ class AppwriteDAL {
   joinSession(token) {
     let promise = this.sdk.database.getDocument(Config.SESSIONS_COLLECTION_ID,
       token);
-    promise.then(response => this.registerPlayer(response), error => alert(
-      error));
-    return promise;
+    promise.then(function(response){this.registerPlayer(response); return promise;}, function(error){alert(
+      error); console.log(error);});
   }
 
   //implement try catch
@@ -145,6 +144,9 @@ class AppwriteDAL {
     });
   }
 
+  joinTeam(token){
+    return null;
+  }
   async leaveLobby() {
     if (window.localStorage.getItem("role") === "host") {
       this.sdk.database.deleteDocument(Config.SESSIONS_COLLECTION_ID,
