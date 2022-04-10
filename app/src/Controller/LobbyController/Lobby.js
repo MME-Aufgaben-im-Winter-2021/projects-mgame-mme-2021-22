@@ -18,12 +18,15 @@ var
   //lobby token code
   tokenText = document.getElementById("lobbyToken");
 
-startButton.addEventListener("click", function (){ console.log("Startled game as host"); DAL.updateGameState(Config.GAME_STARTED);}); //lobbyView.setHidden(true); let gameManager = new GameManager(); gameManager.setGameStatePlay();
+  if (startButton!==null){
+    startButton.addEventListener("click", function (){ console.log("Started game as host"); DAL.updateGameState(Config.GAME_STARTED);}); //lobbyView.setHidden(true); let gameManager = new GameManager(); gameManager.setGameStatePlay();
+  }
 leaveButton.addEventListener("click", leaveLobby);
 tokenText.value = sessionData.$id;
 copyButton.addEventListener("click", copyToClipboard);
 
 function copyToClipboard() {
+  console.log("copytoClipboard");
   tokenText.select();
   navigator.clipboard.writeText(tokenText.value);
   //alert("Copied token to clipboard" + tokenText.value);

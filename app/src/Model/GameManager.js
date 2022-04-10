@@ -126,12 +126,13 @@ class GameManager extends Observable {
 
     let randomCharacter = alphabet[Math.floor(Math.random() * alphabet.length)],
         data = this.imageDownloader.fetchData(randomCharacter,this.getRandomIntBetween0AndMax(Config.MAX_JSON_SEARCH_STARTPOINT));
-  
-    for (let i = 0; i < Config.HAND_SIZE; i++) {
-      if (i< data.length){
-        this.addNewMemeToHand(data[i]);
-      }
-    }  
+    if (data!==undefined){
+      for (let i = 0; i < Config.HAND_SIZE; i++) {
+        if (i< data.length){
+          this.addNewMemeToHand(data[i]);
+        }
+      }  
+    }
   }
 
   addNewMemeToHand(imageSource) {
@@ -364,10 +365,14 @@ class GameManager extends Observable {
   setGameStateRoundEnd() {
     this.playingField.gameView.hidden = true;
     this.roundScoreboard.scoreboardView.hidden = false;
-    let story = new Story(currentPrompt, fieldArray, "Best Story: " + this.getCurrentRoundWinningPlayerName(), 0);
-    this.roundScoreboard.storyListView.removeChild(this.roundScoreboard.storyListView.lastChild);
-    this.roundScoreboard.storyListView.appendChild(story.body);
-    document.getElementById("titleOfTheStory").innerHTML=currentPrompt;
+    
+      let story = new Story(currentPrompt, fieldArray, "Best Story: " + this.getCurrentRoundWinningPlayerName(), 0);
+      this.roundScoreboard.storyListView.appendChild(story.body);
+      document.getElementById("titleOfTheStory").innerHTML=currentPrompt;
+    
+    
+    
+
   }
 
   getCurrentRoundWinningPlayerName(){

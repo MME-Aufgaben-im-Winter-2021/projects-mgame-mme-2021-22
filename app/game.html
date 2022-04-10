@@ -15,13 +15,13 @@
         <div class="row px-2" style="height: 30vh;">
             <div id="promptField" class="promptField container col-2 prompt border border-dark rounded mx-2 my-2">Prompt</div>
             <div class="playingArea col border border-dark mx-2 my-2">
-                <div id="ratingField" class="row row-cols-1 row-cols-md-3 mb-3 text-center ratingWidth" hidden>
+                <div id="ratingField" class="row row-cols-1 row-cols-md-3 text-center ratingWidth" hidden>
                     <div class="firstcol">
                         <div class="card1 mb-4 rounded-3 shadow-sm picture ratingpic1 leftcol style="width:100%">
 
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="secondcol">
                         <div class="card2 mb-4 rounded-3 shadow-sm picture ratingpic2 leftcol tyle="width:100%">
 
                         </div>
@@ -57,7 +57,7 @@
                 </label>
                     <p>
                         <div id="ratingArea_lower" class="toppadding">
-                            <img id="ratingMemeBad" src="\resources\rating_memes\joy_bad.png" width="256" height="256" >
+                            <img id="ratingMemeBad" class ="ratingScaleMeme" src="\resources\rating_memes\joy_bad.png" width="256" height="256" >
                             <button id="bad" type="button" class="bad btn btn-danger">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
@@ -73,7 +73,7 @@
                                     <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"></path>
                                 </svg>
                             </button>
-                            <img id="ratingMemeGood" src="\resources\rating_memes\joy_good.png" width="256" height="256" >
+                            <img id="ratingMemeGood" class ="ratingScaleMeme" src="\resources\rating_memes\joy_good.png" width="256" height="256" >
                         </div>
                     </p>
             </div>
@@ -210,23 +210,23 @@
     <div class="story-view">
         <header>
             <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-                <h1 class="player display-4 fw-normal">Player 3</h1>
+                <h1 class="player display-4 fw-normal">Best story:Player 3</h1>
             </div>
         </header>
         <div class="container">
             <header>
-                <div id = "titleOfTheStory" class="pricing-header p-3 pb-md-4 mx-auto text-center promptField">
+                <div id = "titleOfTheStory" class="pricing-header p-3 pb-md-4 mx-auto text-center promptField padding-bottom">
                     <P>Title of the Story</P>
                 </div>
             </header>
-            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-                <div class="col">
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center toppadding_small">
+                <div class="col-3">
                     <span class="firstMeme currentStandingPicture"></span>
                 </div>
-                <div class="col">
+                <div class="col-3">
                     <span class="secondMeme currentStandingPicture"></span>
                 </div>
-                <div class="col">
+                <div class="col-3">
                     <span class="thirdMeme currentStandingPicture"></span>
                 </div>
          </div>

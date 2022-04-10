@@ -168,6 +168,12 @@ img {
 .promptField {
     font-weight: bold;
     font-size: x-large;
+    color: white;
+    background-color: black;
+}
+
+.padding-bottom{
+    padding-bottom:100px;
 }
 
 .maxWidth {
@@ -188,21 +194,36 @@ img {
     position:relative;
     display: inline-block;
     float:left;
-    padding-left:50px;
+    padding-left: 20px;
+}
+
+
+.titlecol{
+    position:relative;
+    display: inline-block;
+    float:left;
 }
 
 .firstcol{
     position:relative;
     display: inline-block;
     float:left;
-    padding-right:45px;
+    padding-right:70px;
 }
+
+.secondcol{
+    position:relative;
+    display: inline-block;
+    float:left;
+    padding-left: 70px;
+}
+
 
 .thirdcol{
     position:relative;
     display: inline-block;
     float:left;
-    padding-left:80px;
+    padding-left:120px;
 }
 
 .rateThisStoryBox {
@@ -210,6 +231,9 @@ img {
     color: white;
 }
 
+.ratingScaleMeme{
+    border-radius: 10%;
+}
 
 .howWouldYouRateText{
     padding: 30px;
@@ -217,6 +241,10 @@ img {
 
 .toppadding{
     padding-top: 50px;
+}
+
+.toppadding_small{
+    padding-top: 20px;
 }
 
 .currentStandingPic1{
@@ -245,4 +273,12 @@ img {
 
 .noliststyle{
     list-style: none;
+}
+
+.rightpadding{
+    max-width: 10000px;
+}
+
+.slider{
+    padding-top: 5px;
 }
