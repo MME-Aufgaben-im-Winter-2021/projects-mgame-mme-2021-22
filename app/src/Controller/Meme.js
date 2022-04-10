@@ -9,7 +9,7 @@ class Meme extends Observable {
   constructor(image, isInHand) {
     super();
     this.MEME_TEMPLATE = document.querySelector("#meme-template").content
-  .querySelector("div.meme").innerHTML;
+      .querySelector("div.meme").innerHTML;
     this.id = image;
     this.image = image;
     this.isInHand = isInHand;
@@ -19,28 +19,30 @@ class Meme extends Observable {
     this.body.innerHTML = this.MEME_TEMPLATE;
     this.body.classList.add("meme");
     this.imageSource = this.body.querySelector(".picture");
-    this.imageSource.innerHTML = "<img src=\"\\resources\\images_full\\" + image + "\">";
+    this.imageSource.innerHTML = "<img src=\"\\resources\\images_full\\" +
+      image + "\">";
     this.body.setAttribute("draggable", "true");
-    this.body.addEventListener('dragstart', () => {
-      this.body.classList.add('dragging');
+    this.body.addEventListener("dragstart", () => {
+      this.body.classList.add("dragging");
       draggedMeme = this.id;
     });
-    this.body.addEventListener('dragend', () => {
-      this.body.classList.remove('dragging');
-      this.notifyAll(new Event("dragEnded", [draggedMeme, currentLocation, swappingMeme, this.isInHand, this.imageSource]));
+    this.body.addEventListener("dragend", () => {
+      this.body.classList.remove("dragging");
+      this.notifyAll(new Event("dragEnded", [draggedMeme, currentLocation,
+        swappingMeme, this.isInHand, this.imageSource
+      ]));
     });
-    this.body.addEventListener('dragenter', () => {
+    this.body.addEventListener("dragenter", () => {
       swappingMeme = this.id;
     });
-    this.playingArea.addEventListener('dragenter', () => {
+    this.playingArea.addEventListener("dragenter", () => {
       currentLocation = "playingArea";
     });
-    this.handArea.addEventListener('dragenter', () => {
+    this.handArea.addEventListener("dragenter", () => {
       currentLocation = "handArea";
     });
-    
-  }
 
+  }
 
   getImageSource() {
     return this.imageSource.innerHTML;

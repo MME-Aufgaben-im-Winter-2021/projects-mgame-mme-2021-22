@@ -9,8 +9,7 @@ class ImageDownloader extends Observable {
 
   fetchData(tag, placeToStartSearchingJsonFile) {
     let images = [];
-   // let data = new Promise((resolve, reject) => {
-        fetch('./resources/meme_json_data.json')
+        fetch("./resources/meme_json_data.json")
           .then(respond => respond.json())
             .then(files => {
               for (let i = placeToStartSearchingJsonFile; i < files.length; i++) {
@@ -22,8 +21,8 @@ class ImageDownloader extends Observable {
               let event = new Event("imagesFetched",images);
                   //console.log(event);
                   this.notifyAll(event);
-          }).catch(() => {
-            console.log("ups");
+          }).catch((e) => {
+            this.notifyAll(e);
           });
       
     }
