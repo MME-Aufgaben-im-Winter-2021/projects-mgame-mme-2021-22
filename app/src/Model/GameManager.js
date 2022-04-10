@@ -54,7 +54,6 @@ class GameManager extends Observable {
     searchBar.addEventListener('keydown', () => this.delay(1000).then(() => this.onSearch()));
    
     this.fillHandWithRandomMemes();
-
   }
 
   delay(time) {
@@ -62,7 +61,7 @@ class GameManager extends Observable {
   }
 
   onSearch() {
-    if (searchBlockBoolean===false&&searchBar.value.length>1){
+    if (searchBlockBoolean===false&&searchBar.value.length>=1){
       searchBlockBoolean=true;
       this.delay(1000).then(() => this.checkIfNewSearchIsNeeded());
       console.log("onsearch method");
@@ -284,8 +283,10 @@ class GameManager extends Observable {
    * HOST FUNCTIONS; 
    */
   setGameStatePlay() {
+
     handArray = [];
     fieldArray = [];
+
     this.updatePlayingField();
     this.updateHand();
     this.gameProgressCard.start();
@@ -306,6 +307,8 @@ class GameManager extends Observable {
       console.log("Round will go " + roundDuration +"s");
       setTimeout(this.hostSetGameStateRate.bind(this), roundDuration);
     }
+
+    this.fillHandWithRandomMemes();
   }
 
   hostSetGameStateRate(){
@@ -318,14 +321,23 @@ class GameManager extends Observable {
     
     //let story = new Story(currentPrompt, fieldArray, "Player1", 0);
     //this.roundScoreboard.storyListView.appendChild(story.body);
-
+    this.roundScoreboard.scoreboardView.hidden = false;
+    
+      let story = new Story(currentPrompt, fieldArray, "Best Story: " + this.getCurrentRoundWinningPlayerName(), 0);
+      this.roundScoreboard.storyListView.appendChild(story.body);
+      document.getElementById("titleOfTheStory").innerHTML=currentPrompt;
+    
   }
 
-setGameStateGameEnd() {
+  getCurrentRoundWinningPlayerName(){
+    return "winner";
+  }
+
+  setGameStateGameEnd() {
     this.playingField.gameView.hidden = true;
     this.finalScore.endGameScreen.hidden = false;
     this.finalScore.addMemes(fieldArray);
-    let story = new Story(currentPrompt, fieldArray, "Player1", 0);
+    let story = new Story(currentPrompt, fieldArray, "PlayerGameStateEnd", 0);
     this.roundScoreboard.storyListView.appendChild(story.body);
 
   }

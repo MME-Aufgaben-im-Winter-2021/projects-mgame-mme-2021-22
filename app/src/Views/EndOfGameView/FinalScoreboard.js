@@ -24,9 +24,9 @@ class FinalScore{
         });
     }
     sortByPoints(players){
-        let sortedPlayers = [];
+    let sortedPlayers = [];
 
-        for(let i = 0; i<players.length; i++){
+    for(let i = 0; i<players.length; i++){
             if(i === 0){
                 sortedPlayers.push(players[i]);
             }
@@ -36,11 +36,13 @@ class FinalScore{
                     sortedPlayers.splice(j,0,players[i]);
                     break;
                 }
-                else{sortedPlayers.push(players[i]);}
+                else{
+                    sortedPlayers.push(players[i]);
+                }
             }
         }
     }
-        return sortedPlayers;
+    return sortedPlayers;
     }
 
     addMemes(memes){

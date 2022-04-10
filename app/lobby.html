@@ -12,82 +12,80 @@
 
 <body class="body">
     <div id="lobby">
-    <div class="row" style="height: 20vh;">
-        <div class="col">
-            <div class="containter">
-                <h2 class="text-dark text-center">THE MEME GAME</h2>
+        <div class="row" style="height: 20vh;">
+            <div class="titlecol">
+                <div class="containter toppadding">
+                    <h2 class="text-dark text-center">THE MEME GAME</h2>
+                    <div class="row mt-2 pe-4">
+                        <div class="col text-center" id="copy">
+                            <label class="lobbytoken" id="link"><input type="text" value="Lobby-ID" id="lobbyToken" readonly> </label>
+    
+                            <button type="copy" class="btn btn-warning" id="copyToken">Copy lobby invite ID</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <!--Player List-->
-        <div class="col bgd-secondary">
-            <div class="container p-2">
-                <table class="table table-striped border border-dark" id="playerList">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col" colspan="2">Name</th>
-                            <th scope="col">Status</th>
+        <div class="row leftpadding">
+            <!--Player List-->
+            <div class="col bgd-light-s roundborder whitetext">
+                <div class="container p-2 roundborder">
+                    <table class="table table-striped border roundborder whitetext" id="playerList">
+                        <thead>
+                            <tr>
+                                <th scope="col-3">#</th>
+                                <th scope="col-3" colspan="2">Name</th>
+                                <th scope="col-3">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--add player templates here-->
+                        </tbody>
+                    </table>
+                    <template id="player-data">
+                        <tr id="player-slot-">
+                            <th scope="row" id="player-number">-1</th>
+                            <td colspan="2" id="player-name">Larry the Bird</td>
+                            <td id="connection-status">Not Ready</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                    <!--add player templates here-->
-                    </tbody>
-                </table>
-                <template id="player-data">
-                    <tr id="player-slot-">
-                        <th scope="row" id="player-number">-1</th>
-                        <td colspan="2" id="player-name">Larry the Bird</td>
-                        <td id="connection-status">Not Ready</td>
-                    </tr>
-                </template>
+                    </template>
+                </div>
             </div>
-        </div>
-        <!--Game Settings-->
-        <div class="col pe-4">
-            <div class="container border border-dark" id="game-settings">
-                <div id="game-mode-selector" class="carousel carousel-dark slide text-center" data-bs-ride="carousel" style="height: 80pt;" data-bs-interval="false">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#game-mode-selector" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#game-mode-selector" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <h2 class="d-block w-100 mt-4" alt="...">Game Mode 1</h2>
+            <!--Game Settings-->
+            <div class="col pe-4 ">
+                <div class="container border border-dark roundborder" id="game-settings">
+                    <div id="game-mode-selector" class="carousel carousel-dark slide text-center" data-bs-ride="carousel" style="height: 80pt;" data-bs-interval="false">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#game-mode-selector" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#game-mode-selector" data-bs-slide-to="1" aria-label="Slide 2"></button>
                         </div>
-                        <div class="carousel-item">
-                            <h2 class="d-block w-100 mt-4">Game Mode 2</h2>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <h2 class="d-block w-100 mt-4" alt="...">Game Mode 1</h2>
+                            </div>
+                            <div class="carousel-item">
+                                <h2 class="d-block w-100 mt-4">Game Mode 2</h2>
+                            </div>
                         </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#game-mode-selector" data-bs-slide="next">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#game-mode-selector" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#game-mode-selector" data-bs-slide="next">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#game-mode-selector" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-                <hr class="bgd-dark-s border-2 border-top border-dark">
-                <div class="container" id="game-mode-description" style="height: 60px;">
-                GAME_MODE_DESCRIPTION
-                </div>
-                <hr class="bgd-dark-s border-2 border-top border-dark">
-                <div id="game-mode-settings" class="container">
-                    <div class="row" id="setting1">
-                       <!-- <label for="player-count" class="col-3 col-form-label">Player Count</label>
-                        <div class="col">
-                            <input type="range" class="form-range pt-1" id="player-count" min="3" max="16" value="8">
-                        </div>
-                        <div class="col-2">
-                            <input type="number" class="form-control mb-2" id="input-player-count">
-                        </div>-->
-                    </div>
-                    <div class="row" id="setting2">
-                        <label for="round-count" class="col-3 col-form-label">Round Count</label>
-                        <div class="col">
-                            <input type="range" class="form-range pt-1" id="round-count" min="3" max="7">
+                    <hr class="bgd-dark-s border-2 border-top border-dark">
+                    <div id="game-mode-settings" class="container">
+                        <div class="row" id="setting1">
+                            <label for="player-count" class="col-3 col-form-label">Meme Dankness</label>
+                            <div class="col slider">
+                                <input type="range" class="form-range pt-1 " id="player-count">
+                            </div>
+                            <div class="col-2">
+                                <input type="number" class="form-control mb-2" id="input-player-count">
+                            </div>
                         </div>
                         <div class="col-2">
                             <input type="number" class="form-control mb-2" id="input-round-count" min="3" max="7">
@@ -104,21 +102,12 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-2 pe-4">
-                <div class="col" id="link"><input type="text" value="Lobby Token" id="lobbyToken"> </div>
-                <div class="col-1" id="copy">
-                    <button type="copy" id="copyToken">Copy</button>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <button type="button" class="btn btn-danger my-2 mx-2" id="leave">LEAVE LOBBY</button>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-1">
-            <button type="button" class="btn btn-danger my-2 mx-2" id="leave">LEAVE</button>
-        </div>
-        <div class="col-4"></div>
-        <div class="col-2">
-            <button type="button" class="btn btn-primary my-2 mx-2" id="start">START</button>
+
         </div>
     </div>
     </div>
@@ -128,25 +117,25 @@
         <div class="row px-2" style="height: 30vh;">
             <div id="promptField" class="promptField container col-2 prompt border border-dark rounded mx-2 my-2">Prompt</div>
             <div class="playingArea col border border-dark mx-2 my-2">
-                <div id="ratingField" class="row row-cols-1 row-cols-md-3 mb-3 text-center" hidden>
-                    <div class="col">
-                        <div class="card1 mb-4 rounded-3 shadow-sm picture">
+                <div id="ratingField" class="row row-cols-1 row-cols-md-3 mb-3 text-center ratingWidth" hidden>
+                    <div class="firstcol">
+                        <div class="card1 mb-4 rounded-3 shadow-sm picture ratingpic1 leftcol style=" width:100%>
 
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card2 mb-4 rounded-3 shadow-sm picture">
+                    <div class="secondcol">
+                        <div class="card2 mb-4 rounded-3 shadow-sm picture ratingpic2 leftcol tyle=" width:100%>
 
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card3 mb-4 rounded-3 shadow-sm picture">
+                    <div class="thirdcol">
+                        <div class="card3 mb-4 rounded-3 shadow-sm picture ratingpic3 leftcol style=" width:100%>
 
                         </div>
                     </div>
                 </div>
-                <div id="playingField" class="playingField container-fluid py-3">
-                    <div class="field d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr;">
+                <div id="playingField" class="playingField container-fluid py-3 maxWidth">
+                    <div class="field d-grid gap-3 maxWidth" style="grid-template-columns: 1fr 1fr 1fr;">
                         <!-- Hier kommen die Memes rein_________________________________________________________________________________________ DIESER TEIL IST DOPPELT; UNTEN IST MEHR 1fr; KANN DAS HIER ALSO WEG? -->
                     </div>
                 </div>
@@ -161,15 +150,16 @@
                 </div>
             </div>
         </div>
-        <div id="ratingArea" class="row px-2" hidden>
+        <div id="ratingArea" class="row px-2 toppadding bottompadding" hidden>
             <div class="form-group text-center" id="rating-ability-wrapper">
-                <label class="control-label" for="rating">
+                <label class="control-label promptField howWouldYouRateText rateThisStoryBox rounded-3 shadow-sm" for="rating">
                     <span class="field-label-header">How would you rate this Story?</span><br>
                     <span class="field-label-info"></span>
                     <input type="hidden" id="selected_rating" name="selected_rating" value="5" requireSd="required">
                 </label>
-                    <p>
-                        <img id="ratingMemeBad" src="\resources\rating_memes\joy_bad.png" width="256" height="256" >
+                <p>
+                    <div id="ratingArea_lower" class="toppadding">
+                        <img id="ratingMemeBad" src="\resources\rating_memes\joy_bad.png" width="256" height="256">
                         <button id="bad" type="button" class="bad btn btn-danger">
                             <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
@@ -185,8 +175,9 @@
                                 <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"></path>
                             </svg>
                         </button>
-                        <img id="ratingMemeGood" src="\resources\rating_memes\joy_good.png" width="256" height="256" >
-                    </p>
+                        <img id="ratingMemeGood" src="\resources\rating_memes\joy_good.png" width="256" height="256">
+                    </div>
+                </p>
             </div>
         </div>
         <div id="handArea" class="col-12 bgd-dark">
@@ -222,12 +213,12 @@
     </div>
     </div>
     <div id="roundEnd" hidden>
-        <div class="container-fluid pt-5 my-5 bg-dark text-white col-xl-6">
+        <div class="container-fluid pt-5 my-5 bg-dark text-white col-xl-6 currentStandings">
             <h1 class="text-center">Current Standings</h1>
         </div>
         <div class="row-2">
             <div class="container col-xl-6">
-                <table class="table table-dark table-striped">
+                <table class="table table-dark table-striped text-center">
                     <thead>
                         <tr>
                             <th>Player</th>
@@ -241,7 +232,7 @@
             </div>
         </div>
 
-        <div id="roundStories">
+        <div class="noliststyle" , id="roundStories">
             <!-- Hier kommen die Memes rein -->
         </div>
 
@@ -263,42 +254,42 @@
                             <th class="text-end">Score</th>
                         </tr>
                     </thead>
-                    <tbody id = "endScoreboard">
-                         <!-- Hier kommen die Player rein -->
+                    <tbody id="endScoreboard">
+                        <!-- Hier kommen die Player rein -->
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="container">
             <header>
-                <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                <div class="pricing-header p-3 pb-md-4 mx-auto text-center padding-bottom">
                     <h1 class="display-4 fw-normal">Best Story</h1>
                     <P>Title of the Story</P>
                 </div>
             </header>
-            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center toppadding_small">
                 <div class="col">
                     <div class="card mb-4 rounded-3 shadow-sm">
-                        <span id = "bestMeme1" class="picture"></span>
-    
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-    
-                        <span id = "bestMeme2" class="picture"></span>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-    
-                        <span id = "bestMeme1" class="picture"></span>
-                    </div>
-                </div>
-        </div>
-    </div>
+                        <span id="bestMeme1" class="picture"></span>
 
-    <script type="module" src="./src/Controller/LobbyController/Lobby.js"></script>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+
+                        <span id="bestMeme2" class="picture"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+
+                        <span id="bestMeme1" class="picture"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="./src/Controller/LobbyController/Lobby.js"></script>
 </body>
 
 <template id="keyword-template">
@@ -319,7 +310,7 @@
     <div class="story-view">
         <header>
             <div class="pricing-header p-3 pb-md-4 mx-auto">
-                <h1 class="player display-4 fw-normal">Player 3</h1>
+                <h1 class="player display-4 fw-normal">Best Story: Player 3</h1>
             </div>
         </header>
         <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
@@ -343,5 +334,10 @@
             </div>
         </div>
 </template>
-
+<template id = "userWithScore">
+    <tr id="column">
+        <th id="username">Memeio</th>
+        <th id ="points" class="text-end">1200 (+200)</th>
+    </tr>
+</template>
 </html>

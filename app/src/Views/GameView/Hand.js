@@ -3,9 +3,6 @@
  */
 import Observable from "../../utils/Observable.js";
 
-
-  
-
 class Hand extends Observable {
 
   constructor() {

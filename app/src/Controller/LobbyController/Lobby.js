@@ -24,6 +24,7 @@ tokenText.value = sessionData.$id;
 copyButton.addEventListener("click", copyToClipboard);
 
 function copyToClipboard() {
+  console.log("copytoClipboard");
   tokenText.select();
   navigator.clipboard.writeText(tokenText.value);
   //alert("Copied token to clipboard" + tokenText.value);

@@ -9,8 +9,6 @@ var dbLink = new AppwriteDAL(),
   usernameText = document.getElementById("username"),
   DAL = new AppwriteDAL(), joinButton = document.getElementById("join"),
   token = document.getElementById("token");
-
-
 logoutButton.addEventListener("click", logout);
 hostButton.addEventListener("click", hostGame);
 joinButton.addEventListener("click", joinGame);

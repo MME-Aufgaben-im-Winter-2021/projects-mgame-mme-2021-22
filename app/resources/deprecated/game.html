@@ -15,25 +15,25 @@
         <div class="row px-2" style="height: 30vh;">
             <div id="promptField" class="promptField container col-2 prompt border border-dark rounded mx-2 my-2">Prompt</div>
             <div class="playingArea col border border-dark mx-2 my-2">
-                <div id="ratingField" class="row row-cols-1 row-cols-md-3 mb-3 text-center" hidden>
-                    <div class="col">
-                        <div class="card1 mb-4 rounded-3 shadow-sm picture">
+                <div id="ratingField" class="row row-cols-1 row-cols-md-3 text-center ratingWidth" hidden>
+                    <div class="firstcol">
+                        <div class="card1 mb-4 rounded-3 shadow-sm picture ratingpic1 leftcol style="width:100%">
 
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card2 mb-4 rounded-3 shadow-sm picture">
+                    <div class="secondcol">
+                        <div class="card2 mb-4 rounded-3 shadow-sm picture ratingpic2 leftcol tyle="width:100%">
 
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card3 mb-4 rounded-3 shadow-sm picture">
+                    <div class="thirdcol">
+                        <div class="card3 mb-4 rounded-3 shadow-sm picture ratingpic3 leftcol style="width:100%">
 
                         </div>
                     </div>
                 </div>
-                <div id="playingField" class="playingField container-fluid py-3">
-                    <div class="field d-grid gap-3" style="grid-template-columns: 1fr 1fr 1fr;">
+                <div id="playingField" class="playingField container-fluid py-3 maxWidth">
+                    <div class="field d-grid gap-3 maxWidth" style="grid-template-columns: 1fr 1fr 1fr;">
                         <!-- Hier kommen die Memes rein_________________________________________________________________________________________ DIESER TEIL IST DOPPELT; UNTEN IST MEHR 1fr; KANN DAS HIER ALSO WEG? -->
                     </div>
                 </div>
@@ -48,31 +48,33 @@
                 </div>
             </div>
         </div>
-        <div id="ratingArea" class="row px-2" hidden>
+        <div id="ratingArea" class="row px-2 toppadding bottompadding" hidden>
             <div class="form-group text-center" id="rating-ability-wrapper">
-                <label class="control-label" for="rating">
+                <label class="control-label promptField howWouldYouRateText rateThisStoryBox rounded-3 shadow-sm" for="rating">
                     <span class="field-label-header">How would you rate this Story?</span><br>
                     <span class="field-label-info"></span>
                     <input type="hidden" id="selected_rating" name="selected_rating" value="5" requireSd="required">
                 </label>
                     <p>
-                        <img id="ratingMemeBad" src="\resources\rating_memes\joy_bad.png" width="256" height="256" >
-                        <button id="bad" type="button" class="bad btn btn-danger">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-                            </svg>
-                        </button>
-                        <button id="meh" type="button" class="meh btn btn-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-square" viewBox="0 0 16 16">
-                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"></path>
-                            </svg>
-                        </button>
-                        <button id="good" type="button" class="good btn btn-success">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-triangle" viewBox="0 0 16 16">
-                                <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"></path>
-                            </svg>
-                        </button>
-                        <img id="ratingMemeGood" src="\resources\rating_memes\joy_good.png" width="256" height="256" >
+                        <div id="ratingArea_lower" class="toppadding">
+                            <img id="ratingMemeBad" class ="ratingScaleMeme" src="\resources\rating_memes\joy_bad.png" width="256" height="256" >
+                            <button id="bad" type="button" class="bad btn btn-danger">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+                                </svg>
+                            </button>
+                            <button id="meh" type="button" class="meh btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-square" viewBox="0 0 16 16">
+                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"></path>
+                                </svg>
+                            </button>
+                            <button id="good" type="button" class="good btn btn-success">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-triangle" viewBox="0 0 16 16">
+                                    <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"></path>
+                                </svg>
+                            </button>
+                            <img id="ratingMemeGood" class ="ratingScaleMeme" src="\resources\rating_memes\joy_good.png" width="256" height="256" >
+                        </div>
                     </p>
             </div>
         </div>
@@ -113,12 +115,12 @@
     <script type="module" src="./src/Model/index.js"></script>
     </div>
     <div id="roundEnd" hidden>
-        <div class="container-fluid pt-5 my-5 bg-dark text-white col-xl-6">
+        <div class="container-fluid pt-5 my-5 bg-dark text-white col-xl-6 currentStandings">
             <h1 class="text-center">Current Standings</h1>
         </div>
         <div class="row-2">
             <div class="container col-xl-6">
-                <table class="table table-dark table-striped">
+                <table class="table table-dark table-striped text-center">
                     <thead>
                         <tr>
                             <th>Player</th>
@@ -132,7 +134,7 @@
             </div>
         </div>
 
-        <div id="roundStories">
+        <div class="noliststyle", id="roundStories">
             <!-- Hier kommen die Memes rein -->
         </div>
 
@@ -186,7 +188,7 @@
                         <span id = "bestMeme1" class="picture"></span>
                     </div>
                 </div>
-        </div>
+         </div>
     </div>
 </body>
 
@@ -207,30 +209,29 @@
 <template id="finished-story">
     <div class="story-view">
         <header>
-            <div class="pricing-header p-3 pb-md-4 mx-auto">
-                <h1 class="player display-4 fw-normal">Player 3</h1>
+            <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                <h1 class="player display-4 fw-normal">Best story:Player 3</h1>
             </div>
         </header>
-        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-            <div class="col">
-                <div class="card mb-4 rounded-3 shadow-sm">
-                    <span class="firstMeme picture"></span>
-
+        <div class="container">
+            <header>
+                <div id = "titleOfTheStory" class="pricing-header p-3 pb-md-4 mx-auto text-center promptField padding-bottom">
+                    <P>Title of the Story</P>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card mb-4 rounded-3 shadow-sm">
-
-                    <span class="secondMeme picture"></span>
+            </header>
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center toppadding_small">
+                <div class="col-3">
+                    <span class="firstMeme currentStandingPicture"></span>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card mb-4 rounded-3 shadow-sm">
-
-                    <span class="thirdMeme picture"></span>
+                <div class="col-3">
+                    <span class="secondMeme currentStandingPicture"></span>
                 </div>
-            </div>
-        </div>
+                <div class="col-3">
+                    <span class="thirdMeme currentStandingPicture"></span>
+                </div>
+         </div>
+    </div>
+
 </template>
 
 <template id = "userWithScore">
