@@ -29,8 +29,7 @@ class Meme extends Observable {
     this.body.addEventListener("dragend", () => {
       this.body.classList.remove("dragging");
       this.notifyAll(new Event("dragEnded", [draggedMeme, currentLocation,
-        swappingMeme, this.isInHand, this.imageSource
-      ]));
+        swappingMeme, this.isInHand, this.imageSource]));
     });
     this.body.addEventListener("dragenter", () => {
       swappingMeme = this.id;
