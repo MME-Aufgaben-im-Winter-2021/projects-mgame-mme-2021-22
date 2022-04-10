@@ -3,58 +3,99 @@ import { AppwriteDAL } from "./AppwriteService.js";
 import Config from "../src/utils/Config.js";
 import LobbyView from "../src/Views/LobbyView/LobbyView.js";
 import GameManager from "../src/Model/GameManager.js";
-var lobbyView = new LobbyView();
+var lobbyView = new LobbyView(),
+  currentGameState = "";
 
 class Synchronizer {
-    
-    subscribeToGame(){
-        let DAL = new AppwriteDAL();
-        console.log("subscribed with sync");
-        DAL.subscribe();
-    }
-  
-    updateSession(payload){
-        console.log("payload received");
-        let DAL = new AppwriteDAL();
-        if(payload.$id !== window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY)){
-            //alert(Config.CONNECTION_UNSTABLE_WARNING);
-            return false;
-        }
-        let gameManager = new GameManager();
-        switch(payload.GameState){
-            case Config.LOBBY_WAITING: console.log("update lobby"); lobbyView.updateView(payload.UserIDs, payload.RoundCount, payload.RoundDuration); break;
-            case Config.GAME_STARTED: console.log("start game"); DAL.setRoundCount(payload.RoundCount); DAL.setRoundDuration(payload.RoundDuration); lobbyView.setHidden(true); gameManager.setGameStatePlay(); break;
-            case Config.ROUND_ENDED: break;
-            case Config.RATING_PHASE: gameManager.setGameStateRate(); break;
-            case Config.GAME_ENDED: break;
-            case Config.SESSION_ENDED: break;
-            default: return false; 
-        }
-        //if gamestate changed -> synchronize Game State
-        //if round changed -> synchronize round
-        //if meme collection received -> display collection rating
-        
-        return false;
+  constructor() {
+    this.gameManager = new GameManager();
+  }
+
+  subscribeToGame() {
+    let DAL = new AppwriteDAL();
+    console.log("subscribed with sync");
+    DAL.subscribe();
+  }
+
+  updateSession(payload) {
+    if (payload.$id !== window.localStorage.getItem(Config
+        .DOCUMENT_STORAGE_KEY)) {
+      //alert(Config.CONNECTION_UNSTABLE_WARNING);
+      return false;
     }
 
-    synchronizeGameState(targetState){
-        try{let currentState = window.location.pathname;
-            currentState = currentState.split("/").pop();
-            if (currentState !== targetState) {
-                switch(targetState){
-                    case "lobby": window.location.replace("lobby.html"); break;
-                    case "home": window.location.replace("homepage.html"); break;
-                    default: break;
-                }
-                return "Switching page to: " + targetState;
-            }
-            return "Page correct";}catch(error){console.log(error);}
-        return true;
-    }
-    //Host ends round early if all players submit meme before timer runs out
-    checkForSubmissions(){
+    switch (payload.GameState) {
+      case Config.LOBBY_WAITING:
+        this.handleUpdateInLobby(payload);
+        break;
+      case Config.GAME_STARTED:
+        this.handleUpdateInRound(payload);
+        break;
+      case Config.ROUND_ENDED:
+        this.handleUpdateInRoundEnd(payload);
+        break;
+      case Config.RATING_PHASE:
+        this.handleUpdateInRating(payload);
+        break;
+      case Config.GAME_ENDED:
+        break;
+      case Config.SESSION_ENDED:
+        break;
+      default:
         return false;
     }
+    //if gamestate changed -> synchronize Game State
+    //if round changed -> synchronize round
+    //if meme collection received -> display collection rating
+
+    return false;
+  }
+
+  handleUpdateInLobby(payload) {
+    //if already waiting in lobby only update content values
+    if (currentGameState === Config.LOBBY_WAITING) {
+      console.log("Update lobby content.");
+      lobbyView.updateView(payload.UserIDs, payload.RoundCount, payload
+        .RoundDuration);
+    }
+    //else switch ui to lobby
+    else {
+      console.log("Switch to lobby through update.");
+      lobbyView.updateView(payload.UserIDs, payload.RoundCount, payload
+        .RoundDuration);
+      currentGameState = Config.LOBBY_WAITING;
+    }
+  }
+
+  handleUpdateInRound(payload) {
+    let DAL = new AppwriteDAL();
+    if (currentGameState === Config.GAME_STARTED) {
+      console.log("Update in Round");
+    } else {
+      DAL.setRoundCount(payload.RoundCount);
+      DAL.setRoundDuration(payload.RoundDuration);
+      lobbyView.setHidden(true);
+      this.gameManager.setGameStatePlay();
+    }
+  }
+
+  handleUpdateInRating(payload) {
+    //download all meme docs once and ignore following updates for now
+    if (currentGameState === Config.RATING_PHASE) { console.log(
+        "Update in rating ignored!"); } else { currentGameState = Config
+        .RATING_PHASE;
+      this.gameManager.setGameStateRate(); }
+  }
+
+  handleUpdateInRoundEnd(payload) {
+    if (currentGameState === Config
+    .ROUND_ENDED) { return payload; } else { console.log("Round ended"); }
+  }
+
+  //Host ends round early if all players submit meme before timer runs out
+  checkForSubmissions() {
+    return false;
+  }
 }
 
 export default Synchronizer;

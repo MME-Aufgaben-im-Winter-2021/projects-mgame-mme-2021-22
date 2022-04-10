@@ -4,8 +4,8 @@ import Synchronizer from "./Synchronizer.js";
 
 // Init your Web SDK
 // eslint-disable-next-line no-undef
-const appwrite = new Appwrite(), query = new Query(),
-  sync = new Synchronizer();
+const appwrite = new Appwrite();
+  
 
 appwrite
   .setEndpoint(
@@ -47,7 +47,7 @@ class AppwriteDAL {
   subscribe() {
     console.log("Subscribed");
     let channel = "collections." + Config.SESSIONS_COLLECTION_ID +
-      ".documents";
+      ".documents", sync = new Synchronizer();
     try {
       this.sdk.subscribe(channel, function(response) {
         console.log("Update received!");
@@ -145,9 +145,6 @@ class AppwriteDAL {
     });
   }
 
-  joinTeam(token) {
-    return null;
-  }
   async leaveLobby() {
     if (window.localStorage.getItem(Config.ROLE_KEY) === Config.HOST_ROLE) {
       this.sdk.database.deleteDocument(Config.SESSIONS_COLLECTION_ID,
@@ -188,6 +185,7 @@ class AppwriteDAL {
   }
 
   updateSessionWithSettings(rounds, duration) {
+    let sync = new Synchronizer();
     if (rounds !== null) {
 
       let promise = this.sdk.database.updateDocument(Config
@@ -224,9 +222,9 @@ class AppwriteDAL {
     //to do handle error
   }
 
-  downloadMemeStories(roundNumber){
-    let promise = this.sdk.database.listDocuments(Config.MEMESTORY_COLLECTION_ID, [], 100);
-    promise.then(response => console.log(response), error => console.log(error));
+  async downloadMemeStories(){
+    let promise = await this.sdk.database.listDocuments(Config.MEMESTORY_COLLECTION_ID, [], 100);
+    return promise.documents;
   }
 
   setRoundDuration(duration){

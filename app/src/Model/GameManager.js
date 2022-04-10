@@ -16,6 +16,7 @@ import Config from "../utils/Config.js";
 import ImageDownloader from "../Controller/ImageDownloader.js";
 import FinalScore from "../Views/EndOfGameView/FinalScoreboard.js";
 import { AppwriteDAL } from "../../services/AppwriteService.js";
+import RatingManager from "./RatingManager.js";
 
 
 let submitButton = document.querySelector(".submit"),
@@ -241,7 +242,6 @@ class GameManager extends Observable {
     this.updatePlayingField();
   }
 
-
   addNewKeyword() {
     let newKeyWord = new KeyWord(searchBar.value);
     console.log(newKeyWord.keyword);
@@ -347,7 +347,7 @@ class GameManager extends Observable {
     
   }
 
-  setGameStateRate(){
+  async setGameStateRate(){
     this.playingField.playingFieldArea.hidden = true;
     //this.promptField.hidden = true;
     this.gameProgressCard.progressField.hidden = true;
@@ -356,7 +356,10 @@ class GameManager extends Observable {
     this.hand.handArea.hidden = true;
     this.hand.divider.hidden = true;
     //
-    this.DAL.downloadMemeStories(roundCount);
+    let memes = await this.DAL.downloadMemeStories(),
+    filteredMemes = memes.filter(meme => meme.Session === window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY) && meme.InRoundPlayed === roundCount),
+    ratingManager = new RatingManager(filteredMemes);
+    ratingManager.displayMeme();
   }
   /*
    * HOST FUNCTIONS; 
@@ -382,7 +385,6 @@ class GameManager extends Observable {
       let roundDuration = Number(this.DAL.getRoundDuration()) * 100;
       console.log("Round will go " + roundDuration +"s");
       setTimeout(this.hostSetGameStateRate.bind(this), roundDuration);
-      ++roundCount;
     }
   }
 

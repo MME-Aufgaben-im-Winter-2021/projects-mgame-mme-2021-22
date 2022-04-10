@@ -19,7 +19,6 @@ class LobbyView {
   }
 
   updateView(playerNames, rounds, duration) {
-    console.log("Updating View");
     this.updatePlayerList(playerNames);
     this.updateSettings(rounds, duration);
   }

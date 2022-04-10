@@ -4,7 +4,6 @@ class RatingView {
   constructor() {
     this.ratingArea = document.getElementById("ratingArea");
     this.ratingField = document.getElementById("ratingField");
-    this.titleField = document.querySelector(".title");
     this.firstMemeSpace = document.querySelector(".card1");
     this.secondMemeSpace = document.querySelector(".card2");
     this.thirdMemeSpace = document.querySelector(".card3");
@@ -13,9 +12,6 @@ class RatingView {
     //this.goodButton.addEventListener("click", this.votedGood.bind(this));
     //this.mehButton.addEventListener("click", this.votedMeh.bind(this));
     //this.badButton.addEventListener("click", this.votedBad.bind(this));
-
-    console.log(this.titleField);
-
   }
 
   updateView(memes) {
@@ -35,10 +31,9 @@ class RatingView {
     }
     this.setRatingMemeImages();
     try{
-      console.log(memes[0].image);
-      this.firstMemeSpace.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[0].id + "\">";
-      this.secondMemeSpace.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[1].id + "\">";
-      this.thirdMemeSpace.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[2].id + "\">";
+      this.firstMemeSpace.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[0] + "\">";
+      this.secondMemeSpace.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[1] + "\">";
+      this.thirdMemeSpace.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[2] + "\">";
     }
     catch{
       console.error("CATCH: CANT READ MEME DATA IN RATINGVIEW");
