@@ -5,7 +5,7 @@ import Synchronizer from "./Synchronizer.js";
 // Init your Web SDK
 // eslint-disable-next-line no-undef
 const appwrite = new Appwrite();
-  
+
 
 appwrite
   .setEndpoint(
@@ -47,7 +47,8 @@ class AppwriteDAL {
   subscribe() {
     console.log("Subscribed");
     let channel = "collections." + Config.SESSIONS_COLLECTION_ID +
-      ".documents", sync = new Synchronizer();
+      ".documents",
+      sync = new Synchronizer();
     try {
       this.sdk.subscribe(channel, function(response) {
         console.log("Update received!");
@@ -91,8 +92,9 @@ class AppwriteDAL {
     return window.localStorage.getItem("username");
   }
 
-  updateGameState(state){
-    this.sdk.database.updateDocument(Config.SESSIONS_COLLECTION_ID, getDocumentIDFromLocalStorage(), {"GameState":state});
+  updateGameState(state) {
+    this.sdk.database.updateDocument(Config.SESSIONS_COLLECTION_ID,
+      getDocumentIDFromLocalStorage(), { "GameState": state });
   }
 
   async updateSession() {
@@ -115,23 +117,26 @@ class AppwriteDAL {
     let promise = await this.sdk.database.getDocument(Config
       .SESSIONS_COLLECTION_ID,
       token);
-    if (promise === null || promise === undefined) { return alert(
-        "Document does not exist!"); }
+    if (promise === null || promise === undefined) {
+      return alert(
+        "Document does not exist!");
+    }
     //save current session token/id
-    window.localStorage.setItem(Config.DOCUMENT_STORAGE_KEY, 
+    window.localStorage.setItem(Config.DOCUMENT_STORAGE_KEY,
       promise.$id);
     //update document player list
     // eslint-disable-next-line one-var
     let usersInGame = promise.UserIDs,
       user = this.getUsername();
     usersInGame.push(user);
-      // eslint-disable-next-line one-var
-      let update = this.sdk.database.updateDocument(Config
-        .SESSIONS_COLLECTION_ID, promise
-        .$id, { "UserIDs": usersInGame });
+    // eslint-disable-next-line one-var
+    let update = this.sdk.database.updateDocument(Config
+      .SESSIONS_COLLECTION_ID, promise
+      .$id, { "UserIDs": usersInGame });
     update.then(function(response) {
       window.localStorage.setItem(Config.ROLE_KEY, Config.PLAYER_ROLE);
-    }, function(error){console.log(update);alert(error); });
+    }, function(error) { console.log(update);
+      alert(error); });
     return update;
   }
 
@@ -213,35 +218,45 @@ class AppwriteDAL {
 
     }
   }
-  updateScore(score, documentId){
-    let promise = this.sdk.database.getDocument(Config.MEMESTORY_COLLECTION_ID, documentId), newScore = 0;
-    promise.then(response => newScore = score + response.Score);
-    this.sdk.database.updateDocument(Config.MEMESTORY_COLLECTION_ID, documentId, {"Score": newScore});
+
+  async updateScore(score, documentId) {
+    let promise = await this.sdk.database.getDocument(Config
+        .MEMESTORY_COLLECTION_ID, documentId),
+      newScore = score + promise.Score;
+    console.log("NewScore: " + newScore);
+    let update = this.sdk.database.updateDocument(Config.MEMESTORY_COLLECTION_ID,
+      documentId, { "Score": newScore });
+      update.then(response => console.log(response), error => console.log(error));
   }
 
-  uploadMemeStory(memeArray, roundPlayed){
-    this.sdk.database.createDocument(Config.MEMESTORY_COLLECTION_ID, "unique()", {"MemeStories": memeArray, 
-    "Session": getDocumentIDFromLocalStorage(), 
-    "Player": this.getUsername(), "Score": 0, 
-    "InRoundPlayed": roundPlayed}, ["role:all"], ["role:all"]);
+  uploadMemeStory(memeArray, roundPlayed) {
+    this.sdk.database.createDocument(Config.MEMESTORY_COLLECTION_ID,
+      "unique()", {
+        "MemeStories": memeArray,
+        "Session": getDocumentIDFromLocalStorage(),
+        "Player": this.getUsername(),
+        "Score": 0,
+        "InRoundPlayed": roundPlayed,
+      }, ["role:all"], ["role:all"]);
     //to do handle error
   }
 
-  async downloadMemeStories(){
-    let promise = await this.sdk.database.listDocuments(Config.MEMESTORY_COLLECTION_ID, [], 100);
+  async downloadMemeStories() {
+    let promise = await this.sdk.database.listDocuments(Config
+      .MEMESTORY_COLLECTION_ID, [], 100);
     return promise.documents;
   }
 
-  setRoundDuration(duration){
+  setRoundDuration(duration) {
     window.localStorage.setItem("roundLength", duration);
   }
-  getRoundDuration(){
+  getRoundDuration() {
     return window.localStorage.getItem("roundLength");
   }
-  setRoundCount(count){
+  setRoundCount(count) {
     window.localStorage.setItem("roundCount", count);
   }
-  getRoundCount(){
+  getRoundCount() {
     window.localStorage.getItem("roundCount");
   }
 }

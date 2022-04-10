@@ -9,10 +9,8 @@ class RatingManager{
         this.stories = stories;
         this.ratingView = new RatingView();
         this.currentDocument = "";
-        this.initElements().bind(this);
         this.DAL = new AppwriteDAL();
-    }
-    initElements(){
+
         this.goodButton = document.getElementById("good");
         this.mehButton = document.getElementById("meh");
         this.badButton = document.getElementById("bad");
@@ -30,6 +28,7 @@ class RatingManager{
         console.log(this.stories[this.currentRound]);
         let memes = this.stories[this.currentRound].MemeStories;
         this.currentDocument = this.stories[this.currentRound].$id;
+        console.log(this.currentDocument);
         this.ratingView.updateView(memes);
         ++this.currentRound;
         setTimeout(this.displayMeme.bind(this), Config.RATING_DURATION);
