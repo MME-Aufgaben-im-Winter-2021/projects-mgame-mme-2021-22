@@ -2,9 +2,8 @@
 import { AppwriteDAL } from "./AppwriteService.js";
 import Config from "../src/utils/Config.js";
 import LobbyView from "../src/Views/LobbyView/LobbyView.js";
-import PlayingField from "../src/Views/GameView/PlayingField.js";
 import GameManager from "../src/Model/GameManager.js";
-var lobbyView = new LobbyView(), gameManager =new GameManager();
+var lobbyView = new LobbyView();
 
 class Synchronizer {
     
@@ -20,7 +19,7 @@ class Synchronizer {
             //alert(Config.CONNECTION_UNSTABLE_WARNING);
             return false;
         }
-        
+        let gameManager = new GameManager();
         switch(payload.GameState){
             case Config.LOBBY_WAITING: console.log("update lobby"); lobbyView.updateView(payload.UserIDs, payload.RoundCount, payload.RoundDuration); break;
             case Config.GAME_STARTED: console.log("start game"); lobbyView.setHidden(true); gameManager.setGameStatePlay(); break;

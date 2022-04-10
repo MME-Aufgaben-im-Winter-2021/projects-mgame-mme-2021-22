@@ -15,6 +15,7 @@ import Story from "../Controller/Story.js";
 import Config from "../utils/Config.js";
 import ImageDownloader from "../Controller/ImageDownloader.js";
 import FinalScore from "../Views/EndOfGameView/FinalScoreboard.js";
+import { AppwriteDAL } from "../../services/AppwriteService.js";
 
 
 let submitButton = document.querySelector(".submit"),
@@ -36,6 +37,7 @@ class GameManager extends Observable {
 
   constructor() {
     super();
+    this.DAL = new AppwriteDAL();
     this.gameProgressCard = new GameProgressCard();
     this.playingField = new PlayingField();
     this.hand = new Hand();
@@ -48,7 +50,7 @@ class GameManager extends Observable {
     this.imageDownloader.addEventListener("imagesFetched", this.fillHand.bind(this));
     refreshButton.addEventListener("click", this.refreshHand.bind(this));
     saveButton.addEventListener("click", this.addNewKeyword.bind(this));
-    submitButton.addEventListener("click", this.setGameStateRate.bind(this));
+    submitButton.addEventListener("click", this.submitMemeStory.bind(this));
     goodButton.addEventListener("click", this.votedGood.bind(this));
     mehButton.addEventListener("click", this.votedMeh.bind(this));
     badButton.addEventListener("click", this.votedBad.bind(this));
@@ -126,13 +128,13 @@ class GameManager extends Observable {
 
     let randomCharacter = alphabet[Math.floor(Math.random() * alphabet.length)],
         data = this.imageDownloader.fetchData(randomCharacter,this.getRandomIntBetween0AndMax(Config.MAX_JSON_SEARCH_STARTPOINT));
-    if (data!==undefined){
-      for (let i = 0; i < Config.HAND_SIZE; i++) {
-        if (i< data.length){
-          this.addNewMemeToHand(data[i]);
-        }
-      }  
-    }
+        /*
+    for (let i = 0; i < Config.HAND_SIZE; i++) {
+      if (i< data.length){
+        this.addNewMemeToHand(data[i]);
+      }
+      
+    }  */
   }
 
   addNewMemeToHand(imageSource) {
@@ -210,12 +212,11 @@ class GameManager extends Observable {
     this.updatePlayingField();
   }
 
-
   updatePlayingField() {
     console.log(this.playingField.playingField);
     this.playingField.playingField.innerHTML = "";
     for (const meme of fieldArray) {
-      console.log(fieldArray);
+      //console.log(fieldArray);
       this.playingField.playingField.appendChild(meme.body);
     }
     this.storePlayedMemes();
@@ -348,11 +349,14 @@ class GameManager extends Observable {
     this.fillHandWithRandomMemes();
   }
 
-
-  setGameStateRate() {
-    roundCount++;
-    this.ratingView.updateView(Array.from(new Set(JSON.parse(window
-      .localStorage.getItem("playedMemes")))));
+  submitMemeStory() {
+    let memes = Array.from(new Set(JSON.parse(window
+      .localStorage.getItem("playedMemes")))), memeIds = [];
+    //this.ratingView.updateView(memes);
+    console.log("Submitted MemeStory");
+    for(let meme of memes){ memeIds.push(meme.id);}
+    this.DAL.uploadMemeStory(memeIds, roundCount);
+    /*
     this.playingField.playingFieldArea.hidden = true;
     //this.promptField.hidden = true;
     this.gameProgressCard.progressField.hidden = true;
@@ -360,6 +364,7 @@ class GameManager extends Observable {
     this.ratingView.ratingField.hidden = false;
     this.hand.handArea.hidden = true;
     this.hand.divider.hidden = true;
+    ++roundCount;*/
   }
 
   setGameStateRoundEnd() {

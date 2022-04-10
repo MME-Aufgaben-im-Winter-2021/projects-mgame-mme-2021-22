@@ -9,12 +9,12 @@ var dbLink = new AppwriteDAL(),
   hostButton = document.getElementById("host"),
   usernameText = document.getElementById("username"),
   DAL = new AppwriteDAL(), joinButton = document.getElementById("join"),
-  teamButton = document.getElementById("team"),
+  //teamButton = document.getElementById("team"),
   teamToken = document.getElementById("teamId"), 
   token = document.getElementById("token"),
   sync = new Synchronizer();
 
-teamButton.addEventListener("click", joinTeam);
+//teamButton.addEventListener("click", joinTeam);
 logoutButton.addEventListener("click", logout);
 hostButton.addEventListener("click", hostGame);
 joinButton.addEventListener("click", joinGame);
@@ -37,6 +37,8 @@ async function joinGame(){
 
 async function hostGame() {
   //returns promise as json
+  // eslint-disable-next-line no-alert
+  alert("huhu");
   let documentData = await dbLink.hostGame();
   //synchronize my state
   sync.synchronizeGameState(documentData.GameState); //do
