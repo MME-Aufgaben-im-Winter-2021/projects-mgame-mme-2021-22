@@ -10,7 +10,7 @@ import Prompt from "../Views/GameView/Prompt.js";
 import Meme from "../Controller/Meme.js";
 import Observable  from "../utils/Observable.js";
 import KeyWord from "../Controller/KeyWord.js";
-import RoundScoreboard from "../Views/EndOfRoundView/RoundScoreboard.js";
+
 import Story from "../Controller/Story.js";
 import Config from "../utils/Config.js";
 import ImageDownloader from "../Controller/ImageDownloader.js";
@@ -23,7 +23,7 @@ let submitButton = document.querySelector(".submit"),
   refreshButton = document.querySelector(".refresh"),
   saveButton = document.querySelector(".save"),
   searchBar = document.getElementById("searchBar"),
-  continueButton = document.getElementById("continue"),
+  
   handArray = [],
   fieldArray = [],
   roundCount = 0,
@@ -41,7 +41,7 @@ class GameManager extends Observable {
     this.hand = new Hand();
     this.ratingView = new RatingView();
     this.prompt = new Prompt();
-    this.roundScoreboard = new RoundScoreboard();
+    
     this.finalScore = new FinalScore();
     this.imageDownloader = new ImageDownloader();
     
@@ -52,7 +52,7 @@ class GameManager extends Observable {
     //searchBar.addEventListener("change", this.onSearch.bind(this));
     //searchBar.addEventListener("change", this.onSearch);
     searchBar.addEventListener('keydown', () => this.delay(1000).then(() => this.onSearch()));
-    continueButton.addEventListener("click", this.setGameStatePlay.bind(this));
+   
     this.fillHandWithRandomMemes();
 
   }
@@ -221,7 +221,7 @@ class GameManager extends Observable {
     currentPrompt = prompt;
     this.updatePlayingField();
   }
-  
+
   storePlayedMemes() {
     window.localStorage.setItem("playedMemes", JSON.stringify(fieldArray));
   }
@@ -315,8 +315,8 @@ class GameManager extends Observable {
 
   setGameStateRoundEnd() {
     this.playingField.gameView.hidden = true;
-    this.roundScoreboard.scoreboardView.hidden = false;
-    let story = new Story(currentPrompt, fieldArray, "Player1", 0);
+    
+    //let story = new Story(currentPrompt, fieldArray, "Player1", 0);
     //this.roundScoreboard.storyListView.appendChild(story.body);
 
   }

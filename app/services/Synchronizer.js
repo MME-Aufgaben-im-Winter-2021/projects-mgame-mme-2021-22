@@ -71,12 +71,14 @@ class Synchronizer {
     let DAL = new AppwriteDAL();
     if (currentGameState === Config.GAME_STARTED) {
     //update prompt
+    console.log("Updated Prompt");
     this.gameManager.setPrompt(payload.Prompt);
     } else {
       DAL.setRoundCount(payload.RoundCount);
       DAL.setRoundDuration(payload.RoundDuration);
       lobbyView.setHidden(true);
       this.gameManager.setGameStatePlay();
+      currentGameState = Config.GAME_STARTED;
     }
   }
 
@@ -90,7 +92,7 @@ class Synchronizer {
 
   handleUpdateInRoundEnd(payload) {
     if (currentGameState !== Config
-    .ROUND_ENDED) { console.log("Round ended"); this.gameManager.setGameStateRoundEnd(); } 
+    .ROUND_ENDED) { console.log("Round ended"); this.gameManager.setGameStateRoundEnd(); currentGameState = Config.ROUND_ENDED; } 
   }
 
   //Host ends round early if all players submit meme before timer runs out
