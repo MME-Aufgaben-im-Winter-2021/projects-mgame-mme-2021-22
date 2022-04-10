@@ -28,6 +28,8 @@ class AppwriteDAL {
   register(nickname, email, password) {
     this.sdk.account.create("unique()", email, password,
       nickname);
+    
+    alert(Config.REGISTER_SUCCESS);
     //tell the user he actually made an account XD
   }
 
@@ -49,6 +51,7 @@ class AppwriteDAL {
     let channel = "collections." + Config.SESSIONS_COLLECTION_ID +
       ".documents",
       sync = new Synchronizer();
+      
     try {
       this.sdk.subscribe(channel, function(response) {
         console.log("Update received!");
@@ -61,7 +64,7 @@ class AppwriteDAL {
 
   async hostGame() {
     let team = await this.createTeam(),
-      teamId = "team:" + team.$id,
+     // teamId = "team:" + team.$id,
       promise = await this.sdk.database.createDocument(Config
         .SESSIONS_COLLECTION_ID,
         "unique()", {
@@ -101,13 +104,14 @@ class AppwriteDAL {
   }
 
   async updateSession() {
-    let id = window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY);
+    let id = window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY),
+    sync = new Synchronizer();
 
     if (id !== null) {
       let promise = this.sdk.database.getDocument(
         Config.SESSIONS_COLLECTION_ID, id);
       promise.then(function(response) {
-        console.log(response);
+        sync.handleUpdateInLobby(response);
       }, function(error) {
         alert(error);
       });
@@ -136,7 +140,7 @@ class AppwriteDAL {
     let update = this.sdk.database.updateDocument(Config
       .SESSIONS_COLLECTION_ID, promise
       .$id, { "UserIDs": usersInGame });
-    update.then(function(response) {
+    update.then(function() {
       window.localStorage.setItem(Config.ROLE_KEY, Config.PLAYER_ROLE);
     }, function(error) { console.log(update);
       alert(error); });
@@ -225,9 +229,8 @@ class AppwriteDAL {
   async updateScore(score, documentId) {
     let promise = await this.sdk.database.getDocument(Config
         .MEMESTORY_COLLECTION_ID, documentId),
-      newScore = score + promise.Score;
-    console.log("NewScore: " + newScore);
-    let update = this.sdk.database.updateDocument(Config.MEMESTORY_COLLECTION_ID,
+      newScore = score + promise.Score,
+      update = this.sdk.database.updateDocument(Config.MEMESTORY_COLLECTION_ID,
       documentId, { "Score": newScore });
       update.then(response => console.log(response), error => console.log(error));
   }

@@ -20,7 +20,7 @@ class Synchronizer {
   updateSession(payload) {
     if (payload.$id !== window.localStorage.getItem(Config
         .DOCUMENT_STORAGE_KEY)) {
-      //alert(Config.CONNECTION_UNSTABLE_WARNING);
+      alert(Config.CONNECTION_UNSTABLE_WARNING);
       return false;
     }
 
@@ -82,7 +82,7 @@ class Synchronizer {
     }
   }
 
-  handleUpdateInRating(payload) {
+  handleUpdateInRating() {
     //download all meme docs once and ignore following updates for now
     if (currentGameState === Config.RATING_PHASE) { console.log(
         "Update in rating ignored!"); } else { currentGameState = Config
@@ -90,7 +90,7 @@ class Synchronizer {
       this.gameManager.setGameStateRate(); }
   }
 
-  handleUpdateInRoundEnd(payload) {
+  handleUpdateInRoundEnd() {
     if (currentGameState !== Config
     .ROUND_ENDED) { console.log("Round ended"); this.gameManager.setGameStateRoundEnd(); currentGameState = Config.ROUND_ENDED; } 
   }
