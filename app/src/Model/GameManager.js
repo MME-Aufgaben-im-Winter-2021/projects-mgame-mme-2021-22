@@ -290,7 +290,6 @@ class GameManager extends Observable {
     this.updateHand();
     this.gameProgressCard.start();
     //this.setPrompt(this.prompt.generatePrompt());
-    this.roundScoreboard.scoreboardView.hidden = true;
     this.playingField.gameView.hidden = false;
     this.playingField.playingFieldArea.hidden = false;
     //this.promptField.hidden = true;
