@@ -359,6 +359,7 @@ class GameManager extends Observable {
     let memes = await this.DAL.downloadMemeStories(),
     filteredMemes = memes.filter(meme => meme.Session === window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY) && meme.InRoundPlayed === roundCount),
     ratingManager = new RatingManager(filteredMemes);
+    console.log(filteredMemes);
     ratingManager.displayMeme();
   }
   /*

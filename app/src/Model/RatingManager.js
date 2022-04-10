@@ -12,19 +12,20 @@ class RatingManager{
 
     startRating(){
         //set views
-        console.log("Start Rating");
+        console.log("Start Rating Round: " + this.currentRound);
+        console.log(performance.now());
         console.log(this.stories[this.currentRound]);
         let memes = this.stories[this.currentRound].MemeStories;
         this.ratingView.updateView(memes);
         ++this.currentRound;
-        setTimeout(this.displayMeme.bind(this), Config.RATING_DURATION);
+        setTimeout(this.displayMeme, Config.RATING_DURATION);
     }
 
     displayMeme(){
         while(this.currentRound < this.ratingRounds){
             this.startRating();
         }
-        
+        //end rating phase
     }
     
 }
