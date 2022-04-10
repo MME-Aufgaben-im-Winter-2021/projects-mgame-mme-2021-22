@@ -92,6 +92,9 @@ class AppwriteDAL {
     return window.localStorage.getItem("username");
   }
 
+  updatePrompt(prompt){
+    this.sdk.database.updateDocument(Config.SESSIONS_COLLECTION_ID, getDocumentIDFromLocalStorage(), {"Prompt": prompt});
+  }
   updateGameState(state) {
     this.sdk.database.updateDocument(Config.SESSIONS_COLLECTION_ID,
       getDocumentIDFromLocalStorage(), { "GameState": state });

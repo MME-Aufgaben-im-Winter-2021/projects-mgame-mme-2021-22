@@ -18,7 +18,7 @@ var
   //lobby token code
   tokenText = document.getElementById("lobbyToken");
 
-startButton.addEventListener("click", function (){ console.log("Startled game as host"); DAL.updateGameState(Config.GAME_STARTED);}); //lobbyView.setHidden(true); let gameManager = new GameManager(); gameManager.setGameStatePlay();
+startButton.addEventListener("click", function (){ console.log("Startled game as host"); DAL.updateGameState(Config.GAME_STARTED);});
 leaveButton.addEventListener("click", leaveLobby);
 tokenText.value = sessionData.$id;
 copyButton.addEventListener("click", copyToClipboard);

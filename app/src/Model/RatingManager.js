@@ -38,8 +38,13 @@ class RatingManager{
         console.log("Display meme if " + this.currentRound + " < " + this.ratingRounds);
         if (this.currentRound < this.ratingRounds){
             this.startRating();
+        }else{
+            //end rating phase
+            if( window.localStorage.getItem(Config.ROLE_KEY) === Config.HOST_ROLE){
+                this.DAL.updateGameState(Config.ROUND_ENDED);
+            }
         }
-        //end rating phase
+        
     }
 
     votedGood() {
@@ -66,14 +71,14 @@ class RatingManager{
       }
 
       disableVoting(){
-          this.goodButton.disable = true;
-          this.mehButton.disable = true;
-          this.badButton.disable = true;
+          this.goodButton.disabled = true;
+          this.mehButton.disabled = true;
+          this.badButton.disabled = true;
       }
       enabelVoting(){
-        this.goodButton.disable = false;
-        this.mehButton.disable = false;
-        this.badButton.disable = false;
+        this.goodButton.disabled = false;
+        this.mehButton.disabled = false;
+        this.badButton.disabled = false;
     }
     
     playRatingSound(good){

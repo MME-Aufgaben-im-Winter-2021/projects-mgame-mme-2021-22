@@ -52,9 +52,7 @@ class GameManager extends Observable {
     //searchBar.addEventListener("change", this.onSearch.bind(this));
     //searchBar.addEventListener("change", this.onSearch);
     searchBar.addEventListener('keydown', () => this.delay(1000).then(() => this.onSearch()));
-
     continueButton.addEventListener("click", this.setGameStatePlay.bind(this));
-    this.setPrompt(this.prompt.generatePrompt());
     this.fillHandWithRandomMemes();
 
   }
@@ -219,12 +217,11 @@ class GameManager extends Observable {
   }
   
   setPrompt(prompt) {
-
     this.playingField.promptField.innerHTML = prompt;
     currentPrompt = prompt;
     this.updatePlayingField();
-
   }
+  
   storePlayedMemes() {
     window.localStorage.setItem("playedMemes", JSON.stringify(fieldArray));
   }
@@ -292,7 +289,7 @@ class GameManager extends Observable {
     this.updatePlayingField();
     this.updateHand();
     this.gameProgressCard.start();
-    this.setPrompt(this.prompt.generatePrompt());
+    //this.setPrompt(this.prompt.generatePrompt());
     this.roundScoreboard.scoreboardView.hidden = true;
     this.playingField.gameView.hidden = false;
     this.playingField.playingFieldArea.hidden = false;
@@ -304,7 +301,8 @@ class GameManager extends Observable {
     this.hand.divider.hidden = false;
     //round timer
     if(window.localStorage.getItem(Config.ROLE_KEY) === Config.HOST_ROLE){
-      let roundDuration = Number(this.DAL.getRoundDuration()) * 100;
+      let roundDuration = Number(this.DAL.getRoundDuration()) * 100, prompt = this.prompt.generatePrompt();
+      this.DAL.updatePrompt(prompt);
       console.log("Round will go " + roundDuration +"s");
       setTimeout(this.hostSetGameStateRate.bind(this), roundDuration);
     }
@@ -319,7 +317,7 @@ class GameManager extends Observable {
     this.playingField.gameView.hidden = true;
     this.roundScoreboard.scoreboardView.hidden = false;
     let story = new Story(currentPrompt, fieldArray, "Player1", 0);
-    this.roundScoreboard.storyListView.appendChild(story.body);
+    //this.roundScoreboard.storyListView.appendChild(story.body);
 
   }
 

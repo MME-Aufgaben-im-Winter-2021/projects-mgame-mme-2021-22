@@ -70,7 +70,8 @@ class Synchronizer {
   handleUpdateInRound(payload) {
     let DAL = new AppwriteDAL();
     if (currentGameState === Config.GAME_STARTED) {
-      console.log("Update in Round");
+    //update prompt
+    this.gameManager.setPrompt(payload.Prompt);
     } else {
       DAL.setRoundCount(payload.RoundCount);
       DAL.setRoundDuration(payload.RoundDuration);
@@ -88,8 +89,8 @@ class Synchronizer {
   }
 
   handleUpdateInRoundEnd(payload) {
-    if (currentGameState === Config
-    .ROUND_ENDED) { return payload; } else { console.log("Round ended"); }
+    if (currentGameState !== Config
+    .ROUND_ENDED) { console.log("Round ended"); this.gameManager.setGameStateRoundEnd(); } 
   }
 
   //Host ends round early if all players submit meme before timer runs out
