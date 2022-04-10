@@ -37,8 +37,6 @@ async function joinGame(){
 
 async function hostGame() {
   //returns promise as json
-  // eslint-disable-next-line no-alert
-  alert("huhu");
   let documentData = await dbLink.hostGame();
   //synchronize my state
   sync.synchronizeGameState(documentData.GameState); //do
