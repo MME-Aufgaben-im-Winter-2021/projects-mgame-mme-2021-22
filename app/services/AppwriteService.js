@@ -213,6 +213,11 @@ class AppwriteDAL {
 
     }
   }
+  updateScore(score, documentId){
+    let promise = this.sdk.database.getDocument(Config.MEMESTORY_COLLECTION_ID, documentId), newScore = 0;
+    promise.then(response => newScore = score + response.Score);
+    this.sdk.database.updateDocument(Config.MEMESTORY_COLLECTION_ID, documentId, {"Score": newScore});
+  }
 
   uploadMemeStory(memeArray, roundPlayed){
     this.sdk.database.createDocument(Config.MEMESTORY_COLLECTION_ID, "unique()", {"MemeStories": memeArray, 

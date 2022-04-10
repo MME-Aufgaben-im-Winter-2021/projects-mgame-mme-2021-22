@@ -22,9 +22,6 @@ import RatingManager from "./RatingManager.js";
 let submitButton = document.querySelector(".submit"),
   refreshButton = document.querySelector(".refresh"),
   saveButton = document.querySelector(".save"),
-  goodButton = document.getElementById("good"),
-  mehButton = document.getElementById("meh"),
-  badButton = document.getElementById("bad"),
   searchBar = document.getElementById("searchBar"),
   continueButton = document.getElementById("continue"),
   handArray = [],
@@ -52,9 +49,6 @@ class GameManager extends Observable {
     refreshButton.addEventListener("click", this.refreshHand.bind(this));
     saveButton.addEventListener("click", this.addNewKeyword.bind(this));
     submitButton.addEventListener("click", this.submitMemeStory.bind(this));
-    goodButton.addEventListener("click", this.votedGood.bind(this));
-    mehButton.addEventListener("click", this.votedMeh.bind(this));
-    badButton.addEventListener("click", this.votedBad.bind(this));
     //searchBar.addEventListener("change", this.onSearch.bind(this));
     //searchBar.addEventListener("change", this.onSearch);
     searchBar.addEventListener('keydown', () => this.delay(1000).then(() => this.onSearch()));
@@ -258,79 +252,6 @@ class GameManager extends Observable {
     this.hand.HandSpace.innerHTML = "";
     for (const meme of handArray) {
       this.hand.HandSpace.appendChild(meme.body);
-    }
-  }
-
-  votedGood() {
-    this.playRatingSound(true);
-    console.log("votedGood");
-    if(roundCount < Config.MAX_ROUNDS){
-    this.setGameStateRoundEnd();}
-    else{
-    this.setGameStateGameEnd();
-    }
-  }
-
-  votedMeh() {
-    console.log("votedMeh");
-    if(roundCount < Config.MAX_ROUNDS){
-      this.setGameStateRoundEnd();}
-      else{
-      this.setGameStateGameEnd();
-      }
-  }
-
-  votedBad() {
-    this.playRatingSound(false);
-    console.log("votedBAD");
-    if(roundCount < Config.MAX_ROUNDS){
-      this.setGameStateRoundEnd();}
-      else{
-      this.setGameStateGameEnd();
-      }
-  }
-
-  playRatingSound(good){
-    
-    if (good){
-      let rand = Math.floor(Math.random() * Config.GOOD_AUDIO_NUM),
-
-       audio = new Audio("/resources/rating_audio/good"+rand+".mp3");
-      console.log("play rating sound: good:"+rand);
-      switch(rand){
-        case 2: audio.volume = 0.07; break;
-        case 4: audio.volume = 0.07; break;
-        case 6: audio.volume = 0.07; break;
-        case 7: audio.volume = 0.35; break;
-        case 8: audio.volume = 0.07; break;
-        case 9: audio.volume = 0.17; break;
-        case 10: audio.volume = 0.07; break;
-        case 11: audio.volume = 0.06; break;
-        case 12: audio.volume = 0.17; break;
-        case 13: audio.volume = 0.2; break;
-        case 15: audio.volume = 0.06; break;
-        case 17: audio.volume = 0.06; break;
-        case 18: audio.volume = 0.17; break;
-        case 19: audio.volume = 0.05; break;
-        default: audio.volume = 0.1; break;
-      }
-      audio.play();
-    }
-    else{
-      let rand = Math.floor(Math.random() * Config.BAD_AUDIO_NUM),
-      audio = new Audio("/resources/rating_audio/bad"+rand+".mp3");
-      console.log("play rating sound: bad:"+rand);
-      
-      switch(rand){
-        case 0: audio.volume = 0.07; break;
-        case 2: audio.volume = 0.3; break;
-        case 15: audio.volume = 0.4; break;
-        case 18: audio.volume = 0.2; break;
-        case 20: audio.volume = 0.07; break;
-
-        default: audio.volume = 0.1; break;
-      }
-      audio.play();
     }
   }
 

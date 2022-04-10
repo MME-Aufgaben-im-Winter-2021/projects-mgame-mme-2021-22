@@ -30,13 +30,15 @@ class RatingView {
       console.log("ratingmemeGOOD is NOT null");
     }
     this.setRatingMemeImages();
+    //clear old images
+    this.firstMemeSpace.innerHTML= "";
+    this.secondMemeSpace.innerHTML ="";
+    this.thirdMemeSpace.innerHTML ="";
+    //try to fill image slots with selected memes
     try{
       if(memes.length > 0){this.firstMemeSpace.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[0] + "\">";}
       if(memes.length > 1){this.secondMemeSpace.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[1] + "\">";}
       if(memes.length > 2){this.thirdMemeSpace.innerHTML = "<img src=\"\\resources\\images_full\\" + memes[2] + "\">";}
-      
-      
-      
     }
     catch{
       console.error("CATCH: CANT READ MEME DATA IN RATINGVIEW");
