@@ -17,7 +17,8 @@ import ImageDownloader from "../Controller/ImageDownloader.js";
 import FinalScore from "../Views/EndOfGameView/FinalScoreboard.js";
 import { AppwriteDAL } from "../../services/AppwriteService.js";
 import RatingManager from "./RatingManager.js";
-
+import RoundScoreboard from "../Views/EndOfRoundView/RoundScoreboard.js";
+import RoundEndManager from "./RoundEndManager.js";
 
 let submitButton = document.querySelector(".submit"),
   refreshButton = document.querySelector(".refresh"),
@@ -41,7 +42,6 @@ class GameManager extends Observable {
     this.hand = new Hand();
     this.ratingView = new RatingView();
     this.prompt = new Prompt();
-    
     this.finalScore = new FinalScore();
     this.imageDownloader = new ImageDownloader();
     
@@ -271,7 +271,6 @@ class GameManager extends Observable {
     this.ratingView.ratingArea.hidden = false;
     this.ratingView.ratingField.hidden = false;
     this.hand.handArea.hidden = true;
-    this.hand.divider.hidden = true;
     //
     let memes = await this.DAL.downloadMemeStories(),
     filteredMemes = memes.filter(meme => meme.Session === window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY) && meme.InRoundPlayed === roundCount),
@@ -299,7 +298,6 @@ class GameManager extends Observable {
     this.ratingView.ratingArea.hidden = true;
     this.ratingView.ratingField.hidden = true;
     this.hand.handArea.hidden = false;
-    this.hand.divider.hidden = false;
     //round timer
     if(window.localStorage.getItem(Config.ROLE_KEY) === Config.HOST_ROLE){
       let roundDuration = Number(this.DAL.getRoundDuration()) * 100, prompt = this.prompt.generatePrompt();
@@ -318,14 +316,11 @@ class GameManager extends Observable {
 
   setGameStateRoundEnd() {
     this.playingField.gameView.hidden = true;
+    let roundEndManager = new RoundEndManager();
     
-    //let story = new Story(currentPrompt, fieldArray, "Player1", 0);
-    //this.roundScoreboard.storyListView.appendChild(story.body);
-    this.roundScoreboard.scoreboardView.hidden = false;
-    
-      let story = new Story(currentPrompt, fieldArray, "Best Story: " + this.getCurrentRoundWinningPlayerName(), 0);
-      this.roundScoreboard.storyListView.appendChild(story.body);
-      document.getElementById("titleOfTheStory").innerHTML=currentPrompt;
+      //let story = new Story(currentPrompt, fieldArray, "Best Story: " + this.getCurrentRoundWinningPlayerName(), 0);
+      //this.roundScoreboard.storyListView.appendChild(story.body);
+      //document.getElementById("titleOfTheStory").innerHTML=currentPrompt;
     
   }
 

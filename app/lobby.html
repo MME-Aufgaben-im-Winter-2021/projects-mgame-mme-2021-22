@@ -19,7 +19,7 @@
                     <div class="row mt-2 pe-4">
                         <div class="col text-center" id="copy">
                             <label class="lobbytoken" id="link"><input type="text" value="Lobby-ID" id="lobbyToken" readonly> </label>
-    
+
                             <button type="copy" class="btn btn-warning" id="copyToken">Copy lobby invite ID</button>
                         </div>
                     </div>
@@ -78,38 +78,37 @@
                     </div>
                     <hr class="bgd-dark-s border-2 border-top border-dark">
                     <div id="game-mode-settings" class="container">
-                        <div class="row" id="setting1">
-                            <label for="player-count" class="col-3 col-form-label">Meme Dankness</label>
-                            <div class="col slider">
-                                <input type="range" class="form-range pt-1 " id="player-count">
+                        <div class="row" id="setting2">
+                            <label for="round-count" class="col-3 col-form-label">Round Count</label>
+                            <div class="col">
+                                <input type="range" class="form-range pt-1" id="round-count" min="3" max="7">
                             </div>
                             <div class="col-2">
-                                <input type="number" class="form-control mb-2" id="input-player-count">
+                                <input type="number" class="form-control mb-2" id="input-round-count" min="3" max="7">
                             </div>
                         </div>
-                        <div class="col-2">
-                            <input type="number" class="form-control mb-2" id="input-round-count" min="3" max="7">
+                        <div class="row" id="setting3">
+                            <label for="round-length" class="col-3 col-form-label">Round Duration</label>
+                            <div class="col">
+                                <input type="range" class="form-range pt-1" id="round-length" min="60" max="250">
+                            </div>
+                            <div class="col-2">
+                                <input type="number" class="form-control mb-2" id="input-round-length" min="60" max="250">
+                            </div>
                         </div>
                     </div>
-                    <div class="row" id="setting3">
-                        <label for="round-length" class="col-3 col-form-label">Round Duration</label>
-                        <div class="col">
-                            <input type="range" class="form-range pt-1" id="round-length" min="60" max="250">
-                        </div>
-                        <div class="col-2">
-                            <input type="number" class="form-control mb-2" id="input-round-length" min="60" max="250">
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-1">
+                        <button type="button" class="btn btn-danger my-2 mx-2" id="leave">LEAVE LOBBY</button>
+                    </div>
+                    <div class="col-4"></div>
+                    <div class="col-2">
+                        <button type="button" class="btn btn-primary my-2 mx-2" id="start">START</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-1">
-                <button type="button" class="btn btn-danger my-2 mx-2" id="leave">LEAVE LOBBY</button>
-            </div>
-
-        </div>
-    </div>
     </div>
     <!--Game Html-->
     <div id="game" hidden>
@@ -185,7 +184,7 @@
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="categories">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                           
+
                             <!-- Hier kommen die Keywords rein -->
                         </ul>
 
@@ -207,9 +206,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div id="divider" class="row mx-1 vh-70">
-        <div class="col border bgd-secondary h-100"></div>
     </div>
     </div>
     <div id="roundEnd" hidden>
@@ -334,10 +330,11 @@
             </div>
         </div>
 </template>
-<template id = "userWithScore">
+<template id="userWithScore">
     <tr id="column">
         <th id="username">Memeio</th>
-        <th id ="points" class="text-end">1200 (+200)</th>
+        <th id="points" class="text-end">1200 (+200)</th>
     </tr>
 </template>
+
 </html>

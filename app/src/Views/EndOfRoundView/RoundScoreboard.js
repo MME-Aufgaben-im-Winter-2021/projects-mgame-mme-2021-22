@@ -8,6 +8,7 @@ class RoundScoreboard {
     this.storyListView = document.getElementById("roundStories");
 
   }
+  
   updateScoreboard(players) {
     this.roundScoreboard.innerHTML = "";
     players.forEach(player => {
