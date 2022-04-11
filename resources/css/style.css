@@ -1,7 +1,13 @@
 /* Beispiel für die Einbindung zusätzlicher Schriftarten via Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap');
 
-html, body {margin: 0; height: 100%; overflow: hidden}
+html,
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden
+}
+
 /* Beispiel für die einfache Einbindung eines Farbschema, generiert auf coolors.co */
 :root {
     --turquoise-green: #b9e3c6ff;
@@ -31,8 +37,10 @@ html, body {margin: 0; height: 100%; overflow: hidden}
     --sec-light: #1a79ff;
     --sec-dark: #004ecb;
 
-    --primary-text: #0000;  /*min 47% opacity*/
-    --sec-dark-text: #ffff; /*min 52% opacity*/
+    --primary-text: #0000;
+    /*min 47% opacity*/
+    --sec-dark-text: #ffff;
+    /*min 52% opacity*/
 }
 
 .attachment-full {
@@ -55,13 +63,13 @@ body {
 }
 
 
-.big{
+.big {
     width: 100%;
     height: 20%;
     margin: 0 auto;
 }
 
-.medium{
+.medium {
     width: 100%;
     height: 10%;
     margin: 0 auto;
@@ -115,15 +123,15 @@ img {
     width: 230px;
 }
 
-.currentStandingPicture{
+.currentStandingPicture {
     height: 150;
     width: 150px;
 }
 
 /*this fixes website shaking because of scrollbar popping up in chrome*/
-::-webkit-scrollbar { 
-    width: 0px!important;
-  } 
+::-webkit-scrollbar {
+    width: 0px !important;
+}
 
 .btn-primary {
     background-color: var(--sec-light);
@@ -141,58 +149,58 @@ img {
     background-color: black;
 }
 
-.padding-bottom{
-    padding-bottom:100px;
+.padding-bottom {
+    padding-bottom: 100px;
 }
 
 .maxWidth {
     max-width: 850px;
 }
 
-.ratingWidth{
+.ratingWidth {
     padding-top: 10px;
     padding-left: 9%;
-    max-width: 900px; 
+    max-width: 900px;
 }
 
-.leftcol{
+.leftcol {
     offset-position: 500px;
 }
 
-.col{
-    position:relative;
+.col {
+    position: relative;
     display: inline-block;
-    float:left;
+    float: left;
     padding-left: 20px;
 }
 
 
-.titlecol{
-    position:relative;
+.titlecol {
+    position: relative;
     display: inline-block;
-    float:left;
+    float: left;
 }
 
-.firstcol{
-    position:relative;
+.firstcol {
+    position: relative;
     display: inline-block;
-    float:left;
-    padding-right:70px;
+    float: left;
+    padding-right: 70px;
 }
 
-.secondcol{
-    position:relative;
+.secondcol {
+    position: relative;
     display: inline-block;
-    float:left;
+    float: left;
     padding-left: 70px;
 }
 
 
-.thirdcol{
-    position:relative;
+.thirdcol {
+    position: relative;
     display: inline-block;
-    float:left;
-    padding-left:120px;
+    float: left;
+    padding-left: 120px;
 }
 
 .rateThisStoryBox {
@@ -200,73 +208,75 @@ img {
     color: white;
 }
 
-.ratingScaleMeme{
+.ratingScaleMeme {
     border-radius: 10%;
 }
 
-.howWouldYouRateText{
+.howWouldYouRateText {
     padding: 30px;
 }
 
-.signinbutton{
+.signinbutton {
     color: white;
 }
 
-.toppadding{
+.toppadding {
     padding-top: 50px;
 }
 
-.toppadding_small{
+.toppadding_small {
     padding-top: 20px;
 }
 
-.toppadding_large{
+.toppadding_large {
     padding-top: 150px;
 }
 
-.currentStandingPic1{
+.currentStandingPic1 {
     padding-left: 35%;
 }
-.currentStandingPic2{
+
+.currentStandingPic2 {
     padding-left: 12%;
     padding-right: 0%;
 }
-.currentStandingPic3{
+
+.currentStandingPic3 {
     padding-right: 0%;
     padding-left: 0%;
 }
 
-.currentStandingImageContainer{
+.currentStandingImageContainer {
     max-width: 90%;
 }
 
-.currentStandings{
-    margin-top:0px;
-    padding-top:0px;
+.currentStandings {
+    margin-top: 0px;
+    padding-top: 0px;
 
-    margin-bottm:0px;
-    padding-bottom:0px;   
+    margin-bottm: 0px;
+    padding-bottom: 0px;
 }
 
-.noliststyle{
+.noliststyle {
     list-style: none;
 }
 
-.leftpadding{
+.leftpadding {
     padding-left: 20px;
 }
 
-.slider{
+.slider {
     padding-top: 5px;
 }
 
-.mgamepresents{
+.mgamepresents {
     padding-top: 50px;
     font-size: 30px;
     color: var(--sec-dark-text);
 }
 
-.thegame{
+.thegame {
     font-weight: bold;
     font-size: 70px;
     padding-bottom: 20px;
@@ -276,54 +286,55 @@ img {
 
 .form-join {
     width: 100%;
-    max-width:600px;
+    max-width: 600px;
     padding: 15px;
     margin: 100 auto;
-  }
+}
 
 .form-join .form-control {
-position: relative;
-box-sizing: border-box;
-height: auto;
-padding: 10px;
-font-size: 16px;
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
 }
+
 .form-join .form-control:focus {
-z-index: 2;
+    z-index: 2;
 }
 
-.whitetext{
-    color:  white;
+.whitetext {
+    color: white;
 }
 
-.blacktext{
+.blacktext {
     color: black;
 }
 
-.yellowbackground{
+.yellowbackground {
     background-color: yellow;
 }
 
-.copyright{
+.copyright {
     padding-top: 130px;
 }
 
-.roundborder{
+.roundborder {
     border-radius: 2%
 }
 
-.thememegame{
+.thememegame {
     padding: 30px;
     font-weight: bold;
     font-size: 70px;
-    color:white;
+    color: white;
 }
 
-.startGameDivider{
+.startGameDivider {
     padding-left: 390px;
 }
 
-.davidclock{
+.davidclock {
     background: rgb(255, 0, 0);
     border: 15px solid #222;
     border-radius: 50%;
@@ -337,7 +348,7 @@ z-index: 2;
     position: absolute;
     width: 160px;
     height: 160px;
-  }
+}
 
 .hr {
     background: rgb(146, 146, 146);
@@ -357,10 +368,10 @@ z-index: 2;
     bottom: -8px;
     width: 13px;
     height: 16px;
-  }
+}
 
 .clockhand {
     position: absolute;
     bottom: 50%;
     transform-origin: 50% 100%;
-  }
+}
