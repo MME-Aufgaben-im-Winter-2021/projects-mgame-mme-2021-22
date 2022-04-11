@@ -16,9 +16,7 @@ class GameEndManager{
         let storyDocsOfLastRound = await this.DAL.downloadMemeStories(round),
         players = await this.DAL.getPlayers();
         players.sort((a,b) => a.PlayerScore > b.PlayerScore ? 1 : -1);
-        //this.gameEndView.addMemes();
         this.gameEndView.updateScoreboard(players, storyDocsOfLastRound);
-        // [doc1 doc2 doc3] => [ [player1docs], [player2docs] [player3docs]]
         
     }
 

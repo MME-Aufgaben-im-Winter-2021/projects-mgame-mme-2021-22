@@ -3,7 +3,7 @@ import { AppwriteDAL } from "../../../services/AppwriteService.js";
 
 var dbLink = new AppwriteDAL(),
   logoutButton = document.getElementById(
-  "logout"), //joinButton = document.getElementById("join")
+  "logout"), 
   hostButton = document.getElementById("host"),
   usernameText = document.getElementById("username"),
   DAL = new AppwriteDAL(), joinButton = document.getElementById("join"),
@@ -11,7 +11,6 @@ var dbLink = new AppwriteDAL(),
 logoutButton.addEventListener("click", logout);
 hostButton.addEventListener("click", hostGame);
 joinButton.addEventListener("click", joinGame);
-//token.addEventListener("click", lambda => token.value = "");
 
 function logout() {
   dbLink.logout();
@@ -30,8 +29,6 @@ async function hostGame() {
   //synchronize my state
   setGameStateToLobby(documentData.GameState); //do
 }
-
-//.then(response => usernameText.innerHTML = response.name, error => console.log(error)); //window.location.replace("login.html")
 
 function hasUser() {
   let promise = DAL.getAccount();

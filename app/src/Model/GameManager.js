@@ -35,10 +35,6 @@ let submitButton = document.querySelector(".submit"),
 class GameManager extends Observable {
 
   constructor() {
-    //GameManager gets called often because of bad MVC implementation; singleton for now
-    //if(GameManager.instance instanceof GameManager){
-    //  return AppwriteDAL.instance;
-    //}
     super();
     this.DAL = new AppwriteDAL();
     //initializing UI
@@ -60,8 +56,6 @@ class GameManager extends Observable {
 
     this.fillHandWithRandomMemes();
 
-    //Object.freeze(this);
-    //GameManager.instance = this;
   }
 
   clearIntervals() {
@@ -134,8 +128,6 @@ class GameManager extends Observable {
 
   //fills hand with memes
   fillHand(event) {
-    //console.log(event.data);
-
     let data = event.data,
       size = data.length,
       dataRandomStartOffset = 0;
@@ -146,7 +138,6 @@ class GameManager extends Observable {
 
     for (let i = 0; i < Config.HAND_SIZE; i++) {
       if (i < size) {
-        //console.log(size);
         this.addNewMemeToHand(data[i + dataRandomStartOffset]);
       }
     }
@@ -169,11 +160,9 @@ class GameManager extends Observable {
 
   //gets the meme url and sets it into the hand view
   addNewMemeToHand(imageSource) {
-    //console.log(imageSource);
 
     if (handArray.length < Config.HAND_SIZE) {
       let newMeme = new Meme(imageSource, true);
-      //console.log(handArray.length, Config.HAND_SIZE);
       handArray.push(newMeme);
       newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
 
@@ -182,7 +171,6 @@ class GameManager extends Observable {
   }
   //gets the meme url and sets it into the field view
   addNewMemeToField(imageSource) {
-    //console.log(imageSource);
     if (fieldArray.length < Config.MAX_MEMES) {
       let newMeme = new Meme(imageSource,
         false);
@@ -190,7 +178,6 @@ class GameManager extends Observable {
       fieldArray.push(newMeme);
       newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
       newMeme.isInHand = false;
-      //console.log("add meme to field");
     }
     this.updatePlayingField();
   }
@@ -203,7 +190,6 @@ class GameManager extends Observable {
       isInHand = event.data[3];
 
     if (currentLocation === "playingArea") {
-      // this.removeMeme(memeName);
 
       if (isInHand) {
 
@@ -321,7 +307,6 @@ class GameManager extends Observable {
 
   //starts the game phase
   setGameStatePlay() {
-    console.log("setgamestate play");
     this.initClock();
     this.intervalID = window.setInterval(this.updateClock, 1000);
     this.roundEndView.scoreboardView.hidden = true;
@@ -333,7 +318,6 @@ class GameManager extends Observable {
     this.updateHand();
     this.playingField.gameView.hidden = false;
     this.playingField.playingFieldArea.hidden = false;
-    //this.promptField.hidden = true;
     this.ratingView.ratingArea.hidden = true;
     this.ratingView.ratingField.hidden = true;
     this.hand.handArea.hidden = false;
@@ -365,9 +349,6 @@ class GameManager extends Observable {
     }
 
     roundCount++;
-    //let story = new Story(currentPrompt, fieldArray, "Best Story: " + this.getCurrentRoundWinningPlayerName(), 0);
-    //this.roundScoreboard.storyListView.appendChild(story.body);
-    //document.getElementById("titleOfTheStory").innerHTML=currentPrompt;
 
   }
 
