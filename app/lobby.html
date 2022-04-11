@@ -15,21 +15,24 @@
         <div class="row" style="height: 20vh;">
             <div class="titlecol">
                 <div class="containter toppadding">
-                    <h2 class="text-dark text-center">THE MEME GAME</h2>
-                    <div class="row mt-2 pe-4">
+                    <div class="lobbytitle text-center">
+                         <text-center class="promptField text-center roundborder thememegame shadow-sm">THE MEME GAME</text-center>
+                    </div>
+                    
+                    <div class="row mt-2 pe-4 toppadding">
                         <div class="col text-center" id="copy">
-                            <label class="lobbytoken" id="link"><input type="text" value="Lobby-ID" id="lobbyToken" readonly> </label>
+                            <label class="lobbytoken shadow-sm" id="link"><input type="text" value="Lobby-ID" id="lobbyToken" readonly> </label>
 
-                            <button type="copy" class="btn btn-warning" id="copyToken">Copy lobby invite ID</button>
+                            <button type="copy shadow-sm" class="btn btn-warning" id="copyToken">Copy lobby invite ID</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row leftpadding">
+        <div class="row leftpadding toppadding_large">
             <!--Player List-->
             <div class="col bgd-light-s roundborder whitetext">
-                <div class="container p-2 roundborder">
+                <div class="container p-2 roundborder shadow-sm">
                     <table class="table table-striped border roundborder whitetext" id="playerList">
                         <thead>
                             <tr>
@@ -53,7 +56,7 @@
             </div>
             <!--Game Settings-->
             <div class="col pe-4 ">
-                <div class="container border border-dark roundborder" id="game-settings">
+                <div class="container border border-dark roundborder shadow-sm" id="game-settings">
                     <div id="game-mode-selector" class="carousel carousel-dark slide text-center" data-bs-ride="carousel" style="height: 80pt;" data-bs-interval="false">
                         <div class="carousel-indicators">
                             <button type="button" data-bs-target="#game-mode-selector" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -103,8 +106,8 @@
                         <button type="button" class="btn btn-danger my-2 mx-2" id="leave">LEAVE LOBBY</button>
                     </div>
                     <div class="col-4"></div>
-                    <div class="col-2">
-                        <button type="button" class="btn btn-primary my-2 mx-2" id="start">START</button>
+                    <div class="col-1 startGameDivider">
+                        <button type="button" class="btn btn-primary my-2 mx-2" id="start">START GAME</button>
                     </div>
                 </div>
             </div>
