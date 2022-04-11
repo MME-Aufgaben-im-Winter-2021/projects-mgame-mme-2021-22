@@ -20,10 +20,8 @@ class Synchronizer {
   updateSession(payload) {
     if (payload.$id !== window.localStorage.getItem(Config
         .DOCUMENT_STORAGE_KEY)) {
-      alert(Config.CONNECTION_UNSTABLE_WARNING);
       return false;
     }
-
     switch (payload.GameState) {
       case Config.LOBBY_WAITING:
         this.handleUpdateInLobby(payload);
@@ -38,8 +36,10 @@ class Synchronizer {
         this.handleUpdateInRating(payload);
         break;
       case Config.GAME_ENDED:
+        this.handleUpdateInGameEnd(payload);
         break;
       case Config.SESSION_ENDED:
+        this.handleSessionEnd(payload);
         break;
       default:
         return false;
@@ -70,9 +70,9 @@ class Synchronizer {
   handleUpdateInRound(payload) {
     let DAL = new AppwriteDAL();
     if (currentGameState === Config.GAME_STARTED) {
-    //update prompt
-    console.log("Updated Prompt");
-    this.gameManager.setPrompt(payload.Prompt);
+      //update prompt
+      console.log("Updated Prompt");
+      this.gameManager.setPrompt(payload.Prompt);
     } else {
       console.log("Switched to Round through Update");
       DAL.setRoundCount(payload.RoundCount);
@@ -83,23 +83,38 @@ class Synchronizer {
     }
   }
 
-  handleUpdateInRating() {
+  handleUpdateInRating(payload) {
     //download all meme docs once and ignore following updates for now
-    if (currentGameState === Config.RATING_PHASE) { console.log(
-        "Update in rating ignored!"); } else { currentGameState = Config
+    if (currentGameState === Config.RATING_PHASE) {
+      console.log(
+        "Update in rating ignored!");
+    } else {
+      currentGameState = Config
         .RATING_PHASE;
-      this.gameManager.setGameStateRate(); }
-  }
-
-  handleUpdateInRoundEnd() {
-    if (currentGameState !== Config
-    .ROUND_ENDED) { console.log("Round ended"); this.gameManager.setGameStateRoundEnd(); currentGameState = Config.ROUND_ENDED; } else{console.log("Update in Round end ignored!");}
-  }
-
-  handleUpdateInGameEnd(){
-    if(currentGameState !== Config.GAME_ENDED){
-      alert("Host ended game! Bye!"); window.localStorage.clear(); window.location.replace("homepage.html"); currentGameState = Config.GAME_ENDED;
+      this.gameManager.setGameStateRate();
     }
+  }
+
+  handleUpdateInRoundEnd(payload) {
+    if (currentGameState !== Config
+      .ROUND_ENDED) { console.log("Round ended");
+      this.gameManager.setGameStateRoundEnd();
+      currentGameState = Config.ROUND_ENDED; } else { console.log(
+        "Update in Round end ignored!"); }
+  }
+
+  handleUpdateInGameEnd(payload) {
+    if (currentGameState !== Config.GAME_ENDED) {
+      currentGameState = Config.GAME_ENDED;
+    }
+  }
+
+  handleSessionEnd(payload) {
+    if (window.localStorage.getItem(Config.ROLE_KEY) !== Config.HOST_ROLE) {
+      window.localStorage.clear();
+      window.location.replace("homepage.html");
+    }
+
   }
 
   //Host ends round early if all players submit meme before timer runs out

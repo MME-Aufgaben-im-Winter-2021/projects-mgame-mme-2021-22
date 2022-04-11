@@ -28,7 +28,7 @@ let submitButton = document.querySelector(".submit"),
   
   handArray = [],
   fieldArray = [],
-  roundCount = 0,
+  roundCount = 1,
   searchBlockBoolean=false,
   lastSearchedTerm="",
   currentPrompt;

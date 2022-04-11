@@ -24,10 +24,7 @@ class GameEndManager{
     endGameSession(){
         //remove everything and move player to homescreen
         if(window.localStorage.getItem(Config.ROLE_KEY) === Config.HOST_ROLE){
-            this.DAL.updateGameState(Config.GAME_ENDED);
             this.DAL.deleteGameFiles();
-            window.localStorage.clear();
-            window.location.replace("homepage.html");
         }else{
             window.localStorage.clear();
             window.location.replace("homepage.html");

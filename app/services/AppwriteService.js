@@ -270,7 +270,7 @@ class AppwriteDAL {
     let promise = await this.sdk.database.listDocuments(Config
       .MEMESTORY_COLLECTION_ID, [Query.equal("Session",
           getDocumentIDFromLocalStorage()),
-        Query.equal("InRoundPlayed", round)
+        Query.equal("InRoundPlayed", round),
       ], 100);
     return promise.documents;
   }
@@ -288,13 +288,17 @@ class AppwriteDAL {
     return window.localStorage.getItem("roundCount");
   }
 
-  async deleteGameFiles(){
+  deleteGameFiles(){
+    this.updateGameState(Config.SESSION_ENDED);
     //remove all player docs, meme docs and the session doc
-    let players = await this.sdk.database.listDocuments(Config.PLAYER_COLLECTION_ID, [Query.equal("GameSession", getDocumentIDFromLocalStorage())], 100);
-    players.documents.forEach(doc => this.sdk.database.deleteDocument(Config.PLAYER_COLLECTION_ID, doc.$id));
-    let stories = await this.sdk.database.listDocuments(Config.MEMESTORY_COLLECTION_ID, [Query.equal("Session", getDocumentIDFromLocalStorage())], 100);
-    stories.documents.forEach(doc => this.sdk.database.deleteDocument(Config.MEMESTORY_COLLECTION_ID, doc.$id));
-    this.sdk.database.deleteDocument(Config.SESSIONS_COLLECTION_ID, getDocumentIDFromLocalStorage());
+    let players = this.sdk.database.listDocuments(Config.PLAYER_COLLECTION_ID, [Query.equal("GameSession", getDocumentIDFromLocalStorage())], 100),
+    stories = this.sdk.database.listDocuments(Config.MEMESTORY_COLLECTION_ID, [Query.equal("Session", getDocumentIDFromLocalStorage())], 100),
+    promise = this.sdk.database.deleteDocument(Config.SESSIONS_COLLECTION_ID, getDocumentIDFromLocalStorage());
+
+    players.then(response => response.documents.forEach(doc => this.sdk.database.deleteDocument(Config.PLAYER_COLLECTION_ID, doc.$id)),error => console.log(error));
+    stories.then(response => response.documents.forEach(doc => this.sdk.database.deleteDocument(Config.MEMESTORY_COLLECTION_ID, doc.$id)), error => console.log(error));
+
+    promise.then(function(response){window.localStorage.clear(); window.location.replace("homepage.html");} , error => console.log(error));
   }
 }
 
