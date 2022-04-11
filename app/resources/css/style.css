@@ -262,6 +262,10 @@ img {
     padding-top: 20px;
 }
 
+.toppadding_large{
+    padding-top: 150px;
+}
+
 .currentStandingPic1{
     padding-left: 35%;
 }
@@ -307,7 +311,8 @@ img {
 .thegame{
     font-weight: bold;
     font-size: 70px;
-    padding-bottom: 100px;
+    padding-bottom: 20px;
+    padding-top: 20px;
     color:white;
 }
 
@@ -337,10 +342,25 @@ z-index: 2;
     color: black;
 }
 
+.yellowbackground{
+    background-color: yellow;
+}
+
 .copyright{
-    padding-top: 150px;
+    padding-top: 130px;
 }
 
 .roundborder{
     border-radius: 2%
+}
+
+.thememegame{
+    padding: 30px;
+    font-weight: bold;
+    font-size: 70px;
+    color:white;
+}
+
+.startGameDivider{
+    padding-left: 390px;
 }
