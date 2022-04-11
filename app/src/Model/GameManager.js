@@ -72,13 +72,13 @@ class GameManager extends Observable {
   }
 
   initClock() {
+    remainingTime=20;
     this.clearIntervals();
     timeRanOut = false;
     clockSpeed = 360 / remainingTime;
     document.getElementById("clocktimer").style.transform = "rotate(" + 0 +
       "deg)";
   }
-
 
   updateClock() {
     console.log("clock");
