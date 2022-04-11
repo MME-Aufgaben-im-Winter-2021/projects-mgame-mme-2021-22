@@ -328,20 +328,20 @@ z-index: 2;
     border: 15px solid #222;
     border-radius: 50%;
     position: relative;
-    width: 320px;
-    height: 320px;
+    width: 200px;
+    height: 200px;
     margin: auto;
 }
 
 .sec-wrapper {
     position: absolute;
-    width: 320px;
-    height: 320px;
+    width: 160px;
+    height: 160px;
   }
 
 .hr {
     background: rgb(146, 146, 146);
-    left: 152px;
+    left: 84px;
     width: 13px;
     height: 105px;
     border-radius: 10px;

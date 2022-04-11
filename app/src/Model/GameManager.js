@@ -31,7 +31,7 @@ let submitButton = document.querySelector(".submit"),
   searchBlockBoolean=false,
   clockspeed=0,
   timeRanOut=false,
-  remainingTime=12,
+  remainingTime=6,
   lastSearchedTerm="";
 
 class GameManager extends Observable {
@@ -58,8 +58,7 @@ class GameManager extends Observable {
    
     this.fillHandWithRandomMemes();
 
-    this.initClock();
-    this.intervalID = window.setInterval(this.updateClock, 1000);
+ 
 
   }
 
@@ -308,6 +307,9 @@ class GameManager extends Observable {
    * HOST FUNCTIONS; 
    */
   setGameStatePlay() {
+    console.log("setgamestate play");
+    this.initClock();
+    this.intervalID = window.setInterval(this.updateClock, 1000);
     this.roundEndView.scoreboardView.hidden = true;
     submitButton.disabled = false;
     Config.HAS_SUBMITTED = false;
