@@ -26,13 +26,10 @@ function logout() {
 
 async function joinGame(){
     if(token.value !== null){
-        try{
+        
             let promise = await DAL.joinSession(token.value);
             sync.synchronizeGameState(promise.GameState);
-            console.log(promise.GameState);
-        }catch(exception){
-            console.log(exception);
-        }
+       
     }
 }
 

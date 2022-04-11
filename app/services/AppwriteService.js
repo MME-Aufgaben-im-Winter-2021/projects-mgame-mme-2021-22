@@ -313,10 +313,10 @@ class AppwriteDAL {
     stories = this.sdk.database.listDocuments(Config.MEMESTORY_COLLECTION_ID, [Query.equal("Session", getDocumentIDFromLocalStorage())], Config.MAX_DOCUMENTS),
     promise = this.sdk.database.deleteDocument(Config.SESSIONS_COLLECTION_ID, getDocumentIDFromLocalStorage());
 
-    players.then(response => response.documents.forEach(doc => this.sdk.database.deleteDocument(Config.PLAYER_COLLECTION_ID, doc.$id)),error => console.log(error));
-    stories.then(response => response.documents.forEach(doc => this.sdk.database.deleteDocument(Config.MEMESTORY_COLLECTION_ID, doc.$id)), error => console.log(error));
+    players.then(response => response.documents.forEach(doc => this.sdk.database.deleteDocument(Config.PLAYER_COLLECTION_ID, doc.$id)));
+    stories.then(response => response.documents.forEach(doc => this.sdk.database.deleteDocument(Config.MEMESTORY_COLLECTION_ID, doc.$id)));
 
-    promise.then(function(){window.localStorage.clear(); window.location.replace("homepage.html");} , error => console.log(error));
+    promise.then(function(){window.localStorage.clear(); window.location.replace("homepage.html");});
   }
 }
 
