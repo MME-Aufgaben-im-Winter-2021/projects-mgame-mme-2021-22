@@ -9,12 +9,13 @@ class GameProgressCard
 
     constructor(){
     this.progressField = document.getElementById("progressField");
+    /*
     this.canvas = document.getElementById("canvas");
     this.ctx = document.getElementById("canvas").getContext("2d");
     this.clockMagnifyFactor = 0.8;
     this.timeLeft = 12; // in seconds
     this.canvasUpdateDelayRate = 1000; //canvas gets updated every 1000 ms
-    this.radius = (document.getElementById("canvas").height / 2);
+    this.radius = (document.getElementById("canvas").height / 2);*/
     //this.clockEl = document.querySelector(".clock");
     //this.clockHandle = this.clockEl.querySelector(".handle");
 
@@ -61,6 +62,7 @@ class GameProgressCard
         }
 
 
+
     drawTime(ctx, radius) {
         width = radius*0.02;
         length = radius*0.85;
@@ -78,14 +80,14 @@ class GameProgressCard
 
         }
     }
-
+*/
     start() {
         //this.clockHandle.classList.add("handle-animated");
     }
 
     reset() {
         //this.clockHandle.classList.remove("handle-animated");
-    }*/
+    }
 }
 
 
