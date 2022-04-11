@@ -15,10 +15,14 @@ class FinalScore{
                 let name = this.scoreTemplate.content.getElementById("username"),
                 points = this.scoreTemplate.content.getElementById("points"),
                 playerStory = stories.find(story => story.Player === player.PlayerName);
+                try{name.innerHTML = player.PlayerName;
 
-                name.innerHTML = player.PlayerName;
+                    points.innerHTML = player.PlayerScore + playerStory.Score;}catch(error){
+                        name.innerHTML = player.PlayerName;
 
-                points.innerHTML = player.PlayerScore + playerStory.Score;
+                    points.innerHTML = player.PlayerScore;
+                    }
+                
                 
                 let clone = document.importNode(this.scoreTemplate.content, true);
                 this.scoreBoard.appendChild(clone);
