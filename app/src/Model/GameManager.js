@@ -295,7 +295,7 @@ class GameManager extends Observable {
 
   async setGameStateRate(){
     this.playingField.playingFieldArea.hidden = true;
-    this.gameProgressCard.progressField.hidden = true;
+    //this.gameProgressCard.progressField.hidden = true;
     this.ratingView.ratingArea.hidden = false;
     this.ratingView.ratingField.hidden = false;
     this.hand.handArea.hidden = true;

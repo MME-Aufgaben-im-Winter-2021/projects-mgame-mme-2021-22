@@ -149,21 +149,20 @@
                 <div id="countdown">
                     <div id="clock-canvas" >
                         <div id='clock' class="davidclock">
-                            
                             <!--Clock No(1,2,....,12)-->
                             
                              <!--clock hands()-->
                              <div class='hr-wrapper'>
-                                <div class='hand hr' id="clocktimer"></div>
+                                <div class='clockhand hr' id="clocktimer"></div>
                               </div>
                               <div class='min-wrapper'>
-                                <div class='hand min'></div>
+                                <div class='clockhand min'></div>
                               </div>
                               <div class='sec-wrapper'>
-                                <div class='hand sec'></div>
+                                <div class='clockhand sec'></div>
                               </div>
                         
-                           </div>
+                        </div>
         
                     </div>
                 </div>
@@ -208,8 +207,8 @@
                             <!-- Hier kommen die Keywords rein -->
                         </ul>
 
-                        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 " action="javascript:void(0)" method="post" >
-                            <input  id="searchBar" type="text" class="form-control form-control-dark" placeholder="Search...">
+                        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 " onsubmit="return false">
+                            <input id="searchBar" type="text" class="form-control form-control-dark" placeholder="Search...">
                         </form>
 
                         <div class="text-end">
