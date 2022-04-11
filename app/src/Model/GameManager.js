@@ -63,6 +63,7 @@ class GameManager extends Observable {
   }
 
   initClock() {
+    remainingTime = this.DAL.getRoundDuration();
     this.clearIntervals();
     timeRanOut = false;
     clockSpeed = Config.DEGREES / remainingTime;
