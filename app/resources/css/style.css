@@ -359,7 +359,7 @@ z-index: 2;
     height: 16px;
   }
 
-.hand {
+.clockhand {
     position: absolute;
     bottom: 50%;
     transform-origin: 50% 100%;
