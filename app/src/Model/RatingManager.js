@@ -4,7 +4,8 @@ import Config from "../utils/Config.js";
 import RatingView from "../Views/RatingView/RatingView.js";
 //Handles the events during the rating phase
 class RatingManager{
-    constructor(stories){
+    constructor(stories, round){
+        this.gameRound = round;
         this.ratingRounds = stories.length;
         this.currentRound = 0;
         this.stories = stories;
@@ -75,10 +76,8 @@ class RatingManager{
     }
     //plays a sound after voting
     playRatingSound(good){
-          let randplay = Math.floor(Math.random() * Config.SOUNDCHANCE);
-          console.log("randplay:"+randplay);
-          if (randplay===1){
-
+         
+          if (this.gameRound === 1){
           if (good){
             let rand = Math.floor(Math.random() * Config.GOOD_AUDIO_NUM),
       

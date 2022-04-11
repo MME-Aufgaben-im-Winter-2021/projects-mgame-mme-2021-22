@@ -295,7 +295,7 @@ class GameManager extends Observable {
     this.hand.handArea.hidden = true;
     //
     let memes = await this.DAL.downloadMemeStories(roundCount),
-      ratingManager = new RatingManager(memes);
+      ratingManager = new RatingManager(memes, roundCount);
     ratingManager.displayMeme();
   }
 
