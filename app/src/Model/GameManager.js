@@ -26,7 +26,7 @@ let submitButton = document.querySelector(".submit"),
   searchBlockBoolean = false,
   clockSpeed = 0,
   timeRanOut = false,
-  remainingTime = 6,
+  remainingTime = 60,
   lastSearchedTerm = "";
 //manages all the events during the game phase
 class GameManager extends Observable {
@@ -56,7 +56,7 @@ class GameManager extends Observable {
   }
 
   clearIntervals() {
-    var intervalId = window.setInterval(() => { return false; }, 99999);
+    var intervalId = window.setInterval(() => { return false; }, Config.CLEARAMOUNT);
     for (let i = 0; i < intervalId; i++) {
       window.clearInterval(i);
     }
@@ -69,7 +69,6 @@ class GameManager extends Observable {
     document.getElementById("clocktimer").style.transform = "rotate(" + 0 +
       "deg)";
   }
-
 
   updateClock() {
     if (timeRanOut === false) {
@@ -302,7 +301,7 @@ class GameManager extends Observable {
   //starts the game phase
   setGameStatePlay() {
     this.initClock();
-    this.intervalID = window.setInterval(this.updateClock, 1000);
+    this.intervalID = window.setInterval(this.updateClock, Config.SECOND);
     this.roundEndView.scoreboardView.hidden = true;
     submitButton.disabled = false;
     Config.HAS_SUBMITTED = false;

@@ -16,6 +16,7 @@ const Config = {
     RATING_DURATION: 10000,
     MAX_MEMES: 3,
     HAND_SIZE: 27,
+    SECOND: 1000,
     MAX_KEYWORDS: 6,
     GOOD_AUDIO_NUM: 21,
     BAD_AUDIO_NUM: 25,
@@ -24,8 +25,9 @@ const Config = {
     POINTS_FOR_GOOD: 255,
     POINTS_FOR_MEH: 128,
     POINTS_FOR_BAD: 1,
+    CLEARAMOUNT: 99999,
     DELAY: 1000,
-    MS_TO_S_FACTOR: 100,
+    MS_TO_S_FACTOR: 200,
     PLAYER_LIST_UI_ELEMENTS: 5,
     //ERROR CODES
     LOGIN_FAILED_ERROR: "email or password are incorrect",
