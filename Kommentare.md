@@ -4,7 +4,7 @@
 | :-----: | :-: | :-: |  :-: | :-: |
 | E-Mail-Adresse | simon.baierl@uni-regensburg.de | leon.zeitler@uni-regensburg.de |david-ring@uni-regensburg.de | sven-panov@uni-regensburg.de |
 | Github-Nutzer | BaierlSimon | Ruebenritter | derDavid2 |URgithubaccount2 |
-| Komponente der Anwendung | Erstellen einiger UI-Elemente, </br> Erstellen der Spielelogik </br> | | |Unterstützung bei einigen Elementen </br> bugfix-Vorschläge </br> Erstellung der Uhr (die nicht funktionale Version) |
+| Komponente der Anwendung | Erstellen einiger UI-Elemente, </br> Erstellen der Spielelogik </br> | |Image Downloader Webscraper, Sounds, JSON-Meme-File, Timer-Uhr, einige HTML-Elemente + CSS, Suchleiste mit automatischen suchen ohne Enter, Meme-Story-Prompts geschrieben |Unterstützung bei einigen Elementen </br> bugfix-Vorschläge </br> Erstellung der Uhr (die nicht funktionale Version) |
 
 **Zustand der Anwendung:** Das Spiel ist online spielbar, die Lobbies werden richtig erstellt und können beigetreten werden. Es ist dem Host möglich, Einstellungen über das Spiel zu treffen und somit Rundendauer und Anzahl zu ändern. Nach Abschluss des Spiels wird ein score für jeden Spieler angezeigt und die Lobby kann verlassen werden</br>
 
