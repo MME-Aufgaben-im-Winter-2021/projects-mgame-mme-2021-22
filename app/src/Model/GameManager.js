@@ -20,6 +20,7 @@ import RoundScoreboard from "../Views/EndOfRoundView/RoundScoreboard.js";
 import RoundEndManager from "./RoundEndManager.js";
 import GameEndManager from "./GameEndManager.js";
 
+
 let submitButton = document.querySelector(".submit"),
   refreshButton = document.querySelector(".refresh"),
   saveButton = document.querySelector(".save"),
@@ -28,6 +29,9 @@ let submitButton = document.querySelector(".submit"),
   fieldArray = [],
   roundCount = 1,
   searchBlockBoolean=false,
+  clockspeed=0,
+  timeRanOut=false,
+  remainingTime=12,
   lastSearchedTerm="";
 
 class GameManager extends Observable {
@@ -53,7 +57,43 @@ class GameManager extends Observable {
     searchBar.addEventListener("keydown", () => this.delay(Config.DELAY).then(() => this.onSearch()));
    
     this.fillHandWithRandomMemes();
+
+    this.initClock();
+    this.intervalID = window.setInterval(this.updateClock, 1000);
+
   }
+
+  clearIntervals(){
+    var interval_id = window.setInterval(()=>{return false;}, 99999);
+    for (let i = 0; i < interval_id; i++){
+      window.clearInterval(i);
+    }
+  }
+
+  initClock(){
+      this.clearIntervals();
+      timeRanOut=false;
+      clockspeed=360/remainingTime;
+      document.getElementById("clocktimer").style.transform = "rotate(" + 0 + "deg)";
+  }
+
+
+  updateClock(){
+    console.log("clock");
+    if (timeRanOut===false){
+      console.log("clock ranout false");
+      let timerAngle = remainingTime * clockspeed;
+      remainingTime--;
+      document.getElementById("clocktimer").style.transform = "rotate(" + -timerAngle + "deg)";
+
+      if (remainingTime===-1){
+        console.log("CLOCK DONE");
+        timeRanOut=true;
+
+      }
+    }
+  }
+
 
   delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
@@ -275,11 +315,11 @@ class GameManager extends Observable {
     fieldArray = [];
     this.updatePlayingField();
     this.updateHand();
-    this.gameProgressCard.start();
+    //this.gameProgressCard.start();
     this.playingField.gameView.hidden = false;
     this.playingField.playingFieldArea.hidden = false;
     //this.promptField.hidden = true;
-    this.gameProgressCard.progressField.hidden = false;
+    //this.gameProgressCard.progressField.hidden = false;
     this.ratingView.ratingArea.hidden = true;
     this.ratingView.ratingField.hidden = true;
     this.hand.handArea.hidden = false;
