@@ -9,7 +9,6 @@
 **Zustand der Anwendung:** Das Spiel ist online spielbar, die Lobbies werden richtig erstellt und können beigetreten werden. Es ist dem Host möglich, Einstellungen über das Spiel zu treffen und somit Rundendauer und Anzahl zu ändern. Die MemeStories können nacheinander von allen Spielern bewertet werden. Nach Abschluss des Spiels wird ein score für jeden Spieler angezeigt und die Lobby kann verlassen werden</br>
 
 **Nicht implementierte Funktionen:**</br> 
-- Die Uhr während der Runde ist nicht abgestimmt auf die Rundendauer, da es uns (unter Anderem aus Zeitgründen) nicht möglich war, eine flexible Uhr zu erstellen 
 - Die Spielerliste am Ende des Spiels wird nicht richtig nach Punktzahl sortiert 
 - Der Nutzer kann seine eigene Abgabe bewerten was aus Zeitgründen nicht behoben worden konnte
 - Es wurde kein Tutorial eingefügt, da dies schon im ReadMe steht
