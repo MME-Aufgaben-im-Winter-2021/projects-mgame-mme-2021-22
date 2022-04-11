@@ -9,7 +9,7 @@ class GameEndManager{
         this.gameEndView.endGameScreen.hidden = false;
         this.gameEndButton = document.getElementById("leaveGame");
         this.gameEndButton.addEventListener("click", this.endGameSession.bind(this));
-        this.clock = document.getElementById("clocktimer");
+        
     }
 
     //sets final score
