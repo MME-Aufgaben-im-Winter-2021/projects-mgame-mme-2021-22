@@ -109,7 +109,7 @@ class AppwriteDAL {
   logout() {
     this.sdk.account.deleteSession("current").then(function(response) {
       console.log(response);
-      window.location.replace("login.html");
+      window.location.replace("index.html");
     }, function(error) {
       console.log(error);
     });

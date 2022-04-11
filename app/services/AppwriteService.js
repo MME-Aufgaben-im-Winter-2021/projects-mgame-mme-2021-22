@@ -159,7 +159,7 @@ class AppwriteDAL {
   logout() {
     this.sdk.account.deleteSession("current").then(function() {
       window.localStorage.clear();
-      window.location.replace("login.html");
+      window.location.replace("index.html");
     }, function(error) {
       alert(error);
     });

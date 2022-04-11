@@ -32,7 +32,7 @@ async function hostGame() {
 
 function hasUser() {
   let promise = DAL.getAccount();
-  promise.then(response => usernameText.innerHTML = response.name, () => window.location.replace("login.html"));
+  promise.then(response => usernameText.innerHTML = response.name, () => window.location.replace("index.html"));
 }
 
 hasUser();

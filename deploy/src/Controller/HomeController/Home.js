@@ -45,11 +45,10 @@ async function hostGame() {
   //synchronize my state
   sync.synchronizeGameState(documentData.GameState);
 }
-//.then(response => usernameText.innerHTML = response.name, error => console.log(error)); //window.location.replace("login.html")
 
 function hasUser() {
   let promise = DAL.getAccount();
-  promise.then(response => usernameText.innerHTML = response.name, () => window.location.replace("login.html"));
+  promise.then(response => usernameText.innerHTML = response.name, () => window.location.replace("index.html"));
 }
 
 hasUser();

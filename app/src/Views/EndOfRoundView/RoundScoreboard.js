@@ -22,9 +22,12 @@ class RoundScoreboard {
         let name = this.scoreTemplate.content.getElementById("username"),
           points = this.scoreTemplate.content.getElementById("points"),
           playerStory = storyDocs.find(story => story.Player === player.PlayerName);
-
-        name.innerHTML = player.PlayerName;
-        points.innerHTML = player.PlayerScore + " ( +" + playerStory.Score + ")";
+        try{name.innerHTML = player.PlayerName;
+          points.innerHTML = player.PlayerScore + " ( +" + playerStory.Score + ")";}catch(error){
+            name.innerHTML = player.PlayerName;
+          points.innerHTML = player.PlayerScore + " ( + 0 )" ;
+          }
+        
         let newScore = player.PlayerScore + playerStory.Score;
         this.DAL.updatePlayerScore(player.$id, newScore);
         let clone = document.importNode(this.scoreTemplate.content, true);
