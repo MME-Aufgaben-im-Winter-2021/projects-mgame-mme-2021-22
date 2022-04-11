@@ -23,7 +23,7 @@ html, body {margin: 0; height: 100%; overflow: hidden}
     --red-triade: #641b14;
     --green-comp: #B6D615;
 
-    
+    /*material.io oriented color scheme */
     --primary: #008351;
     --prim-light: #4ab47e;
     --prim-dark: #005528;
@@ -263,7 +263,7 @@ img {
 .mgamepresents{
     padding-top: 50px;
     font-size: 30px;
-    color:white;
+    color: var(--sec-dark-text);
 }
 
 .thegame{
@@ -271,7 +271,7 @@ img {
     font-size: 70px;
     padding-bottom: 20px;
     padding-top: 20px;
-    color:white;
+    color: var(--sec-dark-text);
 }
 
 .form-join {
