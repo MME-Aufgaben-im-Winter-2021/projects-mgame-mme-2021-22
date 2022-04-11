@@ -82,13 +82,11 @@ const PROMPT_ARRAY = ["Describe your funniest moment this year",
   "ˍˍˍˍˍˍˍˍˍˍˍˍˍ was all fun and games, until ˍˍˍˍˍˍˍˍˍˍˍˍˍ showed up.",
   "My last exam would have gone great if it wasn't for  ˍˍˍˍˍˍˍˍˍˍˍˍˍ !"];
 
-
 class Prompt {
 
 constructor(){
   this.promptField = document.getElementById("promptField");
   }
-
 
   getRandomInt(max) {
 

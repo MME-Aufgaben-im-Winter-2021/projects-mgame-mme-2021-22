@@ -21,8 +21,7 @@ class RoundEndManager {
     continueToNextRound(){
         this.roundScoreboard.scoreboardView.hidden = true;
     }
-
-
+    
     async showRoundScore(round){
         //get all docs -> filter for player scores -> get player array
         let storiesOfLastRound = await this.DAL.downloadMemeStories(round), 

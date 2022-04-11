@@ -1,5 +1,4 @@
 
-
 /* eslint-disable one-var */
 class FinalScore{
 

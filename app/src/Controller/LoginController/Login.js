@@ -13,11 +13,11 @@ var dal = new AppwriteDAL(), nickname = document.getElementById("nicknameInput")
     if (email.value && password.value){
         dal.register(nickname.value, email.value, password.value);
     }else{
-        console.log("Email or password invalid.");
+        // eslint-disable-next-line no-alert
+        alert("Email or password invalid.");
     }
 }
 
 function signIn(){
-    console.log("Pressed Sign In");
     dal.signIn(email.value, password.value);
 }

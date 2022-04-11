@@ -13,7 +13,6 @@ class Synchronizer {
 
   subscribeToGame() {
     let DAL = new AppwriteDAL();
-    console.log("subscribed with sync");
     DAL.subscribe();
   }
 
@@ -54,13 +53,11 @@ class Synchronizer {
   handleUpdateInLobby(payload) {
     //if already waiting in lobby only update content values
     if (currentGameState === Config.LOBBY_WAITING) {
-      console.log("Update lobby content.");
       lobbyView.updateView(payload.UserIDs, payload.RoundCount, payload
         .RoundDuration);
     }
     //else switch ui to lobby
     else {
-      console.log("Switch to lobby through update.");
       lobbyView.updateView(payload.UserIDs, payload.RoundCount, payload
         .RoundDuration);
       currentGameState = Config.LOBBY_WAITING;
@@ -71,10 +68,8 @@ class Synchronizer {
     let DAL = new AppwriteDAL();
     if (currentGameState === Config.GAME_STARTED) {
       //update prompt
-      console.log("Updated Prompt");
       this.gameManager.setPrompt(payload.Prompt);
     } else {
-      console.log("Switched to Round through Update");
       DAL.setRoundCount(payload.RoundCount);
       DAL.setRoundDuration(payload.RoundDuration);
       lobbyView.setHidden(true);
@@ -83,33 +78,29 @@ class Synchronizer {
     }
   }
 
-  handleUpdateInRating(payload) {
+  handleUpdateInRating() {
     //download all meme docs once and ignore following updates for now
-    if (currentGameState === Config.RATING_PHASE) {
-      console.log(
-        "Update in rating ignored!");
-    } else {
+    if (currentGameState !== Config.RATING_PHASE) {
       currentGameState = Config
         .RATING_PHASE;
       this.gameManager.setGameStateRate();
     }
   }
 
-  handleUpdateInRoundEnd(payload) {
+  handleUpdateInRoundEnd() {
     if (currentGameState !== Config
-      .ROUND_ENDED) { console.log("Round ended");
+      .ROUND_ENDED) { 
       this.gameManager.setGameStateRoundEnd();
-      currentGameState = Config.ROUND_ENDED; } else { console.log(
-        "Update in Round end ignored!"); }
+      currentGameState = Config.ROUND_ENDED; } 
   }
 
-  handleUpdateInGameEnd(payload) {
+  handleUpdateInGameEnd() {
     if (currentGameState !== Config.GAME_ENDED) {
       currentGameState = Config.GAME_ENDED;
     }
   }
 
-  handleSessionEnd(payload) {
+  handleSessionEnd() {
     if (window.localStorage.getItem(Config.ROLE_KEY) !== Config.HOST_ROLE) {
       window.localStorage.clear();
       window.location.replace("homepage.html");

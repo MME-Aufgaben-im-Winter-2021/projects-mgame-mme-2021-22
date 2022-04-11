@@ -59,7 +59,8 @@ function setGameStateToLobby(targetState){
         return "Switching page to: " + targetState;
       }
       return "Page correct";
-    } catch (error) { console.log(error); }
+    // eslint-disable-next-line no-alert
+    } catch (error) {alert(error); }
     return true;
   
 }

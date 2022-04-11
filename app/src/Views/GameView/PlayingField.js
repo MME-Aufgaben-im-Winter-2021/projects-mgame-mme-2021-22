@@ -1,7 +1,6 @@
 /** playing field. players drop cards in here */
 import Observable from "../../utils/Observable.js";
 
-
 class PlayingField extends Observable {
 
   constructor() {
@@ -13,7 +12,6 @@ class PlayingField extends Observable {
     this.playingFieldArea = document.getElementById("playingField");
 
   }
-  
 
 }
 export default PlayingField;
