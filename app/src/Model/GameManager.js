@@ -69,22 +69,19 @@ class GameManager extends Observable {
     remainingTime=20;
     this.clearIntervals();
     timeRanOut = false;
-    clockSpeed = 360 / remainingTime;
+    clockSpeed = Config.DEGREES / remainingTime;
     document.getElementById("clocktimer").style.transform = "rotate(" + 0 +
       "deg)";
   }
 
   updateClock() {
-    console.log("clock");
     if (timeRanOut === false) {
-      console.log("clock ranout false");
       let timerAngle = remainingTime * clockSpeed;
       remainingTime--;
       document.getElementById("clocktimer").style.transform = "rotate(" + -
         timerAngle + "deg)";
 
       if (remainingTime === -1) {
-        console.log("CLOCK DONE");
         timeRanOut = true;
 
       }
