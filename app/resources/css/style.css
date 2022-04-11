@@ -322,3 +322,45 @@ z-index: 2;
 .startGameDivider{
     padding-left: 390px;
 }
+
+.davidclock{
+    background: rgb(255, 0, 0);
+    border: 15px solid #222;
+    border-radius: 50%;
+    position: relative;
+    width: 320px;
+    height: 320px;
+    margin: auto;
+}
+
+.sec-wrapper {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+  }
+
+.hr {
+    background: rgb(146, 146, 146);
+    left: 152px;
+    width: 13px;
+    height: 105px;
+    border-radius: 10px;
+    animation: rotateHand 43200s linear infinite;
+}
+
+.hr:after {
+    background: #222;
+    border-radius: 50%;
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -8px;
+    width: 13px;
+    height: 16px;
+  }
+
+.hand {
+    position: absolute;
+    bottom: 50%;
+    transform-origin: 50% 100%;
+  }

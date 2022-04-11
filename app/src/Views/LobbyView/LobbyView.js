@@ -50,11 +50,12 @@ class LobbyView {
     while (this.playerList.childNodes.length > Config.PLAYER_LIST_UI_ELEMENTS) {
       this.playerList.removeChild(this.playerList.lastChild);
     }
-    for (let player of playerNames) {
+    for (let i= 0; i<playerNames.length; i++) {
+      let player = playerNames[i];
       if (player !== null) {
         let th = this.playerTemplate.content.querySelector("th"),
           td = this.playerTemplate.content.querySelectorAll("td");
-        th.textContent = "PlayerNumber";
+        th.textContent = i+1;
         td[0].textContent = player;
         td[1].textContent = "connected";
 

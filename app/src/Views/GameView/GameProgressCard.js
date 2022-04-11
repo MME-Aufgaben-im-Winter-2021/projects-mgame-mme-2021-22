@@ -2,26 +2,21 @@
 
 class GameProgressCard
 {
-
-
-    
-    
-
     constructor(timeLeft = 12.0){
-    this.progressField = document.getElementById("progressField");
-    
-    this.canvas = document.getElementById("canvas");
-    this.ctx = this.canvas.getContext("2d");
-    this.clockMagnifyFactor = 0.8;
-    this.timeLeft = timeLeft; // in seconds
-    this.canvasUpdateDelayRate = 1000; //canvas gets updated every 1000 ms
-    this.radius = (this.canvas.height / 2);
-    //this.clockEl = document.querySelector(".clock");
-    //this.clockHandle = this.clockEl.querySelector(".handle");
-    this.ctx.translate(this.radius/this.clockMagnifyFactor, this.radius); // setting central point for clock relative to canvas
-    this.radius = this.radius * 0.90 * this.clockMagnifyFactor;
-    this.drawClock();
-    this.setInterval(this.drawClock, this.canvasUpdateDelayRate);
+    //this.progressField = document.getElementById("progressField");
+    //
+    //this.canvas = document.getElementById("canvas");
+    //this.ctx = this.canvas.getContext("2d");
+    //this.clockMagnifyFactor = 0.8;
+    //this.timeLeft = timeLeft; // in seconds
+    //this.canvasUpdateDelayRate = 1000; //canvas gets updated every 1000 ms
+    //this.radius = (this.canvas.height / 2);
+    ////this.clockEl = document.querySelector(".clock");
+    ////this.clockHandle = this.clockEl.querySelector(".handle");
+    //this.ctx.translate(this.radius/this.clockMagnifyFactor, this.radius); // setting central point for clock relative to canvas
+    //this.radius = this.radius * 0.90 * this.clockMagnifyFactor;
+    //this.drawClock();
+    ////this.setInterval(this.drawClock, this.canvasUpdateDelayRate);
     }
 
 

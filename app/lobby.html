@@ -136,6 +136,9 @@
                         </div>
                     </div>
                 </div>
+                
+
+
                 <div id="playingField" class="playingField container-fluid py-3 maxWidth">
                     <div class="field d-grid gap-3 maxWidth" style="grid-template-columns: 1fr 1fr 1fr;">
                         <!-- Hier kommen die Memes rein_________________________________________________________________________________________ DIESER TEIL IST DOPPELT; UNTEN IST MEHR 1fr; KANN DAS HIER ALSO WEG? -->
@@ -145,74 +148,22 @@
             <div id="progressField" class="container col-2 game-progress border border-dark rounded mx-2 my-2">
                 <div id="countdown">
                     <div id="clock-canvas" >
-                        <canvas id="canvas" width="200" height="200" style="background-color: prim-dark"> </canvas>
-                        <!--<script>
-                            let canvas = document.getElementById("canvas");
-                            let ctx = canvas.getContext("2d");
-                            let clockMagnifyFactor = 0.8;
-                            let timeLeft = 12; // in seconds
-                            let canvasUpdateDelayRate = 1000; //canvas gets updated every 1000 ms
-                
-                            let radius = (canvas.height / 2)*clockMagnifyFactor; //-% aka *Factor<1 nötig für abgabestatus
-                            ctx.translate(radius/clockMagnifyFactor, radius); // mittelpunkt setzen
-                            radius = radius * 0.90
-                            drawClock();
-                            setInterval(drawClock, canvasUpdateDelayRate);
+                        <div id='clock' class="davidclock">
                             
-                
+                            <!--Clock No(1,2,....,12)-->
                             
-                            function drawClock() {
-                                ctx.arc(0, 0, radius, 0 , 2 * Math.PI);
-                                ctx.fillStyle = "white";
-                                ctx.fill();
-                                drawFace(ctx, radius);
-                                drawTime(ctx, radius);
-                            }
-                
-                            
-                            function drawFace(ctx, radius) {
-                                    var grad;
-                
-                                    ctx.beginPath();
-                                    ctx.arc(0, 0, radius, 0, 2 * Math.PI);
-                                    ctx.fillStyle = 'white';
-                                    ctx.fill();
-                
-                                    grad = ctx.createRadialGradient(0, 0 ,radius * 0.95, 0, 0, radius * 1.05);
-                                    grad.addColorStop(0, 'grey');
-                                    grad.addColorStop(0.6, 'white');
-                                    grad.addColorStop(1, '#333');
-                                    ctx.strokeStyle = grad;
-                                    ctx.lineWidth = radius*0.1;
-                                    ctx.stroke();
-                
-                                    ctx.beginPath();
-                                    ctx.arc(0, 0, radius * 0.04, 0, 2 * Math.PI);
-                                    ctx.fillStyle = '#888';
-                                    ctx.fill();
-                                }
-                
-                
-                            function drawTime(ctx, radius) {
-                                width = radius*0.02;
-                                length = radius*0.85;
-                                pos = ((60-timeLeft)*Math.PI/30);
-                                ctx.beginPath();
-                                ctx.lineWidth = width;
-                                ctx.lineCap = "round";
-                                ctx.moveTo(0,0);
-                                ctx.rotate(pos);
-                                ctx.lineTo(0, -length);
-                                ctx.stroke();
-                                ctx.rotate(-pos);
-                                timeLeft--;
-                                if(timeLeft===0){
-                
-                                }
-                            }
-                
-                
-                        </script> -->
+                             <!--clock hands()-->
+                             <div class='hr-wrapper'>
+                                <div class='hand hr' id="clocktimer"></div>
+                              </div>
+                              <div class='min-wrapper'>
+                                <div class='hand min'></div>
+                              </div>
+                              <div class='sec-wrapper'>
+                                <div class='hand sec'></div>
+                              </div>
+                        
+                           </div>
         
                     </div>
                 </div>
@@ -257,8 +208,8 @@
                             <!-- Hier kommen die Keywords rein -->
                         </ul>
 
-                        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 " onsubmit="return false">
-                            <input id="searchBar" type="text" class="form-control form-control-dark" placeholder="Search...">
+                        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 " action="javascript:void(0)" method="post" >
+                            <input  id="searchBar" type="text" class="form-control form-control-dark" placeholder="Search...">
                         </form>
 
                         <div class="text-end">

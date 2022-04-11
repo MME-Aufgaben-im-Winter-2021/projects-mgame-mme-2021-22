@@ -22,7 +22,7 @@ const Config = {
     POINTS_FOR_MEH: 128,
     POINTS_FOR_BAD: 1,
     DELAY: 1000,
-    MS_TO_S_FACTOR: 1000,
+    MS_TO_S_FACTOR: 100,
     PLAYER_LIST_UI_ELEMENTS: 5,
     //ERROR CODES
     LOGIN_FAILED_ERROR: "email or password are incorrect",
