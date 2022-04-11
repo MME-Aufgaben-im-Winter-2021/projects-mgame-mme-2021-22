@@ -19,7 +19,6 @@ class ImageDownloader extends Observable {
                 }
               }
               let event = new Event("imagesFetched",images);
-                  //console.log(event);
                   this.notifyAll(event);
           }).catch((e) => {
             this.notifyAll(e);
