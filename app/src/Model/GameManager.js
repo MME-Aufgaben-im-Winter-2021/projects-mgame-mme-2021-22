@@ -79,7 +79,7 @@ class GameManager extends Observable {
 
       if (remainingTime === -1) {
         timeRanOut = true;
-
+        remainingTime=60;
       }
     }
   }
