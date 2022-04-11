@@ -9,7 +9,7 @@ const Config = {
     DEFAULT_ROUNDS: 5,
     MAX_ROUNDS: 7, 
     MIN_ROUND_DURATION: 60, 
-    DEFAULT_ROUND_DURATION: 120,
+    DEFAULT_ROUND_DURATION: 60,
     SOUNDCHANCE: 2,
     DEGREES: 360,
     MAX_ROUND_DURATION: 250,
@@ -27,7 +27,7 @@ const Config = {
     POINTS_FOR_BAD: 1,
     CLEARAMOUNT: 99999,
     DELAY: 1000,
-    MS_TO_S_FACTOR: 200,
+    MS_TO_S_FACTOR: 1000,
     PLAYER_LIST_UI_ELEMENTS: 5,
     //ERROR CODES
     LOGIN_FAILED_ERROR: "email or password are incorrect",
