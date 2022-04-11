@@ -89,9 +89,10 @@ class Synchronizer {
 
   handleUpdateInRoundEnd() {
     if (currentGameState !== Config
-      .ROUND_ENDED) { 
+      .ROUND_ENDED) {
       this.gameManager.setGameStateRoundEnd();
-      currentGameState = Config.ROUND_ENDED; } 
+      currentGameState = Config.ROUND_ENDED;
+    }
   }
 
   handleUpdateInGameEnd() {

@@ -1,6 +1,5 @@
 //Homepage allows user to sign out of session or join a game
 import { AppwriteDAL } from "../../../services/AppwriteService.js";
-//import Config from "../../utils/Config.js";
 
 var dbLink = new AppwriteDAL(),
   logoutButton = document.getElementById(

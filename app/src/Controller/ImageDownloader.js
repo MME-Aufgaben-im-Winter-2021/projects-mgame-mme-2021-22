@@ -1,5 +1,5 @@
 import { Event, Observable } from "../utils/Observable.js";
-
+//fetches images from the json file
 class ImageDownloader extends Observable {
 
   constructor() {

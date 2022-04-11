@@ -16,9 +16,9 @@
             <div class="titlecol">
                 <div class="containter toppadding">
                     <div class="lobbytitle text-center">
-                         <text-center class="promptField text-center roundborder thememegame shadow-sm">THE MEME GAME</text-center>
+                        <text-center class="promptField text-center roundborder thememegame shadow-sm">THE MEME GAME</text-center>
                     </div>
-                    
+
                     <div class="row mt-2 pe-4 toppadding">
                         <div class="col text-center" id="copy">
                             <label class="lobbytoken shadow-sm" id="link"><input type="text" value="Lobby-ID" id="lobbyToken" readonly> </label>
@@ -136,34 +136,34 @@
                         </div>
                     </div>
                 </div>
-                
+
 
 
                 <div id="playingField" class="playingField container-fluid py-3 maxWidth">
                     <div class="field d-grid gap-3 maxWidth" style="grid-template-columns: 1fr 1fr 1fr;">
-                        <!-- Hier kommen die Memes rein_________________________________________________________________________________________ DIESER TEIL IST DOPPELT; UNTEN IST MEHR 1fr; KANN DAS HIER ALSO WEG? -->
+                        <!-- Hier kommen die Memes rein-->
                     </div>
                 </div>
             </div>
             <div id="progressField" class="container col-2 game-progress border border-dark rounded mx-2 my-2">
                 <div id="countdown">
-                    <div id="clock-canvas" >
+                    <div id="clock-canvas">
                         <div id='clock' class="davidclock">
                             <!--Clock No(1,2,....,12)-->
-                            
-                             <!--clock hands()-->
-                             <div class='hr-wrapper'>
+
+                            <!--clock hands()-->
+                            <div class='hr-wrapper'>
                                 <div class='clockhand hr' id="clocktimer"></div>
-                              </div>
-                              <div class='min-wrapper'>
+                            </div>
+                            <div class='min-wrapper'>
                                 <div class='clockhand min'></div>
-                              </div>
-                              <div class='sec-wrapper'>
+                            </div>
+                            <div class='sec-wrapper'>
                                 <div class='clockhand sec'></div>
-                              </div>
-                        
+                            </div>
+
                         </div>
-        
+
                     </div>
                 </div>
             </div>
@@ -207,7 +207,7 @@
                             <!-- Hier kommen die Keywords rein -->
                         </ul>
 
-                        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 " onsubmit="return false">
+                        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 " action="javascript:void(0)" method="post">
                             <input id="searchBar" type="text" class="form-control form-control-dark" placeholder="Search...">
                         </form>
 
@@ -278,9 +278,9 @@
         <div class="container text-center">
             <button id="leaveGame" type="button" class="btn btn-danger btn-lg">Leave Game</button>
         </div>
-        </div>
+    </div>
 
-        <script type="module" src="./src/Controller/LobbyController/Lobby.js"></script>
+    <script type="module" src="./src/Controller/LobbyController/Lobby.js"></script>
 </body>
 
 <template id="keyword-template">
