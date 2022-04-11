@@ -17,7 +17,6 @@ class RoundScoreboard {
   updateScoreboard(storyDocs, playerDocs) {
     //TO DO move calculation and appwrite call to roundendmanager
     this.roundScoreboard.innerHTML = "";
-    console.log(playerDocs);
     playerDocs.forEach(player => {
       
         let name = this.scoreTemplate.content.getElementById("username"),

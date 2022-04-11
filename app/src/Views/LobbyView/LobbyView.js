@@ -47,10 +47,9 @@ class LobbyView {
 
   updatePlayerList(playerNames) {
     //erase old playerlsit
-    while (this.playerList.childNodes.length > 5) {
+    while (this.playerList.childNodes.length > Config.PLAYER_LIST_UI_ELEMENTS) {
       this.playerList.removeChild(this.playerList.lastChild);
     }
-    console.log(playerNames);
     for (let player of playerNames) {
       if (player !== null) {
         let th = this.playerTemplate.content.querySelector("th"),

@@ -10,7 +10,7 @@ const Config = {
     MIN_ROUND_DURATION: 60, 
     DEFAULT_ROUND_DURATION: 120,
     MAX_ROUND_DURATION: 250,
-    RATING_DURATION: 5000,
+    RATING_DURATION: 10000,
     MAX_MEMES: 3,
     HAND_SIZE: 27,
     MAX_KEYWORDS: 6,
@@ -22,7 +22,8 @@ const Config = {
     POINTS_FOR_MEH: 128,
     POINTS_FOR_BAD: 1,
     DELAY: 1000,
-    MS_TO_S_FACTOR: 100,
+    MS_TO_S_FACTOR: 1000,
+    PLAYER_LIST_UI_ELEMENTS: 5,
     //ERROR CODES
     LOGIN_FAILED_ERROR: "email or password are incorrect",
     NO_SUCH_SESSION_ERROR: "This game is no longer available or token is wrong.",

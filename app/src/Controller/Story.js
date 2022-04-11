@@ -35,7 +35,6 @@ addPoints(points){
 
 }
 
-
 }
 
 export default Story;

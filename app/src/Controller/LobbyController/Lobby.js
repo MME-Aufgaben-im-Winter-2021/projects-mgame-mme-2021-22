@@ -1,7 +1,6 @@
 // players wait here for game start, host invites new players and edits settings
 import { AppwriteDAL } from "../../../services/AppwriteService.js";
 import Config from "../../utils/Config.js";
-import LobbyView from "../../Views/LobbyView/LobbyView.js";
 
 var 
   DAL = new AppwriteDAL(),
@@ -17,13 +16,12 @@ var
   //lobby token code
   tokenText = document.getElementById("lobbyToken");
 
-startButton.addEventListener("click", function (){ console.log("Startled game as host"); DAL.updateGameState(Config.GAME_STARTED);});
+startButton.addEventListener("click", function (){ DAL.updateGameState(Config.GAME_STARTED);});
 leaveButton.addEventListener("click", leaveLobby);
 tokenText.value = sessionData.$id;
 copyButton.addEventListener("click", copyToClipboard);
 
 function copyToClipboard() {
-  console.log("copytoClipboard");
   tokenText.select();
   navigator.clipboard.writeText(tokenText.value);
   //alert("Copied token to clipboard" + tokenText.value);
@@ -57,19 +55,3 @@ function leaveLobby() {
 }
 
 init();
-//subscribeGame();
-/*
-async function subscribeGame() {
-  //const state = await DAL.updateSession();
-  //playerList.updatePlayerList(state.UserIDs);
-  DAL.subscribe(updateGamestate);
-}
-
-function updateGamestate(payload){
-  console.log(payload.$id.toString());
-  console.log(window.localStorage.getItem("documentID"));
-  if(payload.$id.toString() === window.localStorage.getItem("documentID")){
-    lobbyView.updatePlayerList(payload.UserIDs);
-    console.log(lobbyView);
-  }
-}*/
