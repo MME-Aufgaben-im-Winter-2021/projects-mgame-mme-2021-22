@@ -209,7 +209,6 @@ class GameManager extends Observable {
     console.log(this.playingField.playingField);
     this.playingField.playingField.innerHTML = "";
     for (const meme of fieldArray) {
-      //console.log(fieldArray);
       this.playingField.playingField.appendChild(meme.body);
     }
     this.storePlayedMemes();
@@ -221,6 +220,7 @@ class GameManager extends Observable {
     this.updatePlayingField();
   }
 
+  
   storePlayedMemes() {
     window.localStorage.setItem("playedMemes", JSON.stringify(fieldArray));
   }
@@ -260,6 +260,7 @@ class GameManager extends Observable {
       for(let meme of memes){ memeIds.push(meme.id);}
       this.DAL.uploadMemeStory(memeIds, roundCount);
       Config.HAS_SUBMITTED = true;
+      this.submitButton.disabled = true;
     }
     
   }
@@ -285,11 +286,10 @@ class GameManager extends Observable {
 
     handArray = [];
     fieldArray = [];
-
+    this.submitButton.disabled = false;
     this.updatePlayingField();
     this.updateHand();
     this.gameProgressCard.start();
-    //this.setPrompt(this.prompt.generatePrompt());
     this.playingField.gameView.hidden = false;
     this.playingField.playingFieldArea.hidden = false;
     //this.promptField.hidden = true;
@@ -302,6 +302,7 @@ class GameManager extends Observable {
       let roundDuration = Number(this.DAL.getRoundDuration()) * 100, prompt = this.prompt.generatePrompt();
       this.DAL.updatePrompt(prompt);
       console.log("Round will go " + roundDuration +"s");
+      //TO DO ADD ROUND DUR TO CLOCK ANIM
       setTimeout(this.hostSetGameStateRate.bind(this), roundDuration);
     }
 

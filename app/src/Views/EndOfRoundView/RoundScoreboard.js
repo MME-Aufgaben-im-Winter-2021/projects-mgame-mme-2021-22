@@ -1,4 +1,5 @@
 /* eslint-disable one-var */
+//Scoreboard View displays round score or final score
 class RoundScoreboard {
 
   constructor() {

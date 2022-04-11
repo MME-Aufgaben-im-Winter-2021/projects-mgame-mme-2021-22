@@ -51,7 +51,7 @@ class RatingManager{
         this.playRatingSound(true);
         console.log("votedGood");
         //updateScore
-        this.DAL.updateScore(256, this.currentDocument);
+        this.DAL.updateScore(255, this.currentDocument);
         this.disableVoting();
       }
     
@@ -66,7 +66,7 @@ class RatingManager{
         this.playRatingSound(false);
         console.log("votedBAD");
         //updateScore
-        this.DAL.updateScore(32, this.currentDocument);
+        this.DAL.updateScore(1, this.currentDocument);
         this.disableVoting();
       }
 
