@@ -10,10 +10,10 @@
 
 **Nicht implementierte Funktionen:**</br> 
 - Die Uhr während der Runde ist nicht abgestimmt auf die Rundendauer, da es uns (unter Anderem aus Zeitgründen) nicht möglich war, eine flexible Uhr zu erstellen 
-- Die Spielerliste am Ende des Spiels wird nicht richtig sortiert 
+- Die Spielerliste am Ende des Spiels wird nicht richtig nach Punktzahl sortiert 
 - Der Nutzer kann seine eigene Abgabe bewerten was aus Zeitgründen nicht behoben worden konnte
 - Es wurde kein Tutorial eingefügt, da dies schon im ReadMe steht
-- Man kann die Memes nicht am Ende der Runde sehen, da mann sie während der Runde schon sieht.
+- Memepodium am Ender jeder Runde uns Gesamtrangliste am Ende des Spiels konnte aus Zeitgründen nicht mehr implementiert werden
 - Es gibt keinen Pausebutton und keine Bereitschaftsanzeige, da diese mit der Uhr hätten implementiert werden sollen
-- Es giebt keine Spielmodi, da diese zu zeitintensiev gewesen wären
+- Nur ein Spielmodus von 2 Geplanten wurde umgesetzt
 - Die Anzahl der verfügbaren Memes beschränken sich auf 1400, da wir keine API nutzen, da diese zum Zeitpunkt der Bewertung bereits offline sein könnte.
