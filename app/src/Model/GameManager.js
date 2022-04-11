@@ -19,6 +19,7 @@ import { AppwriteDAL } from "../../services/AppwriteService.js";
 import RatingManager from "./RatingManager.js";
 import RoundScoreboard from "../Views/EndOfRoundView/RoundScoreboard.js";
 import RoundEndManager from "./RoundEndManager.js";
+import GameEndManager from "./GameEndManager.js";
 
 let submitButton = document.querySelector(".submit"),
   refreshButton = document.querySelector(".refresh"),
@@ -122,7 +123,6 @@ class GameManager extends Observable {
 
     let randomCharacter = alphabet[Math.floor(Math.random() * alphabet.length)],
         data = this.imageDownloader.fetchData(randomCharacter,this.getRandomIntBetween0AndMax(Config.MAX_JSON_SEARCH_STARTPOINT));
-        console.log(data);
         /*
     for (let i = 0; i < Config.HAND_SIZE; i++) {
       if (i< data.length){
@@ -207,7 +207,6 @@ class GameManager extends Observable {
   }
 
   updatePlayingField() {
-    console.log(this.playingField.playingField);
     this.playingField.playingField.innerHTML = "";
     for (const meme of fieldArray) {
       this.playingField.playingField.appendChild(meme.body);
@@ -221,7 +220,6 @@ class GameManager extends Observable {
     this.updatePlayingField();
   }
 
-  
   storePlayedMemes() {
     window.localStorage.setItem("playedMemes", JSON.stringify(fieldArray));
   }
@@ -261,7 +259,7 @@ class GameManager extends Observable {
       for(let meme of memes){ memeIds.push(meme.id);}
       this.DAL.uploadMemeStory(memeIds, roundCount);
       Config.HAS_SUBMITTED = true;
-      this.submitButton.disabled = true;
+      submitButton.disabled = true;
     }
     
   }
@@ -274,20 +272,20 @@ class GameManager extends Observable {
     this.ratingView.ratingField.hidden = false;
     this.hand.handArea.hidden = true;
     //
-    let memes = await this.DAL.downloadMemeStories(),
-    filteredMemes = memes.filter(meme => meme.Session === window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY) && meme.InRoundPlayed === roundCount),
-    ratingManager = new RatingManager(filteredMemes);
-    console.log(filteredMemes);
+    let memes = await this.DAL.downloadMemeStories(roundCount),
+    ratingManager = new RatingManager(memes);
+    console.log(memes);
     ratingManager.displayMeme();
   }
   /*
    * HOST FUNCTIONS; 
    */
   setGameStatePlay() {
-
+    console.log(roundCount);
+    submitButton.disabled = false;
+    Config.HAS_SUBMITTED = false;
     handArray = [];
     fieldArray = [];
-    this.submitButton.disabled = false;
     this.updatePlayingField();
     this.updateHand();
     this.gameProgressCard.start();
@@ -306,7 +304,6 @@ class GameManager extends Observable {
       //TO DO ADD ROUND DUR TO CLOCK ANIM
       setTimeout(this.hostSetGameStateRate.bind(this), roundDuration);
     }
-
     this.fillHandWithRandomMemes();
   }
 
@@ -317,8 +314,16 @@ class GameManager extends Observable {
 
   setGameStateRoundEnd() {
     this.playingField.gameView.hidden = true;
-    let roundEndManager = new RoundEndManager();
+    console.log(this.DAL.getRoundCount());
+    if(roundCount >= this.DAL.getRoundCount()){
+      let gameEndManager = new GameEndManager();
+      gameEndManager.showFinalScore(roundCount);
+    }else{
+      let roundEndManager = new RoundEndManager();
+      roundEndManager.showRoundScore(roundCount);
+    }
     
+    roundCount++;
       //let story = new Story(currentPrompt, fieldArray, "Best Story: " + this.getCurrentRoundWinningPlayerName(), 0);
       //this.roundScoreboard.storyListView.appendChild(story.body);
       //document.getElementById("titleOfTheStory").innerHTML=currentPrompt;
@@ -331,11 +336,8 @@ class GameManager extends Observable {
 
   setGameStateGameEnd() {
     this.playingField.gameView.hidden = true;
-    this.finalScore.endGameScreen.hidden = false;
-    this.finalScore.addMemes(fieldArray);
-    let story = new Story(currentPrompt, fieldArray, "PlayerGameStateEnd", 0);
-    this.roundScoreboard.storyListView.appendChild(story.body);
-
+    let gameEndManager = new GameEndManager();
+    gameEndManager.showFinalScore();
   }
 }
 export default GameManager;

@@ -74,6 +74,7 @@ class Synchronizer {
     console.log("Updated Prompt");
     this.gameManager.setPrompt(payload.Prompt);
     } else {
+      console.log("Switched to Round through Update");
       DAL.setRoundCount(payload.RoundCount);
       DAL.setRoundDuration(payload.RoundDuration);
       lobbyView.setHidden(true);
@@ -92,7 +93,7 @@ class Synchronizer {
 
   handleUpdateInRoundEnd() {
     if (currentGameState !== Config
-    .ROUND_ENDED) { console.log("Round ended"); this.gameManager.setGameStateRoundEnd(); currentGameState = Config.ROUND_ENDED; } 
+    .ROUND_ENDED) { console.log("Round ended"); this.gameManager.setGameStateRoundEnd(); currentGameState = Config.ROUND_ENDED; } else{console.log("Update in Round end ignored!");}
   }
 
   //Host ends round early if all players submit meme before timer runs out

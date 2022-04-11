@@ -25,7 +25,6 @@ class LobbyView {
 
   updateSettings(rounds, duration) {
     if (rounds !== null) {
-      console.log("new round count" + rounds);
       if (rounds <= Config.MAX_ROUNDS && rounds >= Config.MIN_ROUNDS) {
         this.roundCountInput.value = rounds;
         this.roundCountSlider.value = rounds;
@@ -36,7 +35,6 @@ class LobbyView {
           .MIN_ROUNDS; }
     }
     if (duration !== null) {
-      console.log("new round duration");
       if (duration <= Config.MAX_ROUND_DURATION && duration >= Config
         .MIN_ROUND_DURATION) { this.roundLengthInput.value = duration;
         this.roundLengthSlider.value = duration; }
@@ -50,12 +48,11 @@ class LobbyView {
   updatePlayerList(playerNames) {
     //erase old playerlsit
     while (this.playerList.childNodes.length > 5) {
-      console.log(this.playerList.childNodes.length);
       this.playerList.removeChild(this.playerList.lastChild);
     }
+    console.log(playerNames);
     for (let player of playerNames) {
       if (player !== null) {
-        console.log(player);
         let th = this.playerTemplate.content.querySelector("th"),
           td = this.playerTemplate.content.querySelectorAll("td");
         th.textContent = "PlayerNumber";

@@ -1,11 +1,11 @@
 /* eslint-disable no-alert */
+/* global Appwrite, Query */
 import Config from "../src/utils/Config.js";
 import Synchronizer from "./Synchronizer.js";
 
 // Init your Web SDK
 // eslint-disable-next-line no-undef
 const appwrite = new Appwrite();
-
 
 appwrite
   .setEndpoint(
@@ -63,12 +63,9 @@ class AppwriteDAL {
   }
 
   async hostGame() {
-    let team = await this.createTeam(),
-     // teamId = "team:" + team.$id,
-      promise = await this.sdk.database.createDocument(Config
+    let promise = await this.sdk.database.createDocument(Config
         .SESSIONS_COLLECTION_ID,
         "unique()", {
-          "SessionID": "test_session",
           "UserIDs": [
             this.getUsername(),
           ],
@@ -76,19 +73,20 @@ class AppwriteDAL {
           "RoundDuration": Config.DEFAULT_ROUND_DURATION,
           "GameState": "lobby",
         }, ["role:all"], ["role:all"]);
-
+        
     try {
-      window.localStorage.setItem(Config.TEAM_STORAGE_KEY, team.$id);
       window.localStorage.setItem(Config.DOCUMENT_STORAGE_KEY, promise.$id);
       window.localStorage.setItem(Config.ROLE_KEY, Config.HOST_ROLE);
+      let player = await this.sdk.database.createDocument(Config.PLAYER_COLLECTION_ID, "unique()", {"PlayerName": this.getUsername(), "PlayerScore": 0, "GameSession": getDocumentIDFromLocalStorage()});
+      console.log(player);
     } catch (error) { console.log(error); }
+    
     return promise;
   }
 
-  async createTeam() {
-    let teamName = this.getUsername() + "HostsGame",
-      promise = await this.sdk.teams.create("unique()", teamName);
-    return promise;
+  async getPlayers(){
+    let promise = await this.sdk.database.listDocuments(Config.PLAYER_COLLECTION_ID, [Query.equal("GameSession", getDocumentIDFromLocalStorage())], 100);
+      return promise.documents;
   }
 
   getUsername() {
@@ -111,7 +109,9 @@ class AppwriteDAL {
       let promise = this.sdk.database.getDocument(
         Config.SESSIONS_COLLECTION_ID, id);
       promise.then(function(response) {
+        console.log(response);
         sync.handleUpdateInLobby(response);
+        
       }, function(error) {
         alert(error);
       });
@@ -136,6 +136,8 @@ class AppwriteDAL {
     let usersInGame = promise.UserIDs,
       user = this.getUsername();
     usersInGame.push(user);
+
+    //update session document with playername
     // eslint-disable-next-line one-var
     let update = this.sdk.database.updateDocument(Config
       .SESSIONS_COLLECTION_ID, promise
@@ -144,6 +146,8 @@ class AppwriteDAL {
       window.localStorage.setItem(Config.ROLE_KEY, Config.PLAYER_ROLE);
     }, function(error) { console.log(update);
       alert(error); });
+
+    this.sdk.database.createDocument(Config.PLAYER_COLLECTION_ID, "unique()", {"PlayerName": user, "PlayerScore": 0, "GameSession": getDocumentIDFromLocalStorage()});
     return update;
   }
 
@@ -196,6 +200,10 @@ class AppwriteDAL {
     return promise;
   }
 
+  updatePlayerScore(id, score){
+    this.sdk.database.updateDocument(Config.PLAYER_COLLECTION_ID, id, {"PlayerScore": score});
+  }
+  
   updateSessionWithSettings(rounds, duration) {
     let sync = new Synchronizer();
     if (rounds !== null) {
@@ -247,9 +255,10 @@ class AppwriteDAL {
     //to do handle error
   }
 
-  async downloadMemeStories() {
+  async downloadMemeStories(round) {
     let promise = await this.sdk.database.listDocuments(Config
-      .MEMESTORY_COLLECTION_ID, [], 100);
+      .MEMESTORY_COLLECTION_ID, [Query.equal("Session", getDocumentIDFromLocalStorage()),
+    Query.equal("InRoundPlayed", round)], 100);
     return promise.documents;
   }
 
@@ -263,7 +272,7 @@ class AppwriteDAL {
     window.localStorage.setItem("roundCount", count);
   }
   getRoundCount() {
-    window.localStorage.getItem("roundCount");
+    return window.localStorage.getItem("roundCount");
   }
 }
 

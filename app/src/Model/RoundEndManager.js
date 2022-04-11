@@ -8,15 +8,22 @@ class RoundEndManager {
         this.roundScoreboard = new RoundScoreboard(); //View
         this.roundScoreboard.scoreboardView.hidden = false;
         this.continueButton = document.getElementById("continue");
-        this.continueButton.addEventListener("click", this.DAL.updateGameState(Config.GAME_STARTED));
+        this.continueButton.addEventListener("click", this.continueToNextRound.bind(this));
         if(window.localStorage.getItem(Config.ROLE_KEY) === Config.PLAYER_ROLE){
             this.continueButton.disabled = true;
         }
     }
 
+    continueToNextRound(){
+        this.roundScoreboard.scoreboardView.hidden = true;
+        this.DAL.updateGameState(Config.GAME_STARTED);
+    }
+
     async showRoundScore(round){
         //get all docs -> filter for player scores -> get player array
-        let docArr = await this.DAL.downloadMemeStories(), filtered = docArr.filter(doc => doc.Session === window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY));
+        let storiesOfLastRound = await this.DAL.downloadMemeStories(round), 
+        playerDocs = await this.DAL.getPlayers(), filteredPlayers = playerDocs.filter(player => player.GameSession === window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY));
+        this.roundScoreboard.updateScoreboard(storiesOfLastRound, filteredPlayers);
     }
 }
 

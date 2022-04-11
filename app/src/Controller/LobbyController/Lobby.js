@@ -8,7 +8,6 @@ var
   leaveButton = document.getElementById("leave"),
   sessionData = await DAL.updateSession(),
   copyButton = document.getElementById("copyToken"),
-  lobbyView = new LobbyView(),
   //Setting sliders and input fields
   roundCountRangeSetting = document.getElementById("round-count"),
   roundDurationRangeSetting = document.getElementById("round-length"),

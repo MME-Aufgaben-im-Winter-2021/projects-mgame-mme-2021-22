@@ -1,8 +1,12 @@
 /* eslint-disable one-var */
+
+import { AppwriteDAL } from "../../../services/AppwriteService.js";
+
 //Scoreboard View displays round score or final score
 class RoundScoreboard {
 
   constructor() {
+    this.DAL = new AppwriteDAL();
     this.roundScoreboard = document.getElementById("roundScoreboard");
     this.scoreTemplate = document.getElementById("userWithScore");
     this.scoreboardView = document.getElementById("roundEnd");
@@ -10,18 +14,23 @@ class RoundScoreboard {
 
   }
   
-  updateScoreboard(players) {
+  updateScoreboard(storyDocs, playerDocs) {
+    //TO DO move calculation and appwrite call to roundendmanager
     this.roundScoreboard.innerHTML = "";
-    players.forEach(player => {
-      if (player !== null) {
+    console.log(playerDocs);
+    playerDocs.forEach(player => {
+      
         let name = this.scoreTemplate.content.getElementById("username"),
-          points = this.scoreTemplate.content.getElementById("points");
-        name.content = player.name;
-        points.content = player.points;
+          points = this.scoreTemplate.content.getElementById("points"),
+          playerStory = storyDocs.find(story => story.Player === player.PlayerName);
 
+        name.innerHTML = player.PlayerName;
+        points.innerHTML = player.PlayerScore + " ( +" + playerStory.Score + ")";
+        let newScore = player.PlayerScore + playerStory.Score;
+        this.DAL.updatePlayerScore(player.$id, newScore);
         let clone = document.importNode(this.scoreTemplate.content, true);
         this.roundScoreboard.appendChild(clone);
-      }
+      
     });
   }
 

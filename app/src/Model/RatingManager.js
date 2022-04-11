@@ -21,21 +21,16 @@ class RatingManager{
     }
 
     startRating(){
-        this.enabelVoting();
+        this.enableVoting();
         //set views
-        console.log("Start Rating Round: " + this.currentRound);
-        console.log(performance.now());
-        console.log(this.stories[this.currentRound]);
         let memes = this.stories[this.currentRound].MemeStories;
         this.currentDocument = this.stories[this.currentRound].$id;
-        console.log(this.currentDocument);
         this.ratingView.updateView(memes);
         ++this.currentRound;
         setTimeout(this.displayMeme.bind(this), Config.RATING_DURATION);
     }
 
     displayMeme(){
-        console.log("Display meme if " + this.currentRound + " < " + this.ratingRounds);
         if (this.currentRound < this.ratingRounds){
             this.startRating();
         }else{
@@ -49,14 +44,12 @@ class RatingManager{
 
     votedGood() {
         this.playRatingSound(true);
-        console.log("votedGood");
         //updateScore
         this.DAL.updateScore(255, this.currentDocument);
         this.disableVoting();
       }
     
       votedMeh() {
-        console.log("votedMeh");
         //upddateScore
         this.DAL.updateScore(128, this.currentDocument);
         this.disableVoting();
@@ -64,7 +57,6 @@ class RatingManager{
     
       votedBad() {
         this.playRatingSound(false);
-        console.log("votedBAD");
         //updateScore
         this.DAL.updateScore(1, this.currentDocument);
         this.disableVoting();
@@ -75,7 +67,7 @@ class RatingManager{
           this.mehButton.disabled = true;
           this.badButton.disabled = true;
       }
-      enabelVoting(){
+      enableVoting(){
         this.goodButton.disabled = false;
         this.mehButton.disabled = false;
         this.badButton.disabled = false;

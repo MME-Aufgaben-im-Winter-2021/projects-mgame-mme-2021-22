@@ -1,3 +1,5 @@
+
+
 /* eslint-disable one-var */
 class FinalScore{
 
@@ -10,22 +12,24 @@ class FinalScore{
         this.memeView3 = document.getElementById("bestMeme3");
     }
 
-    updateScoreboard(players){
+    updateScoreboard(players, stories){
         players.forEach(player => {
-            if(player !==null){
                 let name = this.scoreTemplate.content.getElementById("username"),
-                points = this.scoreTemplate.content.getElementById("points");
-                name.content = player.name;
-                points.content = player.points;
+                points = this.scoreTemplate.content.getElementById("points"),
+                playerStory = stories.find(story => story.Player === player.PlayerName);
 
+                name.innerHTML = player.PlayerName;
+
+                points.innerHTML = player.PlayerScore + playerStory.Score;
+                
                 let clone = document.importNode(this.scoreTemplate.content, true);
                 this.scoreBoard.appendChild(clone);
-            }
+            
         });
     }
     sortByPoints(players){
     let sortedPlayers = [];
-
+        
     for(let i = 0; i<players.length; i++){
             if(i === 0){
                 sortedPlayers.push(players[i]);
