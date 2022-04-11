@@ -1,7 +1,7 @@
 /* Beispiel für die Einbindung zusätzlicher Schriftarten via Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap');
 
-
+html, body {margin: 0; height: 100%; overflow: hidden}
 /* Beispiel für die einfache Einbindung eines Farbschema, generiert auf coolors.co */
 :root {
     --turquoise-green: #b9e3c6ff;
@@ -23,7 +23,7 @@
     --red-triade: #641b14;
     --green-comp: #B6D615;
 
-    
+    /*material.io oriented color scheme */
     --primary: #008351;
     --prim-light: #4ab47e;
     --prim-dark: #005528;
@@ -55,47 +55,16 @@ body {
 }
 
 
-  
-  .clock {
-    position: relative;
-    width: 210px;
-    margin: 15px auto;
+.big{
+    width: 100%;
+    height: 20%;
+    margin: 0 auto;
 }
 
-.clock .face {
-    width: 200px;
-    height: 200px;
-    border-style: solid;
-    border-width: 5px;
-    border-color: #010104;
-    border-radius: 50%;
-    background-color: #FFF;
-}
-
-.clock .center {
-    position: absolute;
-    top: 100px;
-    left: 100px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #010104;
-}
-
-.clock .handle {
-    position: absolute;
-    width: 4px;
-    height: 100px;
-    top: 20px;
-    left: 103px;
-    transform-origin: 50% 85%;
-    background: #010104;
-    transform: rotateZ(0deg);
-    
-}
-
-.clock .handle-animated {
-    animation: rotate 60s infinite linear;
+.medium{
+    width: 100%;
+    height: 10%;
+    margin: 0 auto;
 }
 
 .ui {
@@ -119,6 +88,7 @@ body {
     background-color: var(--prim-dark);
 }
 
+
 .bgd-light {
     background-color: var(--prim-light);
 }
@@ -141,9 +111,14 @@ img {
 }
 
 .picture {
-    height: 200px;
-    width: 200px;
-   }
+    height: 230px;
+    width: 230px;
+}
+
+.currentStandingPicture{
+    height: 150;
+    width: 150px;
+}
 
 /*this fixes website shaking because of scrollbar popping up in chrome*/
 ::-webkit-scrollbar { 
@@ -158,3 +133,234 @@ img {
     width: 5cm;
     height: 5cm;
 }
+
+.promptField {
+    font-weight: bold;
+    font-size: x-large;
+    color: white;
+    background-color: black;
+}
+
+.padding-bottom{
+    padding-bottom:100px;
+}
+
+.maxWidth {
+    max-width: 850px;
+}
+
+.ratingWidth{
+    padding-top: 10px;
+    padding-left: 9%;
+    max-width: 900px; 
+}
+
+.leftcol{
+    offset-position: 500px;
+}
+
+.col{
+    position:relative;
+    display: inline-block;
+    float:left;
+    padding-left: 20px;
+}
+
+
+.titlecol{
+    position:relative;
+    display: inline-block;
+    float:left;
+}
+
+.firstcol{
+    position:relative;
+    display: inline-block;
+    float:left;
+    padding-right:70px;
+}
+
+.secondcol{
+    position:relative;
+    display: inline-block;
+    float:left;
+    padding-left: 70px;
+}
+
+
+.thirdcol{
+    position:relative;
+    display: inline-block;
+    float:left;
+    padding-left:120px;
+}
+
+.rateThisStoryBox {
+    background-color: var(--sec-dark);
+    color: white;
+}
+
+.ratingScaleMeme{
+    border-radius: 10%;
+}
+
+.howWouldYouRateText{
+    padding: 30px;
+}
+
+.signinbutton{
+    color: white;
+}
+
+.toppadding{
+    padding-top: 50px;
+}
+
+.toppadding_small{
+    padding-top: 20px;
+}
+
+.toppadding_large{
+    padding-top: 150px;
+}
+
+.currentStandingPic1{
+    padding-left: 35%;
+}
+.currentStandingPic2{
+    padding-left: 12%;
+    padding-right: 0%;
+}
+.currentStandingPic3{
+    padding-right: 0%;
+    padding-left: 0%;
+}
+
+.currentStandingImageContainer{
+    max-width: 90%;
+}
+
+.currentStandings{
+    margin-top:0px;
+    padding-top:0px;
+
+    margin-bottm:0px;
+    padding-bottom:0px;   
+}
+
+.noliststyle{
+    list-style: none;
+}
+
+.leftpadding{
+    padding-left: 20px;
+}
+
+.slider{
+    padding-top: 5px;
+}
+
+.mgamepresents{
+    padding-top: 50px;
+    font-size: 30px;
+    color: var(--sec-dark-text);
+}
+
+.thegame{
+    font-weight: bold;
+    font-size: 70px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    color: var(--sec-dark-text);
+}
+
+.form-join {
+    width: 100%;
+    max-width:600px;
+    padding: 15px;
+    margin: 100 auto;
+  }
+
+.form-join .form-control {
+position: relative;
+box-sizing: border-box;
+height: auto;
+padding: 10px;
+font-size: 16px;
+}
+.form-join .form-control:focus {
+z-index: 2;
+}
+
+.whitetext{
+    color:  white;
+}
+
+.blacktext{
+    color: black;
+}
+
+.yellowbackground{
+    background-color: yellow;
+}
+
+.copyright{
+    padding-top: 130px;
+}
+
+.roundborder{
+    border-radius: 2%
+}
+
+.thememegame{
+    padding: 30px;
+    font-weight: bold;
+    font-size: 70px;
+    color:white;
+}
+
+.startGameDivider{
+    padding-left: 390px;
+}
+
+.davidclock{
+    background: rgb(255, 0, 0);
+    border: 15px solid #222;
+    border-radius: 50%;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+
+.sec-wrapper {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+  }
+
+.hr {
+    background: rgb(146, 146, 146);
+    left: 84px;
+    width: 13px;
+    height: 105px;
+    border-radius: 10px;
+    animation: rotateHand 43200s linear infinite;
+}
+
+.hr:after {
+    background: #222;
+    border-radius: 50%;
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -8px;
+    width: 13px;
+    height: 16px;
+  }
+
+.clockhand {
+    position: absolute;
+    bottom: 50%;
+    transform-origin: 50% 100%;
+  }
