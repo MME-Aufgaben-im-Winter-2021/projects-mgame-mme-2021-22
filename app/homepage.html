@@ -1,5 +1,6 @@
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -18,34 +19,29 @@
     <script src="https://cdn.jsdelivr.net/npm/appwrite@7.0.0"></script>
     <!-- Custom styles for this template -->
     <link href=".//resources/css/style.css" rel="stylesheet">
-  </head>
+</head>
 
-  <body class="text-center body">
-    <div class="row align-items-center " >
-       <div class="column col-4 bgd-primary">
-       </div>
-       <div class="column col-4  d-flex align-items-center justify-content-center bgd-dark" style="height: 100vh;">
-          <div class="container ">
-             <div class="hellopart promptField roundborder">
-              <div style="font-size:2vw" id="hello" class="container text-center">Hello,</div>
-              <div style="font-size:3vw" id="username" class="container text-center"> </div>
+<body class="text-center body">
+   <button id="logout" style="font-size:1vw" type="button" class="btn btn-default btn-sm position-absolute top-0 end-0 ">
+      <span class="glyphicon glyphicon-log-out"></span> Log out
+  </button>
+    <div class="row align-items-center ">
+        <div class="column col-4 bgd-primary">
+        </div>
+        <div class="column col-4  d-flex align-items-center justify-content-center bgd-dark" style="height: 100vh;">
+            <div class="container ">
+                <div class="hellopart roundborder">
+                    <div style="font-size:2vw" id="hello" class="container text-center">Hello,</div>
+                    <div style="font-size:3vw" id="username" class="container text-center"> </div>
+                </div>
+                     <button type="button" id="host" style="font-size:2vw" class="w-100 btn btn-dark btn-lg whitetext my-2">Create Game</button>
+                    
+                    <button type="button" style="font-size:2vw" id="join" class="w-100 btn btn-dark btn-lg whitetext my-2" type="submit">Join Game</button>
+                    <input type="text" id="token" class="form-control w-100 my-2" placeholder="Enter Lobby-ID here" required="" autofocus="">
+                <script type="module" src="./src/Controller/HomeController/Home.js"></script>
             </div>
-             <button id="logout" style="font-size:1vw" type="button" class="btn btn-default btn-sm position-absolute top-0 end-0 ">
-             <span class="glyphicon glyphicon-log-out"></span> Log out
-             </button>
-             
-             <form class="form-join">
-                <button type="button"id="host" style="font-size:2vw" class="w-100 btn bgd-dark-s btn-lg whitetext">Create a new Lobby</button>
-             </form>
-             <hr style="height:5px;border-width:1;color:white;background-color:white">
-             <form class="form-join text-center">
-                <input type="text" id="token" class="form-control" placeholder="Enter Lobby-ID here" required="" autofocus="">
-                <button type="button" style="font-size:2vw" id="join" class="w-100 btn bgd-dark-s btn-lg whitetext" type="submit">Join existing Lobby</button>
-             </form>
-             <script type="module" src="./src/Controller/HomeController/Home.js"></script>
-          </div>
-       </div>
-       <div class="column col-4 body"></div>
+        </div>
+        <div class="column col-4 body"></div>
     </div>
  </body>
  </html>
