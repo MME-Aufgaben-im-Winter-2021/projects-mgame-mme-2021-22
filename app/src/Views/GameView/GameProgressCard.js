@@ -7,35 +7,30 @@ class GameProgressCard
     
     
 
-    constructor(){
+    constructor(timeLeft = 12.0){
     this.progressField = document.getElementById("progressField");
-    /*
+    
     this.canvas = document.getElementById("canvas");
     this.ctx = document.getElementById("canvas").getContext("2d");
     this.clockMagnifyFactor = 0.8;
-    this.timeLeft = 12; // in seconds
+    this.timeLeft = timeLeft; // in seconds
     this.canvasUpdateDelayRate = 1000; //canvas gets updated every 1000 ms
-    this.radius = (document.getElementById("canvas").height / 2);*/
+    this.radius = (document.getElementById("canvas").height / 2);
     //this.clockEl = document.querySelector(".clock");
     //this.clockHandle = this.clockEl.querySelector(".handle");
-
-
+    this.ctx.translate(this.radius/this.clockMagnifyFactor, this.radius); // setting central point for clock relative to canvas
+    this.radius = this.radius * 0.90 * this.clockMagnifyFactor;
+    this.drawClock();
+    this.setInterval(this.drawClock, this.canvasUpdateDelayRate);
     }
-   /* ctx.translate(radius/clockMagnifyFactor, radius); // setting central point for clock relative to canvas
-    radius = radius * 0.90 * clockMagnifyFactor;
-
-
-    drawClock();
-    setInterval(drawClock, canvasUpdateDelayRate);
-
 
 
     drawClock() {
-        ctx.arc(0, 0, radius, 0 , 2 * Math.PI);
-        ctx.fillStyle = "white";
-        ctx.fill();
-        drawFace(ctx, radius);
-        drawTime(ctx, radius);
+        this.ctx.arc(0, 0, this.radius, 0 , 2 * Math.PI);
+        this.ctx.fillStyle = "white";
+        this.ctx.fill();
+        this.drawFace(this.ctx, this.radius);
+        this.drawTime(this.ctx, this.radius);
     }
 
 
@@ -64,23 +59,23 @@ class GameProgressCard
 
 
     drawTime(ctx, radius) {
-        width = radius*0.02;
-        length = radius*0.85;
-        pos = ((60-timeLeft)*Math.PI/30);
+        this.width = radius*0.02;
+        this.length = radius*0.85;
+        this.pos = ((60-this.timeLeft)*Math.PI/30);
         ctx.beginPath();
-        ctx.lineWidth = width;
+        ctx.lineWidth = this.width;
         ctx.lineCap = "round";
         ctx.moveTo(0,0);
-        ctx.rotate(pos);
+        ctx.rotate(this.pos);
         ctx.lineTo(0, -length);
         ctx.stroke();
-        ctx.rotate(-pos);
-        timeLeft--;
-        if(timeLeft===0){
+        ctx.rotate(-this.pos);
+        this.timeLeft--;
+        if(this.timeLeft===0){
 
         }
     }
-*/
+
     start() {
         //this.clockHandle.classList.add("handle-animated");
     }
