@@ -61,7 +61,6 @@ class GameManager extends Observable {
     searchBar.addEventListener("keydown", () => this.delay(Config.DELAY).then(() => this.onSearch()));
     this.fillHandWithRandomMemes();
     
-
     this.initClock();
     this.intervalID = window.setInterval(this.updateClock, 1000);
     Object.freeze(this);
