@@ -22,8 +22,6 @@ class FinalScore{
 
                     points.innerHTML = player.PlayerScore;
                     }
-                
-                
                 let clone = document.importNode(this.scoreTemplate.content, true);
                 this.scoreBoard.appendChild(clone);
             

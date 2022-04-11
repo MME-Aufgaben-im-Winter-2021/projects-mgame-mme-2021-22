@@ -25,6 +25,8 @@ class AppwriteDAL {
     AppwriteDAL.instance = this;
   }
 
+  //create an account with appwrite
+  //some pages check for valid login/acc before letting you open it
   register(nickname, email, password) {
     this.sdk.account.create("unique()", email, password,
       nickname);
@@ -44,6 +46,8 @@ class AppwriteDAL {
     });
   }
 
+  //client subscribes to all Session Documents 
+  //callback from Synchronizer handles payload
   subscribe() {
     let channel = "collections." + Config.SESSIONS_COLLECTION_ID +
       ".documents",
@@ -58,6 +62,8 @@ class AppwriteDAL {
 
   }
 
+  //Player opens Session Document and sets himself host in localStorage
+  //Player creates Player Doc linked to Session ID
   async hostGame() {
     let promise = await this.sdk.database.createDocument(Config
       .SESSIONS_COLLECTION_ID,
@@ -85,6 +91,7 @@ class AppwriteDAL {
     return promise;
   }
 
+  //Get all player documents of this session from appwrite db
   async getPlayers() {
     let promise = await this.sdk.database.listDocuments(Config
       .PLAYER_COLLECTION_ID, [Query.equal("GameSession",
@@ -92,19 +99,25 @@ class AppwriteDAL {
     return promise.documents;
   }
 
+  //get current username, game session persistent only
   getUsername() {
     return window.localStorage.getItem("username");
   }
 
+  //Update Session Document in Appwrite DB with Round Prompt
   updatePrompt(prompt) {
     this.sdk.database.updateDocument(Config.SESSIONS_COLLECTION_ID,
       getDocumentIDFromLocalStorage(), { "Prompt": prompt });
   }
+
+  //Update Session Document in Appwrite DB with Game State (usually host only)
   updateGameState(state) {
     this.sdk.database.updateDocument(Config.SESSIONS_COLLECTION_ID,
       getDocumentIDFromLocalStorage(), { "GameState": state });
   }
 
+  //Update client, usually called once manually after first entry into game session
+  //before subscription kicks in
   async updateSession() {
     let id = window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY),
       sync = new Synchronizer();
@@ -123,6 +136,8 @@ class AppwriteDAL {
     return false;
   }
 
+  //join existing Session with Token, set yourself as player
+  //create player Document linked with Session ID
   async joinSession(token) {
     let promise = await this.sdk.database.getDocument(Config
       .SESSIONS_COLLECTION_ID,
@@ -156,6 +171,7 @@ class AppwriteDAL {
     return update;
   }
 
+  //logout and clear localStorage
   logout() {
     this.sdk.account.deleteSession("current").then(function() {
       window.localStorage.clear();
@@ -165,6 +181,8 @@ class AppwriteDAL {
     });
   }
 
+  //as host remove all session files from app db
+  // file removal now obsolete since query gets only necessary data and 100 doc limit no longer dangerous to game functionality 
   async leaveLobby() {
     if (window.localStorage.getItem(Config.ROLE_KEY) === Config.HOST_ROLE) {
       this.sdk.database.deleteDocument(Config.SESSIONS_COLLECTION_ID,
@@ -193,7 +211,7 @@ class AppwriteDAL {
     }
 
   }
-
+//get Account connected to Appwrite rn
   getAccount() {
     let promise = this.sdk.account.get();
     promise.then(function(response) {
@@ -203,11 +221,15 @@ class AppwriteDAL {
     return promise;
   }
 
+  //Update player score, usually after rating their meme story
+  //Updates total additive Score in Player Doc of Players Collection
   updatePlayerScore(id, score) {
     this.sdk.database.updateDocument(Config.PLAYER_COLLECTION_ID,
     id, { "PlayerScore": score });
   }
 
+  //Triggered by Setting Options in Lobby
+  //Update Session Doc in Appwrite DB with round count and duration
   updateSessionWithSettings(rounds, duration) {
     let sync = new Synchronizer();
     if (rounds !== null) {
@@ -236,6 +258,7 @@ class AppwriteDAL {
     }
   }
 
+  //Updates Score in MemeStory Collection of specific meme story
   async updateScore(score, documentId) {
     let promise = await this.sdk.database.getDocument(Config
         .MEMESTORY_COLLECTION_ID, documentId),
@@ -244,6 +267,8 @@ class AppwriteDAL {
       documentId, { "Score": newScore });
   }
 
+  //Upload submitted Story to Appwrite Db MemeStoryCollection 
+  // role:all allows other players to download them for rating phase
   uploadMemeStory(memeArray, roundPlayed) {
     this.sdk.database.createDocument(Config.MEMESTORY_COLLECTION_ID,
       "unique()", {
@@ -256,6 +281,7 @@ class AppwriteDAL {
     //to do handle error
   }
 
+  //Gets MemeStorie of all Players in Session of this round
   async downloadMemeStories(round) {
     let promise = await this.sdk.database.listDocuments(Config
       .MEMESTORY_COLLECTION_ID, [Query.equal("Session",
@@ -278,6 +304,8 @@ class AppwriteDAL {
     return window.localStorage.getItem("roundCount");
   }
 
+  //Called at Game end by host to remove all session files
+  //obsolete as query in listDocuments now avoids 100 Doc limit that endangered game function over several sessions
   deleteGameFiles(){
     this.updateGameState(Config.SESSION_ENDED);
     //remove all player docs, meme docs and the session doc
