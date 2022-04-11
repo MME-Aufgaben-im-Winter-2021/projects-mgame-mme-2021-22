@@ -215,6 +215,8 @@ class GameManager extends Observable {
   }
   
   setPrompt(prompt) {
+    console.log(prompt);
+    this.playingField.promptField.innerHTML ="";
     this.playingField.promptField.innerHTML = prompt;
     currentPrompt = prompt;
     this.updatePlayingField();
