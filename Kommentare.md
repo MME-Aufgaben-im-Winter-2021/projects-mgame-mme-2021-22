@@ -2,11 +2,11 @@
 
 | Teammitglied | Simon Baierl  | Leon Zeitler  | David Ring | Sven Panov
 | :-----: | :-: | :-: |  :-: | :-: |
-| E-Mail-Adresse | simon.baierl@uni-regensburg.de | leon.zeitler@uni-regensburg.de |david-ring@uni-regensburg.de | sven-panov@uni-regensburg.de |
+| E-Mail-Adresse | simon.baierl@stud.uni-regensburg.de | leon.zeitler@stud.uni-regensburg.de |david-ring@stud.uni-regensburg.de | sven-panov@stud.uni-regensburg.de |
 | Github-Nutzer | BaierlSimon | Ruebenritter | derDavid2 |URgithubaccount2 |
-| Komponente der Anwendung | Erstellen einiger UI-Elemente, </br> Erstellen der Spielelogik </br> | |Image Downloader Webscraper, Sounds, JSON-Meme-File, Timer-Uhr, einige HTML-Elemente + CSS, Suchleiste mit automatischen suchen ohne Enter, Meme-Story-Prompts geschrieben |Unterstützung bei einigen Elementen </br> bugfix-Vorschläge </br> Erstellung der Uhr (die nicht funktionale Version) |
+| Komponente der Anwendung | Erstellen einiger UI-Elemente, </br> Erstellen der Spielelogik </br> | Erste Ordnerstruktur nach MVC, html with bootstrap, Appwrite und Synchronizer Funktionen, Überarbeitung GameManager für Multiplayer mit Simon |Image Downloader Webscraper, Sounds, JSON-Meme-File, Timer-Uhr, einige HTML-Elemente + CSS, Suchleiste mit automatischen suchen ohne Enter, Meme-Story-Prompts geschrieben |Unterstützung bei einigen Elementen </br> bugfix-Vorschläge </br> Erstellung der Uhr (die nicht funktionale Version) |
 
-**Zustand der Anwendung:** Das Spiel ist online spielbar, die Lobbies werden richtig erstellt und können beigetreten werden. Es ist dem Host möglich, Einstellungen über das Spiel zu treffen und somit Rundendauer und Anzahl zu ändern. Nach Abschluss des Spiels wird ein score für jeden Spieler angezeigt und die Lobby kann verlassen werden</br>
+**Zustand der Anwendung:** Das Spiel ist online spielbar, die Lobbies werden richtig erstellt und können beigetreten werden. Es ist dem Host möglich, Einstellungen über das Spiel zu treffen und somit Rundendauer und Anzahl zu ändern. Die MemeStories können nacheinander von allen Spielern bewertet werden. Nach Abschluss des Spiels wird ein score für jeden Spieler angezeigt und die Lobby kann verlassen werden</br>
 
 **Nicht implementierte Funktionen:**</br> 
 - Die Uhr während der Runde ist nicht abgestimmt auf die Rundendauer, da es uns (unter Anderem aus Zeitgründen) nicht möglich war, eine flexible Uhr zu erstellen 

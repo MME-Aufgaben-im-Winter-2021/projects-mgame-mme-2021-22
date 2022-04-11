@@ -42,6 +42,7 @@ class GameManager extends Observable {
     this.finalScore = new FinalScore();
     this.imageDownloader = new ImageDownloader();
     this.roundEndView = new RoundScoreboard();
+    this.clock = document.getElementById("countdown");
 
     this.imageDownloader.addEventListener("imagesFetched", this.fillHand.bind(
       this));
@@ -294,6 +295,7 @@ class GameManager extends Observable {
     this.ratingView.ratingArea.hidden = false;
     this.ratingView.ratingField.hidden = false;
     this.hand.handArea.hidden = true;
+    this.clock.hidden = true;
     //
     let memes = await this.DAL.downloadMemeStories(roundCount),
       ratingManager = new RatingManager(memes, roundCount);
@@ -302,6 +304,7 @@ class GameManager extends Observable {
 
   //starts the game phase
   setGameStatePlay() {
+    this.clock.hidden = false;
     this.initClock();
     this.intervalID = window.setInterval(this.updateClock, Config.SECOND);
     this.roundEndView.scoreboardView.hidden = true;
