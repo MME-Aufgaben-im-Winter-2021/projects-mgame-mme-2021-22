@@ -3,7 +3,10 @@
 Die aktuelle _Release_-Version dieses Projekts kann unter: https://mgame.software-engineering.education aufgerufen werden.
 
 ```
-Beschreiben Sie hier in einem kurzen Absatz Ihrer Anwendung bzw. die Ziele Ihres Projekts
+MGAME ist ein Eisbrecher-Spiel, das dafür gedacht ist, dass sich Leute in einem neuen Team etwas kennenlernen und miteinander in einer lockeren Atmosphäre interagieren können.  Die Idee ist, dass es nicht nur reine Unterhaltung ist, sondern danach besser miteinander kommunizieren  und somit besser an einem Projekt arbeiten können. Kommunikation über eine andere Software (Audio oder Video+Audio) wird zwar angenommen, aber es wäre auch ohne spielbar.
+Der Ablauf des Spiels ist folgender: pro Runde bekommt jeder denselben Text, in welchen man entweder Begriffe mit Memes ergänzen soll, oder welchen man mit Memes beantworten soll (in der Regel in Form einer kurzen Geschichte), diese Phase ist zeitlich begrenzt. Es werden einige Memes zufällig vorgeschlagen, man kann aber auch nach Stichwörtern suchen, um bestimmte Memes zu finden. Sobald der Timer der ersten Phase abläuft, werden alle "Meme-Stories" gespeichert und in der nächsten Phase allen anderen nacheinander zum bewerten gegeben, sodass jeder gleichzeitig die  Meme-Stories aller anderen bewertet. Danach wird der aktuelle Score aller Spieler angezeigt und eine neue Runde beginnt.
+Das Spiel endet, wenn die am Anfang ausgewählte Anzahl an Runden gespielt worden ist. Gewonnen hat derjenige mit den bestbewerteten Meme-Stories, wobei der Sieg bei solchen Spielen nicht im Vordergrund ist.
+
 ```
 
 In diesem Repository finden Sie eine Vorlage für die Entwicklung Ihrer Anwendung im MME-Kurs. Das Repository gibt eine grobe Struktur für Ihre Arbeit vor. Dort wo nötig, können Sie von diesen Vorgaben abweichen. Besprechen Sie Änderungen, insbesondere solche am _Deployment-Workflow_ aber im Vorfeld mit uns. 
