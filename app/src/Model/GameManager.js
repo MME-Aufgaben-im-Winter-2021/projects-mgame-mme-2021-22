@@ -8,10 +8,9 @@ import Hand from "../Views/GameView/Hand.js";
 import RatingView from "../Views/RatingView/RatingView.js";
 import Prompt from "../Views/GameView/Prompt.js";
 import Meme from "../Controller/Meme.js";
-import Observable  from "../utils/Observable.js";
+import Observable from "../utils/Observable.js";
 import KeyWord from "../Controller/KeyWord.js";
 
-import Story from "../Controller/Story.js";
 import Config from "../utils/Config.js";
 import ImageDownloader from "../Controller/ImageDownloader.js";
 import FinalScore from "../Views/EndOfGameView/FinalScoreboard.js";
@@ -25,13 +24,11 @@ let submitButton = document.querySelector(".submit"),
   refreshButton = document.querySelector(".refresh"),
   saveButton = document.querySelector(".save"),
   searchBar = document.getElementById("searchBar"),
-  
   handArray = [],
   fieldArray = [],
   roundCount = 1,
   searchBlockBoolean=false,
-  lastSearchedTerm="",
-  currentPrompt;
+  lastSearchedTerm="";
 
 class GameManager extends Observable {
 
@@ -53,7 +50,7 @@ class GameManager extends Observable {
     submitButton.addEventListener("click", this.submitMemeStory.bind(this));
     //searchBar.addEventListener("change", this.onSearch.bind(this));
     //searchBar.addEventListener("change", this.onSearch);
-    searchBar.addEventListener('keydown', () => this.delay(1000).then(() => this.onSearch()));
+    searchBar.addEventListener("keydown", () => this.delay(Config.DELAY).then(() => this.onSearch()));
    
     this.fillHandWithRandomMemes();
   }
@@ -65,8 +62,7 @@ class GameManager extends Observable {
   onSearch() {
     if (searchBlockBoolean===false&&searchBar.value.length>=1){
       searchBlockBoolean=true;
-      this.delay(1000).then(() => this.checkIfNewSearchIsNeeded());
-      console.log("onsearch method");
+      this.delay(Config.DELAY).then(() => this.checkIfNewSearchIsNeeded());
       handArray = [];
       this.updateHand();
       lastSearchedTerm=searchBar.value;
@@ -82,15 +78,12 @@ class GameManager extends Observable {
   }
 
   requestMemes(tag){
-    console.log(tag);
     this.imageDownloader.fetchData(tag,0);
   }
 
   refreshHand(){
-    console.log("refresh");
-
     searchBlockBoolean=true;
-    this.delay(1000).then(() => searchBlockBoolean=false);
+    this.delay(Config.DELAY).then(() => searchBlockBoolean=false);
     handArray=[];
     searchBar.value = "";
     this.fillHandWithRandomMemes();
@@ -122,8 +115,8 @@ class GameManager extends Observable {
   fillHandWithRandomMemes(){
     const alphabet = "abcdefghijklmnoprstuvwxyz";
 
-    let randomCharacter = alphabet[Math.floor(Math.random() * alphabet.length)],
-        data = this.imageDownloader.fetchData(randomCharacter,this.getRandomIntBetween0AndMax(Config.MAX_JSON_SEARCH_STARTPOINT));
+    let randomCharacter = alphabet[Math.floor(Math.random() * alphabet.length)];
+       this.imageDownloader.fetchData(randomCharacter,this.getRandomIntBetween0AndMax(Config.MAX_JSON_SEARCH_STARTPOINT));
         /*
     for (let i = 0; i < Config.HAND_SIZE; i++) {
       if (i< data.length){
@@ -166,7 +159,6 @@ class GameManager extends Observable {
       swappingMeme = event.data[2],
       isInHand = event.data[3];
       
-
     if (currentLocation === "playingArea") {
       // this.removeMeme(memeName);
 
@@ -216,10 +208,8 @@ class GameManager extends Observable {
   }
   
   setPrompt(prompt) {
-    console.log(prompt);
     this.playingField.promptField.innerHTML ="";
     this.playingField.promptField.innerHTML = prompt;
-    currentPrompt = prompt;
     this.updatePlayingField();
   }
 
@@ -236,14 +226,12 @@ class GameManager extends Observable {
 
   addNewKeyword() {
     let newKeyWord = new KeyWord(searchBar.value);
-    console.log(newKeyWord.keyword);
     newKeyWord.keyWordEL.addEventListener("click", () => {
       handArray = [];
       this.updateHand();
       this.requestMemes(newKeyWord.keyword); });
       // logs `false`);
     this.hand.keyWordArea.appendChild(newKeyWord.body);
-    console.log(newKeyWord);
   }
 
   updateHand() {
@@ -257,8 +245,6 @@ class GameManager extends Observable {
     if(Config.HAS_SUBMITTED === false){
       let memes = Array.from(new Set(JSON.parse(window
         .localStorage.getItem("playedMemes")))), memeIds = [];
-      //this.ratingView.updateView(memes);
-      console.log("Submitted MemeStory");
       for(let meme of memes){ memeIds.push(meme.id);}
       this.DAL.uploadMemeStory(memeIds, roundCount);
       Config.HAS_SUBMITTED = true;
@@ -269,7 +255,6 @@ class GameManager extends Observable {
 
   async setGameStateRate(){
     this.playingField.playingFieldArea.hidden = true;
-    //this.promptField.hidden = true;
     this.gameProgressCard.progressField.hidden = true;
     this.ratingView.ratingArea.hidden = false;
     this.ratingView.ratingField.hidden = false;
@@ -277,7 +262,6 @@ class GameManager extends Observable {
     //
     let memes = await this.DAL.downloadMemeStories(roundCount),
     ratingManager = new RatingManager(memes);
-    console.log(memes);
     ratingManager.displayMeme();
   }
   /*
@@ -301,9 +285,8 @@ class GameManager extends Observable {
     this.hand.handArea.hidden = false;
     //round timer
     if(window.localStorage.getItem(Config.ROLE_KEY) === Config.HOST_ROLE){
-      let roundDuration = Number(this.DAL.getRoundDuration()) * 100, prompt = this.prompt.generatePrompt();
+      let roundDuration = Number(this.DAL.getRoundDuration()) * Config.MS_TO_S_FACTOR, prompt = this.prompt.generatePrompt();
       this.DAL.updatePrompt(prompt);
-      console.log("Round will go " + roundDuration +"s");
       //TO DO ADD ROUND DUR TO CLOCK ANIM
       setTimeout(this.hostSetGameStateRate.bind(this), roundDuration);
     }
@@ -311,13 +294,11 @@ class GameManager extends Observable {
   }
 
   hostSetGameStateRate(){
-    console.log("Times up!");
     this.DAL.updateGameState(Config.RATING_PHASE);
   }
 
   setGameStateRoundEnd() {
     this.playingField.gameView.hidden = true;
-    console.log(this.DAL.getRoundCount());
     if(roundCount >= this.DAL.getRoundCount()){
       let gameEndManager = new GameEndManager();
       gameEndManager.showFinalScore(roundCount);

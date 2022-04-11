@@ -17,6 +17,12 @@ const Config = {
     GOOD_AUDIO_NUM: 21,
     BAD_AUDIO_NUM: 25,
     HAS_SUBMITTED: false,
+    MAX_DOCUMENTS: 100,
+    POINTS_FOR_GOOD: 255,
+    POINTS_FOR_MEH: 128,
+    POINTS_FOR_BAD: 1,
+    DELAY: 1000,
+    MS_TO_S_FACTOR: 100,
     //ERROR CODES
     LOGIN_FAILED_ERROR: "email or password are incorrect",
     NO_SUCH_SESSION_ERROR: "This game is no longer available or token is wrong.",

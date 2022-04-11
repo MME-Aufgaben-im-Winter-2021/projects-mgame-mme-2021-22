@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { AppwriteDAL } from "../../services/AppwriteService.js";
 import Config from "../utils/Config.js";
 import RatingView from "../Views/RatingView/RatingView.js";
@@ -45,20 +46,20 @@ class RatingManager{
     votedGood() {
         this.playRatingSound(true);
         //updateScore
-        this.DAL.updateScore(255, this.currentDocument);
+        this.DAL.updateScore(Config.POINTS_FOR_GOOD, this.currentDocument);
         this.disableVoting();
       }
     
       votedMeh() {
-        //upddateScore
-        this.DAL.updateScore(128, this.currentDocument);
+        //updateScore
+        this.DAL.updateScore(Config.POINTS_FOR_MEH, this.currentDocument);
         this.disableVoting();
       }
     
       votedBad() {
         this.playRatingSound(false);
         //updateScore
-        this.DAL.updateScore(1, this.currentDocument);
+        this.DAL.updateScore(Config.POINTS_FOR_BAD, this.currentDocument);
         this.disableVoting();
       }
 
@@ -79,7 +80,6 @@ class RatingManager{
           let rand = Math.floor(Math.random() * Config.GOOD_AUDIO_NUM),
     
            audio = new Audio("/resources/rating_audio/good"+rand+".mp3");
-          console.log("play rating sound: good:"+rand);
           switch(rand){
             case 2: audio.volume = 0.07; break;
             case 4: audio.volume = 0.07; break;
@@ -102,7 +102,6 @@ class RatingManager{
         else{
           let rand = Math.floor(Math.random() * Config.BAD_AUDIO_NUM),
           audio = new Audio("/resources/rating_audio/bad"+rand+".mp3");
-          console.log("play rating sound: bad:"+rand);
           
           switch(rand){
             case 0: audio.volume = 0.07; break;

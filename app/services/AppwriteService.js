@@ -36,10 +36,8 @@ class AppwriteDAL {
   signIn(email, password) {
     let promise = this.sdk.account.createSession(email, password);
 
-    promise.then(function(response) {
+    promise.then(function() {
       //user logged into his account successfully
-      console.log(response);
-
       window.location.replace("homepage.html");
     }, function() {
       alert("Your password must be at least 8 characters long!");
@@ -47,18 +45,16 @@ class AppwriteDAL {
   }
 
   subscribe() {
-    console.log("Subscribed");
     let channel = "collections." + Config.SESSIONS_COLLECTION_ID +
       ".documents",
       sync = new Synchronizer();
 
     try {
       this.sdk.subscribe(channel, function(response) {
-        console.log("Update received!");
         sync.updateSession(response
           .payload);
       });
-    } catch (error) { console.log(error); }
+    } catch (error) { alert(error); }
 
   }
 
@@ -77,13 +73,14 @@ class AppwriteDAL {
     try {
       window.localStorage.setItem(Config.DOCUMENT_STORAGE_KEY, promise.$id);
       window.localStorage.setItem(Config.ROLE_KEY, Config.HOST_ROLE);
+      // eslint-disable-next-line no-unused-vars
       let player = await this.sdk.database.createDocument(Config
         .PLAYER_COLLECTION_ID, "unique()", { "PlayerName": this
           .getUsername(), "PlayerScore": 0, "GameSession": getDocumentIDFromLocalStorage() },
           ["role:all"], ["role:all"],
         );
-      console.log(player);
-    } catch (error) { console.log(error); }
+     
+    } catch (error) { alert(error); }
 
     return promise;
   }
@@ -91,8 +88,7 @@ class AppwriteDAL {
   async getPlayers() {
     let promise = await this.sdk.database.listDocuments(Config
       .PLAYER_COLLECTION_ID, [Query.equal("GameSession",
-        getDocumentIDFromLocalStorage())], 100);
-        console.log(promise.documents);
+        getDocumentIDFromLocalStorage())], Config.MAX_DOCUMENTS);
     return promise.documents;
   }
 
@@ -117,7 +113,6 @@ class AppwriteDAL {
       let promise = this.sdk.database.getDocument(
         Config.SESSIONS_COLLECTION_ID, id);
       promise.then(function(response) {
-        console.log(response);
         sync.handleUpdateInLobby(response);
 
       }, function(error) {
@@ -145,7 +140,7 @@ class AppwriteDAL {
       user = this.getUsername();
     usersInGame.push(user);
 
-    //update session document with playername
+    //update session document with player name
     // eslint-disable-next-line one-var
     let update = this.sdk.database.updateDocument(Config
       .SESSIONS_COLLECTION_ID, promise
@@ -153,7 +148,6 @@ class AppwriteDAL {
     update.then(function() {
       window.localStorage.setItem(Config.ROLE_KEY, Config.PLAYER_ROLE);
     }, function(error) {
-      console.log(update);
       alert(error);
     });
 
@@ -163,8 +157,7 @@ class AppwriteDAL {
   }
 
   logout() {
-    this.sdk.account.deleteSession("current").then(function(response) {
-      console.log(response);
+    this.sdk.account.deleteSession("current").then(function() {
       window.localStorage.clear();
       window.location.replace("login.html");
     }, function(error) {
@@ -180,23 +173,22 @@ class AppwriteDAL {
       this.sdk.teams.delete(window.localStorage.getItem(Config
         .TEAM_STORAGE_KEY));
 
-      console.log("Leaving as host");
       window.localStorage.setItem(Config.TEAM_STORAGE_KEY, "");
       window.localStorage.setItem(Config.DOCUMENT_STORAGE_KEY, "");
       window.localStorage.setItem(Config.ROLE_KEY, "");
       window.location.replace("homepage.html");
     } else {
-      //remove name from userids
+      //remove name from user ids
       let sessionData = await this.updateSession(),
         username = window.localStorage.getItem("username"),
         unfiltered = sessionData.UserIDs,
         filtered = unfiltered.filter(function(
           value /*,index, arr*/ ) { return value !== username; }),
+        // eslint-disable-next-line no-unused-vars
         update = this.sdk.database.updateDocument(Config
           .SESSIONS_COLLECTION_ID,
           sessionData.$id, { "UserIDs": filtered });
-      console.log(update);
-      console.log("leaving as player");
+
       window.location.replace("homepage.html");
     }
 
@@ -227,8 +219,7 @@ class AppwriteDAL {
             rounds),
         },
       );
-      promise.then(response => sync.updateSession(response), error => console
-        .log(error));
+      promise.then(response => sync.updateSession(response), error => alert(error));
 
     }
     if (duration !== null) {
@@ -240,8 +231,7 @@ class AppwriteDAL {
             duration),
         },
       );
-      promise.then(response => sync.updateSession(response), error => console
-        .log(error));
+      promise.then(response => sync.updateSession(response), error => alert(error));
 
     }
   }
@@ -271,7 +261,7 @@ class AppwriteDAL {
       .MEMESTORY_COLLECTION_ID, [Query.equal("Session",
           getDocumentIDFromLocalStorage()),
         Query.equal("InRoundPlayed", round),
-      ], 100);
+      ], Config.MAX_DOCUMENTS);
     return promise.documents;
   }
 
@@ -291,14 +281,14 @@ class AppwriteDAL {
   deleteGameFiles(){
     this.updateGameState(Config.SESSION_ENDED);
     //remove all player docs, meme docs and the session doc
-    let players = this.sdk.database.listDocuments(Config.PLAYER_COLLECTION_ID, [Query.equal("GameSession", getDocumentIDFromLocalStorage())], 100),
-    stories = this.sdk.database.listDocuments(Config.MEMESTORY_COLLECTION_ID, [Query.equal("Session", getDocumentIDFromLocalStorage())], 100),
+    let players = this.sdk.database.listDocuments(Config.PLAYER_COLLECTION_ID, [Query.equal("GameSession", getDocumentIDFromLocalStorage())], Config.MAX_DOCUMENTS),
+    stories = this.sdk.database.listDocuments(Config.MEMESTORY_COLLECTION_ID, [Query.equal("Session", getDocumentIDFromLocalStorage())], Config.MAX_DOCUMENTS),
     promise = this.sdk.database.deleteDocument(Config.SESSIONS_COLLECTION_ID, getDocumentIDFromLocalStorage());
 
-    players.then(response => response.documents.forEach(doc => this.sdk.database.deleteDocument(Config.PLAYER_COLLECTION_ID, doc.$id)),error => console.log(error));
-    stories.then(response => response.documents.forEach(doc => this.sdk.database.deleteDocument(Config.MEMESTORY_COLLECTION_ID, doc.$id)), error => console.log(error));
+    players.then(response => response.documents.forEach(doc => this.sdk.database.deleteDocument(Config.PLAYER_COLLECTION_ID, doc.$id)),error => alert(error));
+    stories.then(response => response.documents.forEach(doc => this.sdk.database.deleteDocument(Config.MEMESTORY_COLLECTION_ID, doc.$id)), error => alert(error));
 
-    promise.then(function(response){window.localStorage.clear(); window.location.replace("homepage.html");} , error => console.log(error));
+    promise.then(function(){window.localStorage.clear(); window.location.replace("homepage.html");} , error => alert(error));
   }
 }
 
