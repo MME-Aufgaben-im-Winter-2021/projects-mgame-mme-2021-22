@@ -16,7 +16,6 @@ class Synchronizer {
     DAL.subscribe();
   }
 
- 
   updateSession(payload) {
     if (payload.$id !== window.localStorage.getItem(Config
         .DOCUMENT_STORAGE_KEY)) {
