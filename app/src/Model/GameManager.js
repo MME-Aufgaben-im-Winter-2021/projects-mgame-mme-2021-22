@@ -81,7 +81,7 @@ class GameManager extends Observable {
       if (remainingTime === -1) {
         timeRanOut = true;
         remainingTime=Number(this.DAL.getRoundDuration()) * Config
-        .MS_TO_S_FACTOR
+        .MS_TO_S_FACTOR;
       }
     }
   }
