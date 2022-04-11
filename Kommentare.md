@@ -1,8 +1,19 @@
 # Das Team
 
-| Teammitglied | Simon Baierl  | Leon Zeitler  |
-| :-----: | :-: | :-: |
-| E-Mail-Adresse | simon.baierl@uni-regensburg.de | leon.zeitler@uni-regensburg.de |
-| Github-Nutzer | BaierlSimon | Ruebenritter |
-| Foto | ![Simon-Bild](./docs/simon.jpg) | ![Leon-Bild](./docs/bookface.jpg) |
-| Komponente der Anwendung | **Planen und Ausführen von Stacks** </br> Durch den AlarmManager, implementiert durch [Alarm](https://github.com/Android-Projekte-VHB/vhb-android-ss2021--stackyourlife-11-/blob/55b790e009009c9fa35d06f2e6c88966f82b9b85/app/app/src/main/java/com/example/habitstackerapp/functionality/Alarm.java) und [AlarmReciever](https://github.com/Android-Projekte-VHB/vhb-android-ss2021--stackyourlife-11-/blob/55b790e009009c9fa35d06f2e6c88966f82b9b85/app/app/src/main/java/com/example/habitstackerapp/functionality/AlarmReceiver.java), werden dem Nutzer Notifications generiert, durch welche er in die [Run-Activity](https://github.com/Android-Projekte-VHB/vhb-android-ss2021--stackyourlife-11-/blob/ba4464846a84bd002b3670875cd977cd24668b4e/app/app/src/main/java/com/example/habitstackerapp/activities/RunActivity.java) geschickt wird, um die geplanten Habits auszuführen| **Erstellen, Speichern und Anzeige von Stacks** </br> Die Entities [Habit](https://github.com/Android-Projekte-VHB/vhb-android-ss2021--stackyourlife-11-/blob/bd3df8260b9de8fa24deab8d76b1a383b7aa581e/app/app/src/main/java/com/example/habitstackerapp/functionality/Habit.java), [Anchor](https://github.com/Android-Projekte-VHB/vhb-android-ss2021--stackyourlife-11-/blob/bd3df8260b9de8fa24deab8d76b1a383b7aa581e/app/app/src/main/java/com/example/habitstackerapp/functionality/Anchor.java) und [Stack](https://github.com/Android-Projekte-VHB/vhb-android-ss2021--stackyourlife-11-/blob/bd3df8260b9de8fa24deab8d76b1a383b7aa581e/app/app/src/main/java/com/example/habitstackerapp/functionality/Stack.java) werden nach ihrer Erstellung in einer [Room Database](https://github.com/Android-Projekte-VHB/vhb-android-ss2021--stackyourlife-11-/blob/bd3df8260b9de8fa24deab8d76b1a383b7aa581e/app/app/src/main/java/com/example/habitstackerapp/StackDataBase/StackDataBase.java) gespeichert und in einer [RecyclerView](https://github.com/Android-Projekte-VHB/vhb-android-ss2021--stackyourlife-11-/blob/976a7d101b7278da36b2c05e0081d5c691bc63d2/app/app/src/main/java/com/example/habitstackerapp/fragments/StackOverviewFragment.java) mit den entsprechenden [Adaptern](https://github.com/Android-Projekte-VHB/vhb-android-ss2021--stackyourlife-11-/blob/976a7d101b7278da36b2c05e0081d5c691bc63d2/app/app/src/main/java/com/example/habitstackerapp/viewholderadapter/StackAdapter.java) angezeigt. Der Zugriff auf die Daten erflogt über das [Repository mit AsyncTasks](https://github.com/Android-Projekte-VHB/vhb-android-ss2021--stackyourlife-11-/blob/976a7d101b7278da36b2c05e0081d5c691bc63d2/app/app/src/main/java/com/example/habitstackerapp/StackDataBase/StackRepository.java).|
+| Teammitglied | Simon Baierl  | Leon Zeitler  | David Ring | Sven Panov
+| :-----: | :-: | :-: |  :-: | :-: |
+| E-Mail-Adresse | simon.baierl@uni-regensburg.de | leon.zeitler@uni-regensburg.de |david-ring@uni-regensburg.de | sven-panov@uni-regensburg.de |
+| Github-Nutzer | BaierlSimon | Ruebenritter | derDavid2 |URgithubaccount2 |
+| Komponente der Anwendung | Erstellen einiger UI-Elemente, </br> Erstellen der Spielelogik </br> | | | |
+
+**Zustand der Anwendung:** Das Spiel ist online spielbar, die Lobbies werden richtig erstellt und können beigetreten werden. Es ist dem Host möglich, Einstellungen über das Spiel zu treffen und somit Rundendauer und Anzahl zu ändern. Nach Abschluss des Spiels wird ein score für jeden Spieler angezeigt und die Lobby kann verlassen werden</br>
+
+**Nicht implementierte Funktionen:**</br> 
+- Die Uhr während der Runde ist nicht abgestimmt auf die Rundendauer, da es uns (unter Anderem aus Zeitgründen) nicht möglich war, eine flexible Uhr zu erstellen 
+- Die Spielerliste am Ende des Spiels wird nicht richtig sortiert 
+- Der Nutzer kann seine eigene Abgabe bewerten was aus Zeitgründen nicht behoben worden konnte
+- Es wurde kein Tutorial eingefügt, da dies schon im ReadMe steht
+- Man kann die Memes nicht am Ende der Runde sehen, da mann sie während der Runde schon sieht.
+- Es gibt keinen Pausebutton und keine Bereitschaftsanzeige, da diese mit der Uhr hätten implementiert werden sollen
+- Es giebt keine Spielmodi, da diese zu zeitintensiev gewesen wären
+- Die Anzahl der verfügbaren Memes beschränken sich auf 1400, da wir keine API nutzen, da diese zum Zeitpunkt der Bewertung bereits offline sein könnte.
