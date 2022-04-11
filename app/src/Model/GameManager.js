@@ -70,6 +70,7 @@ class GameManager extends Observable {
     clockSpeed = Config.DEGREES / remainingTime;
     document.getElementById("clocktimer").style.transform = "rotate(" + 0 +
       "deg)";
+    return remainingTime;
   }
 
   updateClock() {
@@ -81,8 +82,9 @@ class GameManager extends Observable {
 
       if (remainingTime === -1) {
         timeRanOut = true;
-        remainingTime=Number(this.DAL.getRoundDuration()) * Config
-        .MS_TO_S_FACTOR;
+        try{ remainingTime=Number() * Config
+          .MS_TO_S_FACTOR;}catch(error){remainingTime = Config.MIN_ROUND_DURATION; console.log(error);}
+       
       }
     }
   }
@@ -306,7 +308,7 @@ class GameManager extends Observable {
   setGameStatePlay() {
     this.clock.hidden = false;
     this.initClock();
-    this.intervalID = window.setInterval(this.updateClock, Config.SECOND);
+    this.intervalID = window.setInterval(this.updateClock.bind(this), Config.SECOND);
     this.roundEndView.scoreboardView.hidden = true;
     submitButton.disabled = false;
     Config.HAS_SUBMITTED = false;
