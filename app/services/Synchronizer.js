@@ -8,7 +8,13 @@ var lobbyView = new LobbyView(),
 
 class Synchronizer {
   constructor() {
+    //sync gets called too often because of bad mvc implementation; singleton for now
+    if(Synchronizer.instance instanceof Synchronizer){
+      return Synchronizer.instance;
+    }
     this.gameManager = new GameManager();
+    Object.freeze(this);
+    Synchronizer.instance = this;
   }
 
   subscribeToGame() {
