@@ -96,6 +96,12 @@ class Synchronizer {
     .ROUND_ENDED) { console.log("Round ended"); this.gameManager.setGameStateRoundEnd(); currentGameState = Config.ROUND_ENDED; } else{console.log("Update in Round end ignored!");}
   }
 
+  handleUpdateInGameEnd(){
+    if(currentGameState !== Config.GAME_ENDED){
+      alert("Host ended game! Bye!"); window.localStorage.clear(); window.location.replace("homepage.html"); currentGameState = Config.GAME_ENDED;
+    }
+  }
+
   //Host ends round early if all players submit meme before timer runs out
   checkForSubmissions() {
     return false;

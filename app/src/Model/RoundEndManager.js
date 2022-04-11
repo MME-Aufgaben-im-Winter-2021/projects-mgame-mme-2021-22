@@ -27,6 +27,7 @@ class RoundEndManager {
         //get all docs -> filter for player scores -> get player array
         let storiesOfLastRound = await this.DAL.downloadMemeStories(round), 
         playerDocs = await this.DAL.getPlayers(), filteredPlayers = playerDocs.filter(player => player.GameSession === window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY));
+        playerDocs.sort((a,b)=> a.PlayerScore > b.PlayerScore ? 1 : -1);
         this.roundScoreboard.updateScoreboard(storiesOfLastRound, filteredPlayers);
     }
 }

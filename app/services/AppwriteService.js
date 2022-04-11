@@ -287,6 +287,15 @@ class AppwriteDAL {
   getRoundCount() {
     return window.localStorage.getItem("roundCount");
   }
+
+  async deleteGameFiles(){
+    //remove all player docs, meme docs and the session doc
+    let players = await this.sdk.database.listDocuments(Config.PLAYER_COLLECTION_ID, [Query.equal("GameSession", getDocumentIDFromLocalStorage())], 100);
+    players.documents.forEach(doc => this.sdk.database.deleteDocument(Config.PLAYER_COLLECTION_ID, doc.$id));
+    let stories = await this.sdk.database.listDocuments(Config.MEMESTORY_COLLECTION_ID, [Query.equal("Session", getDocumentIDFromLocalStorage())], 100);
+    stories.documents.forEach(doc => this.sdk.database.deleteDocument(Config.MEMESTORY_COLLECTION_ID, doc.$id));
+    this.sdk.database.deleteDocument(Config.SESSIONS_COLLECTION_ID, getDocumentIDFromLocalStorage());
+  }
 }
 
 function getDocumentIDFromLocalStorage() {
