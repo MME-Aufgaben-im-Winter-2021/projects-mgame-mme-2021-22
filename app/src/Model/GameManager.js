@@ -45,6 +45,7 @@ class GameManager extends Observable {
     this.prompt = new Prompt();
     this.finalScore = new FinalScore();
     this.imageDownloader = new ImageDownloader();
+    this.roundEndView = new RoundScoreboard();
     
     this.imageDownloader.addEventListener("imagesFetched", this.fillHand.bind(this));
     refreshButton.addEventListener("click", this.refreshHand.bind(this));
@@ -281,7 +282,7 @@ class GameManager extends Observable {
    * HOST FUNCTIONS; 
    */
   setGameStatePlay() {
-    console.log(roundCount);
+    this.roundEndView.scoreboardView.hidden = true;
     submitButton.disabled = false;
     Config.HAS_SUBMITTED = false;
     handArray = [];
