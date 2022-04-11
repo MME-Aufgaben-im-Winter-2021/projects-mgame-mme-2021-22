@@ -28,7 +28,7 @@ class AppwriteDAL {
   register(nickname, email, password) {
     this.sdk.account.create("unique()", email, password,
       nickname);
-    
+
     alert(Config.REGISTER_SUCCESS);
     //tell the user he actually made an account XD
   }
@@ -51,7 +51,7 @@ class AppwriteDAL {
     let channel = "collections." + Config.SESSIONS_COLLECTION_ID +
       ".documents",
       sync = new Synchronizer();
-      
+
     try {
       this.sdk.subscribe(channel, function(response) {
         console.log("Update received!");
@@ -64,37 +64,45 @@ class AppwriteDAL {
 
   async hostGame() {
     let promise = await this.sdk.database.createDocument(Config
-        .SESSIONS_COLLECTION_ID,
-        "unique()", {
-          "UserIDs": [
-            this.getUsername(),
-          ],
-          "RoundCount": Config.DEFAULT_ROUNDS,
-          "RoundDuration": Config.DEFAULT_ROUND_DURATION,
-          "GameState": "lobby",
-        }, ["role:all"], ["role:all"]);
-        
+      .SESSIONS_COLLECTION_ID,
+      "unique()", {
+        "UserIDs": [
+          this.getUsername(),
+        ],
+        "RoundCount": Config.DEFAULT_ROUNDS,
+        "RoundDuration": Config.DEFAULT_ROUND_DURATION,
+        "GameState": "lobby",
+      }, ["role:all"], ["role:all"]);
+
     try {
       window.localStorage.setItem(Config.DOCUMENT_STORAGE_KEY, promise.$id);
       window.localStorage.setItem(Config.ROLE_KEY, Config.HOST_ROLE);
-      let player = await this.sdk.database.createDocument(Config.PLAYER_COLLECTION_ID, "unique()", {"PlayerName": this.getUsername(), "PlayerScore": 0, "GameSession": getDocumentIDFromLocalStorage()});
+      let player = await this.sdk.database.createDocument(Config
+        .PLAYER_COLLECTION_ID, "unique()", { "PlayerName": this
+          .getUsername(), "PlayerScore": 0, "GameSession": getDocumentIDFromLocalStorage() },
+          ["role:all"], ["role:all"],
+        );
       console.log(player);
     } catch (error) { console.log(error); }
-    
+
     return promise;
   }
 
-  async getPlayers(){
-    let promise = await this.sdk.database.listDocuments(Config.PLAYER_COLLECTION_ID, [Query.equal("GameSession", getDocumentIDFromLocalStorage())], 100);
-      return promise.documents;
+  async getPlayers() {
+    let promise = await this.sdk.database.listDocuments(Config
+      .PLAYER_COLLECTION_ID, [Query.equal("GameSession",
+        getDocumentIDFromLocalStorage())], 100);
+        console.log(promise.documents);
+    return promise.documents;
   }
 
   getUsername() {
     return window.localStorage.getItem("username");
   }
 
-  updatePrompt(prompt){
-    this.sdk.database.updateDocument(Config.SESSIONS_COLLECTION_ID, getDocumentIDFromLocalStorage(), {"Prompt": prompt});
+  updatePrompt(prompt) {
+    this.sdk.database.updateDocument(Config.SESSIONS_COLLECTION_ID,
+      getDocumentIDFromLocalStorage(), { "Prompt": prompt });
   }
   updateGameState(state) {
     this.sdk.database.updateDocument(Config.SESSIONS_COLLECTION_ID,
@@ -103,7 +111,7 @@ class AppwriteDAL {
 
   async updateSession() {
     let id = window.localStorage.getItem(Config.DOCUMENT_STORAGE_KEY),
-    sync = new Synchronizer();
+      sync = new Synchronizer();
 
     if (id !== null) {
       let promise = this.sdk.database.getDocument(
@@ -111,7 +119,7 @@ class AppwriteDAL {
       promise.then(function(response) {
         console.log(response);
         sync.handleUpdateInLobby(response);
-        
+
       }, function(error) {
         alert(error);
       });
@@ -144,10 +152,13 @@ class AppwriteDAL {
       .$id, { "UserIDs": usersInGame });
     update.then(function() {
       window.localStorage.setItem(Config.ROLE_KEY, Config.PLAYER_ROLE);
-    }, function(error) { console.log(update);
-      alert(error); });
+    }, function(error) {
+      console.log(update);
+      alert(error);
+    });
 
-    this.sdk.database.createDocument(Config.PLAYER_COLLECTION_ID, "unique()", {"PlayerName": user, "PlayerScore": 0, "GameSession": getDocumentIDFromLocalStorage()});
+    this.sdk.database.createDocument(Config.PLAYER_COLLECTION_ID,
+    "unique()", { "PlayerName": user, "PlayerScore": 0, "GameSession": getDocumentIDFromLocalStorage() }, ["role:all"], ["role:all"]);
     return update;
   }
 
@@ -200,10 +211,11 @@ class AppwriteDAL {
     return promise;
   }
 
-  updatePlayerScore(id, score){
-    this.sdk.database.updateDocument(Config.PLAYER_COLLECTION_ID, id, {"PlayerScore": score});
+  updatePlayerScore(id, score) {
+    this.sdk.database.updateDocument(Config.PLAYER_COLLECTION_ID,
+    id, { "PlayerScore": score });
   }
-  
+
   updateSessionWithSettings(rounds, duration) {
     let sync = new Synchronizer();
     if (rounds !== null) {
@@ -237,10 +249,9 @@ class AppwriteDAL {
   async updateScore(score, documentId) {
     let promise = await this.sdk.database.getDocument(Config
         .MEMESTORY_COLLECTION_ID, documentId),
-      newScore = score + promise.Score,
-      update = this.sdk.database.updateDocument(Config.MEMESTORY_COLLECTION_ID,
+      newScore = score + promise.Score;
+    this.sdk.database.updateDocument(Config.MEMESTORY_COLLECTION_ID,
       documentId, { "Score": newScore });
-      update.then(response => console.log(response), error => console.log(error));
   }
 
   uploadMemeStory(memeArray, roundPlayed) {
@@ -257,8 +268,10 @@ class AppwriteDAL {
 
   async downloadMemeStories(round) {
     let promise = await this.sdk.database.listDocuments(Config
-      .MEMESTORY_COLLECTION_ID, [Query.equal("Session", getDocumentIDFromLocalStorage()),
-    Query.equal("InRoundPlayed", round)], 100);
+      .MEMESTORY_COLLECTION_ID, [Query.equal("Session",
+          getDocumentIDFromLocalStorage()),
+        Query.equal("InRoundPlayed", round)
+      ], 100);
     return promise.documents;
   }
 
