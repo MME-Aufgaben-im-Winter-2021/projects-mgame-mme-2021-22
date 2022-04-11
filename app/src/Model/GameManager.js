@@ -37,6 +37,10 @@ let submitButton = document.querySelector(".submit"),
 class GameManager extends Observable {
 
   constructor() {
+    //GameManager gets called often because of bad MVC implementation; singleton for now
+    //if(GameManager.instance instanceof GameManager){
+    //  return AppwriteDAL.instance;
+    //}
     super();
     this.DAL = new AppwriteDAL();
     this.gameProgressCard = new GameProgressCard();
@@ -55,11 +59,10 @@ class GameManager extends Observable {
     //searchBar.addEventListener("change", this.onSearch.bind(this));
     //searchBar.addEventListener("change", this.onSearch);
     searchBar.addEventListener("keydown", () => this.delay(Config.DELAY).then(() => this.onSearch()));
-   
     this.fillHandWithRandomMemes();
-
- 
-
+    
+    //Object.freeze(this);
+    //GameManager.instance = this;
   }
 
   clearIntervals(){
