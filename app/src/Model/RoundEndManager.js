@@ -1,7 +1,7 @@
 import { AppwriteDAL } from "../../services/AppwriteService.js";
 import Config from "../utils/Config.js";
 import RoundScoreboard from "../Views/EndOfRoundView/RoundScoreboard.js";
-
+//gets called when the round ends and shows 
 class RoundEndManager {
     constructor() {
         this.DAL = new AppwriteDAL();
@@ -21,7 +21,7 @@ class RoundEndManager {
     continueToNextRound(){
         this.roundScoreboard.scoreboardView.hidden = true;
     }
-    
+
     async showRoundScore(round){
         //get all docs -> filter for player scores -> get player array
         let storiesOfLastRound = await this.DAL.downloadMemeStories(round), 
