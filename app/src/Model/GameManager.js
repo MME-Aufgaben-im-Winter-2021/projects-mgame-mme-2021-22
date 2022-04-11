@@ -122,6 +122,7 @@ class GameManager extends Observable {
 
     let randomCharacter = alphabet[Math.floor(Math.random() * alphabet.length)],
         data = this.imageDownloader.fetchData(randomCharacter,this.getRandomIntBetween0AndMax(Config.MAX_JSON_SEARCH_STARTPOINT));
+        console.log(data);
         /*
     for (let i = 0; i < Config.HAND_SIZE; i++) {
       if (i< data.length){

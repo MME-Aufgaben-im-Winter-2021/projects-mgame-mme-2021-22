@@ -1,4 +1,5 @@
-<html lang="en"><head>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -19,28 +20,35 @@
     <link href=".//resources/css/style.css" rel="stylesheet">
   </head>
 
-  <body>
- 
-     
-    <button id="logout" style="font-size:1vw" type="button" class="btn btn-default btn-sm position-absolute top-0 end-0 ">
-        <span class="glyphicon glyphicon-log-out"></span> Log out
-      </button>
-  
-
-      <div style="font-size:2vw" id="username" class="container text-center">Hello username</div>
-    <form class="form-join">
-        <h1 style="font-size:2vw" class="h3 mb-3 font-weight-normal text-center">Create a Lobby</h1>
-        <button type="button"id="host" style="font-size:3vw" class="btn btn-dark big">Create Lobby</button>
-      </form>
-    <form class="form-join">
-      <h1  style="font-size:2vw" id="username" class="h3 mb-3 font-weight-normal text-center">Join a Lobby</h1>
-      <input type="text" id="token" class="form-control" placeholder="Enter token here" required="" autofocus="">
-      <button type="button" style="font-size:3vw" id="join" class="btn btn-lg btn-dark btn-block medium" type="submit">Join</button>
-     
-    </form>
-    <script type="module" src="./src/Controller/HomeController/Home.js"></script>
-
+<body class="text-center body">
+  <div class="row align-items-center " >
+    <div class="column col-4 bgd-primary">
+      
+    </div>
+      <div class="column col-4  d-flex align-items-center justify-content-center bgd-dark" style="height: 100vh;">
+          <div class="container ">
+            <div style="font-size:2vw" id="hello" class="container text-center whitetext">Hello</div>
+            <button id="logout" style="font-size:1vw" type="button" class="btn btn-default btn-sm position-absolute top-0 end-0 ">
+              <span class="glyphicon glyphicon-log-out"></span> Log out
+            </button>
+            <div style="font-size:3vw" id="username" class="container text-center whitetext">Hello username</div>
+          <form class="form-join">
+              <button type="button"id="host" style="font-size:2vw" class="w-100 btn bgd-dark-s btn-lg whitetext">Create a new Lobby</button>
+            </form>
+          <form class="form-join text-center">
+            <input type="text" id="token" class="form-control" placeholder="Enter Lobby-ID here" required="" autofocus="">
+            <button type="button" style="font-size:2vw" id="join" class="w-100 btn bgd-dark-s btn-lg whitetext" type="submit">Join existing Lobby</button>
+           
+          </form>
+          <script type="module" src="./src/Controller/HomeController/Home.js"></script>
+          </div>
+          
+      </div>
+      <div class="column col-4 body"></div>
+  </div>
+  <script type="module" src="./src/Controller/LoginController/Login.js"></script>
 </body>
+
 </html>
     
    

@@ -25,6 +25,8 @@ const Config = {
     CONNECTION_LOST_ERROR: "You lost connection to the game session.",
     CONNECTION_UNSTABLE_WARNING: "Your connection to the game session is unstable/was interrupted.",
     HOST_ERROR: "Could not host a new game! Sry bro.",
+    REGISTER_ERROR: "Could not register new account",
+    REGISTER_SUCCESS: "Account registered",
     // MEME JSON
     MAX_JSON_SEARCH_STARTPOINT: 1300,
     //GameStates
