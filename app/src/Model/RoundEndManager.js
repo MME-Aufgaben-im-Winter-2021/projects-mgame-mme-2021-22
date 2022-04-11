@@ -1,7 +1,7 @@
 import { AppwriteDAL } from "../../services/AppwriteService.js";
 import Config from "../utils/Config.js";
 import RoundScoreboard from "../Views/EndOfRoundView/RoundScoreboard.js";
-//gets called when the round ends and shows 
+//gets called when the round ends and shows scoreboard
 class RoundEndManager {
     constructor() {
         this.DAL = new AppwriteDAL();

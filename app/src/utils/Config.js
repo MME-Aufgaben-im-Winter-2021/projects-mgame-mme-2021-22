@@ -1,3 +1,4 @@
+//config 
 const Config = {
     DOCUMENT_STORAGE_KEY: "documentId",
     TEAM_STORAGE_KEY: "teamId",

@@ -1,6 +1,6 @@
 /* eslint-disable one-var */
 import Config from "../../utils/Config.js";
-
+//handles the UI of the Lobby
 class LobbyView {
   constructor() {
     this.playerList = document.getElementById("playerList");
@@ -14,15 +14,18 @@ class LobbyView {
 
   }
 
+  //hides the Lobby UI
   setHidden(isHidden) {
     this.lobbyView.hidden = isHidden;
   }
 
+  //updates the UI
   updateView(playerNames, rounds, duration) {
     this.updatePlayerList(playerNames);
     this.updateSettings(rounds, duration);
   }
 
+  //updates the settings UI
   updateSettings(rounds, duration) {
     if (rounds !== null) {
       if (rounds <= Config.MAX_ROUNDS && rounds >= Config.MIN_ROUNDS) {
@@ -44,9 +47,10 @@ class LobbyView {
           Config.MIN_ROUND_DURATION; }
     }
   }
-
+  
+  //updates the player list UI
   updatePlayerList(playerNames) {
-    //erase old playerlsit
+    //erase old player list
     while (this.playerList.childNodes.length > Config.PLAYER_LIST_UI_ELEMENTS) {
       this.playerList.removeChild(this.playerList.lastChild);
     }

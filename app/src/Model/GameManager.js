@@ -2,7 +2,6 @@
 import PlayingField from "../Views/GameView/PlayingField";
 import Prompt from "../Views/GameView/Prompt";
 */
-import GameProgressCard from "../Views/GameView/GameProgressCard.js";
 import PlayingField from "../Views/GameView/PlayingField.js";
 import Hand from "../Views/GameView/Hand.js";
 import RatingView from "../Views/RatingView/RatingView.js";
@@ -20,7 +19,6 @@ import RoundScoreboard from "../Views/EndOfRoundView/RoundScoreboard.js";
 import RoundEndManager from "./RoundEndManager.js";
 import GameEndManager from "./GameEndManager.js";
 
-
 let submitButton = document.querySelector(".submit"),
   refreshButton = document.querySelector(".refresh"),
   saveButton = document.querySelector(".save"),
@@ -28,12 +26,12 @@ let submitButton = document.querySelector(".submit"),
   handArray = [],
   fieldArray = [],
   roundCount = 1,
-  searchBlockBoolean=false,
-  clockspeed=0,
-  timeRanOut=false,
-  remainingTime=6,
-  lastSearchedTerm="";
-
+  searchBlockBoolean = false,
+  clockSpeed = 0,
+  timeRanOut = false,
+  remainingTime = 6,
+  lastSearchedTerm = "";
+//manages all the events during the game phase
 class GameManager extends Observable {
 
   constructor() {
@@ -43,7 +41,7 @@ class GameManager extends Observable {
     //}
     super();
     this.DAL = new AppwriteDAL();
-    this.gameProgressCard = new GameProgressCard();
+    //initializing UI
     this.playingField = new PlayingField();
     this.hand = new Hand();
     this.ratingView = new RatingView();
@@ -51,136 +49,138 @@ class GameManager extends Observable {
     this.finalScore = new FinalScore();
     this.imageDownloader = new ImageDownloader();
     this.roundEndView = new RoundScoreboard();
-    
-    this.imageDownloader.addEventListener("imagesFetched", this.fillHand.bind(this));
+
+    this.imageDownloader.addEventListener("imagesFetched", this.fillHand.bind(
+      this));
     refreshButton.addEventListener("click", this.refreshHand.bind(this));
     saveButton.addEventListener("click", this.addNewKeyword.bind(this));
     submitButton.addEventListener("click", this.submitMemeStory.bind(this));
-    //searchBar.addEventListener("change", this.onSearch.bind(this));
-    //searchBar.addEventListener("change", this.onSearch);
-    searchBar.addEventListener("keydown", () => this.delay(Config.DELAY).then(() => this.onSearch()));
+    searchBar.addEventListener("keydown", () => this.delay(Config.DELAY).then(
+      () => this.onSearch()));
+
     this.fillHandWithRandomMemes();
-    
+
     //Object.freeze(this);
     //GameManager.instance = this;
   }
 
-  clearIntervals(){
-    var interval_id = window.setInterval(()=>{return false;}, 99999);
-    for (let i = 0; i < interval_id; i++){
+  clearIntervals() {
+    var intervalId = window.setInterval(() => { return false; }, 99999);
+    for (let i = 0; i < intervalId; i++) {
       window.clearInterval(i);
     }
   }
 
-  initClock(){
-      this.clearIntervals();
-      timeRanOut=false;
-      clockspeed=360/remainingTime;
-      document.getElementById("clocktimer").style.transform = "rotate(" + 0 + "deg)";
+  initClock() {
+    this.clearIntervals();
+    timeRanOut = false;
+    clockSpeed = 360 / remainingTime;
+    document.getElementById("clocktimer").style.transform = "rotate(" + 0 +
+      "deg)";
   }
 
 
-  updateClock(){
+  updateClock() {
     console.log("clock");
-    if (timeRanOut===false){
+    if (timeRanOut === false) {
       console.log("clock ranout false");
-      let timerAngle = remainingTime * clockspeed;
+      let timerAngle = remainingTime * clockSpeed;
       remainingTime--;
-      document.getElementById("clocktimer").style.transform = "rotate(" + -timerAngle + "deg)";
+      document.getElementById("clocktimer").style.transform = "rotate(" + -
+        timerAngle + "deg)";
 
-      if (remainingTime===-1){
+      if (remainingTime === -1) {
         console.log("CLOCK DONE");
-        timeRanOut=true;
+        timeRanOut = true;
 
       }
     }
   }
-
 
   delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
   }
-
+  //typing in the text bar requests memes from the json file
   onSearch() {
-    if (searchBlockBoolean===false&&searchBar.value.length>=1){
-      searchBlockBoolean=true;
+    if (searchBlockBoolean === false && searchBar.value.length >= 1) {
+      searchBlockBoolean = true;
       this.delay(Config.DELAY).then(() => this.checkIfNewSearchIsNeeded());
       handArray = [];
       this.updateHand();
-      lastSearchedTerm=searchBar.value;
+      lastSearchedTerm = searchBar.value;
       this.requestMemes(searchBar.value);
     }
   }
 
-  checkIfNewSearchIsNeeded(){
-    searchBlockBoolean=false;
-    if (searchBar.value!==lastSearchedTerm){
-        this.onSearch();
+  checkIfNewSearchIsNeeded() {
+    searchBlockBoolean = false;
+    if (searchBar.value !== lastSearchedTerm) {
+      this.onSearch();
     }
   }
 
-  requestMemes(tag){
-    this.imageDownloader.fetchData(tag,0);
+  requestMemes(tag) {
+    this.imageDownloader.fetchData(tag, 0);
   }
 
-  refreshHand(){
-    searchBlockBoolean=true;
-    this.delay(Config.DELAY).then(() => searchBlockBoolean=false);
-    handArray=[];
+  //refreshes Hand with random memes
+  refreshHand() {
+    searchBlockBoolean = true;
+    this.delay(Config.DELAY).then(() => searchBlockBoolean = false);
+    handArray = [];
     searchBar.value = "";
     this.fillHandWithRandomMemes();
   }
 
-  fillHand(event){
+  //fills hand with memes
+  fillHand(event) {
     //console.log(event.data);
 
     let data = event.data,
-    size = data.length,
-    dataRandomStartOffset=0;
-    if (size>Config.HAND_SIZE){
-      dataRandomStartOffset=this.getRandomIntBetween0AndMax(size-Config.HAND_SIZE);
+      size = data.length,
+      dataRandomStartOffset = 0;
+    if (size > Config.HAND_SIZE) {
+      dataRandomStartOffset = this.getRandomIntBetween0AndMax(size - Config
+        .HAND_SIZE);
     }
 
     for (let i = 0; i < Config.HAND_SIZE; i++) {
-      if (i<size){
+      if (i < size) {
         //console.log(size);
-        this.addNewMemeToHand(data[i+dataRandomStartOffset]);
+        this.addNewMemeToHand(data[i + dataRandomStartOffset]);
       }
     }
   }
 
-  getRandomIntBetween0AndMax(max){
+  getRandomIntBetween0AndMax(max) {
     let rand = Math.floor(Math.random() * max);
     return rand;
   }
-  
-  fillHandWithRandomMemes(){
+
+  fillHandWithRandomMemes() {
     const alphabet = "abcdefghijklmnoprstuvwxyz";
 
-    let randomCharacter = alphabet[Math.floor(Math.random() * alphabet.length)];
-       this.imageDownloader.fetchData(randomCharacter,this.getRandomIntBetween0AndMax(Config.MAX_JSON_SEARCH_STARTPOINT));
-        /*
-    for (let i = 0; i < Config.HAND_SIZE; i++) {
-      if (i< data.length){
-        this.addNewMemeToHand(data[i]);
-      }
-      
-    }  */
+    let randomCharacter = alphabet[Math.floor(Math.random() * alphabet
+      .length)];
+    this.imageDownloader.fetchData(randomCharacter, this
+      .getRandomIntBetween0AndMax(Config.MAX_JSON_SEARCH_STARTPOINT));
+
   }
 
+  //gets the meme url and sets it into the hand view
   addNewMemeToHand(imageSource) {
     //console.log(imageSource);
-    
+
     if (handArray.length < Config.HAND_SIZE) {
-      let newMeme = new Meme( imageSource, true);
+      let newMeme = new Meme(imageSource, true);
       //console.log(handArray.length, Config.HAND_SIZE);
       handArray.push(newMeme);
       newMeme.addEventListener("dragEnded", this.checkMeme.bind(this));
-      
+
     }
     this.updateHand();
   }
-
+  //gets the meme url and sets it into the field view
   addNewMemeToField(imageSource) {
     //console.log(imageSource);
     if (fieldArray.length < Config.MAX_MEMES) {
@@ -195,12 +195,13 @@ class GameManager extends Observable {
     this.updatePlayingField();
   }
 
+  //checks if meme is supposed is in hand or field
   checkMeme(event) {
     let memeName = event.data[0],
       currentLocation = event.data[1],
       swappingMeme = event.data[2],
       isInHand = event.data[3];
-      
+
     if (currentLocation === "playingArea") {
       // this.removeMeme(memeName);
 
@@ -215,20 +216,21 @@ class GameManager extends Observable {
     }
   }
 
+  //swaps memes on field
   swapMeme(firstMeme, secondMeme) {
     let indexDragged,
       indexSwapped;
 
     for (let i = 0; i < fieldArray.length; i++) {
       let meme = fieldArray[i];
-      if (meme.id === firstMeme) {
+      if (meme.image === firstMeme) {
         indexDragged = i;
         break;
       }
     }
     for (let i = 0; i < fieldArray.length; i++) {
       let meme = fieldArray[i];
-      if (meme.id === secondMeme) {
+      if (meme.image === secondMeme) {
         indexSwapped = i;
         break;
       }
@@ -240,7 +242,7 @@ class GameManager extends Observable {
     ]; //https://stackoverflow.com/questions/872310/javascript-swap-array-elements/872317
     this.updatePlayingField();
   }
-
+  //updates the field HTML
   updatePlayingField() {
     this.playingField.playingField.innerHTML = "";
     for (const meme of fieldArray) {
@@ -248,34 +250,39 @@ class GameManager extends Observable {
     }
     this.storePlayedMemes();
   }
-  
+
+  //sets the prompt
   setPrompt(prompt) {
-    this.playingField.promptField.innerHTML ="";
+    this.playingField.promptField.innerHTML = "";
     this.playingField.promptField.innerHTML = prompt;
     this.updatePlayingField();
   }
-
+  //saves played memes in local storage
   storePlayedMemes() {
     window.localStorage.setItem("playedMemes", JSON.stringify(fieldArray));
   }
 
+  //deletes memes
   removeMemeFromField(memeName) {
     fieldArray = fieldArray.filter((meme) => meme
-      .id !==
+      .image !==
       memeName);
     this.updatePlayingField();
   }
 
+  //adds keyword to filter memes
   addNewKeyword() {
     let newKeyWord = new KeyWord(searchBar.value);
     newKeyWord.keyWordEL.addEventListener("click", () => {
       handArray = [];
       this.updateHand();
-      this.requestMemes(newKeyWord.keyword); });
-      // logs `false`);
+      this.requestMemes(newKeyWord.keyword);
+    });
+    // logs `false`);
     this.hand.keyWordArea.appendChild(newKeyWord.body);
   }
 
+  //updates hand HTML
   updateHand() {
     this.hand.HandSpace.innerHTML = "";
     for (const meme of handArray) {
@@ -283,32 +290,36 @@ class GameManager extends Observable {
     }
   }
 
+  //submits the finished story
   submitMemeStory() {
-    if(Config.HAS_SUBMITTED === false){
+    if (Config.HAS_SUBMITTED === false) {
       let memes = Array.from(new Set(JSON.parse(window
-        .localStorage.getItem("playedMemes")))), memeIds = [];
-      for(let meme of memes){ memeIds.push(meme.id);}
+          .localStorage.getItem("playedMemes")))),
+        memeIds = [];
+      for (let meme of memes) { memeIds.push(meme.image); }
       this.DAL.uploadMemeStory(memeIds, roundCount);
       Config.HAS_SUBMITTED = true;
       submitButton.disabled = true;
     }
-    
-  }
 
-  async setGameStateRate(){
+  }
+  /*
+   * HOST FUNCTIONS; 
+   */
+
+  //starts the rating phase
+  async setGameStateRate() {
     this.playingField.playingFieldArea.hidden = true;
-    //this.gameProgressCard.progressField.hidden = true;
     this.ratingView.ratingArea.hidden = false;
     this.ratingView.ratingField.hidden = false;
     this.hand.handArea.hidden = true;
     //
     let memes = await this.DAL.downloadMemeStories(roundCount),
-    ratingManager = new RatingManager(memes);
+      ratingManager = new RatingManager(memes);
     ratingManager.displayMeme();
   }
-  /*
-   * HOST FUNCTIONS; 
-   */
+
+  //starts the game phase
   setGameStatePlay() {
     console.log("setgamestate play");
     this.initClock();
@@ -320,17 +331,17 @@ class GameManager extends Observable {
     fieldArray = [];
     this.updatePlayingField();
     this.updateHand();
-    //this.gameProgressCard.start();
     this.playingField.gameView.hidden = false;
     this.playingField.playingFieldArea.hidden = false;
     //this.promptField.hidden = true;
-    //this.gameProgressCard.progressField.hidden = false;
     this.ratingView.ratingArea.hidden = true;
     this.ratingView.ratingField.hidden = true;
     this.hand.handArea.hidden = false;
     //round timer
-    if(window.localStorage.getItem(Config.ROLE_KEY) === Config.HOST_ROLE){
-      let roundDuration = Number(this.DAL.getRoundDuration()) * Config.MS_TO_S_FACTOR, prompt = this.prompt.generatePrompt();
+    if (window.localStorage.getItem(Config.ROLE_KEY) === Config.HOST_ROLE) {
+      let roundDuration = Number(this.DAL.getRoundDuration()) * Config
+        .MS_TO_S_FACTOR,
+        prompt = this.prompt.generatePrompt();
       this.DAL.updatePrompt(prompt);
       //TO DO ADD ROUND DUR TO CLOCK ANIM
       setTimeout(this.hostSetGameStateRate.bind(this), roundDuration);
@@ -338,31 +349,29 @@ class GameManager extends Observable {
     this.fillHandWithRandomMemes();
   }
 
-  hostSetGameStateRate(){
+  hostSetGameStateRate() {
     this.DAL.updateGameState(Config.RATING_PHASE);
   }
 
+  //sets game state to round end
   setGameStateRoundEnd() {
     this.playingField.gameView.hidden = true;
-    if(roundCount >= this.DAL.getRoundCount()){
+    if (roundCount >= this.DAL.getRoundCount()) {
       let gameEndManager = new GameEndManager();
       gameEndManager.showFinalScore(roundCount);
-    }else{
+    } else {
       let roundEndManager = new RoundEndManager();
       roundEndManager.showRoundScore(roundCount);
     }
-    
+
     roundCount++;
-      //let story = new Story(currentPrompt, fieldArray, "Best Story: " + this.getCurrentRoundWinningPlayerName(), 0);
-      //this.roundScoreboard.storyListView.appendChild(story.body);
-      //document.getElementById("titleOfTheStory").innerHTML=currentPrompt;
-    
+    //let story = new Story(currentPrompt, fieldArray, "Best Story: " + this.getCurrentRoundWinningPlayerName(), 0);
+    //this.roundScoreboard.storyListView.appendChild(story.body);
+    //document.getElementById("titleOfTheStory").innerHTML=currentPrompt;
+
   }
 
-  getCurrentRoundWinningPlayerName(){
-    return "winner";
-  }
-
+  //shows end screen
   setGameStateGameEnd() {
     this.playingField.gameView.hidden = true;
     let gameEndManager = new GameEndManager();

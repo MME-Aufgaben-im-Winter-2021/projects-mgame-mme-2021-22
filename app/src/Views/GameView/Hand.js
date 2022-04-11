@@ -2,7 +2,7 @@
  * maybe split into output and input
  */
 import Observable from "../../utils/Observable.js";
-
+//view of hand
 class Hand extends Observable {
 
   constructor() {

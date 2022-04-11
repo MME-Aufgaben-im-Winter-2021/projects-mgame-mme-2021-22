@@ -1,6 +1,6 @@
 /** playing field. players drop cards in here */
 import Observable from "../../utils/Observable.js";
-
+//View of playing field
 class PlayingField extends Observable {
 
   constructor() {

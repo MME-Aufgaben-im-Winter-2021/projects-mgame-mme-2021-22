@@ -2,7 +2,7 @@
 import { AppwriteDAL } from "../../services/AppwriteService.js";
 import Config from "../utils/Config.js";
 import RatingView from "../Views/RatingView/RatingView.js";
-
+//Handles the events during the rating phase
 class RatingManager{
     constructor(stories){
         this.ratingRounds = stories.length;
@@ -20,7 +20,7 @@ class RatingManager{
         this.mehButton.addEventListener("click", this.votedMeh.bind(this));
         this.badButton.addEventListener("click", this.votedBad.bind(this));
     }
-
+    
     startRating(){
         this.enableVoting();
         //set views
@@ -62,7 +62,7 @@ class RatingManager{
         this.DAL.updateScore(Config.POINTS_FOR_BAD, this.currentDocument);
         this.disableVoting();
       }
-
+      //if you voted, buttons are disabled
       disableVoting(){
           this.goodButton.disabled = true;
           this.mehButton.disabled = true;
@@ -73,7 +73,7 @@ class RatingManager{
         this.mehButton.disabled = false;
         this.badButton.disabled = false;
     }
-    
+    //plays a sound after voting
     playRatingSound(good){
     
         if (good){
