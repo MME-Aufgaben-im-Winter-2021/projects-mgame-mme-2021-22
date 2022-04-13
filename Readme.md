@@ -16,6 +16,7 @@ Auf der Startseite erstellt sich der Nutzer einen Account mit E-Mail-Adresse, Nu
 ## Quellen
 
 **Memes:** Von imgflip mit Python webscraper runtergeladen
+
 **Witzige Sounds:** Myinstants.com.
 
 ## Screenshots
