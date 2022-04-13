@@ -1,0 +1,5 @@
+CMD in ordnerleiste starten
+
+dann:
+ 
+scrapy crawl -L INFO popular-memes &&scrapy crawl -L INFO meme_names
