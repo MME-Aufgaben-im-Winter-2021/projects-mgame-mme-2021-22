@@ -80,6 +80,10 @@ class MemeService {
    */
   async createMemeSet(numberOfMemes = DEFAULT_MEME_SET_SIZE) {
     let memeSet = new MemeSet({
+      /*
+       * Statt den Service als Ganzes zu übergeben, wird ein Proxy-Objekt mit einer einzelnen Methode zum (Nach-) Laden 
+      der benötigen Anzahl an Memes übergeben.
+       */
       reload: this.getRandomMemes.bind(this, numberOfMemes),
     });
     await memeSet.init();
