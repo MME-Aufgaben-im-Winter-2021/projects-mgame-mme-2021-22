@@ -48,12 +48,11 @@ class MemeService {
    * @returns Ein Promise, das aufgelöst wird, sobald das Meme ausgewählt wurde.
    * Als Ergebnis des Promis wird das zufällig ausgewähltes Meme-Objekt übergeben.
    */
-  async getRandomMeme
-    () {
-      let randomMeme = this.memes[Math.floor(Math.random() * this.memes
-        .length)];
-      return randomMeme;
-    }
+  async getRandomMeme() {
+    let randomMeme = this.memes[Math.floor(Math.random() * this.memes
+      .length)];
+    return randomMeme;
+  }
 
   /**
    * Gibt ein Array mit zufällig ausgewählten Memes zurück.
