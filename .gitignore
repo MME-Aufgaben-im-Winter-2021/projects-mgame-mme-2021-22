@@ -1,6 +1,9 @@
 # local node dependencies
 node_modules
 
+# Local builds
+deploy/
+
 # Local IDE files
 .vscode
 
