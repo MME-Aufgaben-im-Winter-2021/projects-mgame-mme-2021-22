@@ -11,10 +11,9 @@ const MEME_DATA_URL = "resources/meme_json_data.json",
  * des Promise wird ein Array mit den geladenen Memes übergeben.
  */
 async function loadMemesFrom(url) {
-  let memes = [],
-    raw = await fetch(url),
-    json = await raw.json();
-  memes = json.map((jsonMeme) => Meme.fromJSON(jsonMeme));
+  let raw = await fetch(url),
+    json = await raw.json(),
+    memes = json.map((jsonMeme) => Meme.fromJSON(jsonMeme));
   return memes;
 }
 
@@ -49,8 +48,7 @@ class MemeService {
    * Als Ergebnis des Promis wird das zufällig ausgewähltes Meme-Objekt übergeben.
    */
   async getRandomMeme() {
-    let randomMeme = this.memes[Math.floor(Math.random() * this.memes
-      .length)];
+    let randomMeme = this.memes[Math.floor(Math.random() * this.memes.length)];
     return randomMeme;
   }
 

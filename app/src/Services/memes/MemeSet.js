@@ -8,7 +8,6 @@ class MemeSet {
 
   constructor(serviceProxy) {
     this.service = serviceProxy;
-    this.reload();
   }
 
   async init() {
