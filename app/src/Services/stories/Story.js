@@ -19,6 +19,7 @@ class Story extends Simplifyable {
     super();
     this.createdAt = createdAt;
     this.prompt = prompt;
+    Object.freeze(this);
   }
 
   toSimpleObject() {
