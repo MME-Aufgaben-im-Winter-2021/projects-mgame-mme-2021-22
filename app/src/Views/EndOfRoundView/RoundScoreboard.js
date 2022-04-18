@@ -44,7 +44,7 @@ class RoundScoreboard {
         sortedPlayers.push(players[i]);
       } else {
         for (let j = 0; j < sortedPlayers.length; j++) {
-          if (players[i].points > sortedPlayers[j].points) {
+          if (players[i].points*1 > sortedPlayers[j].points*1) {
             sortedPlayers.splice(j, 0, players[i]);
             break;
           } else { sortedPlayers.push(players[i]); }
