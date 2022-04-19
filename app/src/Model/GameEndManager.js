@@ -17,7 +17,7 @@ class GameEndManager{
         let storyDocsOfLastRound = await this.DAL.downloadMemeStories(round),
         players = await this.DAL.getPlayers();
         //may function, just as in RoundEndManager.js: players.sort((a,b) => (a.PlayerScore*1 > b.PlayerScore*1) ? 1 : -1);
-		players.sort( function(a,b) { return a.PlayerScore-b.PlayerScore;} );
+		players.sort( function(a,b) { return b.PlayerScore-a.PlayerScore;} );
         this.gameEndView.updateScoreboard(players, storyDocsOfLastRound);
         
     }
