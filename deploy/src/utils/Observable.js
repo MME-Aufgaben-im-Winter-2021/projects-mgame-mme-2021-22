@@ -1,5 +1,5 @@
 /* eslint-env browser */
-
+//Observable class from MME
 class Event {
     constructor(type, data) {
         this.type = type;

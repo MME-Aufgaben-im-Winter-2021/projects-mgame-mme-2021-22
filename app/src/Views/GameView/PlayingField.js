@@ -5,12 +5,27 @@ class PlayingField extends Observable {
 
   constructor() {
     super();
-    this.gameView = document.getElementById("game");
-    this.playingFieldArray = [];
     this.playingField = document.querySelector(".field");
-    this.promptField = document.getElementById("promptField");
     this.playingFieldArea = document.getElementById("playingField");
 
+  }
+
+  addMemeToPlayingField(memeView){
+    this.playingField.innerHTML = memeView;
+  }
+
+  clearPlayingField(){
+    this.playingField.innerHTML = "";
+  }
+
+  hideView(){
+    this.playingField.hidden = true;
+    this.playingFieldArea.hidden = true;
+  }
+
+  showView(){
+    this.playingField.hidden = false;
+    this.playingFieldArea.hidden = false;
   }
 
 }
