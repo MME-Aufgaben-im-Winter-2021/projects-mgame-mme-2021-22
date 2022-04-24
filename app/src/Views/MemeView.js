@@ -4,14 +4,13 @@ var draggedMeme,
   swappingMeme,
   currentLocation;
 //Draggable object, template with the meme pictures
-class Meme extends Observable {
+class MemeView extends Observable {
 
-  constructor(image, isInHand) {
+  constructor(meme) {
     super();
     this.MEME_TEMPLATE = document.querySelector("#meme-template").content
       .querySelector("div.meme").innerHTML;
-    this.image = image;
-    this.isInHand = isInHand;
+    this.image = meme.url;
     //the meme has to know where it is 
     this.playingArea = document.querySelector(".playingArea");
     this.handArea = document.querySelector(".handMemeArea");
@@ -20,7 +19,7 @@ class Meme extends Observable {
     this.body.classList.add("meme");
     this.imageSource = this.body.querySelector(".picture");
     this.imageSource.innerHTML = "<img src=\"\\resources\\images_full\\" +
-      image + "\">";
+      this.image + "\">";
     this.body.setAttribute("draggable", "true");
     this.body.addEventListener("dragstart", () => {
       this.body.classList.add("dragging");
@@ -44,4 +43,4 @@ class Meme extends Observable {
   }
 
 }
-export default Meme;
+export default MemeView;

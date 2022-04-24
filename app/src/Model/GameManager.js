@@ -3,7 +3,7 @@ import PlayingField from "../Views/GameView/PlayingField.js";
 import Hand from "../Views/GameView/Hand.js";
 import RatingView from "../Views/RatingView/RatingView.js";
 import Prompt from "../Views/GameView/Prompt.js";
-import Meme from "../Controller/Meme.js";
+import Meme from "../Views/MemeView.js";
 import Observable from "../utils/Observable.js";
 import KeyWord from "../Controller/KeyWord.js";
 
