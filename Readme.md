@@ -2,9 +2,6 @@
 
 Die aktuelle _Release_-Version dieses Projekts kann unter: https://mgame.software-engineering.education aufgerufen werden.
 
-**WARNING: GAME BREAKING BUG**
-WENN MAN IN DER LOBBY DIE RUNDENDAUER NICHT VERSTELLT GEHT DAS SPIEL NICHT WEITER! 
-
 ## Ziel unserer Anwendung
 
 Ein witziges Multiplayerspiel dass lachen in der Gruppe hervorruft und als Eisbrecher/Teambuilder dienen kann.
