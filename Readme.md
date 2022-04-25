@@ -37,3 +37,5 @@ Auf der Startseite erstellt sich der Nutzer einen Account mit E-Mail-Adresse, Nu
 ![Screenshot einer Spielrunde](docs/Mgame%20Spiel.jpg)
 
 ### Bewertungsrunde
+
+![Screenshot der Bewertungsrunde](docs/Mgame%20Rating.jpg)
