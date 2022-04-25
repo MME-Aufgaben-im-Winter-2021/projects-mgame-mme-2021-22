@@ -334,6 +334,7 @@ class GameManager extends Observable {
   }
 
   hostSetGameStateRate() {
+    this.submitMemeStory();
     this.DAL.updateGameState(Config.RATING_PHASE);
   }
 

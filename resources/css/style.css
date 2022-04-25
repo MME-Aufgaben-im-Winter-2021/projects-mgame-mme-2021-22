@@ -185,14 +185,14 @@ img {
     position: relative;
     display: inline-block;
     float: left;
-    padding-right: 70px;
+    padding-right: 200px;
 }
 
 .secondcol {
     position: relative;
     display: inline-block;
     float: left;
-    padding-left: 70px;
+    padding-left: 125px;
 }
 
 
@@ -200,7 +200,7 @@ img {
     position: relative;
     display: inline-block;
     float: left;
-    padding-left: 120px;
+    padding-left: 230px;
 }
 
 .rateThisStoryBox {
